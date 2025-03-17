@@ -40,4 +40,4 @@ Contributions are welcome! Feel free to fork this repository and submit a pull r
 This project is licensed under the **MIT License**.
 
 ## 📬 Contact
-For any inquiries, feel free to reach out via [LinkedIn](https://linkedin.com/in/mo7ammed-hassan) or email at **mo7amedhassan07@gmail.com**.
+For any inquiries, feel free to reach out via [LinkedIn](https://www.linkedin.com/in/mohamedhassan07) or email at **mo7amedhassan07@gmail.com**.
