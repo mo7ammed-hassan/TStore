@@ -1,16 +1,43 @@
-# t_store
+# 🛍️ TStore
 
-A new Flutter project.
+TStore is a modern and efficient e-commerce mobile application built with **Flutter**, providing a seamless shopping experience for users. It offers a clean UI, smooth performance, and powerful features to enhance online shopping.
 
-## Getting Started
+## ✨ Features
+- 🛒 **Product Browsing** – Explore a wide range of products with categories and filters.
+- 🔍 **Smart Search** – Easily find products with an intuitive search system.
+- 📦 **Order Management** – Track orders, view order history, and manage deliveries.
+- 💳 **Secure Payments** – Multiple payment options with secure transactions.
+- ❤️ **Wishlist & Favorites** – Save favorite items for later purchases.
+- 🛠 **User Authentication** – Register, login, and manage user accounts.
 
-This project is a starting point for a Flutter application.
+## 🛠️ Tech Stack
+- **Flutter** – Frontend UI
+- **Firebase** – Backend services
+- **BLoC (Cubit)** – State management
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Installation
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/mo7ammed-hassan/TStore.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd TStore
+   ```
+3. Install dependencies:
+   ```sh
+   flutter pub get
+   ```
+4. Run the application:
+   ```sh
+   flutter run
+   ```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 📌 Contribution
+Contributions are welcome! Feel free to fork this repository and submit a pull request.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📄 License
+This project is licensed under the **MIT License**.
+
+## 📬 Contact
+For any inquiries, feel free to reach out via [LinkedIn](https://linkedin.com/in/mo7ammed-hassan) or email at **mo7amedhassan07@gmail.com**.
