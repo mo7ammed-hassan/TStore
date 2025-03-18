@@ -56,7 +56,7 @@ class TSocialButtons extends StatelessWidget {
               );
             }),
           ),
-          const SizedBox(width: TSizes.spaceBtwItems),
+          const SizedBox(width: AppSizes.spaceBtwItems),
           const TSocialButton(socialIcon: TImages.facebook),
         ],
       ),

@@ -26,7 +26,7 @@ class TVerticalImageText extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.only(right: TSizes.spaceBtwItems),
+        padding: const EdgeInsets.only(right: AppSizes.spaceBtwItems),
         child: Column(
           children: [
             TCircularImage(
@@ -34,7 +34,7 @@ class TVerticalImageText extends StatelessWidget {
               fit: BoxFit.fitWidth,
               isNetworkImage: isNetworkImage,
               backgroundColor: backgroundColor,
-              padding: TSizes.sm * 1.4,
+              padding: AppSizes.sm * 1.4,
               imageColor: (isDark ? AppColors.light : AppColors.dark),
             ),
             // Container(
@@ -54,7 +54,7 @@ class TVerticalImageText extends StatelessWidget {
             //     ),
             //   ),
             // ),
-            const SizedBox(height: TSizes.spaceBtwItems / 2),
+            const SizedBox(height: AppSizes.spaceBtwItems / 2),
             SizedBox(
               width: 60,
               child: Text(

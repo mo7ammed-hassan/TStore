@@ -21,8 +21,8 @@ class TSocialButton extends StatelessWidget {
       child: IconButton(
         onPressed: onPressed,
         icon: Image(
-          width: TSizes.iconLg,
-          height: TSizes.iconLg,
+          width: AppSizes.iconLg,
+          height: AppSizes.iconLg,
           image: AssetImage(socialIcon),
         ),
       ),

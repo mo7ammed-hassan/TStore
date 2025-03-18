@@ -14,7 +14,7 @@ class Loaders {
       SnackBar(
         behavior: SnackBarBehavior.floating,
         elevation: 0,
-        duration: const Duration(seconds: 1),
+        duration: const Duration(milliseconds: 600),
         backgroundColor: Colors.transparent,
         content: Container(
           padding: const EdgeInsets.all(12.0),
@@ -31,6 +31,7 @@ class Loaders {
               style: isMedium
                   ? Theme.of(AppContext.context).textTheme.bodyMedium
                   : Theme.of(AppContext.context).textTheme.labelLarge,
+              textAlign: TextAlign.center,
             ),
           ),
         ),
@@ -82,6 +83,7 @@ class Loaders {
       icon: const Icon(Iconsax.warning_2, color: AppColors.white),
     );
   }
+
 }
 
 class AppContext {

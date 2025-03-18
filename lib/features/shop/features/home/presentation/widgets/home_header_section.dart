@@ -14,9 +14,9 @@ class HomeHeaderSection extends StatelessWidget {
       child: Column(
         children: [
           THomeAppBar(),
-          SizedBox(height: TSizes.spaceBtwSections / 2),
+          SizedBox(height: AppSizes.spaceBtwSections / 2),
           TSearchConatiner(text: 'Search in Store'),
-          SizedBox(height: TSizes.spaceBtwSections / 2),
+          SizedBox(height: AppSizes.spaceBtwSections / 2),
           CategoriesSection(),
         ],
       ),

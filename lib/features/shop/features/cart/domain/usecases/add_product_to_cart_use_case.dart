@@ -11,7 +11,9 @@ class AddProductToCartUseCase
   AddProductToCartUseCase(this._cartRepository);
 
   @override
-  Future<Either<Failure, void>> call({ProductEntity? params}) async {
-    return await _cartRepository.addProductToCart(product: params!);
+  Future<Either<Failure, void>> call(
+      {ProductEntity? params, int? quantity}) async {
+    return await _cartRepository.addProductToCart(
+        product: params!, quantity: quantity!);
   }
 }

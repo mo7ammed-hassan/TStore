@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/common/widgets/products/product_cards/product_card_horizantal.dart';
+import 'package:t_store/common/widgets/products/product_cards/horizantal_product_card.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_sub_category_products.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/sub_category/presentation/cubits/sub_category_cubit.dart';
@@ -41,9 +41,9 @@ class BuildSubCategoryProducts extends StatelessWidget {
       itemCount: products.length,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) =>
-          ProductCardHorizantal(product: products[index]),
+          HorizantalProductCard(product: products[index]),
       separatorBuilder: (BuildContext context, int index) =>
-          const SizedBox(width: TSizes.spaceBtwItems),
+          const SizedBox(width: AppSizes.spaceBtwItems),
     );
   }
 }

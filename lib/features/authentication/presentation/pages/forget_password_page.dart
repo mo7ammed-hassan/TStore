@@ -30,7 +30,7 @@ class ForgetPasswordPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.spaceBtwItems),
+          padding: const EdgeInsets.all(AppSizes.spaceBtwItems),
           child: Form(
             key: context.read<ResetPasswordCubit>().formKey,
             child: Column(
@@ -40,14 +40,14 @@ class ForgetPasswordPage extends StatelessWidget {
                   TTexts.forgetPassword,
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
-                const SizedBox(height: TSizes.spaceBtwItems),
+                const SizedBox(height: AppSizes.spaceBtwItems),
                 Text(
                   TTexts.forgetPasswordSubTitle,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
-                const SizedBox(height: TSizes.spaceBtwSections * 2),
+                const SizedBox(height: AppSizes.spaceBtwSections * 2),
                 _emailField(context),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                const SizedBox(height: AppSizes.spaceBtwSections),
                 _submitButton(context),
               ],
             ),

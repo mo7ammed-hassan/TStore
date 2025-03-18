@@ -5,54 +5,51 @@ import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cub
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_state.dart';
 import 'package:t_store/features/shop/features/cart/presentation/widgets/cart_items.dart';
 import 'package:t_store/features/shop/features/checkout/presentation/pages/checkout_page.dart';
+import 'package:t_store/navigation_menu.dart';
+import 'package:t_store/service_locator.dart';
+import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/helpers/navigation.dart';
+import 'package:t_store/utils/loaders/animation_loader.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CartCubit()..fetchCartItems(),
+    var cartCubit = getIt.get<CartCubit>();
+    return BlocProvider.value(
+      value: cartCubit,
       child: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
-          if (state is CartLoadedState) {
-            if (state.cartItems.isEmpty) {
-              return Scaffold(
-                appBar: _appBar(context),
-                body: const Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: TSizes.spaceBtwItems,
-                    vertical: TSizes.defaultSpace,
-                  ),
-                  child: CartItems(),
-                ),
-              );
-            }
-            return Scaffold(
-              bottomNavigationBar: _checkoutButton(context),
-              appBar: _appBar(context),
-              body: const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: TSizes.spaceBtwItems,
-                  vertical: TSizes.defaultSpace,
-                ),
-                child: CartItems(),
-              ),
-            );
-          }
           return Scaffold(
-            bottomNavigationBar: _checkoutButton(context),
             appBar: _appBar(context),
-            body: const Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: TSizes.spaceBtwItems,
-                vertical: TSizes.defaultSpace,
-              ),
-              child: CartItems(),
-            ),
+            body: (cartCubit.totalCartItems == 0)
+                ? _emptyWidget(context)
+                : const Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppSizes.spaceBtwItems - 2,
+                      vertical: AppSizes.defaultSpace,
+                    ),
+                    child: CartItems(),
+                  ),
+            bottomNavigationBar: (cartCubit.totalCartItems == 0)
+                ? null
+                : _checkoutButton(context, cartCubit.totalCartPrice),
           );
         },
+      ),
+    );
+  }
+
+  TAnimationLoaderWidget _emptyWidget(BuildContext context) {
+    return TAnimationLoaderWidget(
+      text: 'Whoops! Cart is Empty.',
+      animation: TImages.cartAnimation,
+      showAction: true,
+      actionText: 'Let\'s fill it',
+      onActionPressed: () => context.removeAll(
+        const NavigationMenu(),
       ),
     );
   }
@@ -67,11 +64,11 @@ class CartPage extends StatelessWidget {
     );
   }
 
-  Widget _checkoutButton(BuildContext context) {
+  Widget _checkoutButton(BuildContext context, double totalPrice) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: TSizes.defaultSpace,
-        vertical: TSizes.spaceBtwItems,
+        horizontal: AppSizes.defaultSpace,
+        vertical: AppSizes.spaceBtwItems,
       ),
       child: ElevatedButton(
         onPressed: () {
@@ -82,7 +79,7 @@ class CartPage extends StatelessWidget {
             ),
           );
         },
-        child: const Text('Checkout \$300'),
+        child: Text('Checkout \$${totalPrice.toStringAsFixed(2)}'),
       ),
     );
   }

@@ -37,17 +37,17 @@ class StorePage extends StatelessWidget {
                     : AppColors.white,
                 expandedHeight: 420, //440
                 flexibleSpace: const Padding(
-                  padding: EdgeInsets.all(TSizes.defaultSpace),
+                  padding: EdgeInsets.all(AppSizes.defaultSpace),
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        SizedBox(height: TSizes.spaceBtwItems),
+                        SizedBox(height: AppSizes.spaceBtwItems),
                         TSearchConatiner(
                           text: 'Search in Store',
                           padding: EdgeInsets.zero,
                           showBackground: false,
                         ),
-                        SizedBox(height: TSizes.spaceBtwSections),
+                        SizedBox(height: AppSizes.spaceBtwSections),
                         FeaturedBrandsSection(),
                       ],
                     ),

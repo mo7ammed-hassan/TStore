@@ -28,7 +28,7 @@ class LoginPage extends StatelessWidget {
             ),
             // Divider
             const TFormDivider(dividerText: TTexts.orSignInWith),
-            const SizedBox(height: TSizes.spaceBtwSections),
+            const SizedBox(height: AppSizes.spaceBtwSections),
             // Footer
             const TSocialButtons(),
           ],

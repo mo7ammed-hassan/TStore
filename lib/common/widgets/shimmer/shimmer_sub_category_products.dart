@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:t_store/common/widgets/products/product_cards/product_card_horizantal.dart';
+import 'package:t_store/common/widgets/products/product_cards/horizantal_product_card.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
@@ -15,12 +15,12 @@ class ShimmerSubCategoryProducts extends StatelessWidget {
         itemCount: 4,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) => const Skeletonizer(
-          child: ProductCardHorizantal(
+          child: HorizantalProductCard(
             product: ProductEntity.empty(),
           ),
         ),
         separatorBuilder: (BuildContext context, int index) =>
-            const SizedBox(width: TSizes.spaceBtwItems),
+            const SizedBox(width: AppSizes.spaceBtwItems),
       ),
     );
   }

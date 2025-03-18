@@ -16,7 +16,7 @@ class TBrandCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isDark = HelperFunctions.isDarkMode(context);
     return TRoundedContainer(
-      padding: const EdgeInsets.all(TSizes.sm),
+      padding: const EdgeInsets.all(AppSizes.sm),
       showBorder: showBorder,
       backgroundColor: Colors.transparent,
       child: Row(
@@ -29,7 +29,7 @@ class TBrandCard extends StatelessWidget {
               imageColor: (isDark ? AppColors.light : AppColors.dark),
             ),
           ),
-          const SizedBox(width: TSizes.spaceBtwItems / 2),
+          const SizedBox(width: AppSizes.spaceBtwItems / 2),
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.min,

@@ -21,8 +21,8 @@ class SubCategoryPage extends StatelessWidget {
         body: const SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: TSizes.spaceBtwItems,
-              vertical: TSizes.defaultSpace,
+              horizontal: AppSizes.spaceBtwItems,
+              vertical: AppSizes.defaultSpace,
             ),
             child: Column(
               children: [
@@ -31,7 +31,7 @@ class SubCategoryPage extends StatelessWidget {
                   aplayImageRaduis: true,
                   imageUrl: TImages.banner3,
                 ),
-                SizedBox(height: TSizes.spaceBtwSections),
+                SizedBox(height: AppSizes.spaceBtwSections),
                 BuildSubCategoriesSections(),
               ],
             ),

@@ -24,28 +24,28 @@ class ResetPasswordPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.spaceBtwItems),
+          padding: const EdgeInsets.all(AppSizes.spaceBtwItems),
           child: Column(
             children: [
               Image(
                 width: HelperFunctions.screenWidth() * 0.6,
                 image: const AssetImage(TImages.deliveredEmailIllustration),
               ),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              const SizedBox(height: AppSizes.spaceBtwSections),
               Text(
                 TTexts.changeYourPasswordTitle,
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: TSizes.spaceBtwItems),
+              const SizedBox(height: AppSizes.spaceBtwItems),
               Text(
                 TTexts.changeYourPasswordSubTitle,
                 style: Theme.of(context).textTheme.labelMedium,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              const SizedBox(height: AppSizes.spaceBtwSections),
               _doneButton(context),
-              const SizedBox(height: TSizes.spaceBtwItems),
+              const SizedBox(height: AppSizes.spaceBtwItems),
               _resendEmail(context),
             ],
           ),

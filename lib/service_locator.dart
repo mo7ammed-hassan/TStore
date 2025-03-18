@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:t_store/common/core/hive_boxes/open_boxes.dart';
 import 'package:t_store/features/authentication/data/repository/authentication_repository_impl.dart';
@@ -52,12 +53,14 @@ import 'package:t_store/features/shop/features/all_products/presentation/cubits/
 import 'package:t_store/features/shop/features/cart/data/mappers_or_factories/cart_item_factory.dart';
 import 'package:t_store/features/shop/features/cart/data/repositories/cart_repository_impl.dart';
 import 'package:t_store/features/shop/features/cart/data/source/cart_local_storage_services.dart';
-import 'package:t_store/features/shop/features/cart/data/source/cart_mangment_service.dart';
+import 'package:t_store/features/shop/features/cart/data/source/cart_managment_service.dart';
 import 'package:t_store/features/shop/features/cart/domain/repositories/cart_repository.dart';
 import 'package:t_store/features/shop/features/cart/domain/usecases/add_product_to_cart_use_case.dart';
 import 'package:t_store/features/shop/features/cart/domain/usecases/add_single_cart_item_use_case.dart';
 import 'package:t_store/features/shop/features/cart/domain/usecases/fetch_cart_items_use_case.dart';
+import 'package:t_store/features/shop/features/cart/domain/usecases/get_item_quantity_by_variation_use_case.dart';
 import 'package:t_store/features/shop/features/cart/domain/usecases/remover_single_cart_item_use_case.dart';
+import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
 import 'package:t_store/features/shop/features/home/data/repository/banner_repository_impl.dart';
 import 'package:t_store/features/shop/features/home/data/repository/category_repository_impl.dart';
 import 'package:t_store/features/shop/features/home/data/source/remote/banner_firebase_services.dart';
@@ -102,11 +105,14 @@ Future<void> initializeDependencies() async {
   getIt.registerSingleton<WishlistFirebaseServices>(
     WishlistFirebaseServicesImpl(),
   );
+  getIt.registerLazySingleton<ProductVariationCubit>(
+      () => ProductVariationCubit());
   getIt.registerLazySingleton<CartLocalStorageServices>(
     () => CartLocalStorageServicesImpl(),
   );
+  
   getIt.registerSingleton<DefaultCartItemFactory>(
-    DefaultCartItemFactory(ProductVariationCubit()),
+    DefaultCartItemFactory(getIt.get<ProductVariationCubit>()),
   );
   getIt.registerLazySingleton<CartManagementService>(
     () => CartManagementServiceImpl(
@@ -142,6 +148,7 @@ Future<void> initializeDependencies() async {
       WishlistFirebaseServicesImpl(),
     ),
   );
+
   getIt.registerSingleton<CartRepository>(
     CartRepositoryImpl(
       getIt.get<CartManagementService>(),
@@ -246,7 +253,6 @@ Future<void> initializeDependencies() async {
   getIt.registerSingleton<RemoveItemFromWishlistUseCase>(
     RemoveItemFromWishlistUseCase(),
   );
-
   getIt.registerSingleton<FetchWishlistItemsUseCase>(
     FetchWishlistItemsUseCase(),
   );
@@ -280,6 +286,9 @@ Future<void> initializeDependencies() async {
   getIt.registerLazySingleton<AddProductToCartUseCase>(
     () => AddProductToCartUseCase(getIt.get<CartRepository>()),
   );
+  getIt.registerLazySingleton<GetItemQuantityByVariationUseCase>(
+    () => GetItemQuantityByVariationUseCase(getIt.get<CartRepository>()),
+  );
 
   // -- Cubits--
   getIt.registerLazySingleton<ProductsCubit>(() => ProductsCubit());
@@ -288,7 +297,14 @@ Future<void> initializeDependencies() async {
   getIt.registerLazySingleton<FavoriteButtonCubit>(
     () => FavoriteButtonCubit(getIt.get<WishlistCubit>()),
   );
+  getIt.registerLazySingleton<CartCubit>(
+    () => CartCubit(),
+  );
 
   // -- HIVE BOXES --
   getIt.registerLazySingleton<OpenBoxes>(() => OpenBoxes());
+  
+}
+void setupLocator() {
+  getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 }

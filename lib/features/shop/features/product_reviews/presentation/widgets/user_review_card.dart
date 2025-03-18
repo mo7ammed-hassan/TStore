@@ -21,7 +21,7 @@ class UserReviewCard extends StatelessWidget {
                 const CircleAvatar(
                   backgroundImage: AssetImage(TImages.userProfileImage1),
                 ),
-                const SizedBox(width: TSizes.spaceBtwItems),
+                const SizedBox(width: AppSizes.spaceBtwItems),
                 Text('Ahmed Hossam',
                     style: Theme.of(context).textTheme.titleLarge),
               ],
@@ -29,25 +29,25 @@ class UserReviewCard extends StatelessWidget {
             IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
           ],
         ),
-        const SizedBox(height: TSizes.spaceBtwItems),
+        const SizedBox(height: AppSizes.spaceBtwItems),
         Row(
           children: [
             const TRatingBarIndicator(rating: 3.5),
-            const SizedBox(width: TSizes.spaceBtwItems),
+            const SizedBox(width: AppSizes.spaceBtwItems),
             Text(
               '20 Nov 2024',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
         ),
-        const SizedBox(height: TSizes.spaceBtwItems),
+        const SizedBox(height: AppSizes.spaceBtwItems),
         const TReadMoreText(
           text:
               'Ratings and reviews are verified and are from people who use the same type of product that you see',
         ),
-        const SizedBox(height: TSizes.spaceBtwItems),
+        const SizedBox(height: AppSizes.spaceBtwItems),
         const StoreResponse(),
-        const SizedBox(height: TSizes.spaceBtwSections),
+        const SizedBox(height: AppSizes.spaceBtwSections),
       ],
     );
   }

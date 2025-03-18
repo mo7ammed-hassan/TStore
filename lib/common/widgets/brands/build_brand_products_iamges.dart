@@ -54,10 +54,10 @@ class BuildBrandProductsImages extends StatelessWidget {
       backgroundColor: HelperFunctions.isDarkMode(context)
           ? AppColors.darkerGrey
           : AppColors.light,
-      margin: const EdgeInsets.only(right: TSizes.sm),
-      padding: const EdgeInsets.all(TSizes.md),
+      margin: const EdgeInsets.only(right: AppSizes.sm),
+      padding: const EdgeInsets.all(AppSizes.md),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
+        borderRadius: BorderRadius.circular(AppSizes.cardRadiusLg),
         child: Image(
           image: AssetImage(image),
           fit: BoxFit.contain,

@@ -27,7 +27,7 @@ class LaunchAppCubit extends Cubit<LaunchAppState> {
 
       if (isVerifiedEmail) {
         // If the email is verified, show the main page
-        await getIt.get<OpenBoxes>().openUserWishlistBox(userID: user.uid);
+        await getIt.get<OpenBoxes>().initializeUserBox();
         emit(AuthenticatedState());
       } else {
         // If the email is not verified, show the email verification page

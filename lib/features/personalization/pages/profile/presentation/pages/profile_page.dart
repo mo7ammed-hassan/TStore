@@ -19,32 +19,32 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: const TAppBar(title: Text('Profile'), showBackArrow: true),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(TSizes.spaceBtwItems),
+        padding: const EdgeInsets.all(AppSizes.spaceBtwItems),
         child: Column(
           children: [
             const ProfileHeader(),
             const Divider(),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            const SizedBox(height: AppSizes.spaceBtwItems),
             const TSectionHeading(
               title: 'Profile Information',
               showActionButton: false,
             ),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            const SizedBox(height: AppSizes.spaceBtwItems),
             const ProfileInformationSection(),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            const SizedBox(height: AppSizes.spaceBtwItems),
             const Divider(),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            const SizedBox(height: AppSizes.spaceBtwItems),
 
             ///Heading
             const TSectionHeading(
               title: 'Personal Information',
               showActionButton: false,
             ),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            const SizedBox(height: AppSizes.spaceBtwItems),
             PersonalInformationSection(user: userData!),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            const SizedBox(height: AppSizes.spaceBtwItems),
             const Divider(),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            const SizedBox(height: AppSizes.spaceBtwItems),
 
             const CloseAccountButton(),
           ],

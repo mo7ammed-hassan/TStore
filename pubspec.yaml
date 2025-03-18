@@ -23,6 +23,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.0.0
+  flutter_launcher_icons: ^0.14.3
   flutter_native_splash: ^2.4.2
   flutter_rating_bar: ^4.0.1
   get: ^4.6.6
@@ -89,3 +90,21 @@ flutter:
         - asset: assets/fonts/Poppins-BoldItalic.ttf
           weight: 800
           style: italic
+
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/logos/logo.png"
+  min_sdk_android: 21
+  web:
+    generate: true
+    image_path: "assets/logos/logo.png"
+  windows:
+    generate: true
+    image_path: "assets/logos/logo.png"
+    icon_size: 128
+  macos:
+    generate: true
+    image_path: "assets/logos/logo.png"
+      

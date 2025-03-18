@@ -8,6 +8,7 @@ import 'package:t_store/features/shop/features/product_details/presentation/cubi
 abstract class CartItemFactoryInterface {
   CartItemModel createCartItem(
       {required ProductEntity product, required int quantity});
+  void resetVariationCubit();
 }
 
 // --DIP >> Dependency Inversion Principle Applied with Factory Method Pattern
@@ -62,6 +63,12 @@ class DefaultCartItemFactory implements CartItemFactoryInterface {
 
     return (product.salePrice! > 0.0 ? product.salePrice : product.price)!
         .toDouble();
+  }
+
+  // --ResetVariationCubit
+  @override
+  void resetVariationCubit() {
+    variationCubit.resetVariation();
   }
 }
 

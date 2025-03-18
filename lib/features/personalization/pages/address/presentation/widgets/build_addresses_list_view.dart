@@ -54,7 +54,7 @@ class BuildAddressesListView extends StatelessWidget {
     return const Center(
       child: Text(
         'You don\'t have any addresses yet. Add one now! 🤓',
-        style: TextStyle(fontSize: TSizes.md),
+        style: TextStyle(fontSize: AppSizes.md),
         textAlign: TextAlign.center,
       ),
     );
@@ -77,7 +77,7 @@ class BuildAddressesListView extends StatelessWidget {
         );
       },
       separatorBuilder: (context, index) => const SizedBox(
-        height: TSizes.spaceBtwItems,
+        height: AppSizes.spaceBtwItems,
       ),
     );
   }
@@ -86,7 +86,7 @@ class BuildAddressesListView extends StatelessWidget {
     return const Center(
       child: Text(
         'There was an error, Please try again later 🫤',
-        style: TextStyle(fontSize: TSizes.md),
+        style: TextStyle(fontSize: AppSizes.md),
         textAlign: TextAlign.center,
       ),
     );

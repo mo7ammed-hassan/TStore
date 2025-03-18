@@ -59,7 +59,7 @@ class BuildBrandsList extends StatelessWidget {
         nextScreen: BrandProductsPage(
           brand: brands[index],
         ),
-        radius: const Radius.circular(TSizes.cardRadiusLg),
+        radius: const Radius.circular(AppSizes.cardRadiusLg),
         child: TBrandCard(
           brand: brands[index],
         ),

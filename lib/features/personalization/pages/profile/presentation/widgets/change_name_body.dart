@@ -14,7 +14,7 @@ class ChangeNameBody extends StatelessWidget {
           'Enter your real name for verification purposes. This name will appear on multiple pages.',
           style: Theme.of(context).textTheme.labelMedium,
         ),
-        const SizedBox(height: TSizes.spaceBtwSections),
+        const SizedBox(height: AppSizes.spaceBtwSections),
         const ChangeNameForm(),
       ],
     );

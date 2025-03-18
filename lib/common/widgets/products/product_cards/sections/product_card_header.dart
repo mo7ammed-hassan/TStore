@@ -23,7 +23,7 @@ class TProductCardHeader extends StatelessWidget {
     return TRoundedContainer(
       height: 180,
       width: 180,
-      padding: const EdgeInsets.all(TSizes.sm),
+      padding: const EdgeInsets.all(AppSizes.sm),
       backgroundColor: isDark ? AppColors.dark : AppColors.light,
       child: Stack(
         children: [

@@ -20,10 +20,10 @@ class CategoryShimmer extends StatelessWidget {
               const ShimmerWidget(
                 height: 56,
                 width: 56,
-                padding: EdgeInsets.all(TSizes.sm),
+                padding: EdgeInsets.all(AppSizes.sm),
                 shapeBorder: CircleBorder(),
               ),
-              const SizedBox(height: TSizes.spaceBtwItems / 2),
+              const SizedBox(height: AppSizes.spaceBtwItems / 2),
               ShimmerWidget(
                 height: 8,
                 width: 55,
@@ -35,7 +35,7 @@ class CategoryShimmer extends StatelessWidget {
           );
         },
         separatorBuilder: (context, index) => const SizedBox(
-          width: TSizes.spaceBtwItems,
+          width: AppSizes.spaceBtwItems,
         ),
       ),
     );

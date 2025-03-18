@@ -25,12 +25,12 @@ class TCategoryTab extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           Padding(
-            padding: const EdgeInsets.all(TSizes.spaceBtwItems),
+            padding: const EdgeInsets.all(AppSizes.spaceBtwItems),
             child: Column(
               children: [
                 // Brands
                 BuildBrandList(categoryId: category.id),
-                const SizedBox(height: TSizes.spaceBtwItems + 2),
+                const SizedBox(height: AppSizes.spaceBtwItems + 2),
                 // Products
                 TSectionHeading(
                   title: 'You might like',
@@ -48,9 +48,9 @@ class TCategoryTab extends StatelessWidget {
                     );
                   },
                 ),
-                const SizedBox(height: TSizes.spaceBtwItems),
+                const SizedBox(height: AppSizes.spaceBtwItems),
                 BuildProductsList(categoryId: category.id),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                const SizedBox(height: AppSizes.spaceBtwSections),
               ],
             ),
           ),

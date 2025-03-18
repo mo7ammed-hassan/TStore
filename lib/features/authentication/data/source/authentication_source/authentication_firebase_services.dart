@@ -33,7 +33,7 @@ class AuthenticationFirebaseServicesImpl
       await getIt
           .get<OpenBoxes>()
           .closeUserWishlistBox(userID: _user.currentUser!.uid);
-      // -- Reset Singletons to resevie new instance   
+      // -- Reset Singletons to resevie new instance
       await getIt.resetLazySingleton<WishlistCubit>();
       await getIt.resetLazySingleton<FavoriteButtonCubit>();
       await getIt.resetLazySingleton<OpenBoxes>();
@@ -43,7 +43,7 @@ class AuthenticationFirebaseServicesImpl
 
       return const Right('Success Logout');
     } catch (e) {
-      return const Left('There was an error, please try again');
+      return Left('There was an error, please try again $e');
     }
   }
 
@@ -83,9 +83,7 @@ class AuthenticationFirebaseServicesImpl
           );
 
       // Open User Wishlist Box
-      await getIt
-          .get<OpenBoxes>()
-          .openUserWishlistBox(userID: userCredential.user!.uid);
+      await getIt.get<OpenBoxes>().initializeUserBox();
 
       return const Right(
         'Your Account has been created! Verify email to continue',
@@ -111,10 +109,7 @@ class AuthenticationFirebaseServicesImpl
         password: userSigninModel.password,
       );
 
-      // Open User Wishlist Box
-      await getIt
-          .get<OpenBoxes>()
-          .openUserWishlistBox(userID: userCredential.user!.uid);
+      await getIt.get<OpenBoxes>().initializeUserBox();
 
       return Right(userCredential.user);
     } on FirebaseAuthException catch (e) {
@@ -123,6 +118,8 @@ class AuthenticationFirebaseServicesImpl
         message = 'No user found for that email.';
       } else if (e.code == 'wrong-password') {
         message = 'Wrong password provided for that user.';
+      } else {
+        message = e.message!;
       }
 
       return Left(message);

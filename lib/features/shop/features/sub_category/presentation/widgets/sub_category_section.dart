@@ -18,7 +18,7 @@ class SubCategorySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: TSizes.spaceBtwSections),
+      padding: const EdgeInsets.only(bottom: AppSizes.spaceBtwSections),
       child: Column(
         children: [
           TSectionHeading(
@@ -34,7 +34,7 @@ class SubCategorySection extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(height: TSizes.spaceBtwItems),
+          const SizedBox(height: AppSizes.spaceBtwItems),
           SizedBox(
             height: 120,
             child: BuildSubCategoryProducts(subCategoryId: subCategory.id),

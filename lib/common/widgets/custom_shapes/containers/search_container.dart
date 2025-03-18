@@ -18,7 +18,8 @@ class TSearchConatiner extends StatelessWidget {
     this.showBackground = true,
     this.showBorder = true,
     this.onTap,
-    this.padding = const EdgeInsets.symmetric(horizontal: TSizes.spaceBtwItems),
+    this.padding =
+        const EdgeInsets.symmetric(horizontal: AppSizes.spaceBtwItems),
   });
 
   @override
@@ -30,20 +31,20 @@ class TSearchConatiner extends StatelessWidget {
         padding: padding,
         child: Container(
           width: TDeviceUtils.getScreenWidth(context),
-          padding: const EdgeInsets.all(TSizes.md),
+          padding: const EdgeInsets.all(AppSizes.md),
           decoration: BoxDecoration(
             color: showBackground
                 ? isDark
                     ? AppColors.dark
                     : AppColors.light
                 : Colors.transparent,
-            borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
+            borderRadius: BorderRadius.circular(AppSizes.cardRadiusLg),
             border: showBorder ? Border.all(color: AppColors.grey) : null,
           ),
           child: Row(
             children: [
               Icon(icon, color: AppColors.darkGrey),
-              const SizedBox(width: TSizes.spaceBtwItems),
+              const SizedBox(width: AppSizes.spaceBtwItems),
               Text(
                 text,
                 style: Theme.of(context).textTheme.bodySmall,

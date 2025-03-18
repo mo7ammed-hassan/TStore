@@ -18,7 +18,7 @@ class ShimmerSlider extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: TSizes.spaceBtwItems),
+        const SizedBox(height: AppSizes.spaceBtwItems),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(

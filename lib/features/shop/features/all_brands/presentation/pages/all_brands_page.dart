@@ -13,8 +13,8 @@ class AllBrandsPage extends StatelessWidget {
       appBar: _appBar(context),
       body: const Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: TSizes.spaceBtwItems,
-          vertical: TSizes.defaultSpace,
+          horizontal: AppSizes.spaceBtwItems,
+          vertical: AppSizes.defaultSpace,
         ),
         child: Column(
           children: [
@@ -22,7 +22,7 @@ class AllBrandsPage extends StatelessWidget {
               title: 'Brands',
               showActionButton: false,
             ),
-            SizedBox(height: TSizes.spaceBtwItems),
+            SizedBox(height: AppSizes.spaceBtwItems),
             Expanded(child: BuildBrandsList()),
           ],
         ),

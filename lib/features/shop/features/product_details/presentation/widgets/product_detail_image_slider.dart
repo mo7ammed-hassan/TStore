@@ -28,7 +28,7 @@ class TProductDetailImageSlider extends StatelessWidget {
             Positioned(
               bottom: 30,
               right: 0,
-              left: TSizes.defaultSpace,
+              left: AppSizes.defaultSpace,
               child: BuildImagesSlider(product: product),
             ),
             _appBar(),
@@ -45,7 +45,7 @@ class TProductDetailImageSlider extends StatelessWidget {
           height: MediaQuery.sizeOf(context).height * 0.45,
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.all(TSizes.productImageRadius * 2),
+              padding: const EdgeInsets.all(AppSizes.productImageRadius * 2),
               child: GestureDetector(
                 onTap: () => showEnlargedImage(selectedImage, context),
                 child: Image.asset(

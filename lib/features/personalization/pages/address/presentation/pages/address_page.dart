@@ -24,10 +24,11 @@ class AddressPage extends StatelessWidget {
             return Stack(
               children: [
                 const Padding(
-                  padding: EdgeInsets.all(TSizes.spaceBtwItems),
+                  padding: EdgeInsets.all(AppSizes.spaceBtwItems),
                   child: BuildAddressesListView(),
                 ),
-                if (state is SelectedAddressLoadingState)
+                if (state is SelectedAddressLoadingState ||
+                    state is DeleteAddressLoadingState)
                   const Center(
                     child: CircularProgressIndicator(
                       color: AppColors.primary,
@@ -52,9 +53,9 @@ class AddressPage extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => BlocProvider.value(
-                  value: addressCubit, // Pass the ✅ Same instance
-                  child: const AddNewAddressPage(),
+                // 👈 Pass cubit or use BlocProvider.value
+                builder: (context) => AddNewAddressPage(
+                  addressCubit: addressCubit,
                 ),
               ),
             );

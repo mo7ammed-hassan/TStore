@@ -62,30 +62,30 @@ class VerifyEmailPage extends StatelessWidget {
           },
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(TSizes.defaultSpace),
+              padding: const EdgeInsets.all(AppSizes.defaultSpace),
               child: Column(
                 children: [
                   Image(
                     width: HelperFunctions.screenWidth() * 0.6,
                     image: const AssetImage(TImages.deliveredEmailIllustration),
                   ),
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  const SizedBox(height: AppSizes.spaceBtwSections),
                   Text(
                     TTexts.confirmEmail,
                     style: Theme.of(context).textTheme.headlineMedium,
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: TSizes.spaceBtwItems),
+                  const SizedBox(height: AppSizes.spaceBtwItems),
                   _userEmail(context),
-                  const SizedBox(height: TSizes.spaceBtwItems),
+                  const SizedBox(height: AppSizes.spaceBtwItems),
                   Text(
                     TTexts.confirmEmailSubTitle,
                     style: Theme.of(context).textTheme.labelMedium,
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  const SizedBox(height: AppSizes.spaceBtwSections),
                   _continueButton(context),
-                  const SizedBox(height: TSizes.spaceBtwItems),
+                  const SizedBox(height: AppSizes.spaceBtwItems),
                   _resendButton(context),
                 ],
               ),

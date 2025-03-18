@@ -26,7 +26,7 @@ class FeaturedBrandsSection extends StatelessWidget {
         ..fetchFeaturedBrands()
         ..fetchAllBrands(),
       child: Padding(
-        padding: const EdgeInsets.only(bottom: TSizes.sm),
+        padding: const EdgeInsets.only(bottom: AppSizes.sm),
         child: Column(
           children: [
             TSectionHeading(
@@ -35,7 +35,7 @@ class FeaturedBrandsSection extends StatelessWidget {
                 context.pushPage(const AllBrandsPage());
               },
             ),
-            const SizedBox(height: TSizes.spaceBtwItems / 2),
+            const SizedBox(height: AppSizes.spaceBtwItems / 2),
             BlocBuilder<BrandCubit, BrandState>(
               builder: (context, state) {
                 // Handle loading state
@@ -75,7 +75,7 @@ class FeaturedBrandsSection extends StatelessWidget {
         nextScreen: BrandProductsPage(
           brand: brands[index],
         ),
-        radius: const Radius.circular(TSizes.cardRadiusLg),
+        radius: const Radius.circular(AppSizes.cardRadiusLg),
         child: TBrandCard(brand: brands[index]),
       ),
       animatedEffect: ({required child, isVisible, onAdd, onRemove}) {

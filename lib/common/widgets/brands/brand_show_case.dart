@@ -17,12 +17,12 @@ class TBrandShowcase extends StatelessWidget {
       borderColor: AppColors.darkGrey,
       backgroundColor: Colors.transparent,
       //margin: const EdgeInsets.only(bottom: TSizes.spaceBtwItems),
-      padding: const EdgeInsets.all(TSizes.md),
+      padding: const EdgeInsets.all(AppSizes.md),
       child: Column(
         children: [
           // Brand with Product Conunt
           TBrandCard(brand: brand, showBorder: false),
-          const SizedBox(height: TSizes.spaceBtwItems),
+          const SizedBox(height: AppSizes.spaceBtwItems),
           //Brand Top 3 Product Image
           BrandProductsSection(brandId: brand.id),
         ],

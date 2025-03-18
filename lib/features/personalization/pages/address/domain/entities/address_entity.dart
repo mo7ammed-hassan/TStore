@@ -1,3 +1,5 @@
+import 'package:t_store/features/personalization/pages/address/data/models/address_model.dart';
+
 class AddressEntity {
   final String id;
   final String name;
@@ -8,7 +10,7 @@ class AddressEntity {
   final String country;
   final String postalCode;
   final DateTime? createdAt;
-   bool selectedAddress;
+  bool selectedAddress;
 
   AddressEntity({
     required this.id,
@@ -23,7 +25,6 @@ class AddressEntity {
     required this.selectedAddress,
   });
 
-  // Empty constructor for Firestore
   AddressEntity.empty()
       : id = '',
         name = '',
@@ -35,4 +36,6 @@ class AddressEntity {
         postalCode = '',
         createdAt = null,
         selectedAddress = false;
+
+  AddressModel toModel() => AddressModel.fromEntity(this);
 }

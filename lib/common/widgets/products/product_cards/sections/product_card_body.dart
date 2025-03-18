@@ -13,7 +13,7 @@ class TProductCardBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: TSizes.sm),
+      padding: const EdgeInsets.only(left: AppSizes.sm),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -21,7 +21,7 @@ class TProductCardBody extends StatelessWidget {
             title: title ?? '',
             smallSize: true,
           ),
-          const SizedBox(height: TSizes.spaceBtwItems / 2),
+          const SizedBox(height: AppSizes.spaceBtwItems / 2),
           TBrandTitleWithVerifiedIcon(title: brandTitle ?? ''),
         ],
       ),

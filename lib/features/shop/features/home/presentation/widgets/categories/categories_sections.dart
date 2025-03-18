@@ -13,7 +13,7 @@ class CategoriesSection extends StatelessWidget {
     return BlocProvider(
       create: (context) => CategoryCubit()..getAllCategories(),
       child: const Padding(
-        padding: EdgeInsets.only(left: TSizes.defaultSpace),
+        padding: EdgeInsets.only(left: AppSizes.defaultSpace),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -22,9 +22,9 @@ class CategoriesSection extends StatelessWidget {
               showActionButton: false,
               textColor: Colors.white,
             ),
-            SizedBox(height: TSizes.spaceBtwItems),
+            SizedBox(height: AppSizes.spaceBtwItems),
             THomeCategories(),
-            SizedBox(height: TSizes.spaceBtwSections),
+            SizedBox(height: AppSizes.spaceBtwSections),
           ],
         ),
       ),

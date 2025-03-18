@@ -26,7 +26,7 @@ class TProductQuantityButtons extends StatelessWidget {
           icon: Iconsax.minus,
           width: 32,
           height: 32,
-          size: TSizes.md,
+          size: AppSizes.md,
           color: isDark ? AppColors.white : AppColors.black,
           onPressed: () async {
             await context
@@ -34,18 +34,18 @@ class TProductQuantityButtons extends StatelessWidget {
                 .removeSingleCartItem(cartItem: cartItem.toModel());
           },
         ),
-        const SizedBox(width: TSizes.spaceBtwItems),
+        const SizedBox(width: AppSizes.spaceBtwItems),
         Text(
           cartItem.quantity.toString(),
           style: Theme.of(context).textTheme.titleSmall,
         ),
-        const SizedBox(width: TSizes.spaceBtwItems),
+        const SizedBox(width: AppSizes.spaceBtwItems),
         TCircularIcon(
           backgroundColor: AppColors.primary,
           icon: Iconsax.add,
           width: 32,
           height: 32,
-          size: TSizes.md,
+          size: AppSizes.md,
           color: AppColors.white,
           onPressed: () async {
             await context

@@ -39,16 +39,16 @@ class SettingsPage extends StatelessWidget {
                           .apply(color: AppColors.white),
                     ),
                   ),
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  const SizedBox(height: AppSizes.spaceBtwSections),
                   const UserProfileTile(),
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  const SizedBox(height: AppSizes.spaceBtwSections),
                 ],
               ),
             ),
 
             // --Body
             Padding(
-              padding: const EdgeInsets.all(TSizes.defaultSpace),
+              padding: const EdgeInsets.all(AppSizes.defaultSpace),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -57,7 +57,7 @@ class SettingsPage extends StatelessWidget {
                     showActionButton: false,
                   ),
                   const SizedBox(
-                    height: TSizes.spaceBtwItems,
+                    height: AppSizes.spaceBtwItems,
                   ),
                   TSettingMenuTile(
                     icon: Iconsax.safe_home,
@@ -123,14 +123,14 @@ class SettingsPage extends StatelessWidget {
                     onTap: () {},
                   ),
                   const SizedBox(
-                    height: TSizes.spaceBtwSections,
+                    height: AppSizes.spaceBtwSections,
                   ),
                   const TSectionHeading(
                     title: 'General Settings',
                     showActionButton: false,
                   ),
                   const SizedBox(
-                    height: TSizes.spaceBtwItems,
+                    height: AppSizes.spaceBtwItems,
                   ),
                   TSettingMenuTile(
                     icon: Iconsax.document_upload,
@@ -159,7 +159,7 @@ class SettingsPage extends StatelessWidget {
                     trailing: Switch(value: false, onChanged: (value) {}),
                   ),
 
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  const SizedBox(height: AppSizes.spaceBtwSections),
                   // Logout Button
                   SizedBox(
                     width: double.infinity,
@@ -181,7 +181,7 @@ class SettingsPage extends StatelessWidget {
                       child: const Text('Logout'),
                     ),
                   ),
-                  const SizedBox(height: TSizes.spaceBtwItems * 2.5),
+                  const SizedBox(height: AppSizes.spaceBtwItems * 2.5),
                 ],
               ),
             ),

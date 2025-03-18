@@ -32,6 +32,10 @@ class CartItemEntity {
         productId = '',
         brandName = null,
         selectedVariation = {};
+
+  // -- toJson
+
+  Map<String, dynamic> toJson() => CartItemModel.fromEntity(this).toJson();
 }
 
 extension CartItemEntityExtension on CartItemEntity {

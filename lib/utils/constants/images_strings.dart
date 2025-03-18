@@ -75,6 +75,10 @@ class TImages {
       "assets/images/animations/72462-check-register.json";
   static const String loadingJuggle =
       "assets/images/animations/141397-loading-juggle.json";
+  static const String paymentSuccessful =
+      "assets/images/animations/120978-payment-successful.json";
+  static const String completeOrder =
+      "assets/images/animations/order-complete-car-delivery-animation.json";
 
   // -- OnBoarding Texts
   static const String onBoardingImage1 =
