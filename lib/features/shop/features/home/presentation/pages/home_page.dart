@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/products_cubit.dart';
+import 'package:t_store/features/shop/features/home/presentation/cubits/category/category_cubit.dart';
 import 'package:t_store/features/shop/features/home/presentation/widgets/home_body_section.dart';
 import 'package:t_store/features/shop/features/home/presentation/widgets/home_header_section.dart';
 import 'package:t_store/service_locator.dart';
@@ -28,6 +29,7 @@ class HomePage extends StatelessWidget {
 
   Future<void> _onRefresh() async {
     final productsCubit = getIt.get<ProductsCubit>();
+    final categoryCubit = getIt.get<CategoryCubit>();
 
     TFullScreenLoader.openLoadingDialog(
       'Loading data...',
@@ -35,6 +37,7 @@ class HomePage extends StatelessWidget {
     );
 
     await productsCubit.refreshProducts();
+    await categoryCubit.refreshCategories();
 
     TFullScreenLoader.stopLoading();
   }

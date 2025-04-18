@@ -16,7 +16,7 @@ class FeaturedProductSection extends StatelessWidget {
     return BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
         if (state is ProductsLoadingState || state is ProductsInitialState) {
-          return const ShimmerProductsGridLayout(itemCount: 4);
+          return const ShimmerProductsGridLayout();
         }
         if (state is ProductsFailureState) {
           return _errorWidget(state.featuredProductsError!);

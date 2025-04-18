@@ -23,7 +23,6 @@ class AddressSection extends StatelessWidget {
             children: [
               TSectionHeading(
                 title: 'Shiping Address',
-                showActionButton: true,
                 buttonTitle: 'Change',
                 onPressed: () async {
                   await showAddressBottomSheet(
@@ -68,9 +67,12 @@ class AddressSection extends StatelessWidget {
                             size: 16,
                           ),
                           const SizedBox(width: AppSizes.spaceBtwItems),
-                          Text(
-                            '${address.city}, ${address.street}, ${address.postalCode}, ${address.state}, ${address.country}',
-                            style: Theme.of(context).textTheme.bodyMedium,
+                          Flexible(
+                            child: Text(
+                              '${address.city}, ${address.street}, ${address.postalCode}, ${address.state}, ${address.country}',
+                              maxLines: 2,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
                           ),
                         ],
                       ),

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:t_store/common/core/hive_boxes/open_boxes.dart';
 import 'package:t_store/features/authentication/data/repository/authentication_repository_impl.dart';
@@ -304,7 +303,4 @@ Future<void> initializeDependencies() async {
   // -- HIVE BOXES --
   getIt.registerLazySingleton<OpenBoxes>(() => OpenBoxes());
   
-}
-void setupLocator() {
-  getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 }

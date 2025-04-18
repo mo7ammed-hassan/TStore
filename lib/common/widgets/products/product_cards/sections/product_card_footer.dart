@@ -20,7 +20,6 @@ class TProductCartFooter extends StatelessWidget {
             child: FittedBox(
               child: TProductPriceText(
                 price: price ?? '0',
-                isLarge: false,
               ),
             ),
           ),

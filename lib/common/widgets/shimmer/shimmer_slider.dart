@@ -12,7 +12,6 @@ class ShimmerSlider extends StatelessWidget {
         AspectRatio(
           aspectRatio: 16 / 9,
           child: ShimmerWidget(
-            width: double.infinity,
             shapeBorder: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
             ),

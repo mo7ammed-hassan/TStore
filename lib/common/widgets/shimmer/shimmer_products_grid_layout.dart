@@ -11,7 +11,6 @@ class ShimmerProductsGridLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
-      enabled: true,
       child: TGridLayout(
         itemCount: itemCount,
         itemBuilder: (p0, p1) => TVerticalProductCard(

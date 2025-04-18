@@ -21,7 +21,6 @@ class PaymentSection extends StatelessWidget {
       children: [
         TSectionHeading(
           title: 'Payment Method',
-          showActionButton: true,
           buttonTitle: 'Change',
           onPressed: () async {
             await showPaymentMethodBottomSheet(context, cubit);
@@ -40,7 +39,6 @@ class PaymentSection extends StatelessWidget {
                   height: 30,
                   backgroundColor: isDark ? AppColors.light : AppColors.white,
                   imageUrl: cubit.selectedPaymentMethod!.image,
-                  fit: BoxFit.contain,
                   padding: const EdgeInsets.all(2),
                   borderRadius: 5,
                 ),

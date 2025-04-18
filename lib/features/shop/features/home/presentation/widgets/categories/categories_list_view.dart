@@ -28,13 +28,12 @@ class CategoriesListView extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (_, index) {
             return TVerticalImageText(
-              isNetworkImage: false,
               image: categories[index].image,
               title: categories[index].name,
               onTap: () {
                 context.pushPage(
                   SubCategoryPage(
-                    categoryId: categories[index].id,
+                    category: categories[index],
                   ),
                 );
               },

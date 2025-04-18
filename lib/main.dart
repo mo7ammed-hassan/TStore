@@ -52,7 +52,6 @@ void main() {
 
       // Service Locator Initialization
       await initializeDependencies();
-      setupLocator();
 
       // Open Hive Boxes
       await OpenBoxes().initializeUserBox();

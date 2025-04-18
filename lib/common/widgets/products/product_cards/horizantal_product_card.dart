@@ -33,7 +33,6 @@ class HorizantalProductCard extends StatelessWidget {
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             TRoundedContainer(
               height: 120,
@@ -45,9 +44,7 @@ class HorizantalProductCard extends StatelessWidget {
                     height: 120,
                     width: 120,
                     child: TRoundedImage(
-                      fit: BoxFit.contain,
                       imageUrl: product.thumbnail,
-                      aplayImageRaduis: true,
                     ),
                   ),
                   _discountText(context),

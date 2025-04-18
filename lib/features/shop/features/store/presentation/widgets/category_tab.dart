@@ -34,7 +34,6 @@ class TCategoryTab extends StatelessWidget {
                 // Products
                 TSectionHeading(
                   title: 'You might like',
-                  showActionButton: true,
                   onPressed: () {
                     context.pushPage(
                       AllProductsPage(

@@ -21,7 +21,11 @@ class AddressFirebaseServicesImpl extends AddressFirebaseServices {
   Future<Either<String, String>> addNewAddress(
       {required AddressModel address}) async {
     try {
-      final userId = _user!.uid;
+      final userId = _user?.uid;
+
+      if (userId == null) {
+        _user?.reload();
+      }
 
       var collection = _storage
           .collection(FirebaseCollections.USER_COLLECTION)
@@ -39,7 +43,7 @@ class AddressFirebaseServicesImpl extends AddressFirebaseServices {
   @override
   Future<void> deleteAddress({required String addressId}) async {
     try {
-      final userId = _user!.uid;
+      final userId = _user?.uid;
 
       await _storage
           .collection(FirebaseCollections.USER_COLLECTION)
@@ -56,7 +60,7 @@ class AddressFirebaseServicesImpl extends AddressFirebaseServices {
   Future<Either<String, List<QueryDocumentSnapshot<Map<String, dynamic>>>>>
       fetchAddresses() async {
     try {
-      final userId = _user!.uid;
+      final userId = _user?.uid;
 
       var snapshot = await _storage
           .collection(FirebaseCollections.USER_COLLECTION)

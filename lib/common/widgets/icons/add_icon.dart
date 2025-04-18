@@ -23,8 +23,7 @@ class AddIcon extends StatelessWidget {
       child: InkWell(
         onTap: () {
           if (product.productType == ProductType.single.toString()) {
-            cartCubit.addProductToCartFormProduct(
-                product: product, quantity: 1);
+            cartCubit.addProductToCartFormProduct(product: product);
           } else {
             context.pushPage(ProductDetailPage(product: product));
           }

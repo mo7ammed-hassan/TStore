@@ -14,6 +14,7 @@ class TFullScreenLoader {
   ///   - animation: The Lottie animation to be shown.
   static void openLoadingDialog(String text, String animation) {
     showDialog(
+      useSafeArea: false,
       context:
           Get.overlayContext!, // Use Get.overlayContext for overlay dialogs
       barrierDismissible:

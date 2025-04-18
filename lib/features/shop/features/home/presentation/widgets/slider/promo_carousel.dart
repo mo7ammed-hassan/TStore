@@ -23,7 +23,6 @@ class TPromoCarousel extends StatelessWidget {
           .toList(),
       options: CarouselOptions(
         autoPlay: isLoading ? false : true,
-        autoPlayCurve: Curves.fastOutSlowIn,
         viewportFraction: 1,
         onPageChanged: (index, _) =>
             context.read<PromoSliderCubit>().updatePageIndicator(index),

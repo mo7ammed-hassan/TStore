@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'T-Store',
-        themeMode: ThemeMode.system,
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         navigatorKey: AppContext.navigatorKey,
@@ -32,7 +31,7 @@ class AppLifecycleObserver extends WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.detached) {
       // Cleanup resources when the app is closed
-      getIt.reset(dispose: true); // Ensure proper resource disposal
+      getIt.reset(); // Ensure proper resource disposal
     }
   }
 }

@@ -30,7 +30,6 @@ class ProductVariationModel {
       price: 0.0,
       salePrice: 0.0,
       stock: 0,
-      attributeValues: {},
     );
   }
 

@@ -76,7 +76,6 @@ class CheckoutPage extends StatelessWidget {
               TFullScreenLoader.stopLoading();
               context.pushPage(
                 SuccessPage(
-                  json: true,
                   title: 'Payment Success!',
                   subtitle: 'Your items will be shipping soon!',
                   image: TImages.completeOrder,

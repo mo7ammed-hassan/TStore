@@ -28,6 +28,7 @@ class TVerticalImageText extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(right: AppSizes.spaceBtwItems),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             TCircularImage(
               image: image,
@@ -37,23 +38,6 @@ class TVerticalImageText extends StatelessWidget {
               padding: AppSizes.sm * 1.4,
               imageColor: (isDark ? AppColors.light : AppColors.dark),
             ),
-            // Container(
-            //   width: 56,
-            //   height: 56,
-            //   padding: const EdgeInsets.all(TSizes.fontSizeSm),
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(100),
-            //     color:
-            //         backgroundColor ?? (isDark ? TColors.black : TColors.white),
-            //   ),
-            //   child: Center(
-            //     child: Image(
-            //       image: AssetImage(image),
-            //       fit: BoxFit.cover,
-            //       color: (isDark ? TColors.light : TColors.dark),
-            //     ),
-            //   ),
-            // ),
             const SizedBox(height: AppSizes.spaceBtwItems / 2),
             SizedBox(
               width: 60,

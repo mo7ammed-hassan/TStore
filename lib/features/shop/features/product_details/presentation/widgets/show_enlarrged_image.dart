@@ -8,7 +8,6 @@ void showEnlargedImage(String image, BuildContext context) {
       insetAnimationDuration: const Duration(microseconds: 850),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -22,7 +21,6 @@ void showEnlargedImage(String image, BuildContext context) {
           ),
           const SizedBox(height: AppSizes.spaceBtwSections),
           Align(
-            alignment: Alignment.center,
             child: SizedBox(
               width: 150,
               child: OutlinedButton(

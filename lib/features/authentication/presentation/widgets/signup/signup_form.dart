@@ -60,7 +60,6 @@ class TSignupForm extends StatelessWidget {
   Expanded _firstNameField(BuildContext context) {
     return Expanded(
       child: TextFormField(
-        expands: false,
         controller: context.read<SignupCubit>().firstNameController,
         validator: (value) => TValidator.validateEmptyText('First Name', value),
         textInputAction: TextInputAction.next,
@@ -80,7 +79,6 @@ class TSignupForm extends StatelessWidget {
         validator: (value) => TValidator.validateEmptyText('Last Name', value),
         textInputAction: TextInputAction.next,
         autofillHints: const [AutofillHints.familyName],
-        expands: false,
         decoration: const InputDecoration(
           labelText: TTexts.lastName,
           prefixIcon: Icon(Iconsax.user),

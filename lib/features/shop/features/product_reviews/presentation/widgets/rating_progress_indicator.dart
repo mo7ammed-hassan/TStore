@@ -15,7 +15,6 @@ class TRatingProgressIndicator extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          flex: 1,
           child: Text(
             text,
             style: Theme.of(context).textTheme.bodyMedium,
