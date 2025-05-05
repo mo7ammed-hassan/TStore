@@ -86,7 +86,10 @@ class ForgetPasswordPage extends StatelessWidget {
             );
           } else if (state is ResetPasswordSuccessState) {
             TFullScreenLoader.stopLoading();
-            context.pushPage(const ResetPasswordPage());
+            context.pushPage(BlocProvider.value(
+              value: context.read<ResetPasswordCubit>(),
+              child: const ResetPasswordPage(),
+            ));
             Loaders.successSnackBar(
               title: 'Success',
               message: state.successMessage,

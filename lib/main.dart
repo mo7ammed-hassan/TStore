@@ -62,7 +62,7 @@ void main() {
       // Bloc Observer
       Bloc.observer = MyBlocObserver();
 
-      // Run the app
+      // Run 
       runApp(
         BlocProvider(
           create: (context) => LaunchAppCubit()..launchApp(),
