@@ -31,6 +31,7 @@ class TBrandCard extends StatelessWidget {
           ),
           const SizedBox(width: AppSizes.spaceBtwItems / 2),
           Expanded(
+            flex: 2,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -18,7 +18,8 @@ class TBottomNavigationBar extends StatelessWidget {
           elevation: 0,
           selectedIndex: state,
           onDestinationSelected: context.read<NavigationMenuCubit>().setScreen,
-          backgroundColor: isDark ? AppColors.black : AppColors.white,
+          backgroundColor:
+              isDark ? const Color.fromARGB(255, 15, 15, 15) : AppColors.white,
           indicatorColor: isDark
               ? AppColors.white.withValues(alpha: 0.1)
               : AppColors.black.withValues(alpha: 0.1),
