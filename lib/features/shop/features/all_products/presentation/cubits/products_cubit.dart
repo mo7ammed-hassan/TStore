@@ -24,11 +24,13 @@ class ProductsCubit extends Cubit<ProductsState> {
       return;
     }
 
-    emit(
-      ProductsLoadingState(
-        isLoadingAllProducts: true,
-      ),
-    );
+    if (!isClosed) {
+      emit(
+        ProductsLoadingState(
+          isLoadingAllProducts: true,
+        ),
+      );
+    }
 
     var result = await getIt<GetPopularProductsUseCase>().call();
 
@@ -36,13 +38,13 @@ class ProductsCubit extends Cubit<ProductsState> {
 
     result.fold(
       (error) {
-        emit(ProductsFailureState(allProductsError: error));
+        if (!isClosed) emit(ProductsFailureState(allProductsError: error));
       },
       (products) {
         allProducts.clear();
         allProducts.addAll(products);
 
-        emit(ProductsLoadedState(allProducts, featuredProducts));
+        if (!isClosed) emit(ProductsLoadedState(allProducts, featuredProducts));
         _hasFetchedPopularProducts = true;
       },
     );
@@ -60,11 +62,13 @@ class ProductsCubit extends Cubit<ProductsState> {
       return;
     }
 
-    emit(
-      ProductsLoadingState(
-        isLoadingFeaturedProducts: true,
-      ),
-    );
+    if (!isClosed) {
+      emit(
+        ProductsLoadingState(
+          isLoadingFeaturedProducts: true,
+        ),
+      );
+    }
 
     var result = await getIt<GetFeturedProductsUseCase>().call(params: limit);
 
@@ -72,27 +76,27 @@ class ProductsCubit extends Cubit<ProductsState> {
 
     result.fold(
       (error) {
-        emit(ProductsFailureState(featuredProductsError: error));
+        if (!isClosed) emit(ProductsFailureState(featuredProductsError: error));
       },
       (products) {
         featuredProducts.clear();
         featuredProducts.addAll(products);
 
-        emit(ProductsLoadedState(allProducts, featuredProducts));
+        if (!isClosed) emit(ProductsLoadedState(allProducts, featuredProducts));
         _hasFetchedFeaturedProducts = true;
       },
     );
   }
 
- 
-
   Future<void> fetchInitialData() async {
-    emit(
-      ProductsLoadingState(
-        isLoadingAllProducts: true,
-        isLoadingFeaturedProducts: true,
-      ),
-    );
+    if (!isClosed) {
+      emit(
+        ProductsLoadingState(
+          isLoadingAllProducts: true,
+          isLoadingFeaturedProducts: true,
+        ),
+      );
+    }
 
     await Future.wait([
       fetchPopularProducts(forceRefresh: true).catchError((_) {}),

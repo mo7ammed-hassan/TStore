@@ -68,6 +68,7 @@ import 'package:t_store/features/shop/features/home/domain/repository/banner_rep
 import 'package:t_store/features/shop/features/home/domain/repository/category_repositoy.dart';
 import 'package:t_store/features/shop/features/home/domain/use_cases/banner_use_case.dart';
 import 'package:t_store/features/shop/features/home/domain/use_cases/category_use_case.dart';
+import 'package:t_store/features/shop/features/home/presentation/cubits/category/category_cubit.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/cubits/product_variation_cubit.dart';
 import 'package:t_store/features/shop/features/wishlist/data/repositories/wishlist_repository_impl.dart';
 import 'package:t_store/features/shop/features/wishlist/data/source/wishlist_firebase_services.dart';
@@ -290,6 +291,7 @@ Future<void> initializeDependencies() async {
   );
 
   // -- Cubits--
+  getIt.registerLazySingleton<CategoryCubit>(() => CategoryCubit());
   getIt.registerLazySingleton<ProductsCubit>(() => ProductsCubit());
   getIt.registerLazySingleton<BrandCubit>(() => BrandCubit());
   getIt.registerLazySingleton<WishlistCubit>(() => WishlistCubit());

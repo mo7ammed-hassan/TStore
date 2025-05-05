@@ -71,9 +71,7 @@ class ResetPasswordPage extends StatelessWidget {
       width: double.infinity,
       child: Builder(builder: (context) {
         return TextButton(
-          onPressed: () {
-            context.removePage(const ResetPasswordPage());
-          },
+          onPressed: () => context.read<ResetPasswordCubit>().resetPassword(),
           child: Text(
             TTexts.resendEmail,
             style: const TextStyle()

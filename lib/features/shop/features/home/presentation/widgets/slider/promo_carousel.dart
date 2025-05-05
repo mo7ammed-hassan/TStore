@@ -17,7 +17,7 @@ class TPromoCarousel extends StatelessWidget {
           .map(
             (banner) => TRoundedImage(
               imageUrl: banner.imageUrl,
-              //isNetworkImage: true,
+              isNetworkImage: true,
             ),
           )
           .toList(),

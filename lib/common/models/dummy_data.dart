@@ -103,18 +103,7 @@ class DummyData {
 
   static final List<BannerModel> banners = [
     BannerModel(
-        id: '1', image: TImages.banner1, targetScreen: '/order', active: false),
-    BannerModel(
-        id: '2', image: TImages.banner2, targetScreen: '/cart', active: false),
-    BannerModel(
-        image: TImages.banner3, targetScreen: '/favorite', active: true),
-    BannerModel(image: TImages.banner4, targetScreen: '/search', active: true),
-    BannerModel(
-        image: TImages.banner5, targetScreen: '/settings', active: true),
-    BannerModel(
-        image: TImages.banner6, targetScreen: '/userAddress', active: true),
-    BannerModel(
-        image: TImages.banner8, targetScreen: '/checout', active: false),
+        id: '1', image: TImages.banner3, targetScreen: '/order', active: false),
   ];
 
   static final List<ProductUploadModel> products = [

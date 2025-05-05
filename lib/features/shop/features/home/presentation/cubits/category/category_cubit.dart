@@ -29,14 +29,14 @@ class CategoryCubit extends Cubit<CategoryState> {
       return;
     }
 
-    emit(const CategoryLoadingState());
+    if (!isClosed) emit(const CategoryLoadingState());
 
     var result = await getIt<CategoryUseCase>().call();
 
     if (isClosed) return;
     result.fold(
       (error) {
-        emit(CategoryFailureState(error));
+        if (!isClosed) emit(CategoryFailureState(error));
       },
       (categories) {
         allCategories.clear();
@@ -50,7 +50,9 @@ class CategoryCubit extends Cubit<CategoryState> {
               .toList(),
         );
 
-        emit(CategoryLoadedState(allCategories, featuredCategories));
+        if (!isClosed) {
+          emit(CategoryLoadedState(allCategories, featuredCategories));
+        }
 
         _hasFetched = true;
       },
