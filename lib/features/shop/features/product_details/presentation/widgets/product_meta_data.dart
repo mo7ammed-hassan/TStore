@@ -9,7 +9,6 @@ import 'package:t_store/features/shop/features/all_products/presentation/cubits/
 import 'package:t_store/service_locator.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/enums.dart';
-import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
@@ -78,7 +77,7 @@ class TProductMetaData extends StatelessWidget {
         Row(
           children: [
             TCircularImage(
-              image: product.brand?.image ?? TImages.nikeLogo,
+              image: product.brand?.image,
               width: 32,
               height: 32,
               backgroundColor: isDark ? AppColors.black : AppColors.white,

@@ -28,18 +28,18 @@ class TImages {
   static const String electronicsIcon =
       "assets/icons/categories/icons8-smartphone-64.png";
 
-  // -- Brand Icons
-  static const String nikeLogo = "assets/icons/brands/nike.png";
-  static const String adidasLogo = "assets/icons/brands/adidas-logo.png";
-  static const String appleLogo = "assets/icons/brands/apple-logo.png";
-  static const String jordanLogo = "assets/icons/brands/jordan-logo.png";
-  static const String pumaLogo = "assets/icons/brands/puma-logo.png";
-  static const String zaraLogo = "assets/icons/brands/zara-logo.png";
-  static const String kenwoodLogo = "assets/icons/brands/kenwood-logo.png";
-  static const String hermanMillerLogo =
-      "assets/icons/brands/herman-miller-logo.png";
-  static const String ikeaLogo = "assets/icons/brands/ikea_logo.png";
-  static const String acerlogo = "assets/icons/brands/acer_logo.png";
+  // // -- Brand Icons
+  // static const String nikeLogo = "assets/icons/brands/nike.png";
+  // static const String adidasLogo = "assets/icons/brands/adidas-logo.png";
+  // static const String appleLogo = "assets/icons/brands/apple-logo.png";
+  // static const String jordanLogo = "assets/icons/brands/jordan-logo.png";
+  // static const String pumaLogo = "assets/icons/brands/puma-logo.png";
+  // static const String zaraLogo = "assets/icons/brands/zara-logo.png";
+  // static const String kenwoodLogo = "assets/icons/brands/kenwood-logo.png";
+  // static const String hermanMillerLogo =
+  //     "assets/icons/brands/herman-miller-logo.png";
+  // static const String ikeaLogo = "assets/icons/brands/ikea_logo.png";
+  // static const String acerlogo = "assets/icons/brands/acer_logo.png";
 
   // -- Animations
   static const String productsIllustration =
@@ -266,4 +266,6 @@ class TImages {
   static const String paytm = "assets/icons/payment_methods/paytm.png";
   static const String successfulPaymentIcon =
       "assets/icons/payment_methods/successful_payment_icon.png";
+
+  static var defaultImage = "assets/images/products/default_product_image.png";
 }
