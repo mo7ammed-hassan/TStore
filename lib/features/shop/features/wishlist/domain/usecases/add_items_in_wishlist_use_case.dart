@@ -8,5 +8,5 @@ class AddItemsInWishlistUseCase extends UseCases<void, String> {
     return await getIt<WishlistRepository>().addProductToWishlist(params!);
   }
 
-  clearWishlist() {}
+  void clearWishlist() {}
 }

@@ -74,7 +74,7 @@ class OrderModel {
         'cartItems': List<dynamic>.from(cartItems.map((item) => item.toJson())),
       };
 
-  static empty() {
+  static OrderModel empty() {
     return OrderModel(
       id: '',
       userId: '',
