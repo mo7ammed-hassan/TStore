@@ -18,7 +18,7 @@ class CategoryModel {
 
   // Empty Helper function
   static CategoryModel empty() => CategoryModel(
-      id: '', name: '', image: '', parentId: '', isFeatured: false);
+      id: '', name: '', image: '', isFeatured: false);
 
   // Convert Model to Json structure to storage in the database
   Map<String, dynamic> toJson() {

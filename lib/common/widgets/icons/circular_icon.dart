@@ -16,7 +16,7 @@ class TCircularIcon extends StatelessWidget {
     this.onPressed,
     this.width,
     this.height,
-    this.size = TSizes.lg,
+    this.size = AppSizes.lg,
     this.color,
   });
 

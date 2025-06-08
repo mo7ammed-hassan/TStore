@@ -17,23 +17,23 @@ class UploadDataPage extends StatelessWidget {
       child: Scaffold(
         appBar: _appBar(),
         body: SingleChildScrollView(
-          padding: const EdgeInsets.all(TSizes.spaceBtwItems),
+          padding: const EdgeInsets.all(AppSizes.spaceBtwItems),
           child: Column(
             children: [
               const TSectionHeading(
                   title: 'Main Record', showActionButton: false),
-              const SizedBox(height: TSizes.spaceBtwItems),
+              const SizedBox(height: AppSizes.spaceBtwItems),
               const MainRecordSection(),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              const SizedBox(height: AppSizes.spaceBtwSections),
               const TSectionHeading(
                   title: 'Relationships', showActionButton: false),
               Text(
                 'Make sure you have already uploaded all the content above',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              const SizedBox(height: TSizes.spaceBtwItems),
+              const SizedBox(height: AppSizes.spaceBtwItems),
               const RelationshipsSection(),
-              const SizedBox(height: TSizes.spaceBtwSections * 2),
+              const SizedBox(height: AppSizes.spaceBtwSections * 2),
               Builder(
                 builder: (context) {
                   return SizedBox(

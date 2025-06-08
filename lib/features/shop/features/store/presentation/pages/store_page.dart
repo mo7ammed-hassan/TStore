@@ -29,25 +29,31 @@ class StorePage extends StatelessWidget {
           headerSliverBuilder: (_, innerBoxIsScrolled) {
             return [
               SliverAppBar(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(AppSizes.md),
+                    topRight: Radius.circular(AppSizes.md),
+                  ),
+                ),
                 automaticallyImplyLeading: false,
                 pinned: true,
                 floating: true,
                 backgroundColor: HelperFunctions.isDarkMode(context)
-                    ? AppColors.black
+                    ? const Color.fromARGB(255, 15, 15, 15)
                     : AppColors.white,
                 expandedHeight: 420, //440
                 flexibleSpace: const Padding(
-                  padding: EdgeInsets.all(TSizes.defaultSpace),
+                  padding: EdgeInsets.all(AppSizes.defaultSpace),
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        SizedBox(height: TSizes.spaceBtwItems),
+                        SizedBox(height: AppSizes.spaceBtwItems),
                         TSearchConatiner(
                           text: 'Search in Store',
                           padding: EdgeInsets.zero,
                           showBackground: false,
                         ),
-                        SizedBox(height: TSizes.spaceBtwSections),
+                        SizedBox(height: AppSizes.spaceBtwSections),
                         FeaturedBrandsSection(),
                       ],
                     ),

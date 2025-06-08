@@ -13,10 +13,10 @@ class TDiscountRate extends StatelessWidget {
   Widget build(BuildContext context) {
     return TRoundedContainer(
       padding: const EdgeInsets.symmetric(
-        horizontal: TSizes.sm,
-        vertical: TSizes.xs,
+        horizontal: AppSizes.sm,
+        vertical: AppSizes.xs,
       ),
-      radius: TSizes.sm,
+      radius: AppSizes.sm,
       backgroundColor: AppColors.secondary.withValues(alpha: 0.8),
       child: Text(
         rate,

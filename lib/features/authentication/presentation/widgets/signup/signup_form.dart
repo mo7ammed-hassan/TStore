@@ -32,23 +32,23 @@ class TSignupForm extends StatelessWidget {
               Row(
                 children: [
                   _firstNameField(context),
-                  const SizedBox(width: TSizes.spaceBtwInputFields),
+                  const SizedBox(width: AppSizes.spaceBtwInputFields),
                   _lastNameField(context),
                 ],
               ),
-              const SizedBox(height: TSizes.spaceBtwInputFields),
+              const SizedBox(height: AppSizes.spaceBtwInputFields),
               _userNameField(context),
-              const SizedBox(height: TSizes.spaceBtwInputFields),
+              const SizedBox(height: AppSizes.spaceBtwInputFields),
               _emailField(context),
-              const SizedBox(height: TSizes.spaceBtwInputFields),
+              const SizedBox(height: AppSizes.spaceBtwInputFields),
               _phoneNumberField(context),
-              const SizedBox(height: TSizes.spaceBtwInputFields),
+              const SizedBox(height: AppSizes.spaceBtwInputFields),
               PasswordField(
                 controller: context.read<SignupCubit>().passwordController,
               ),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              const SizedBox(height: AppSizes.spaceBtwSections),
               const TTermAndCondationCheckbox(),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              const SizedBox(height: AppSizes.spaceBtwSections),
               _createAccount(context),
             ],
           ),
@@ -60,7 +60,6 @@ class TSignupForm extends StatelessWidget {
   Expanded _firstNameField(BuildContext context) {
     return Expanded(
       child: TextFormField(
-        expands: false,
         controller: context.read<SignupCubit>().firstNameController,
         validator: (value) => TValidator.validateEmptyText('First Name', value),
         textInputAction: TextInputAction.next,
@@ -80,7 +79,6 @@ class TSignupForm extends StatelessWidget {
         validator: (value) => TValidator.validateEmptyText('Last Name', value),
         textInputAction: TextInputAction.next,
         autofillHints: const [AutofillHints.familyName],
-        expands: false,
         decoration: const InputDecoration(
           labelText: TTexts.lastName,
           prefixIcon: Icon(Iconsax.user),

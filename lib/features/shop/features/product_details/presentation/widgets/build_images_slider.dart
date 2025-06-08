@@ -29,7 +29,7 @@ class BuildImagesSlider extends StatelessWidget {
                 onTap: () => cubit.selectImage(image),
                 child: TRoundedImage(
                   width: 80,
-                  padding: const EdgeInsets.all(TSizes.xs),
+                  padding: const EdgeInsets.all(AppSizes.xs),
                   imageUrl: image,
                   backgroundColor: isDark ? AppColors.dark : AppColors.white,
                   border: Border.all(
@@ -44,7 +44,7 @@ class BuildImagesSlider extends StatelessWidget {
           );
         },
         separatorBuilder: (context, index) =>
-            const SizedBox(width: TSizes.spaceBtwItems),
+            const SizedBox(width: AppSizes.spaceBtwItems),
       ),
     );
   }

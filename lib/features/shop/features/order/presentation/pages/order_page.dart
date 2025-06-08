@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/features/shop/features/order/presentation/cubits/order_cubit.dart';
 import 'package:t_store/features/shop/features/order/presentation/widgets/order_list_items.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
@@ -8,14 +10,17 @@ class OrderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _appBar(context),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: TSizes.spaceBtwItems,
-          vertical: TSizes.defaultSpace,
+    return BlocProvider(
+      create: (context) => OrderCubit()..fetchOrders(), 
+      child: Scaffold(
+        appBar: _appBar(context),
+        body: const Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSizes.spaceBtwItems,
+            vertical: AppSizes.defaultSpace,
+          ),
+          child: OrderListItems(),
         ),
-        child: OrderListItems(),
       ),
     );
   }
@@ -30,3 +35,4 @@ class OrderPage extends StatelessWidget {
     );
   }
 }
+

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
 import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
@@ -11,14 +12,14 @@ class TCircularImage extends StatelessWidget {
     required this.image,
     this.width = 56,
     this.height = 56,
-    this.padding = TSizes.sm,
+    this.padding = AppSizes.sm,
     this.backgroundColor,
     this.fit = BoxFit.cover,
     this.isNetworkImage = false,
     this.imageColor,
   });
 
-  final String image;
+  final String? image;
   final double width, height, padding;
 
   final Color? backgroundColor;
@@ -40,9 +41,9 @@ class TCircularImage extends StatelessWidget {
       child: Center(
         child: ClipRRect(
           borderRadius: BorderRadius.circular(100),
-          child: isNetworkImage
+          child: (isNetworkImage && image != null)
               ? CachedNetworkImage(
-                  imageUrl: image,
+                  imageUrl: image ?? TImages.defaultImage,
                   fit: fit,
                   color: (isDark ? AppColors.light : AppColors.dark),
                   progressIndicatorBuilder: (context, url, progress) =>
@@ -55,7 +56,7 @@ class TCircularImage extends StatelessWidget {
                 )
               : Image(
                   fit: fit,
-                  image: AssetImage(image),
+                  image: AssetImage(image ?? TImages.defaultImage),
                   color: imageColor,
                 ),
         ),

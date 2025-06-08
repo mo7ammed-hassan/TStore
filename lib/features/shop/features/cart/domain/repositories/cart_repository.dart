@@ -7,10 +7,12 @@ import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_en
 abstract class CartRepository {
   Future<Either<ServerFailure, List<CartItemEntity>>> fetchCartItems();
   Future<Either<Failure, void>> addProductToCart(
-      {required ProductEntity product, int quantity = 1});
+      {required ProductEntity product, required int quantity});
   Future<Either<Failure, void>> addSingleItemToCart(
       {required CartItemModel cartItem});
   Future<Either<Failure, void>> removeSingleItemFromCart(
       {required CartItemModel cartItem});
   Future<Either<Failure, void>> removeAllItemsFromCart();
+  int getItemQuantityWithVariationId(
+      {required String productId, required String selectedVariationId});
 }

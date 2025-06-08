@@ -62,8 +62,8 @@ class _AnimatedGridLayoutState extends State<AnimatedGridLayout> {
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisSpacing: TSizes.gridViewSpacing, //vertical
-        crossAxisSpacing: TSizes.gridViewSpacing,
+        mainAxisSpacing: AppSizes.gridViewSpacing, //vertical
+        crossAxisSpacing: AppSizes.gridViewSpacing,
         mainAxisExtent: widget.mainAxisExtent,
       ),
       itemBuilder: (context, index) {

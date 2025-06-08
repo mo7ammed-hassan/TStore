@@ -15,8 +15,8 @@ class CartLoadingState extends CartState {}
 
 class CartLoadedState extends CartState {
   final List<CartItemEntity> cartItems;
-
-  const CartLoadedState( this.cartItems);
+  final int totalItems;
+  const CartLoadedState( this.cartItems, this.totalItems);
 
   @override
   List<Object> get props => [cartItems];
@@ -29,4 +29,9 @@ class CartErrorState extends CartState {
 
   @override
   List<Object> get props => [message];
+}
+
+
+class CartItemQuantityChangedState extends CartState {
+  const CartItemQuantityChangedState();
 }

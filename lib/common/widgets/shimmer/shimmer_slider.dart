@@ -12,13 +12,12 @@ class ShimmerSlider extends StatelessWidget {
         AspectRatio(
           aspectRatio: 16 / 9,
           child: ShimmerWidget(
-            width: double.infinity,
             shapeBorder: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
             ),
           ),
         ),
-        const SizedBox(height: TSizes.spaceBtwItems),
+        const SizedBox(height: AppSizes.spaceBtwItems),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(

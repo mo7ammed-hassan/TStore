@@ -17,11 +17,9 @@ class ChangeNamePage extends StatelessWidget {
         ),
       ),
       body: const Padding(
-        padding: EdgeInsets.all(TSizes.spaceBtwItems),
+        padding: EdgeInsets.all(AppSizes.spaceBtwItems),
         child: ChangeNameBody(),
       ),
     );
   }
 }
-
-

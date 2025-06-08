@@ -44,7 +44,7 @@ class TPromoSlider extends StatelessWidget {
             return Column(
               children: [
                 TPromoCarousel(banners: state.allBanners),
-                const SizedBox(height: TSizes.spaceBtwItems),
+                const SizedBox(height: AppSizes.spaceBtwItems),
                 TPromoSliderIndicators(length: state.allBanners.length),
               ],
             );
@@ -66,7 +66,7 @@ class TPromoSlider extends StatelessWidget {
               BannerModel.empty().toEntity(),
             ],
           ),
-          const SizedBox(height: TSizes.spaceBtwItems),
+          const SizedBox(height: AppSizes.spaceBtwItems),
           const TPromoSliderIndicators(length: 1),
         ],
       ),

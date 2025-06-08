@@ -15,15 +15,18 @@ class TPromoCarousel extends StatelessWidget {
     return CarouselSlider(
       items: banners
           .map(
-            (banner) => TRoundedImage(
-              imageUrl: banner.imageUrl,
-              //isNetworkImage: true,
+            (banner) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2.0),
+              child: TRoundedImage(
+                padding: const EdgeInsets.all(2),
+                imageUrl: banner.imageUrl,
+                isNetworkImage: true,
+              ),
             ),
           )
           .toList(),
       options: CarouselOptions(
         autoPlay: isLoading ? false : true,
-        autoPlayCurve: Curves.fastOutSlowIn,
         viewportFraction: 1,
         onPageChanged: (index, _) =>
             context.read<PromoSliderCubit>().updatePageIndicator(index),

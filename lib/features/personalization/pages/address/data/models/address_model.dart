@@ -54,6 +54,21 @@ class AddressModel {
         'selectedAddress': selectedAddress,
       };
 
+      // --from json
+
+  factory AddressModel.fromJson(Map<String, dynamic> json) => AddressModel( 
+        id: json['id'] ?? '',
+        name: json['name'], 
+        phoneNumber: json['phoneNumber'], 
+        street: json['street'], 
+        city: json['city'], 
+        state: json['state'], 
+        country: json['country'], 
+        postalCode: json['postalCode'], 
+        createdAt:  json['createdAt'] is Timestamp ? (json['createdAt'] as Timestamp).toDate() : DateTime.tryParse(json['createdAt']) ?? DateTime.now(), 
+        selectedAddress: json['selectedAddress'], 
+      );
+
   factory AddressModel.empty() => AddressModel(
         id: '',
         name: '',
@@ -66,6 +81,21 @@ class AddressModel {
         createdAt: DateTime.now(),
         selectedAddress: false,
       );
+
+  static AddressModel fromEntity(AddressEntity addressEntity) {
+    return AddressModel(
+      id: addressEntity.id,
+      name: addressEntity.name,
+      phoneNumber: addressEntity.phoneNumber,
+      street: addressEntity.street,
+      city: addressEntity.city,
+      state: addressEntity.state,
+      country: addressEntity.country,
+      postalCode: addressEntity.postalCode,
+      createdAt: addressEntity.createdAt,
+      selectedAddress: addressEntity.selectedAddress,
+    );
+  }
 }
 
 extension AddressXModel on AddressModel {

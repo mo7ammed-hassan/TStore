@@ -42,9 +42,9 @@ class ReAuthForm extends StatelessWidget {
         child: Column(
           children: [
             _buildEmailField(cubit),
-            const SizedBox(height: TSizes.spaceBtwInputFields),
+            const SizedBox(height: AppSizes.spaceBtwInputFields),
             _buildPasswordField(cubit),
-            const SizedBox(height: TSizes.spaceBtwSections),
+            const SizedBox(height: AppSizes.spaceBtwSections),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(

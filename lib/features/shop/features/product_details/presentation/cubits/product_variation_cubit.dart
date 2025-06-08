@@ -31,6 +31,7 @@ class ProductVariationCubit extends Cubit<ProductVariationEntity> {
 
       // Get stock state and emit
       getProductVariationStock();
+
       emit(selectedVariation);
     }
   }
@@ -94,5 +95,14 @@ class ProductVariationCubit extends Cubit<ProductVariationEntity> {
         .toSet();
 
     return availableVariationAttributesValues;
+  }
+
+  // -- reset variation--
+  void resetVariation() {
+    selectedVariation = ProductVariationEntity.empty();
+    selectedAttributes = {};
+    selectedIamge = '';
+    variationStockState = '';
+    emit(selectedVariation);
   }
 }

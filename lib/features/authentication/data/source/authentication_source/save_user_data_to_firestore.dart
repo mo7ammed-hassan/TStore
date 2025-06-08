@@ -35,7 +35,7 @@ class SaveUserDataToFirestore {
     }
   }
 
-  static String generateUsername(fullName) {
+  static String generateUsername(String fullName) {
     List<String> nameParts = fullName.split(' ');
 
     String firstName = nameParts[0].toLowerCase();

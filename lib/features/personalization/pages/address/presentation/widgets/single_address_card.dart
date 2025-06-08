@@ -35,14 +35,14 @@ class SingleAddressCard extends StatelessWidget {
 
         return InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
+          borderRadius: BorderRadius.circular(AppSizes.cardRadiusLg),
           onLongPress: onLongPress,
           child: TRoundedContainer(
             width: double.infinity,
             backgroundColor: isSelectedAddress
                 ? AppColors.primary.withValues(alpha: 0.4)
                 : Colors.transparent,
-            padding: const EdgeInsets.all(TSizes.md),
+            padding: const EdgeInsets.all(AppSizes.md),
             showBorder: true,
             borderColor: isSelectedAddress
                 ? Colors.transparent
@@ -72,12 +72,12 @@ class SingleAddressCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    const SizedBox(height: TSizes.sm / 2),
+                    const SizedBox(height: AppSizes.sm / 2),
                     Text(
                       address.phoneNumber,
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
-                    const SizedBox(height: TSizes.sm / 2),
+                    const SizedBox(height: AppSizes.sm / 2),
                     Text(
                       '${address.street}, ${address.state}, ${address.country}, ${address.postalCode}',
                       maxLines: 2,

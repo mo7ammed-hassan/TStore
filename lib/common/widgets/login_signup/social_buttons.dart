@@ -56,14 +56,14 @@ class TSocialButtons extends StatelessWidget {
               );
             }),
           ),
-          const SizedBox(width: TSizes.spaceBtwItems),
+          const SizedBox(width: AppSizes.spaceBtwItems),
           const TSocialButton(socialIcon: TImages.facebook),
         ],
       ),
     );
   }
 
-  _navigateToMenuPage(BuildContext context) {
+  void _navigateToMenuPage(BuildContext context) {
     context.removeAll(const NavigationMenu());
   }
 }

@@ -28,6 +28,9 @@ class AddressCubit extends Cubit<AddressState> {
   // flage to check if first time or not
   bool isFirstTime = true;
 
+  // -- Previous Address--
+  AddressEntity? previousAddress = AddressEntity.empty();
+
   // -- Fetch Addresses--
   Future<void> fetchAllAddresses() async {
     if (isFirstTime) {
@@ -46,6 +49,10 @@ class AddressCubit extends Cubit<AddressState> {
           orElse: () => AddressEntity.empty(),
         );
         isFirstTime = false;
+        if (addresses.isNotEmpty) {
+          previousAddress = addresses.last;
+        }
+
         emit(FetchAddressesSuccessState(addresses));
       },
     );
@@ -121,6 +128,7 @@ class AddressCubit extends Cubit<AddressState> {
     try {
       await getIt.get<DeleteAddressUseCase>().call(params: addressId);
       await fetchAllAddresses();
+      await selecteAddress(previousAddress!);
       emit(DeleteAddressSuccessState());
     } catch (e) {
       emit(DeleteAddressFailureState());

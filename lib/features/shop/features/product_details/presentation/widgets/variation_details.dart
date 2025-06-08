@@ -18,17 +18,19 @@ class VariationDetails extends StatelessWidget {
 
     return BlocBuilder<ProductVariationCubit, ProductVariationEntity>(
       builder: (context, state) {
-        if (state.id.isEmpty) return const SizedBox();
-
         return TRoundedContainer(
-          padding: const EdgeInsets.all(TSizes.md),
+          padding: const EdgeInsets.all(AppSizes.md),
           backgroundColor: isDark ? AppColors.darkGrey : AppColors.grey,
           child: Column(
             children: [
               _buildVariationHeader(context, state),
-              const SizedBox(height: TSizes.spaceBtwItems),
+              const SizedBox(height: AppSizes.spaceBtwItems),
               if (state.description != null && state.description!.isNotEmpty)
-                _buildDescription(state.description!),
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  child: _buildDescription(state.description!),
+                ),
             ],
           ),
         );
@@ -48,7 +50,7 @@ class VariationDetails extends StatelessWidget {
           title: 'Variation',
           showActionButton: false,
         ),
-        const SizedBox(width: TSizes.spaceBtwSections),
+        const SizedBox(width: AppSizes.spaceBtwSections),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -70,12 +72,12 @@ class VariationDetails extends StatelessWidget {
           title: 'Price:',
           smallSize: true,
         ),
-        const SizedBox(width: TSizes.spaceBtwItems),
+        const SizedBox(width: AppSizes.spaceBtwItems),
         TProductPriceText(price: price),
         if (originalPrice != null)
           Row(
             children: [
-              const SizedBox(width: TSizes.spaceBtwItems),
+              const SizedBox(width: AppSizes.spaceBtwItems),
               Text(
                 '\$${originalPrice.toString()}',
                 style: Theme.of(context).textTheme.titleSmall!.apply(
@@ -96,7 +98,7 @@ class VariationDetails extends StatelessWidget {
           title: 'Stock:',
           smallSize: true,
         ),
-        const SizedBox(width: TSizes.spaceBtwItems),
+        const SizedBox(width: AppSizes.spaceBtwItems),
         Text(
           stockStatus,
           style: Theme.of(context).textTheme.titleMedium,

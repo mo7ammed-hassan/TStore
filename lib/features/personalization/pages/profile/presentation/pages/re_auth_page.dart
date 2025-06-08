@@ -15,7 +15,7 @@ class ReAuthPage extends StatelessWidget {
       child: const Scaffold(
         appBar: TAppBar(title: Text('Re-Authenticate'), showBackArrow: true),
         body: Padding(
-          padding: EdgeInsets.all(TSizes.spaceBtwItems),
+          padding: EdgeInsets.all(AppSizes.spaceBtwItems),
           child: ReAuthForm(),
         ),
       ),

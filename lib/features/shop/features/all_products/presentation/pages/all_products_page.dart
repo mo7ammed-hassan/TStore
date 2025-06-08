@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/common/widgets/layouts/grid_layout.dart';
-import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:t_store/common/widgets/products/product_cards/vertical_product_card.dart';
 import 'package:t_store/common/widgets/products/sortable/sortable_products.dart';
 import 'package:t_store/features/shop/features/all_products/data/models/product_model.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
@@ -31,8 +31,8 @@ class AllProductsPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: TSizes.spaceBtwItems,
-              vertical: TSizes.defaultSpace,
+              horizontal: AppSizes.spaceBtwItems,
+              vertical: AppSizes.defaultSpace,
             ),
             child: BlocBuilder<AllProductsCubit, AllProductsState>(
               builder: (context, state) {
@@ -77,7 +77,6 @@ class AllProductsPage extends StatelessWidget {
 
   Widget _loadingWidget() {
     return Skeletonizer(
-      enabled: true,
       child: TGridLayout(
         itemCount: 6,
         itemBuilder: (p0, p1) => TVerticalProductCard(

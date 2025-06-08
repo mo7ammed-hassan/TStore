@@ -16,7 +16,7 @@ class TCircularLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(TSizes.lg),
+      padding: const EdgeInsets.all(AppSizes.lg),
       decoration: BoxDecoration(
         color: backgroundColor,
         shape: BoxShape.circle,

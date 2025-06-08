@@ -19,12 +19,12 @@ class ShimmerBrandShowCase extends StatelessWidget {
         borderColor: AppColors.darkGrey,
         backgroundColor: Colors.transparent,
         //margin: const EdgeInsets.only(bottom: TSizes.spaceBtwItems),
-        padding: const EdgeInsets.all(TSizes.md),
+        padding: const EdgeInsets.all(AppSizes.md),
         child: Column(
           children: [
             // Brand with Product Conunt
             TBrandCard(brand: BrandEntity.empty(), showBorder: false),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            const SizedBox(height: AppSizes.spaceBtwItems),
             //Brand Top 3 Product Images
             Row(
               children: List.generate(
@@ -35,10 +35,11 @@ class ShimmerBrandShowCase extends StatelessWidget {
                     backgroundColor: HelperFunctions.isDarkMode(context)
                         ? AppColors.darkerGrey
                         : AppColors.light,
-                    margin: const EdgeInsets.only(right: TSizes.sm),
+                    margin: const EdgeInsets.only(right: AppSizes.sm),
                     padding: const EdgeInsets.all(2),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
+                      borderRadius:
+                          BorderRadius.circular(AppSizes.cardRadiusLg),
                       child: const Image(
                         image: AssetImage(TImages.productImage1),
                         fit: BoxFit.cover,

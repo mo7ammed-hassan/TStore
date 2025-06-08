@@ -16,21 +16,22 @@ class TBrandCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isDark = HelperFunctions.isDarkMode(context);
     return TRoundedContainer(
-      padding: const EdgeInsets.all(TSizes.sm),
+      padding: const EdgeInsets.all(AppSizes.sm),
       showBorder: showBorder,
       backgroundColor: Colors.transparent,
       child: Row(
         children: [
           Flexible(
             child: TCircularImage(
-              isNetworkImage: false,
               image: brand.image,
+              isNetworkImage: true,
               backgroundColor: Colors.transparent,
               imageColor: (isDark ? AppColors.light : AppColors.dark),
             ),
           ),
-          const SizedBox(width: TSizes.spaceBtwItems / 2),
+          const SizedBox(width: AppSizes.spaceBtwItems / 2),
           Expanded(
+            flex: 2,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,

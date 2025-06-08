@@ -15,10 +15,10 @@ class CouponFiled extends StatelessWidget {
       showBorder: true,
       backgroundColor: isDark ? AppColors.dark : AppColors.white,
       padding: const EdgeInsets.only(
-        top: TSizes.sm,
-        bottom: TSizes.sm,
-        right: TSizes.sm,
-        left: TSizes.md,
+        top: AppSizes.sm,
+        bottom: AppSizes.sm,
+        right: AppSizes.sm,
+        left: AppSizes.md,
       ),
       child: Row(
         children: [

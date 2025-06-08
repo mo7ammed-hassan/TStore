@@ -5,6 +5,7 @@ import 'package:readmore/readmore.dart';
 import 'package:t_store/common/widgets/animation_containers/open_container_wrapper.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
+import 'package:t_store/features/shop/features/checkout/presentation/pages/checkout_page.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/cubits/images_product_cubit.dart';
 import 'package:t_store/features/shop/features/product_reviews/presentation/pages/product_review_page.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/widgets/bottom_add_to_cart.dart';
@@ -14,6 +15,7 @@ import 'package:t_store/features/shop/features/product_details/presentation/widg
 import 'package:t_store/features/shop/features/product_details/presentation/widgets/rating_and_share.dart';
 import 'package:t_store/utils/constants/enums.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/helpers/navigation.dart';
 
 class ProductDetailPage extends StatelessWidget {
   final ProductEntity product;
@@ -31,42 +33,43 @@ class ProductDetailPage extends StatelessWidget {
               TProductDetailImageSlider(product: product),
               Padding(
                 padding: const EdgeInsets.only(
-                  bottom: TSizes.defaultSpace,
-                  right: TSizes.spaceBtwItems,
-                  left: TSizes.spaceBtwItems,
+                  bottom: AppSizes.defaultSpace,
+                  right: AppSizes.spaceBtwItems,
+                  left: AppSizes.spaceBtwItems,
                 ),
                 child: Column(
                   children: [
                     // -Rating & Share
                     const TRatingAndShare(),
-                    const SizedBox(height: TSizes.spaceBtwItems / 2),
+                    const SizedBox(height: AppSizes.spaceBtwItems / 2),
                     // - Price, Title, Stock, Brand
                     TProductMetaData(product: product),
-                    const SizedBox(height: TSizes.spaceBtwItems),
+                    const SizedBox(height: AppSizes.spaceBtwItems),
                     // - Attributes
                     if (product.productType == ProductType.variable.toString())
                       TProductAttributes(product: product),
                     if (product.productType == ProductType.variable.toString())
-                      const SizedBox(height: TSizes.spaceBtwSections),
+                      const SizedBox(height: AppSizes.spaceBtwSections),
                     // - Checkout Button
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.pushPage(const CheckoutPage());
+                        },
                         child: const Text('Checkout'),
                       ),
                     ),
-                    const SizedBox(height: TSizes.spaceBtwSections),
+                    const SizedBox(height: AppSizes.spaceBtwSections),
                     // -- Description
                     const TSectionHeading(
                       title: 'Description',
                       showActionButton: false,
                     ),
-                    const SizedBox(height: TSizes.spaceBtwItems),
+                    const SizedBox(height: AppSizes.spaceBtwItems),
                     ReadMoreText(
                       product.description ??
                           'This is a Product description. there are more things that can be added to this description',
-                      trimLines: 2,
                       trimMode: TrimMode.Line,
                       trimCollapsedText: ' Show more',
                       trimExpandedText: ' Less',
@@ -77,9 +80,9 @@ class ProductDetailPage extends StatelessWidget {
                     ),
 
                     // Reviews
-                    const SizedBox(height: TSizes.spaceBtwItems),
+                    const SizedBox(height: AppSizes.spaceBtwItems),
                     const Divider(),
-                    const SizedBox(height: TSizes.spaceBtwItems),
+                    const SizedBox(height: AppSizes.spaceBtwItems),
                     const OpenContainerWrapper(
                       nextScreen: ProductReviewPage(),
                       radius: Radius.circular(0),

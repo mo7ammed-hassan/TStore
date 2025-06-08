@@ -31,7 +31,7 @@ class SignInCubit extends Cubit<SignInState> {
     passwordController.text = _storage.read('REMEMBER_ME_PASSWORD') ?? '';
   }
 
-  void signIn(isRememberMe) async {
+  void signIn(bool isRememberMe) async {
     if (!validateForm()) return;
 
     // Start Loading

@@ -20,14 +20,14 @@ class ProductReviewPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.spaceBtwItems),
+          padding: const EdgeInsets.all(AppSizes.spaceBtwItems),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
                 'Ratings and reviews are verified and are from people who use the same type of product that you see',
               ),
-              const SizedBox(height: TSizes.spaceBtwItems),
+              const SizedBox(height: AppSizes.spaceBtwItems),
 
               // overall Product Rating
               const TOverallProductRating(),
@@ -36,7 +36,7 @@ class ProductReviewPage extends StatelessWidget {
                 '12,611 Reviews',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              const SizedBox(height: AppSizes.spaceBtwSections),
               const UserReviewCard(),
               const UserReviewCard(),
             ],

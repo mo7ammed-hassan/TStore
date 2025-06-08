@@ -27,7 +27,7 @@ class ChangeNameForm extends StatelessWidget {
             validator: (value) =>
                 TValidator.validateEmptyText('First Name', value),
           ),
-          const SizedBox(height: TSizes.spaceBtwInputFields),
+          const SizedBox(height: AppSizes.spaceBtwInputFields),
           _buildNameField(
             context,
             controller: userCubit.lastNameController,
@@ -35,7 +35,7 @@ class ChangeNameForm extends StatelessWidget {
             validator: (value) =>
                 TValidator.validateEmptyText('Last Name', value),
           ),
-          const SizedBox(height: TSizes.spaceBtwSections),
+          const SizedBox(height: AppSizes.spaceBtwSections),
           _buildSaveButton(context, userCubit),
         ],
       ),

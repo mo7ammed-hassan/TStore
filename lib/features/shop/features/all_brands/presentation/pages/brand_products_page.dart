@@ -4,7 +4,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/common/widgets/brands/brand_card.dart';
 import 'package:t_store/common/widgets/layouts/grid_layout.dart';
-import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:t_store/common/widgets/products/product_cards/vertical_product_card.dart';
 import 'package:t_store/common/widgets/products/sortable/sortable_dropdown.dart';
 import 'package:t_store/common/widgets/products/sortable/sortable_products.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
@@ -28,16 +28,16 @@ class BrandProductsPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: TSizes.spaceBtwItems,
-              vertical: TSizes.defaultSpace,
+              horizontal: AppSizes.spaceBtwItems,
+              vertical: AppSizes.defaultSpace,
             ),
             child: Column(
               children: [
                 TBrandCard(brand: brand),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                const SizedBox(height: AppSizes.spaceBtwSections),
                 const TSectionHeading(
                     title: 'Products', showActionButton: false),
-                const SizedBox(height: TSizes.spaceBtwItems),
+                const SizedBox(height: AppSizes.spaceBtwItems),
                 BlocBuilder<ProductsByBrandCubit, ProductsByBrandState>(
                   builder: (context, state) {
                     if (state is ProductsByBrandLoadingState ||
@@ -87,7 +87,7 @@ class BrandProductsPage extends StatelessWidget {
         const SortableDropdown(
           initialValue: 'Name',
         ),
-        const SizedBox(height: TSizes.spaceBtwSections),
+        const SizedBox(height: AppSizes.spaceBtwSections),
         Skeletonizer(
           child: TGridLayout(
             itemCount: 6,

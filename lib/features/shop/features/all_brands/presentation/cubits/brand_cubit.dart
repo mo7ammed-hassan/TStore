@@ -27,7 +27,6 @@ class BrandCubit extends Cubit<BrandState> {
     }
 
     emit(BrandLoading(
-      isLoadingAllBrands: false,
       isLoadingFeaturedBrands: true,
     ));
 
@@ -62,7 +61,6 @@ class BrandCubit extends Cubit<BrandState> {
 
     emit(BrandLoading(
       isLoadingAllBrands: true,
-      isLoadingFeaturedBrands: false,
     ));
 
     var result = await getIt.get<GetAllBrandsUseCase>().call(params: 16);

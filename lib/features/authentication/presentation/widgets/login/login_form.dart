@@ -32,21 +32,21 @@ class TLoginForm extends StatelessWidget {
           key: context.read<SignInCubit>().formKey,
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              vertical: TSizes.spaceBtwSections,
+              vertical: AppSizes.spaceBtwSections,
             ),
             child: Column(
               children: [
                 _emailField(context),
-                const SizedBox(height: TSizes.spaceBtwInputFields),
+                const SizedBox(height: AppSizes.spaceBtwInputFields),
                 PasswordField(
                   controller: context.read<SignInCubit>().passwordController,
                 ),
-                const SizedBox(height: TSizes.spaceBtwInputFields / 2),
+                const SizedBox(height: AppSizes.spaceBtwInputFields / 2),
                 // Remember Me & Forget Password
                 _rememberMeAndForgetPassword(context),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                const SizedBox(height: AppSizes.spaceBtwSections),
                 _signIn(context),
-                const SizedBox(height: TSizes.spaceBtwItems),
+                const SizedBox(height: AppSizes.spaceBtwItems),
                 _createAccount(context),
               ],
             ),
@@ -165,7 +165,7 @@ class TLoginForm extends StatelessWidget {
     );
   }
 
-  _navigateToMenuPage(BuildContext context) {
+  void _navigateToMenuPage(BuildContext context) {
     context.removeAll(const NavigationMenu());
   }
 }

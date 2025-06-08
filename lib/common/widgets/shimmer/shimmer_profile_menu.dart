@@ -16,7 +16,7 @@ class ShimmerProfileMenu extends StatelessWidget {
       period: const Duration(milliseconds: 1550),
       child: Padding(
         padding:
-            const EdgeInsets.symmetric(vertical: TSizes.spaceBtwItems / 1.5),
+            const EdgeInsets.symmetric(vertical: AppSizes.spaceBtwItems / 1.5),
         child: Row(
           children: [
             Expanded(

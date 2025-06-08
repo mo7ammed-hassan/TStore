@@ -13,7 +13,7 @@ class StoreResponse extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return TRoundedContainer(
-      padding: const EdgeInsets.all(TSizes.md),
+      padding: const EdgeInsets.all(AppSizes.md),
       backgroundColor: isDark ? AppColors.darkerGrey : AppColors.grey,
       child: Column(
         children: [
@@ -30,7 +30,7 @@ class StoreResponse extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: TSizes.spaceBtwItems),
+          const SizedBox(height: AppSizes.spaceBtwItems),
           const TReadMoreText(
             text:
                 'Ratings and reviews are verified and are from people who use the same type of product that you see,, Ratings and reviews are verified',

@@ -1,5 +1,3 @@
-import 'package:t_store/utils/constants/images_strings.dart';
-
 class BrandEntity {
   String id;
   String name;
@@ -18,9 +16,9 @@ class BrandEntity {
   // -- empty --
   static BrandEntity empty() {
     return BrandEntity(
-      id: '000',
+      id: '',
       name: 'Name',
-      image: TImages.nikeLogo,
+      image: '',
       productCount: 0,
       isFeatured: false,
     );

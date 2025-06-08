@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-
 import '../constants/colors.dart';
 import '../helpers/helper_functions.dart';
 
 class Loaders {
-  static hideSnackBar() =>
+  static void hideSnackBar() =>
       ScaffoldMessenger.of(AppContext.context).hideCurrentSnackBar();
 
-  static customToast({required message, bool isMedium = true}) {
+  static void customToast({required String message, bool isMedium = true}) {
     ScaffoldMessenger.of(AppContext.context).showSnackBar(
       SnackBar(
         behavior: SnackBarBehavior.floating,
         elevation: 0,
-        duration: const Duration(seconds: 1),
+        duration: const Duration(milliseconds: 600),
         backgroundColor: Colors.transparent,
         content: Container(
           padding: const EdgeInsets.all(12.0),
@@ -31,6 +30,7 @@ class Loaders {
               style: isMedium
                   ? Theme.of(AppContext.context).textTheme.bodyMedium
                   : Theme.of(AppContext.context).textTheme.labelLarge,
+              textAlign: TextAlign.center,
             ),
           ),
         ),
@@ -38,7 +38,7 @@ class Loaders {
     );
   }
 
-  static successSnackBar({required title, message = '', duration = 3}) {
+  static void successSnackBar({required String title, message = '', duration = 3}) {
     Get.snackbar(
       title,
       message,
@@ -53,7 +53,7 @@ class Loaders {
     );
   }
 
-  static warningSnackBar({required title, message = ''}) {
+  static void warningSnackBar({required String title, message = ''}) {
     Get.snackbar(
       title,
       message,
@@ -62,13 +62,12 @@ class Loaders {
       colorText: AppColors.white,
       backgroundColor: Colors.orange,
       snackPosition: SnackPosition.BOTTOM,
-      duration: const Duration(seconds: 3),
       margin: const EdgeInsets.all(20),
       icon: const Icon(Iconsax.warning_2, color: AppColors.white),
     );
   }
 
-  static errorSnackBar({required title, message = ''}) {
+  static void errorSnackBar({required String title, message = ''}) {
     Get.snackbar(
       title,
       message,
@@ -77,11 +76,11 @@ class Loaders {
       colorText: AppColors.white,
       backgroundColor: Colors.red.shade600,
       snackPosition: SnackPosition.BOTTOM,
-      duration: const Duration(seconds: 3),
       margin: const EdgeInsets.all(20),
       icon: const Icon(Iconsax.warning_2, color: AppColors.white),
     );
   }
+
 }
 
 class AppContext {

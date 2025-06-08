@@ -58,7 +58,7 @@ class BuildSubCategoriesSections extends StatelessWidget {
             title: 'Sub Category',
             onPressed: () {},
           ),
-          const SizedBox(height: TSizes.spaceBtwItems),
+          const SizedBox(height: AppSizes.spaceBtwItems),
           const ShimmerSubCategoryProducts(),
         ],
       ),

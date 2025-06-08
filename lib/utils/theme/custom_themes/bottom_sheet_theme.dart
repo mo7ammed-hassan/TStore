@@ -6,7 +6,7 @@ class TBottomSheetTheme {
     showDragHandle: true,
     backgroundColor: Colors.white,
     modalBackgroundColor: Colors.white,
-    constraints: const BoxConstraints(maxWidth: double.infinity),
+    constraints: const BoxConstraints(),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(16),
     ),
@@ -15,7 +15,7 @@ class TBottomSheetTheme {
     showDragHandle: true,
     backgroundColor: Colors.black,
     modalBackgroundColor: Colors.black,
-    constraints: const BoxConstraints(maxWidth: double.infinity),
+    constraints: const BoxConstraints(),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(16),
     ),

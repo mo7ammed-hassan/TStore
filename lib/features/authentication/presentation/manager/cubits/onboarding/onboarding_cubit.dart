@@ -12,7 +12,7 @@ class OnBoardingCubit extends Cubit<int> {
     emit(index);
     pageController.animateToPage(
       index,
-      duration: const Duration(milliseconds: 350),
+      duration: const Duration(milliseconds: 150),
       curve: Curves.easeIn,
     );
   }
@@ -21,18 +21,18 @@ class OnBoardingCubit extends Cubit<int> {
     emit(index);
     pageController.animateToPage(
       index,
-      duration: const Duration(milliseconds: 350),
+      duration: const Duration(milliseconds: 150),
       curve: Curves.easeInOut,
     );
   }
 
-  void nextPage(context) {
+  void nextPage(BuildContext context) {
     if (state < 2) {
       final nextIndex = state + 1;
       emit(nextIndex);
       pageController.animateToPage(
         nextIndex,
-        duration: const Duration(milliseconds: 350),
+        duration: const Duration(milliseconds: 150),
         curve: Curves.easeIn,
       );
     } else {

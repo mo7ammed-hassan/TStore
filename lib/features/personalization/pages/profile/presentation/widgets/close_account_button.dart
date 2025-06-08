@@ -45,7 +45,7 @@ class CloseAccountButton extends StatelessWidget {
 
   void _showDeleteAccountPopup(BuildContext context) {
     Get.defaultDialog(
-      contentPadding: const EdgeInsets.all(TSizes.md),
+      contentPadding: const EdgeInsets.all(AppSizes.md),
       title: 'Delete Account',
       middleText:
           'Are you sure you want to delete your account permanently?This action is not reservable and all of your data will be removed permanently.',
@@ -59,7 +59,7 @@ class CloseAccountButton extends StatelessWidget {
           Navigator.pop(context);
         },
         child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: TSizes.lg),
+          padding: EdgeInsets.symmetric(horizontal: AppSizes.lg),
           child: Text('Delete'),
         ),
       ),
