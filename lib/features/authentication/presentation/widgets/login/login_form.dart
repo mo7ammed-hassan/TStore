@@ -165,7 +165,7 @@ class TLoginForm extends StatelessWidget {
     );
   }
 
-  _navigateToMenuPage(BuildContext context) {
+  void _navigateToMenuPage(BuildContext context) {
     context.removeAll(const NavigationMenu());
   }
 }

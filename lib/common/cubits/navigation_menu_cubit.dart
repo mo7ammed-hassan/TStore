@@ -15,5 +15,5 @@ class NavigationMenuCubit extends Cubit<int> {
     const SettingsPage(),
   ];
 
-  void setScreen(index) => emit(index);
+  void setScreen(int index) => emit(index);
 }

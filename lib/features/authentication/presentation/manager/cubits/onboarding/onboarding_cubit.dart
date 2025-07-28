@@ -26,7 +26,7 @@ class OnBoardingCubit extends Cubit<int> {
     );
   }
 
-  void nextPage(context) {
+  void nextPage(BuildContext context) {
     if (state < 2) {
       final nextIndex = state + 1;
       emit(nextIndex);

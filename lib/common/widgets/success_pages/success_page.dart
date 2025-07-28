@@ -49,7 +49,7 @@ class SuccessPage extends StatelessWidget {
     );
   }
 
-  SizedBox _continueButton(context) {
+  SizedBox _continueButton(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(

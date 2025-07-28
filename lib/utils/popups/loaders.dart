@@ -6,10 +6,10 @@ import '../constants/colors.dart';
 import '../helpers/helper_functions.dart';
 
 class Loaders {
-  static hideSnackBar() =>
+  static void hideSnackBar() =>
       ScaffoldMessenger.of(AppContext.context).hideCurrentSnackBar();
 
-  static customToast({required message, bool isMedium = true}) {
+  static void customToast({required String message, bool isMedium = true}) {
     ScaffoldMessenger.of(AppContext.context).showSnackBar(
       SnackBar(
         behavior: SnackBarBehavior.floating,
@@ -38,7 +38,7 @@ class Loaders {
     );
   }
 
-  static successSnackBar({required title, message = '', duration = 3}) {
+  static void successSnackBar({required String title, message = '', duration = 3}) {
     Get.snackbar(
       title,
       message,
@@ -53,7 +53,7 @@ class Loaders {
     );
   }
 
-  static warningSnackBar({required title, message = ''}) {
+  static void warningSnackBar({required String title, message = ''}) {
     Get.snackbar(
       title,
       message,
@@ -68,7 +68,7 @@ class Loaders {
     );
   }
 
-  static errorSnackBar({required title, message = ''}) {
+  static void errorSnackBar({required String title, message = ''}) {
     Get.snackbar(
       title,
       message,
