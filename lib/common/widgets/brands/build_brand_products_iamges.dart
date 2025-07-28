@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
@@ -58,9 +59,11 @@ class BuildBrandProductsImages extends StatelessWidget {
       padding: const EdgeInsets.all(TSizes.md),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
-        child: Image(
-          image: AssetImage(image),
+        child: CachedNetworkImage(
+          imageUrl: image,
           fit: BoxFit.contain,
+          errorWidget: (context, error, stackTrace) =>
+              const Icon(Icons.error_rounded),
         ),
       ),
     );

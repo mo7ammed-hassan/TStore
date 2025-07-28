@@ -38,7 +38,7 @@ class TBottomAddToCart extends StatelessWidget {
               ),
               const SizedBox(width: TSizes.spaceBtwItems),
               Text(
-                '3',
+                '1',
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               const SizedBox(width: TSizes.spaceBtwItems),

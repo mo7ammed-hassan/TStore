@@ -78,5 +78,5 @@ class TImages {
       "assets/icons/payment_methods/successful_payment_icon.png";
 
   static const String defaultProductImage =
-      "assets/default/default_image.png";    
+      "https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg";    
 }

@@ -78,7 +78,10 @@ class CartPage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const CheckoutPage(),
+              builder: (context) => BlocProvider.value(
+                value:  CartCubit(),
+                child: const CheckoutPage(),
+              ),
             ),
           );
         },

@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
 class TRoundedImage extends StatelessWidget {
@@ -24,7 +26,7 @@ class TRoundedImage extends StatelessWidget {
     this.padding,
     this.onTap,
     this.aplayImageRaduis = true,
-    this.isNetworkImage = false,
+    this.isNetworkImage = true,
   });
 
   @override
@@ -44,11 +46,20 @@ class TRoundedImage extends StatelessWidget {
           borderRadius: aplayImageRaduis
               ? BorderRadius.circular(borderRadius)
               : BorderRadius.zero,
-          child: Image(
-            image:
-                isNetworkImage ? NetworkImage(imageUrl) : AssetImage(imageUrl),
-            fit: fit,
-          ),
+          child: isNetworkImage
+              ? CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  fit: fit,
+                  errorWidget: (context, url, error) => Image.network(
+                        TImages.defaultProductImage,
+                        fit: fit,
+                      ))
+              : Image.asset(
+                  imageUrl,
+                  fit: fit,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const Icon(Icons.error),
+                ),
         ),
       ),
     );

@@ -15,9 +15,13 @@ class TPromoCarousel extends StatelessWidget {
     return CarouselSlider(
       items: banners
           .map(
-            (banner) => TRoundedImage(
-              imageUrl: banner.imageUrl,
-              //isNetworkImage: true,
+            (banner) => Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: TRoundedImage(
+                isNetworkImage: true,
+                imageUrl: banner.imageUrl,
+                //isNetworkImage: true,
+              ),
             ),
           )
           .toList(),

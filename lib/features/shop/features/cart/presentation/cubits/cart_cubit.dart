@@ -13,7 +13,6 @@ class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartInitialState());
 
   // -- Fetch Cart Items --
-
   Future<void> fetchCartItems() async {
     emit(CartLoadingState());
     final result = await getIt.get<FetchCartItemsUseCase>().call();

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
@@ -48,14 +49,14 @@ class TProductDetailImageSlider extends StatelessWidget {
               padding: const EdgeInsets.all(TSizes.productImageRadius * 2),
               child: GestureDetector(
                 onTap: () => showEnlargedImage(selectedImage, context),
-                child: Image.asset(
-                  selectedImage.isEmpty
+                child: CachedNetworkImage(
+                  imageUrl: selectedImage.isEmpty
                       ? product.thumbnail.isNotEmpty
                           ? product.thumbnail
                           : TImages.defaultProductImage
                       : selectedImage,
                   fit: BoxFit.contain,
-                  errorBuilder: (context, error, stackTrace) =>
+                  errorWidget: (context, error, stackTrace) =>
                       const Icon(Icons.error_rounded),
                 ),
               ),
