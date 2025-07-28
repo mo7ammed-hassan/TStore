@@ -20,7 +20,7 @@ class BrandEntity {
     return BrandEntity(
       id: '000',
       name: 'Name',
-      image: TImages.nikeLogo,
+      image: TImages.defaultProductImage,
       productCount: 0,
       isFeatured: false,
     );

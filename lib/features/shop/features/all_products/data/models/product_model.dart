@@ -51,7 +51,7 @@ class ProductModel {
       sku: '',
       date: null,
       salePrice: 0.0,
-      thumbnail: TImages.productImage1,
+      thumbnail: TImages.defaultProductImage,
       isFeatured: false,
       brand: null,
       description: '',

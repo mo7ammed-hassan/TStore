@@ -25,7 +25,7 @@ class CartItemEntity {
   // --empty--
   CartItemEntity.empty()
       : title = '',
-        imageUrl = TImages.productImage1,
+        imageUrl = TImages.defaultProductImage,
         quantity = 0,
         price = 0.0,
         variationId = null,

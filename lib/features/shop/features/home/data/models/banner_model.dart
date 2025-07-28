@@ -17,7 +17,7 @@ class BannerModel {
   });
 
   static BannerModel empty() =>
-      BannerModel(image: TImages.banner1, targetScreen: '', active: false);
+      BannerModel(image: TImages.defaultProductImage, targetScreen: '', active: false);
 
   Map<String, dynamic> toJson() => {
         'Image': image,

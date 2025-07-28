@@ -52,7 +52,7 @@ class TProductDetailImageSlider extends StatelessWidget {
                   selectedImage.isEmpty
                       ? product.thumbnail.isNotEmpty
                           ? product.thumbnail
-                          : TImages.animalIcon
+                          : TImages.defaultProductImage
                       : selectedImage,
                   fit: BoxFit.contain,
                   errorBuilder: (context, error, stackTrace) =>

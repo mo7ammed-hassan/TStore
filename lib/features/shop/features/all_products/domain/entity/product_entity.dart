@@ -52,7 +52,7 @@ class ProductEntity {
         sku = '',
         date = null,
         salePrice = 0,
-        thumbnail = TImages.productImage1,
+        thumbnail = TImages.defaultProductImage,
         isFeatured = false,
         brand = null,
         description = '',

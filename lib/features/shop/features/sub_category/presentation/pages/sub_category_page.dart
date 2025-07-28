@@ -29,7 +29,7 @@ class SubCategoryPage extends StatelessWidget {
                 TRoundedImage(
                   width: double.infinity,
                   aplayImageRaduis: true,
-                  imageUrl: TImages.banner3,
+                  imageUrl: TImages.defaultProductImage,
                 ),
                 SizedBox(height: TSizes.spaceBtwSections),
                 BuildSubCategoriesSections(),

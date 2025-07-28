@@ -40,7 +40,7 @@ class ShimmerBrandShowCase extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
                       child: const Image(
-                        image: AssetImage(TImages.productImage1),
+                        image: AssetImage(TImages.defaultProductImage),
                         fit: BoxFit.cover,
                       ),
                     ),
