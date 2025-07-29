@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:t_store/common/widgets/shimmer/shimmer_brand_products_images.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
 import 'package:t_store/features/shop/features/all_brands/presentation/cubits/product_by_brand_cubit.dart';
 import 'package:t_store/features/shop/features/all_brands/presentation/cubits/product_by_brand_state.dart';
@@ -16,10 +17,10 @@ class BuildBrandProductsImages extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductsByBrandCubit, ProductsByBrandState>(
       builder: (context, state) {
-        // if (state is ProductsByBrandLoadingState ||
-        //     state is ProductsByBrandInitialState) {
-        //   return const ShimmerBrandProductsImages();
-        // }
+        if (state is ProductsByBrandLoadingState ||
+            state is ProductsByBrandInitialState) {
+          return const ShimmerBrandProductsImages();
+        }
 
         if (state is ProductsByBrandErrorState) {
           return Center(child: Text(state.message));

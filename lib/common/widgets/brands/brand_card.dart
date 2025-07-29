@@ -12,6 +12,7 @@ class TBrandCard extends StatelessWidget {
   const TBrandCard({super.key, this.showBorder = true, required this.brand});
   final bool showBorder;
   final BrandEntity brand;
+
   @override
   Widget build(BuildContext context) {
     final bool isDark = HelperFunctions.isDarkMode(context);
@@ -29,6 +30,7 @@ class TBrandCard extends StatelessWidget {
             ),
           ),
           const SizedBox(width: TSizes.spaceBtwItems / 2),
+          
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.min,

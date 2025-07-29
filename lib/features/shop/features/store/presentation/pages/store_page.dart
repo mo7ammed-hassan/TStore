@@ -47,7 +47,7 @@ class StorePage extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           showBackground: false,
                         ),
-                        SizedBox(height: TSizes.spaceBtwSections),
+                        SizedBox(height: TSizes.spaceBtwItems),
                         FeaturedBrandsSection(),
                       ],
                     ),

@@ -48,6 +48,7 @@ class TVerticalProductCard extends StatelessWidget {
               brandTitle: product.brand?.name ?? '',
             ),
             const Spacer(),
+            
             TProductCartFooter(
               price: cubit.getProductPrice(product),
               addIconTap: () async {

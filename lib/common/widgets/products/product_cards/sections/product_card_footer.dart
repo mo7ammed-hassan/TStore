@@ -21,6 +21,7 @@ class TProductCartFooter extends StatelessWidget {
           child: TProductPriceText(price: price ?? '', isLarge: false),
         ),
         const SizedBox(width: TSizes.sm),
+        
         Flexible(
           child: TAddIcon(
             onTap: addIconTap,

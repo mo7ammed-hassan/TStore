@@ -67,7 +67,7 @@ class StoreCubit extends Cubit<StoreState> {
     result.fold(
       (error) => emit(StoreProductSpecificBrandError(error: error)),
       (products) {
-        products = products;
+        products = List.of(products);
         emit(StoreProductSpecificBrandLoaded(products: products));
       },
     );

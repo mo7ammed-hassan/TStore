@@ -20,42 +20,48 @@ class TCategoryTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => StoreCubit(),
-      child: ListView(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(TSizes.spaceBtwItems),
-            child: Column(
-              children: [
-                // Brands
-                BuildBrandList(categoryId: category.id),
-                const SizedBox(height: TSizes.spaceBtwItems + 2),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+            vertical: TSizes.md, horizontal: TSizes.spaceBtwItems),
+        child: CustomScrollView(
+          slivers: [
+            /// Brand List as Sliver
+            BuildBrandList(categoryId: category.id),
 
-                // Products
-                TSectionHeading(
-                  title: 'You might like',
-                  showActionButton: true,
-                  onPressed: () {
-                    context.pushPage(
-                      AllProductsPage(
-                        future: getIt
-                            .get<GetProductsSpecificCategoryUseCase>()
-                            .call(
-                              params: GetAllParams(id: category.id, limit: 10),
-                            ),
-                        title: 'All Products',
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(height: TSizes.spaceBtwItems),
-                BuildProductsList(categoryId: category.id),
-                const SizedBox(height: TSizes.spaceBtwSections),
-              ],
+            const SliverToBoxAdapter(
+                child: SizedBox(height: TSizes.spaceBtwItems + 2)),
+
+            /// Section Heading (title + button)
+            SliverToBoxAdapter(
+              child: TSectionHeading(
+                title: 'You might like',
+                showActionButton: true,
+                onPressed: () {
+                  context.pushPage(
+                    AllProductsPage(
+                      future: getIt
+                          .get<GetProductsSpecificCategoryUseCase>()
+                          .call(
+                            params: GetAllParams(id: category.id, limit: 10),
+                          ),
+                      title: 'All Products',
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+
+            const SliverToBoxAdapter(
+                child: SizedBox(height: TSizes.spaceBtwItems)),
+
+            ///  Product Grid as Sliver
+            BuildProductsList(categoryId: category.id),
+
+            /// Bottom spacing
+            const SliverToBoxAdapter(
+                child: SizedBox(height: TSizes.spaceBtwSections)),
+          ],
+        ),
       ),
     );
   }

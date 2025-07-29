@@ -18,52 +18,49 @@ class BuildBrandList extends StatelessWidget {
     context
         .read<StoreCubit>()
         .fetchBrandsSpecificCategory(categoryId: categoryId);
+
     return BlocBuilder<StoreCubit, StoreState>(
-      buildWhen: (previous, current) {
-        if (current is StoreBrandLoaded ||
-            current is StoreBrandError ||
-            current is StoreBrandLoading) {
-          return true;
-        }
-        return false;
-      },
+      buildWhen: (previous, current) =>
+          current is StoreBrandLoaded ||
+          current is StoreBrandError ||
+          current is StoreBrandLoading,
       builder: (context, state) {
         if (state is StoreBrandLoading) {
-          return const ShimmerBrandShowCase();
+          return const SliverToBoxAdapter(child: ShimmerBrandShowCase());
         }
 
         if (state is StoreBrandLoaded) {
           if (state.brands.isEmpty) {
-            return const Center(child: Text('No brands found!'));
+            return const SliverToBoxAdapter(
+              child: Center(child: Text('No brands found!')),
+            );
           }
 
-          return _buildBrandsListItems(state.brands);
+          return _buildBrandSliverList(state.brands);
         }
 
         if (state is StoreBrandError) {
-          return Center(
-            child: Text(state.error),
+          return SliverToBoxAdapter(
+            child: Center(child: Text(state.error)),
           );
         }
 
-        return const Center(child: Text('Something went wrong!'));
+        return const SliverToBoxAdapter(
+          child: Center(child: Text('Something went wrong!')),
+        );
       },
     );
   }
 
-  Widget _buildBrandsListItems(List<BrandEntity> brands) {
-    return Column(
-      children: brands
-          .map(
-            (brand) => OpenContainerWrapper(
-              nextScreen: BrandProductsPage(
-                brand: brand,
-              ),
-              radius: const Radius.circular(TSizes.cardRadiusLg),
-              child: TBrandShowcase(brand: brand),
-            ),
-          )
-          .toList(),
+  Widget _buildBrandSliverList(List<BrandEntity> brands) {
+    return SliverList.separated(
+      itemBuilder: (context, index) => OpenContainerWrapper(
+        nextScreen: BrandProductsPage(brand: brands[index]),
+        radius: const Radius.circular(TSizes.cardRadiusLg),
+        child: TBrandShowcase(brand: brands[index]),
+      ),
+      separatorBuilder: (context, index) => const SizedBox(height: TSizes.md),
+      itemCount: brands.length,
     );
   }
 }

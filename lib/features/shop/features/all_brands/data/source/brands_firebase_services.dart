@@ -56,7 +56,7 @@ class BrandsFirebaseServicesImpl implements BrandsFirebaseServices {
       // Getting the brand ids from the BrandCategory collection
       var brandCategory = await _firestore
           .collection(FirebaseCollections.BRANDS_CATEGORY_COLLECTION)
-          .where('brandId', isEqualTo: categoryId)
+          .where('categoryId', isEqualTo: categoryId)
           .get();
 
       // Extracting the brand ids
