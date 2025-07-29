@@ -31,6 +31,7 @@ class TCategoryTab extends StatelessWidget {
                 // Brands
                 BuildBrandList(categoryId: category.id),
                 const SizedBox(height: TSizes.spaceBtwItems + 2),
+
                 // Products
                 TSectionHeading(
                   title: 'You might like',

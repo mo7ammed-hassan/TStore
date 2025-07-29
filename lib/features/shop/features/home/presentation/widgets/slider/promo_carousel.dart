@@ -12,19 +12,18 @@ class TPromoCarousel extends StatelessWidget {
   final bool isLoading;
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      items: banners
-          .map(
-            (banner) => Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: TRoundedImage(
-                isNetworkImage: true,
-                imageUrl: banner.imageUrl,
-                //isNetworkImage: true,
-              ),
-            ),
-          )
-          .toList(),
+    return CarouselSlider.builder(
+      itemCount: banners.length,
+      itemBuilder: (context, index, realIndex) {
+        final banner = banners[index];
+        return Padding(
+          padding: const EdgeInsets.only(right: 8.0),
+          child: TRoundedImage(
+            imageUrl: banner.imageUrl,
+            //isNetworkImage: true,
+          ),
+        );
+      },
       options: CarouselOptions(
         autoPlay: isLoading ? false : true,
         autoPlayCurve: Curves.fastOutSlowIn,

@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:t_store/common/widgets/shimmer/shimmer_brand_products_images.dart';
+import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
 import 'package:t_store/features/shop/features/all_brands/presentation/cubits/product_by_brand_cubit.dart';
 import 'package:t_store/features/shop/features/all_brands/presentation/cubits/product_by_brand_state.dart';
 import 'package:t_store/utils/constants/colors.dart';
@@ -16,10 +16,10 @@ class BuildBrandProductsImages extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductsByBrandCubit, ProductsByBrandState>(
       builder: (context, state) {
-        if (state is ProductsByBrandLoadingState ||
-            state is ProductsByBrandInitialState) {
-          return const ShimmerBrandProductsImages();
-        }
+        // if (state is ProductsByBrandLoadingState ||
+        //     state is ProductsByBrandInitialState) {
+        //   return const ShimmerBrandProductsImages();
+        // }
 
         if (state is ProductsByBrandErrorState) {
           return Center(child: Text(state.message));
@@ -62,6 +62,10 @@ class BuildBrandProductsImages extends StatelessWidget {
         child: CachedNetworkImage(
           imageUrl: image,
           fit: BoxFit.contain,
+          placeholder: (context, url) => ShimmerWidget(
+            height: 100,
+            width: double.infinity,
+          ),
           errorWidget: (context, error, stackTrace) =>
               const Icon(Icons.error_rounded),
         ),

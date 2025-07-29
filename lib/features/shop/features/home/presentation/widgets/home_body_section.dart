@@ -38,6 +38,7 @@ class _HomeBodySectionState extends State<HomeBodySection> {
         ),
         child: Column(
           children: [
+            // Banners Slider
             const TPromoSlider(),
             const SizedBox(height: TSizes.spaceBtwSections),
             TSectionHeading(

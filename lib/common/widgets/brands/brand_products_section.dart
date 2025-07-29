@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/common/widgets/brands/build_brand_products_iamges.dart';
+import 'package:t_store/common/widgets/brands/build_brand_products_images.dart';
 import 'package:t_store/features/shop/features/all_brands/presentation/cubits/product_by_brand_cubit.dart';
 
 class BrandProductsSection extends StatelessWidget {
