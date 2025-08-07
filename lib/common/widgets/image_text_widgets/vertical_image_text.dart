@@ -25,9 +25,10 @@ class TVerticalImageText extends StatelessWidget {
     final isDark = HelperFunctions.isDarkMode(context);
     return GestureDetector(
       onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.only(right: TSizes.spaceBtwItems),
+      child: SizedBox(
+        width: 85,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TCircularImage(
               image: image,
@@ -37,35 +38,15 @@ class TVerticalImageText extends StatelessWidget {
               padding: TSizes.sm * 1.4,
               imageColor: (isDark ? AppColors.light : AppColors.dark),
             ),
-            // Container(
-            //   width: 56,
-            //   height: 56,
-            //   padding: const EdgeInsets.all(TSizes.fontSizeSm),
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(100),
-            //     color:
-            //         backgroundColor ?? (isDark ? TColors.black : TColors.white),
-            //   ),
-            //   child: Center(
-            //     child: Image(
-            //       image: AssetImage(image),
-            //       fit: BoxFit.cover,
-            //       color: (isDark ? TColors.light : TColors.dark),
-            //     ),
-            //   ),
-            // ),
             const SizedBox(height: TSizes.spaceBtwItems / 2),
-            SizedBox(
-              width: 60,
-              child: Text(
-                title,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .apply(color: textColor),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
+            Text(
+              title,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .apply(color: textColor),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
