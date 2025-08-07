@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:t_store/utils/popups/loaders.dart';
 
 class HelperFunctions {
   static Color? getColor(String value) {
@@ -40,14 +40,14 @@ class HelperFunctions {
   }
 
   static void showSnackBar(String message) {
-    ScaffoldMessenger.of(Get.context!).showSnackBar(
+    ScaffoldMessenger.of(AppContext.context).showSnackBar(
       SnackBar(content: Text(message)),
     );
   }
 
   static void showAlert(String title, String message) {
     showDialog(
-      context: Get.context!,
+      context: AppContext.context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(title),
@@ -83,15 +83,15 @@ class HelperFunctions {
   }
 
   static Size screenSize() {
-    return MediaQuery.of(Get.context!).size;
+    return MediaQuery.of(AppContext.context).size;
   }
 
   static double screenHeight() {
-    return MediaQuery.of(Get.context!).size.height;
+    return MediaQuery.of(AppContext.context).size.height;
   }
 
   static double screenWidth() {
-    return MediaQuery.of(Get.context!).size.width;
+    return MediaQuery.of(AppContext.context).size.width;
   }
 
   static String getFormattedDate(DateTime date,

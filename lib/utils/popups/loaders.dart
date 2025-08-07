@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../constants/colors.dart';
@@ -39,49 +38,101 @@ class Loaders {
     );
   }
 
-  static void successSnackBar(
-      {required String title, message = '', duration = 3}) {
-    Get.snackbar(
-      title,
-      message,
-      isDismissible: true,
-      shouldIconPulse: true,
-      colorText: Colors.white,
+  static void successSnackBar({
+    required String title,
+    String message = '',
+    int duration = 3,
+  }) {
+    _showBaseSnackBar(
+      title: title,
+      message: message,
       backgroundColor: AppColors.primary,
-      snackPosition: SnackPosition.BOTTOM,
-      duration: Duration(seconds: duration),
-      margin: const EdgeInsets.all(10),
-      icon: const Icon(Iconsax.check, color: AppColors.white),
+      icon: Iconsax.check,
+      duration: duration,
     );
   }
 
-  static void warningSnackBar({required String title, message = ''}) {
-    Get.snackbar(
-      title,
-      message,
-      isDismissible: true,
-      shouldIconPulse: true,
-      colorText: AppColors.white,
+  static void warningSnackBar({
+    required String title,
+    String message = '',
+    int duration = 3,
+  }) {
+    _showBaseSnackBar(
+      title: title,
+      message: message,
       backgroundColor: Colors.orange,
-      snackPosition: SnackPosition.BOTTOM,
-      duration: const Duration(seconds: 3),
-      margin: const EdgeInsets.all(20),
-      icon: const Icon(Iconsax.warning_2, color: AppColors.white),
+      icon: Iconsax.warning_2,
+      duration: duration,
     );
   }
 
-  static void errorSnackBar({required String title, message = ''}) {
-    Get.snackbar(
-      title,
-      message,
-      isDismissible: true,
-      shouldIconPulse: true,
-      colorText: AppColors.white,
+  static void errorSnackBar({
+    required String title,
+    String message = '',
+    int duration = 3,
+  }) {
+    _showBaseSnackBar(
+      title: title,
+      message: message,
       backgroundColor: Colors.red.shade600,
-      snackPosition: SnackPosition.BOTTOM,
-      duration: const Duration(seconds: 3),
-      margin: const EdgeInsets.all(20),
-      icon: const Icon(Iconsax.warning_2, color: AppColors.white),
+      icon: Iconsax.warning_2,
+      duration: duration,
+    );
+  }
+
+  /// private helper method
+  static void _showBaseSnackBar({
+    required String title,
+    required String message,
+    required Color backgroundColor,
+    required IconData icon,
+    required int duration,
+  }) {
+    final context = AppContext.context;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        duration: Duration(seconds: duration),
+        content: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: backgroundColor.withValues(alpha: 0.9),
+          ),
+          child: Row(
+            children: [
+              Icon(icon, color: Colors.white),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(color: Colors.white),
+                    ),
+                    if (message.isNotEmpty)
+                      Text(
+                        message,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(color: Colors.white70),
+                      ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

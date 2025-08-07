@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:t_store/utils/popups/loaders.dart';
 import '../constants/colors.dart';
 import '../helpers/helper_functions.dart';
 import '../loaders/animation_loader.dart';
@@ -14,14 +14,13 @@ class TFullScreenLoader {
   ///   - animation: The Lottie animation to be shown.
   static void openLoadingDialog(String text, String animation) {
     showDialog(
-      context:
-          Get.overlayContext!, // Use Get.overlayContext for overlay dialogs
+      context: AppContext.context, // Use Get.overlayContext for overlay dialogs
       barrierDismissible:
           false, // The dialog can't be dismissed by tapping outside it
       builder: (_) => PopScope(
         canPop: false, // Disable popping with the back button
         child: Container(
-          color: HelperFunctions.isDarkMode(Get.context!)
+          color: HelperFunctions.isDarkMode(AppContext.context)
               ? AppColors.dark
               : AppColors.white,
           width: double.infinity,
@@ -41,7 +40,7 @@ class TFullScreenLoader {
   /// Stop the currently open loading dialog.
   /// This method doesn't return anything.
   static void stopLoading() {
-    Navigator.of(Get.overlayContext!)
+    Navigator.of(AppContext.context)
         .pop(); // Close the dialog using the Navigator
   }
 }

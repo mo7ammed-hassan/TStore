@@ -1,9 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
+import 'package:t_store/utils/popups/loaders.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class TDeviceUtils {
@@ -33,7 +32,7 @@ class TDeviceUtils {
   }
 
   static double getScreenHeight() {
-    return MediaQuery.of(Get.context!).size.height;
+    return MediaQuery.of(AppContext.context).size.height;
   }
 
   static double getScreenWidth(BuildContext context) {
@@ -41,11 +40,11 @@ class TDeviceUtils {
   }
 
   static double getPixelRatio() {
-    return MediaQuery.of(Get.context!).devicePixelRatio;
+    return MediaQuery.of(AppContext.context).devicePixelRatio;
   }
 
   static double getStatusBarHeight() {
-    return MediaQuery.of(Get.context!).padding.top;
+    return MediaQuery.of(AppContext.context).padding.top;
   }
 
   static double getBottomNavigationBarHeight() {
@@ -57,12 +56,12 @@ class TDeviceUtils {
   }
 
   static double getKeyboardHeight() {
-    final viewInsets = MediaQuery.of(Get.context!).viewInsets;
+    final viewInsets = MediaQuery.of(AppContext.context).viewInsets;
     return viewInsets.bottom;
   }
 
   static Future<bool> isKeyboardVisible() async {
-    final viewInsets = View.of(Get.context!).viewInsets;
+    final viewInsets = View.of(AppContext.context).viewInsets;
     return viewInsets.bottom > 0;
   }
 
