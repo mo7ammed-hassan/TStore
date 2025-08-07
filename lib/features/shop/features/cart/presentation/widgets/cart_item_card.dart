@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widgets/images/rounded_image.dart';
 import 'package:t_store/common/widgets/products/cart/product_quantity_button.dart';
 import 'package:t_store/common/widgets/texts/brand_title_with_verified_icon.dart';
@@ -95,8 +96,8 @@ class CartItemCard extends StatelessWidget {
               onPressed: () =>
                   context.read<CartCubit>().removeItemFromCart(item: cartItem),
               icon: Icon(
-                Icons.delete,
-                color: Colors.red,
+                Iconsax.trash,
+                color: Colors.redAccent,
               ),
             )
           ],
