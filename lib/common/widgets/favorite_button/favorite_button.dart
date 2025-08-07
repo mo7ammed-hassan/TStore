@@ -34,7 +34,7 @@ class FavoriteButton extends StatelessWidget {
         },
         listener: (context, state) {
           // if (state is ToggleFavoriteButton) {
-          //   TLoaders.customToast(
+          //   Loaders.customToast(
           //     message: state.message,
           //     isMedium: false,
           //   );

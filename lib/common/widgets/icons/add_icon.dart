@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
+import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
+import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_state.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
 class TAddIcon extends StatelessWidget {
-  const TAddIcon({super.key, this.onTap});
+  const TAddIcon({super.key, this.onTap, required this.product});
   final Function()? onTap;
+  final ProductEntity product;
+
   @override
   Widget build(BuildContext context) {
+    final cartCubit = context.read<CartCubit>();
     return InkWell(
-      onTap: onTap,
+      onTap: () async {
+        await cartCubit.addItemToCart(
+          showMessage: true,
+          product: product,
+          selectedVariation: product.productVariations!.first,
+        );
+      },
       child: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -18,13 +31,25 @@ class TAddIcon extends StatelessWidget {
           ),
           color: AppColors.dark,
         ),
-        child: const SizedBox(
+        child: SizedBox(
           width: TSizes.iconLg * 1.2,
           height: TSizes.iconLg * 1.2,
           child: Center(
-            child: Icon(
-              Iconsax.add,
-              color: AppColors.white,
+            child: BlocBuilder<CartCubit, CartState>(
+              builder: (context, state) {
+                final itemQuantity = context
+                    .read<CartCubit>()
+                    .getItemQuantity(itemId: product.id);
+                return itemQuantity >= 1
+                    ? Text(
+                        itemQuantity.toString(),
+                        style: TextStyle(color: AppColors.white),
+                      )
+                    : Icon(
+                        Iconsax.add,
+                        color: AppColors.white,
+                      );
+              },
             ),
           ),
         ),

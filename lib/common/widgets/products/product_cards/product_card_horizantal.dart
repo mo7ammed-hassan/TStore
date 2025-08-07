@@ -87,7 +87,7 @@ class ProductCardHorizantal extends StatelessWidget {
                             maxLines: 2,
                           ),
                         ),
-                        const TAddIcon(),
+                        TAddIcon(product: product),
                       ],
                     )
                   ],

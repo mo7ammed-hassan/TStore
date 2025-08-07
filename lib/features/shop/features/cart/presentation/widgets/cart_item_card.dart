@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/images/rounded_image.dart';
 import 'package:t_store/common/widgets/products/cart/product_quantity_button.dart';
 import 'package:t_store/common/widgets/texts/brand_title_with_verified_icon.dart';
 import 'package:t_store/common/widgets/texts/product_price.dart';
 import 'package:t_store/common/widgets/texts/product_title_text.dart';
 import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
+import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
@@ -17,6 +19,7 @@ class CartItemCard extends StatelessWidget {
   });
   final bool showAddRemoveButtons;
   final CartItemEntity cartItem;
+
   @override
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
@@ -26,7 +29,7 @@ class CartItemCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TRoundedImage(
-              imageUrl: cartItem.imageUrl!,
+              imageUrl: cartItem.product.imageUrl,
               width: 60,
               height: 60,
               padding: const EdgeInsets.all(TSizes.sm),
@@ -39,7 +42,7 @@ class CartItemCard extends StatelessWidget {
                 children: [
                   const TBrandTitleWithVerifiedIcon(title: 'Nike'),
                   TProductTitleText(
-                    title: cartItem.title,
+                    title: cartItem.product.title,
                     maxLines: 1,
                   ),
                   Text.rich(
@@ -50,17 +53,25 @@ class CartItemCard extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                         TextSpan(
-                          text: '${cartItem.selectedVariation?['color']}  ',
+                          text:
+                              '${cartItem.product.variation.attributeValues['Colors']}  ',
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
-                        TextSpan(
-                          text: 'Size  ',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        TextSpan(
-                          text: '${cartItem.selectedVariation?['size']}  ',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
+                        if (cartItem
+                                .product.variation.attributeValues['Sizes'] !=
+                            null)
+                          TextSpan(
+                            text: 'Size  ',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        if (cartItem
+                                .product.variation.attributeValues['Sizes'] !=
+                            null)
+                          TextSpan(
+                            text:
+                                '${cartItem.product.variation.attributeValues['Sizes']}  ',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
                       ],
                     ),
                   ),
@@ -73,12 +84,21 @@ class CartItemCard extends StatelessWidget {
                           isDark: isDark,
                           cartItem: cartItem,
                         ),
-                        TProductPriceText(price: cartItem.price.toString()),
+                        TProductPriceText(
+                            price: cartItem.totalPrice.toString()),
                       ],
                     ),
                 ],
               ),
             ),
+            IconButton(
+              onPressed: () =>
+                  context.read<CartCubit>().removeItemFromCart(item: cartItem),
+              icon: Icon(
+                Icons.delete,
+                color: Colors.red,
+              ),
+            )
           ],
         ),
       ],

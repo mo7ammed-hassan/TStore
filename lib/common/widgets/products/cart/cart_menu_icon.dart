@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
+import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_state.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
@@ -34,12 +37,16 @@ class TCartCounterIcon extends StatelessWidget {
               borderRadius: BorderRadius.circular(100),
             ),
             child: Center(
-              child: Text(
-                '2',
-                style: Theme.of(context).textTheme.bodySmall!.apply(
-                      color: AppColors.white,
-                      fontSizeFactor: 0.8,
-                    ),
+              child: BlocBuilder<CartCubit, CartState>(
+                builder: (context, state) {
+                  return Text(
+                    context.read<CartCubit>().getCartLength().toString(),
+                    style: Theme.of(context).textTheme.bodySmall!.apply(
+                          color: AppColors.white,
+                          fontSizeFactor: 0.8,
+                        ),
+                  );
+                },
               ),
             ),
           ),

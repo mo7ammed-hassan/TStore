@@ -4,6 +4,7 @@ import 'package:t_store/common/cubits/navigation_menu_cubit.dart';
 import 'package:t_store/common/widgets/navigation_menu/bottom_navigation_bar.dart';
 import 'package:t_store/common/widgets/navigation_menu/navigation_body.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
+import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});
@@ -11,6 +12,7 @@ class NavigationMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<UserCubit>().fetchUserData();
+    context.read<CartCubit>().fetchCartItems();
     return BlocProvider(
       create: (context) => NavigationMenuCubit(),
       child: const Scaffold(

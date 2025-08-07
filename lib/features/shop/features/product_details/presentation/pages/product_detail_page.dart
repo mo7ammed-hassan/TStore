@@ -6,6 +6,7 @@ import 'package:t_store/common/widgets/animation_containers/open_container_wrapp
 import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/cubits/images_product_cubit.dart';
+import 'package:t_store/features/shop/features/product_details/presentation/cubits/product_variation_cubit.dart';
 import 'package:t_store/features/shop/features/product_reviews/presentation/pages/product_review_page.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/widgets/bottom_add_to_cart.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/widgets/product_attribute.dart';
@@ -21,8 +22,16 @@ class ProductDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => ImagesProductCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ImagesProductCubit(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              ProductVariationCubit()..initializeWithDefault(product),
+        ),
+      ],
       child: Scaffold(
         bottomNavigationBar: TBottomAddToCart(product: product),
         body: SingleChildScrollView(

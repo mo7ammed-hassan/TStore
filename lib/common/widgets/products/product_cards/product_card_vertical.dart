@@ -6,7 +6,6 @@ import 'package:t_store/common/widgets/products/product_cards/sections/product_c
 import 'package:t_store/common/widgets/products/product_cards/sections/product_card_header.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/products_cubit.dart';
-import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/pages/product_detail_page.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
@@ -18,9 +17,9 @@ class TVerticalProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartCubit = CartCubit();
     ProductsCubit cubit = ProductsCubit();
     final isDark = HelperFunctions.isDarkMode(context);
+
     return OpenContainerWrapper(
       radius: const Radius.circular(TSizes.productImageRadius),
       nextScreen: ProductDetailPage(product: product),
@@ -48,12 +47,9 @@ class TVerticalProductCard extends StatelessWidget {
               brandTitle: product.brand?.name ?? '',
             ),
             const Spacer(),
-            
             TProductCartFooter(
               price: cubit.getProductPrice(product),
-              addIconTap: () async {
-                await cartCubit.addProductToCart(product: product);
-              },
+              product: product,
             ),
           ],
         ),

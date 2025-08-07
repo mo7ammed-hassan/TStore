@@ -17,12 +17,13 @@ class ProductEntity {
   final BrandEntity? brand;
   final String? description;
   final String? categoryId;
-  final List<String>? images; // Defaults to an empty list
+  final List<String>? images;
   final String productType;
-  final List<ProductAttributeEntity>
-      productAttributes; // Defaults to an empty list
-  final List<ProductVariationEntity>?
-      productVariations; // Defaults to an empty list
+  final List<ProductAttributeEntity> productAttributes;
+  final List<ProductVariationEntity>? productVariations;
+
+  double get effectivePrice =>
+      salePrice != null && salePrice! > 0 ? salePrice! : price.toDouble();
 
   const ProductEntity({
     required this.id,

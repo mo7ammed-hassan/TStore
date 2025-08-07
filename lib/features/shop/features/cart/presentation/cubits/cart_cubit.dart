@@ -1,69 +1,160 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store/features/shop/features/all_products/data/mapper/product_variation_mapper.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
-import 'package:t_store/features/shop/features/cart/data/models/cart_item_model.dart';
-import 'package:t_store/features/shop/features/cart/domain/usecases/add_product_to_cart_use_case.dart';
-import 'package:t_store/features/shop/features/cart/domain/usecases/add_single_cart_item_use_case.dart';
-import 'package:t_store/features/shop/features/cart/domain/usecases/fetch_cart_items_use_case.dart';
-import 'package:t_store/features/shop/features/cart/domain/usecases/remover_single_cart_item_use_case.dart';
+import 'package:t_store/features/shop/features/all_products/domain/entity/product_variation_entity.dart';
+import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
+import 'package:t_store/features/shop/features/cart/domain/entities/product_cart_item_entity.dart';
+import 'package:t_store/features/shop/features/cart/domain/usecases/cart_usecases.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_state.dart';
-import 'package:t_store/service_locator.dart';
 import 'package:t_store/utils/popups/loaders.dart';
 
 class CartCubit extends Cubit<CartState> {
-  CartCubit() : super(CartInitialState());
+  CartCubit(this._cartUsecases) : super(CartInitialState());
+  final CartUsecases _cartUsecases;
+
+  // Cache of current cart items (for in-memory manipulation)
+  List<CartItemEntity> _cartItems = [];
+
+  double get totalPrice {
+    return _cartItems.fold(
+      0.0,
+      (previousValue, item) => previousValue + item.totalPrice,
+    );
+  }
 
   // -- Fetch Cart Items --
   Future<void> fetchCartItems() async {
     emit(CartLoadingState());
-    final result = await getIt.get<FetchCartItemsUseCase>().call();
-    result.fold(
-      (failure) => emit(CartErrorState(failure.message)),
-      (cartItems) => emit(CartLoadedState(cartItems)),
-    );
+    final result = await _cartUsecases.fetchCartItemsUseCase();
+
+    result.fold((failure) => emit(CartErrorState(failure.message)),
+        (cartItems) {
+      _cartItems = cartItems;
+      _emitUpdateCart();
+    });
   }
 
-  // -- Add Product To Cart --
-  Future<void> addProductToCart({required ProductEntity product}) async {
-    final result =
-        await getIt.get<AddProductToCartUseCase>().call(params: product);
+  Future<void> addItemToCart({
+    bool showMessage = false,
+    required ProductEntity product,
+    required ProductVariationEntity selectedVariation,
+    int quantity = 1,
+  }) async {
+    final exists = _cartItems.any(
+      (item) =>
+          item.product.variation.id == selectedVariation.id &&
+          quantity == item.quantity,
+    );
+
+    if (exists) {
+      Loaders.customToast(
+        message: 'Item already in cart, please change quantity',
+        isMedium: false,
+      );
+      return;
+    }
+
+    final ProductCartItemEntity productModel = ProductCartItemEntity(
+      id: product.id,
+      title: product.title,
+      price: selectedVariation.price.toDouble(),
+      imageUrl: selectedVariation.image,
+      variation: selectedVariation.toModel(),
+      brand: product.brand?.name ?? '',
+    );
+
+    final CartItemEntity cartItem =
+        CartItemEntity(product: productModel, quantity: quantity);
+
+    final result = await _cartUsecases.addItemToCartUsecase(params: cartItem);
 
     result.fold(
-      (failure) => emit(CartErrorState(failure.message)),
-      (_) {
-        Loaders.customToast(message: 'Item added to cart');
-        fetchCartItems();
+      (l) => emit(CartErrorState(l.message)),
+      (r) {
+        if (_cartItems
+            .any((item) => item.product.variation.id == selectedVariation.id)) {
+          _cartItems.removeWhere(
+            (item) => item.product.variation.id == selectedVariation.id,
+          );
+        }
+        _cartItems.add(cartItem);
+        _emitUpdateCart();
+
+        if (showMessage) {
+          Loaders.customToast(
+            message: 'Item added to cart',
+            isMedium: false,
+          );
+        }
       },
     );
   }
 
-  // -- Remove Single Cart Item --
-  Future<void> removeSingleCartItem({required CartItemModel cartItem}) async {
-    var result =
-        await getIt.get<RemoverSingleCartItemUseCase>().call(params: cartItem);
+  // -- Add item to cart --
+  Future<void> removeItemFromCart({required CartItemEntity item}) async {
+    final result = await _cartUsecases.removeItemFromCartUsecase(params: item);
+
     result.fold(
-      (failure) => emit(CartErrorState(failure.message)),
-      (_) => fetchCartItems(),
+      (l) => emit(CartErrorState(l.message)),
+      (r) {
+        _cartItems.remove(item);
+        _emitUpdateCart();
+
+        Loaders.customToast(
+          message: 'Item removed from cart',
+          isMedium: false,
+        );
+      },
     );
   }
 
-  // -- Add Single Cart Item --
+  // -- Change item quantity --
+  Future<void> changeItemQuantity(
+      {required CartItemEntity item, required int quantity}) async {
+    final result = await _cartUsecases.changeCartItemQuantityUsecase(
+        params: (item.product.variation.id, quantity));
 
-  Future<void> addSingleCartItem({required CartItemModel cartItem}) async {
-    var result =
-        await getIt.get<AddSingleCartItemUseCase>().call(params: cartItem);
     result.fold(
-      (failure) => emit(CartErrorState(failure.message)),
-      (_) => fetchCartItems(),
+      (l) => emit(CartErrorState(l.message)),
+      (r) {
+        final index = _cartItems.indexWhere(
+          (cartItem) =>
+              cartItem.product.variation.id == item.product.variation.id,
+        );
+        if (index != -1) {
+          _cartItems[index] = _cartItems[index].copyWith(quantity: quantity);
+        }
+
+        _emitUpdateCart();
+      },
     );
   }
 
-  // -- Remove All Cart Items --
+  int getCartLength() {
+    return _cartItems.length;
+  }
 
-  Future<void> removeAllCartItems() async {
-    var result = await getIt.get<RemoverSingleCartItemUseCase>().call();
-    result.fold(
-      (failure) => emit(CartErrorState(failure.message)),
-      (_) => fetchCartItems(),
+  int getItemQuantity({required String itemId}) {
+    final item = _cartItems.firstWhere(
+      (element) => element.product.id == itemId,
+      orElse: () => CartItemEntity.empty(),
     );
+
+    return item.quantity;
+  }
+
+  int getVariationItemQuantity({required String variationId}) {
+    final item = _cartItems.firstWhere(
+      (element) => element.product.variation.id == variationId,
+      orElse: () => CartItemEntity.empty(),
+    );
+
+    return item.quantity;
+  }
+
+  // -- Private helper to emit state safely
+  void _emitUpdateCart() {
+    final updatedCartItems = List<CartItemEntity>.from(_cartItems);
+    emit(CartLoadedState(updatedCartItems));
   }
 }

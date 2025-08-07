@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:t_store/features/shop/features/all_products/data/mapper/product_mapper.dart';
 import 'package:t_store/features/shop/features/all_products/data/models/product_model.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_cubit.dart';

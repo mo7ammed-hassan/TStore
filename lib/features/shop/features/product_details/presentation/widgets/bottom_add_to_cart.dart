@@ -1,17 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widgets/icons/circular_icon.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
+import 'package:t_store/features/shop/features/product_details/presentation/cubits/product_variation_cubit.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/helpers/helper_functions.dart';
 
-class TBottomAddToCart extends StatelessWidget {
+class TBottomAddToCart extends StatefulWidget {
   const TBottomAddToCart({super.key, required this.product});
   final ProductEntity product;
+
+  @override
+  State<TBottomAddToCart> createState() => _TBottomAddToCartState();
+}
+
+class _TBottomAddToCartState extends State<TBottomAddToCart> {
+  final ValueNotifier<int> quantityNotifier = ValueNotifier<int>(1);
+  String? _lastVariationId;
+
+  void _updateQuantityIfNeeded(BuildContext context) {
+    final cartCubit = context.read<CartCubit>();
+    final selectedVariation =
+        context.watch<ProductVariationCubit>().selectedVariation;
+
+    if (_lastVariationId != selectedVariation.id) {
+      final itemQuantity = cartCubit.getVariationItemQuantity(
+        variationId: selectedVariation.id,
+      );
+
+      quantityNotifier.value = itemQuantity > 0 ? itemQuantity : 1;
+      _lastVariationId = selectedVariation.id;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isDark = HelperFunctions.isDarkMode(context);
+    _updateQuantityIfNeeded(context);
+
+    final cartCubit = context.read<CartCubit>();
+
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: TSizes.defaultSpace,
@@ -29,32 +60,50 @@ class TBottomAddToCart extends StatelessWidget {
         children: [
           Row(
             children: [
-              const TCircularIcon(
+              TCircularIcon(
                 backgroundColor: AppColors.darkGrey,
                 icon: Iconsax.minus,
                 width: 40,
                 height: 40,
                 color: AppColors.white,
+                onPressed: () {
+                  if (quantityNotifier.value > 1) {
+                    quantityNotifier.value--;
+                  }
+                },
               ),
               const SizedBox(width: TSizes.spaceBtwItems),
-              Text(
-                '1',
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
+              ValueListenableBuilder(
+                  valueListenable: quantityNotifier,
+                  builder: (context, value, child) {
+                    return Text(
+                      value.toString(),
+                      style: Theme.of(context).textTheme.titleSmall,
+                    );
+                  }),
               const SizedBox(width: TSizes.spaceBtwItems),
-              const TCircularIcon(
+              TCircularIcon(
                 backgroundColor: AppColors.black,
                 icon: Iconsax.add,
                 width: 40,
                 height: 40,
                 color: AppColors.white,
+                onPressed: () {
+                  quantityNotifier.value++;
+                },
               ),
             ],
           ),
           const SizedBox(width: TSizes.spaceBtwSections),
           ElevatedButton(
             onPressed: () async {
-              await CartCubit().addProductToCart(product: product);
+              await cartCubit.addItemToCart(
+                showMessage: true,
+                quantity: quantityNotifier.value,
+                product: widget.product,
+                selectedVariation:
+                    context.read<ProductVariationCubit>().selectedVariation,
+              );
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(TSizes.md),
@@ -66,5 +115,11 @@ class TBottomAddToCart extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    quantityNotifier.dispose();
+    super.dispose();
   }
 }

@@ -3,9 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:t_store/features/shop/features/cart/data/models/cart_item_model.dart';
 
 abstract class CartLocalStorageServices {
-  // -- Store items in cart--
   void storeCartItems({required List<CartItemModel> cartItems});
-  // -- Fetch items from cart--
   Future<List<CartItemModel>> fetchCartItems();
 }
 
@@ -34,7 +32,7 @@ class CartLocalStorageServicesImpl implements CartLocalStorageServices {
     await box.clear();
 
     for (var item in cartItems) {
-      String key = '${item.productId}-${item.variationId}';
+      String key = item.id;
       await box.put(key, item);
     }
   }

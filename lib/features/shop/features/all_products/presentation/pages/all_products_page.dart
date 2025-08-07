@@ -5,6 +5,7 @@ import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/common/widgets/layouts/grid_layout.dart';
 import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:t_store/common/widgets/products/sortable/sortable_products.dart';
+import 'package:t_store/features/shop/features/all_products/data/mapper/product_mapper.dart';
 import 'package:t_store/features/shop/features/all_products/data/models/product_model.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/all_product_cubit.dart';

@@ -1,39 +1,28 @@
-import 'package:t_store/features/shop/features/cart/data/models/cart_item_model.dart';
-import 'package:t_store/utils/constants/images_strings.dart';
+import 'package:t_store/features/shop/features/cart/domain/entities/product_cart_item_entity.dart';
 
 class CartItemEntity {
-  final String title;
-  final String? imageUrl;
+  final String? id;
+  final ProductCartItemEntity product;
   final int quantity;
-  final double price;
-  final String? variationId;
-  final String productId;
-  final String? brandName;
-  final Map<String, dynamic>? selectedVariation;
 
-  CartItemEntity({
-    required this.title,
-    required this.imageUrl,
-    required this.quantity,
-    required this.price,
-    required this.variationId,
-    required this.productId,
-    required this.brandName,
-    required this.selectedVariation,
-  });
+  double get totalPrice => product.price * quantity;
 
-  // --empty--
-  CartItemEntity.empty()
-      : title = '',
-        imageUrl = TImages.defaultProductImage,
-        quantity = 0,
-        price = 0.0,
-        variationId = null,
-        productId = '',
-        brandName = null,
-        selectedVariation = {};
-}
+  CartItemEntity({this.id, required this.product, required this.quantity});
 
-extension CartItemEntityExtension on CartItemEntity {
-  CartItemModel toModel() => CartItemModel.fromEntity(this);
+  static CartItemEntity empty() {
+    return CartItemEntity(
+      id: '',
+      product: ProductCartItemEntity.empty(),
+      quantity: 0,
+    );
+  }
+
+  // copyWith method to create a new instance with modified quantity
+  CartItemEntity copyWith({int? quantity}) {
+    return CartItemEntity(
+      id: id,
+      product: product,
+      quantity: quantity ?? this.quantity,
+    );
+  }
 }

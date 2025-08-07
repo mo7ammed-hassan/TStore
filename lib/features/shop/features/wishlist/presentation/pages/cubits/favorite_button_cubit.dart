@@ -20,8 +20,11 @@ class FavoriteButtonCubit extends Cubit<FavoriteButtonState> {
           userId: _userID);
 
       emit(ToggleFavoriteButton(message));
+      Loaders.customToast(
+        message: message,
+        isMedium: false,
+      );
 
-      Loaders.customToast(message: message);
       // After toggling, fetch the updated wishlist
       if (!isClosed) {
         await _wishlistCubit.fetchWishlist();

@@ -28,6 +28,7 @@ class Loaders {
           child: Center(
             child: Text(
               message,
+              textAlign: TextAlign.center,
               style: isMedium
                   ? Theme.of(AppContext.context).textTheme.bodyMedium
                   : Theme.of(AppContext.context).textTheme.labelLarge,
@@ -38,7 +39,8 @@ class Loaders {
     );
   }
 
-  static void successSnackBar({required String title, message = '', duration = 3}) {
+  static void successSnackBar(
+      {required String title, message = '', duration = 3}) {
     Get.snackbar(
       title,
       message,

@@ -1,29 +1,63 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hive/hive.dart';
 import 'package:t_store/features/shop/features/all_brands/data/models/brand_model.dart';
 import 'package:t_store/features/shop/features/all_products/data/models/product_attribute_model.dart';
 import 'package:t_store/features/shop/features/all_products/data/models/product_variation_model.dart';
-import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 
-class ProductModel {
+part 'product_model.g.dart';
+
+@HiveType(typeId: 4)
+class ProductModel extends HiveObject {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final int stock;
+
+  @HiveField(2)
   final num price;
+
+  @HiveField(3)
   final String title;
+
+  @HiveField(4)
   final String sku;
+
+  @HiveField(5)
   final DateTime? date;
+
+  @HiveField(6)
   final double salePrice;
+
+  @HiveField(7)
   final String thumbnail;
+
+  @HiveField(8)
   final bool? isFeatured;
+
+  @HiveField(9)
   final BrandModel? brand;
+
+  @HiveField(10)
   final String? description;
+
+  @HiveField(11)
   final String? categoryId;
+
+  @HiveField(12)
   final List<String> images;
+
+  @HiveField(13)
   final String productType;
+
+  @HiveField(14)
   final List<ProductAttributeModel> productAttributes;
+
+  @HiveField(15)
   final List<ProductVariationModel> productVariations;
 
-  const ProductModel({
+  ProductModel({
     required this.id,
     required this.stock,
     required this.price,
@@ -43,7 +77,7 @@ class ProductModel {
   });
 
   static ProductModel empty() {
-    return const ProductModel(
+    return ProductModel(
       id: '100',
       stock: 0,
       price: 0.0,
@@ -108,28 +142,6 @@ class ProductModel {
               ?.map((e) => ProductVariationModel.fromJson(e))
               .toList() ??
           const [],
-    );
-  }
-}
-
-extension ProductXModel on ProductModel {
-  ProductEntity toEntity() {
-    return ProductEntity(
-      id: id,
-      stock: stock,
-      price: price,
-      title: title,
-      sku: sku,
-      salePrice: salePrice,
-      thumbnail: thumbnail,
-      isFeatured: isFeatured,
-      brand: brand?.toEntity(),
-      description: description,
-      categoryId: categoryId,
-      images: images,
-      productType: productType,
-      productAttributes: productAttributes.map((e) => e.toEntity()).toList(),
-      productVariations: productVariations.map((e) => e.toEntity()).toList(),
     );
   }
 }

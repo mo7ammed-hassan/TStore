@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+import 'package:t_store/common/widgets/shimmer/shimmer_cart_item.dart';
 import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_state.dart';
@@ -53,16 +53,7 @@ class CartItems extends StatelessWidget {
   }
 
   Widget _loadingCartItems() {
-    return Skeletonizer(
-      child: Column(
-        children: List.generate(
-          3,
-          (index) => CartItemCard(
-            cartItem: CartItemEntity.empty(),
-          ),
-        ),
-      ),
-    );
+    return ShimmerCartItem();
   }
 
   Widget _buildErrorWidget() {

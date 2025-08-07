@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_attribute_entity.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
-import 'package:t_store/features/shop/features/product_details/presentation/cubits/product_variation_cubit.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/widgets/build_choice_chips.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/widgets/variation_details.dart';
 import 'package:t_store/utils/constants/sizes.dart';
@@ -14,19 +12,12 @@ class TProductAttributes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        final cubit = ProductVariationCubit();
-         cubit.initializeWithDefault(product); // Initialize with default
-        return cubit;
-      },
-      child: Column(
-        children: [
-          const VariationDetails(),
-          const SizedBox(height: TSizes.spaceBtwItems),
-          _buildAttributesList(context),
-        ],
-      ),
+    return Column(
+      children: [
+        const VariationDetails(),
+        const SizedBox(height: TSizes.spaceBtwItems),
+        _buildAttributesList(context),
+      ],
     );
   }
 

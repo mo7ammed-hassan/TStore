@@ -12,25 +12,11 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CartCubit()..fetchCartItems(),
-      child: BlocBuilder<CartCubit, CartState>(
-        builder: (context, state) {
-          if (state is CartLoadedState) {
-            if (state.cartItems.isEmpty) {
-              return Scaffold(
-                appBar: _appBar(context),
-                body: const Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: TSizes.spaceBtwItems,
-                    vertical: TSizes.defaultSpace,
-                  ),
-                  child: CartItems(),
-                ),
-              );
-            }
+    return BlocBuilder<CartCubit, CartState>(
+      builder: (context, state) {
+        if (state is CartLoadedState) {
+          if (state.cartItems.isEmpty) {
             return Scaffold(
-              bottomNavigationBar: _checkoutButton(context),
               appBar: _appBar(context),
               body: const Padding(
                 padding: EdgeInsets.symmetric(
@@ -52,8 +38,19 @@ class CartPage extends StatelessWidget {
               child: CartItems(),
             ),
           );
-        },
-      ),
+        }
+        return Scaffold(
+          bottomNavigationBar: _checkoutButton(context),
+          appBar: _appBar(context),
+          body: const Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: TSizes.spaceBtwItems,
+              vertical: TSizes.defaultSpace,
+            ),
+            child: CartItems(),
+          ),
+        );
+      },
     );
   }
 
@@ -68,6 +65,8 @@ class CartPage extends StatelessWidget {
   }
 
   Widget _checkoutButton(BuildContext context) {
+    final cartCubit = context.read<CartCubit>();
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: TSizes.defaultSpace,
@@ -78,14 +77,11 @@ class CartPage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => BlocProvider.value(
-                value:  CartCubit(),
-                child: const CheckoutPage(),
-              ),
+              builder: (context) => const CheckoutPage(),
             ),
           );
         },
-        child: const Text('Checkout \$300'),
+        child: Text('Checkout \$${cartCubit.totalPrice.toStringAsFixed(2)}'),
       ),
     );
   }
