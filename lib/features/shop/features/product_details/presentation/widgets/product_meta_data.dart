@@ -47,14 +47,12 @@ class TProductMetaData extends StatelessWidget {
                     .titleLarge!
                     .apply(decoration: TextDecoration.lineThrough),
               ),
-            if (product.productType == ProductType.single.toString() &&
-                product.salePrice! > 0)
-              const SizedBox(width: TSizes.spaceBtwItems / 2),
-
-            TProductPriceText(
-                price: cubit.getProductPrice(product), isLarge: true),
           ],
         ),
+        if (product.productType == ProductType.single.toString() &&
+            product.salePrice! > 0)
+          const SizedBox(width: TSizes.spaceBtwItems / 2),
+        TProductPriceText(price: cubit.getProductPrice(product), isLarge: true),
         const SizedBox(height: TSizes.spaceBtwItems / 1.5),
         TProductTitleText(
           title: product.title,
