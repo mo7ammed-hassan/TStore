@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
@@ -53,9 +54,17 @@ class TRoundedImage extends StatelessWidget {
                   imageUrl: imageUrl,
                   fit: fit,
                   errorWidget: (context, url, error) => Image.network(
-                        TImages.defaultProductImage,
-                        fit: fit,
-                      ))
+                    TImages.defaultProductImage,
+                    fit: fit,
+                  ),
+                  placeholder: (context, url) => ShimmerWidget(
+                    width: width ?? double.infinity,
+                    height: height ?? double.infinity,
+                    shapeBorder: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(borderRadius),
+                    ),
+                  ),
+                )
               : Image.asset(
                   imageUrl,
                   fit: fit,
@@ -67,7 +76,6 @@ class TRoundedImage extends StatelessWidget {
     );
   }
 }
-
 
 // class TRoundedImage extends StatelessWidget {
 //   final String imageUrl;
