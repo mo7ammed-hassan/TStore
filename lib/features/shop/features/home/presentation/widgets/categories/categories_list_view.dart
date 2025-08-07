@@ -34,7 +34,7 @@ class CategoriesListView extends StatelessWidget {
               onTap: () {
                 context.pushPage(
                   SubCategoryPage(
-                    categoryId: categories[index].id,
+                    category: categories[index],
                   ),
                 );
               },

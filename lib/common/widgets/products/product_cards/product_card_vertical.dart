@@ -37,9 +37,7 @@ class TVerticalProductCard extends StatelessWidget {
             TProductCardHeader(
               productId: product.id,
               thumbnail: product.thumbnail,
-              discountPrice: cubit.calculateProductDiscount(
-                      product.price.toDouble(), product.salePrice!) ??
-                  '0',
+              discountPrice: product.discountPercentage.toString(),
             ),
             const SizedBox(height: TSizes.spaceBtwItems / 2),
             TProductCardBody(

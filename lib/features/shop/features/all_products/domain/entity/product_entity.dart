@@ -1,6 +1,7 @@
 import 'package:t_store/features/shop/features/all_brands/domain/entities/brand_entity.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_attribute_entity.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_variation_entity.dart';
+import 'package:t_store/utils/constants/enums.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 
 /// final >>  immutabl
@@ -22,8 +23,56 @@ class ProductEntity {
   final List<ProductAttributeEntity> productAttributes;
   final List<ProductVariationEntity>? productVariations;
 
-  double get effectivePrice =>
-      salePrice != null && salePrice! > 0 ? salePrice! : price.toDouble();
+  String get productrice {
+    if (productType == ProductType.single.toString()) {
+      return (salePrice != null && salePrice! > 0)
+          ? salePrice!.toString()
+          : price.toString();
+    }
+
+    double smallestPrice = double.infinity;
+    double largestPrice = 0;
+
+    for (var variation in productVariations!) {
+      double priceToConsider =
+          (variation.salePrice > 0.0) ? variation.salePrice : variation.price;
+
+      if (priceToConsider < smallestPrice) {
+        smallestPrice = priceToConsider;
+      }
+      if (priceToConsider > largestPrice) {
+        largestPrice = priceToConsider;
+      }
+    }
+
+    return smallestPrice == largestPrice
+        ? largestPrice.toString()
+        : '$smallestPrice - $largestPrice';
+  }
+
+  /// Calculate the discount percentage
+  String get discountPercentage {
+    if (productType == ProductType.single.toString()) {
+      if (salePrice != null && salePrice! > 0 && price > 0) {
+        return (((price - salePrice!) / price) * 100).toStringAsFixed(1);
+      }
+      return '0';
+    } else {
+      double maxDiscount = 0;
+
+      for (var variation in productVariations ?? []) {
+        if (variation.salePrice > 0 && variation.price > 0) {
+          double discount =
+              ((variation.price - variation.salePrice) / variation.price) * 100;
+          if (discount > maxDiscount) {
+            maxDiscount = discount;
+          }
+        }
+      }
+
+      return maxDiscount.toStringAsFixed(1);
+    }
+  }
 
   const ProductEntity({
     required this.id,

@@ -58,8 +58,7 @@ class ProductCardHorizantal extends StatelessWidget {
             const SizedBox(width: TSizes.spaceBtwItems / 2),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(
-                    right: TSizes.sm, left: TSizes.sm, top: TSizes.sm),
+                padding: const EdgeInsets.only(left: TSizes.sm, top: TSizes.sm),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,14 +78,16 @@ class ProductCardHorizantal extends StatelessWidget {
                     ),
                     const Spacer(),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Flexible(
-                          child: TProductPriceText(
-                            price: product.price.toString(),
-                            maxLines: 2,
+                        Expanded(
+                          child: FittedBox(
+                            child: TProductPriceText(
+                              price: product.productrice,
+                              maxLines: 2,
+                            ),
                           ),
                         ),
+                        const SizedBox(width: TSizes.sm),
                         TAddIcon(product: product),
                       ],
                     )
@@ -102,17 +103,19 @@ class ProductCardHorizantal extends StatelessWidget {
 
   Positioned _favoriteButton() {
     return Positioned(
-      top: 0,
+      top: 4,
       right: 0,
-      child: FavoriteButton(productId: product.id),
+      child: FavoriteButton(
+        productId: product.id,
+      ),
     );
   }
 
   Positioned _discountText(BuildContext context) {
-    return const Positioned(
-      top: 12,
+    return Positioned(
+      top: 10,
       child: TDiscountRate(
-        rate: '25%',
+        rate: '${product.discountPercentage}%',
       ),
     );
   }

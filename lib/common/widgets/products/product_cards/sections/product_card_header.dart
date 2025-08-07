@@ -45,7 +45,7 @@ class TProductCardHeader extends StatelessWidget {
 
   Widget _favoriteButton() {
     return Positioned(
-      top: 0,
+      top: 5,
       right: 0,
       child: FavoriteButton(productId: productId),
     );

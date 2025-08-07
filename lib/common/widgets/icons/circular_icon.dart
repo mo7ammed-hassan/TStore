@@ -23,22 +23,21 @@ class TCircularIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        color: backgroundColor != null
-            ? backgroundColor!
-            : isDark
-                ? AppColors.black.withValues(alpha: 0.9)
-                : AppColors.white.withValues(alpha: 0.9),
-        shape: BoxShape.circle,
-      ),
-      child: IconButton(
-        iconSize: size,
-        padding: const EdgeInsets.all(0),
-        onPressed: onPressed,
-        icon: Icon(icon, size: size, color: color),
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        width: width,
+        height: height,
+        padding: EdgeInsets.all(7),
+        decoration: BoxDecoration(
+          color: backgroundColor != null
+              ? backgroundColor!
+              : isDark
+                  ? AppColors.black.withValues(alpha: 0.9)
+                  : AppColors.white.withValues(alpha: 0.9),
+          shape: BoxShape.circle,
+        ),
+        child: Icon(icon, size: size, color: color),
       ),
     );
   }
