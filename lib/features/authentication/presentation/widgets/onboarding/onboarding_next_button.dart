@@ -12,14 +12,14 @@ class OnBoardingNextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<OnboardingCubit>();
     final isDark = HelperFunctions.isDarkMode(context);
+    
     return Positioned(
       bottom: TDeviceUtils.getBottomNavigationBarHeight(),
       right: TSizes.defaultSpace,
       child: ElevatedButton(
-        onPressed: () {
-          context.read<OnBoardingCubit>().nextPage(context);
-        },
+        onPressed: cubit.nextPage,
         style: ElevatedButton.styleFrom(
           shape: const CircleBorder(),
           backgroundColor: isDark ? AppColors.primary : Colors.black,

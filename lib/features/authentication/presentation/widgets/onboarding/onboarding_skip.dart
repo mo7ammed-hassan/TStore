@@ -12,21 +12,29 @@ class OnBoardingSkip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<OnboardingCubit>();
+
     return Positioned(
-      top: TDeviceUtils.getAppBarHeight(),
-      right: TSizes.defaultSpace,
+      top: TDeviceUtils.getAppBarHeight() / 2,
+      right: TSizes.defaultSpace / 2,
       child: TextButton(
         onPressed: () {
-          context.read<OnBoardingCubit>().skipPage();
+          context.read<OnboardingCubit>().skipPage();
         },
-        child: BlocBuilder<OnBoardingCubit, int>(
+        child: BlocBuilder<OnboardingCubit, int>(
+          buildWhen: (previous, current) => previous != current,
           builder: (context, state) {
-            return state != 2
-                ? Text(
-                    TTexts.skip,
-                    style: Theme.of(context).textTheme.bodyLarge,
+            final shouldShowSkip = state < cubit.totalPages - 1;
+
+            return shouldShowSkip
+                ? TextButton(
+                    onPressed: cubit.skipPage,
+                    child: Text(
+                      TTexts.skip,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
                   )
-                : const SizedBox();
+                : const SizedBox.shrink();
           },
         ),
       ),

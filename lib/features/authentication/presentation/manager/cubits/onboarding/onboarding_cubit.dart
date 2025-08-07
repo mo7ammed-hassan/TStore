@@ -1,56 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:t_store/features/authentication/presentation/pages/login_page.dart';
+import 'package:t_store/features/authentication/presentation/widgets/onboarding/onboarding_view.dart';
+import 'package:t_store/utils/constants/images_strings.dart';
+import 'package:t_store/utils/constants/text_strings.dart';
 
-class OnBoardingCubit extends Cubit<int> {
-  OnBoardingCubit() : super(0);
+class OnboardingCubit extends Cubit<int> {
+  OnboardingCubit() : super(0);
 
   final PageController pageController = PageController();
+  static const _animationDuration = Duration(milliseconds: 300);
 
-  void updatePageIndicator(int index) {
-    emit(index);
-    pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 350),
-      curve: Curves.easeIn,
-    );
+  final storage = GetStorage();
+
+  List<Widget> onboardingPages = const [
+    OnBoardingView(
+      image: TImages.onBoardingImage1,
+      title: TTexts.onBoardingTitle1,
+      subtitle: TTexts.onBoardingSubTitle1,
+    ),
+    OnBoardingView(
+      image: TImages.onBoardingImage2,
+      title: TTexts.onBoardingTitle2,
+      subtitle: TTexts.onBoardingSubTitle2,
+    ),
+    OnBoardingView(
+      image: TImages.onBoardingImage3,
+      title: TTexts.onBoardingTitle3,
+      subtitle: TTexts.onBoardingSubTitle3,
+    ),
+  ];
+
+  bool _isManualScroll = true;
+
+  int get totalPages => onboardingPages.length;
+  bool get isLastPage => state == totalPages - 1;
+  bool get hasCompletedOnboarding => state >= onboardingPages.length;
+
+  void changePage(int index) {
+    if (_isManualScroll) emit(index);
   }
 
-  void dotNavigationClick(int index) {
-    emit(index);
-    pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 350),
+  void nextPage() async {
+    _isManualScroll = false;
+    if (isLastPage) {
+      emit(totalPages);
+      storage.write('isFirstLaunch', false);
+      return;
+    }
+    final nextPageIndex = state + 1;
+
+    emit(nextPageIndex);
+    await pageController.animateToPage(
+      nextPageIndex,
+      duration: _animationDuration,
       curve: Curves.easeInOut,
     );
+
+    _restoreManualScroll();
   }
 
-  void nextPage(BuildContext context) {
-    if (state < 2) {
-      final nextIndex = state + 1;
-      emit(nextIndex);
-      pageController.animateToPage(
-        nextIndex,
-        duration: const Duration(milliseconds: 350),
-        curve: Curves.easeIn,
-      );
-    } else {
-      final storage = GetStorage();
-      storage.write('isFirstLaunch', false);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const LoginPage(),
-        ),
-      );
-    }
-  }
+  void skipPage() async {
+    _isManualScroll = false;
 
-  void skipPage() {
-    const lastPageIndex = 2;
+    final lastPageIndex = totalPages - 1;
     emit(lastPageIndex);
-    pageController.jumpToPage(lastPageIndex);
+
+    await pageController.animateToPage(
+      lastPageIndex,
+      duration: _animationDuration,
+      curve: Curves.easeInOut,
+    );
+
+    _restoreManualScroll();
+  }
+
+  void _restoreManualScroll() {
+    Future.delayed(const Duration(milliseconds: 200), () {
+      _isManualScroll = true;
+    });
   }
 
   @override

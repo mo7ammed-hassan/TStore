@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/common/widgets/products/cart/cart_menu_icon.dart';
+import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/personalization/cubit/user_state.dart';
 import 'package:t_store/features/shop/features/cart/presentation/pages/cart_page.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
+import 'package:t_store/utils/device/device_utlity.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
 
 class THomeAppBar extends StatelessWidget {
@@ -61,14 +62,13 @@ class THomeAppBar extends StatelessWidget {
     );
   }
 
-  Skeletonizer _loadingWidget(BuildContext context) {
-    return Skeletonizer(
-      child: Text(
-        "",
-        style: Theme.of(context)
-            .textTheme
-            .headlineSmall!
-            .apply(color: AppColors.grey, fontSizeFactor: 1.1),
+  Widget _loadingWidget(BuildContext context) {
+    return ShimmerWidget(
+      height: 10,
+      margin: const EdgeInsets.only(top: 3),
+      width: TDeviceUtils.getScreenWidth(context) * 0.4,
+      shapeBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(4),
       ),
     );
   }
