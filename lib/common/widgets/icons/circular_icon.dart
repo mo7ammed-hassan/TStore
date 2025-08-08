@@ -29,7 +29,7 @@ class TCircularIcon extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
-        padding: EdgeInsets.all(7),
+        padding: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: backgroundColor != null
               ? backgroundColor!

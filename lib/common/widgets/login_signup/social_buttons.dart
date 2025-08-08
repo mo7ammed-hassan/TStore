@@ -4,7 +4,7 @@ import 'package:t_store/common/widgets/login_signup/scocial_button.dart';
 import 'package:t_store/features/authentication/presentation/manager/cubits/signin/signin_with_google_cubit.dart';
 import 'package:t_store/features/authentication/presentation/manager/cubits/signin/signin_with_google_state.dart';
 import 'package:t_store/features/authentication/presentation/pages/verify_email_page.dart';
-import 'package:t_store/navigation_menu.dart';
+import 'package:t_store/features/navigation_menu/navigation_screen.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
@@ -64,6 +64,6 @@ class TSocialButtons extends StatelessWidget {
   }
 
   void _navigateToMenuPage(BuildContext context) {
-    context.removeAll(const NavigationMenu());
+    context.removeAll(const NavigationScreen());
   }
 }

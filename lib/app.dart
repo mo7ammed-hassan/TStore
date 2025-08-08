@@ -4,6 +4,7 @@ import 'package:t_store/app_entry_point.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
 import 'package:t_store/service_locator.dart';
+import 'package:t_store/utils/helpers/app_focus_handler.dart';
 import 'package:t_store/utils/popups/loaders.dart';
 import 'package:t_store/utils/theme/theme.dart';
 
@@ -17,14 +18,16 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => UserCubit()),
         BlocProvider(create: (context) => getIt<CartCubit>()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'T-Store',
-        themeMode: ThemeMode.system,
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        navigatorKey: AppContext.navigatorKey,
-        home: const AppEntryPoint(),
+      child: AppFocusHandler(
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'T-Store',
+          themeMode: ThemeMode.system,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          navigatorKey: AppContext.navigatorKey,
+          home: const AppEntryPoint(),
+        ),
       ),
     );
   }

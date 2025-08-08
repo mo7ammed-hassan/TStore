@@ -5,7 +5,7 @@ import 'package:t_store/common/cubits/launch_app/launch_app_state.dart';
 import 'package:t_store/features/authentication/presentation/pages/login_page.dart';
 import 'package:t_store/features/authentication/presentation/pages/onboarding_page.dart';
 import 'package:t_store/features/authentication/presentation/pages/verify_email_page.dart';
-import 'package:t_store/navigation_menu.dart';
+import 'package:t_store/features/navigation_menu/navigation_screen.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
 
 class AppEntryPoint extends StatelessWidget {
@@ -20,7 +20,7 @@ class AppEntryPoint extends StatelessWidget {
           context.removeAll(const OnBoardingPage());
         } else if (state is AuthenticatedState) {
           // In case of authenticated user, navigate to the main menu
-          context.removeAll(const NavigationMenu());
+          context.removeAll(const NavigationScreen());
         } else if (state is VerifingEmailState) {
           // In case of email verification needed, navigate to Verify Email page
           context.removeAll(VerifyEmailPage(email: state.email));

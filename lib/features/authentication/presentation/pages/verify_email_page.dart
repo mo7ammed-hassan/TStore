@@ -6,7 +6,7 @@ import 'package:t_store/features/authentication/presentation/manager/cubits/sign
 import 'package:t_store/features/authentication/presentation/manager/cubits/signup/verify_email_state.dart';
 import 'package:t_store/features/authentication/presentation/pages/login_page.dart';
 import 'package:t_store/features/personalization/domain/use_cases/delete_account_use_case.dart';
-import 'package:t_store/navigation_menu.dart';
+import 'package:t_store/features/navigation_menu/navigation_screen.dart';
 import 'package:t_store/service_locator.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
@@ -54,7 +54,7 @@ class VerifyEmailPage extends StatelessWidget {
                   subtitle: TTexts.yourAccountCreatedSubTitle,
                   image: TImages.successfullRegisterAnimation,
                   onPressed: () async {
-                    context.removeAll(const NavigationMenu());
+                    context.removeAll(const NavigationScreen());
                   },
                 ),
               );

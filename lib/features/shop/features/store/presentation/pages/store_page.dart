@@ -38,19 +38,23 @@ class StorePage extends StatelessWidget {
                 expandedHeight: 420, //440
                 flexibleSpace: const Padding(
                   padding: EdgeInsets.all(TSizes.defaultSpace),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(height: TSizes.spaceBtwItems),
-                        TSearchConatiner(
-                          text: 'Search in Store',
-                          padding: EdgeInsets.zero,
-                          showBackground: false,
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverToBoxAdapter(
+                        child: Column(
+                          children: [
+                            SizedBox(height: TSizes.spaceBtwItems),
+                            TSearchConatiner(
+                              text: 'Search in Store',
+                              padding: EdgeInsets.zero,
+                              showBackground: false,
+                            ),
+                            SizedBox(height: TSizes.spaceBtwItems),
+                            FeaturedBrandsSection(),
+                          ],
                         ),
-                        SizedBox(height: TSizes.spaceBtwItems),
-                        FeaturedBrandsSection(),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
 

@@ -4,7 +4,7 @@ import 'package:t_store/common/widgets/success_pages/success_page.dart';
 import 'package:t_store/features/shop/features/cart/presentation/widgets/cart_items.dart';
 import 'package:t_store/features/shop/features/checkout/presentation/widgets/chekout_order_detial.dart';
 import 'package:t_store/features/shop/features/checkout/presentation/widgets/coupon_field.dart';
-import 'package:t_store/navigation_menu.dart';
+import 'package:t_store/features/navigation_menu/navigation_screen.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
@@ -55,7 +55,7 @@ class CheckoutPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const NavigationMenu(),
+                      builder: (context) => const NavigationScreen(),
                     ),
                   );
                 },

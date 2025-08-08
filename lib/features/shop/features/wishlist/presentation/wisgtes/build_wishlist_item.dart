@@ -6,7 +6,7 @@ import 'package:t_store/common/widgets/products/product_cards/product_card_verti
 import 'package:t_store/common/widgets/shimmer/shimmer_products_grid_layout.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubits/wishlist_cubit.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubits/wishlist_state.dart';
-import 'package:t_store/navigation_menu.dart';
+import 'package:t_store/features/navigation_menu/navigation_screen.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/loaders/animation_loader.dart';
@@ -63,7 +63,7 @@ class BuildWishlistItems extends StatelessWidget {
       showAction: true,
       actionText: 'Let\'s add more',
       onActionPressed: () => context.removeAll(
-        const NavigationMenu(),
+        const NavigationScreen(),
       ),
     );
   }
