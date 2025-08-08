@@ -18,15 +18,14 @@ class TProductCartFooter extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: TSizes.sm),
-          child: TProductPriceText(price: price ?? '', isLarge: false),
+        Expanded(
+          child: FittedBox(
+            child: TProductPriceText(price: price ?? '', isLarge: false),
+          ),
         ),
         const SizedBox(width: TSizes.sm),
-        Flexible(
-          child: TAddIcon(
-            product: product,
-          ),
+        TAddIcon(
+          product: product,
         ),
       ],
     );

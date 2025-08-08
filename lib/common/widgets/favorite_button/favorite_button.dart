@@ -32,14 +32,7 @@ class FavoriteButton extends StatelessWidget {
                 : AppColors.grey,
           );
         },
-        listener: (context, state) {
-          // if (state is ToggleFavoriteButton) {
-          //   Loaders.customToast(
-          //     message: state.message,
-          //     isMedium: false,
-          //   );
-          // }
-        },
+        listener: (context, state) {},
       ),
     );
   }
