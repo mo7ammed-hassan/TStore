@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
-import 'package:t_store/common/widgets/layouts/grid_layout.dart';
-import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:t_store/common/widgets/products/sortable/sortable_products.dart';
-import 'package:t_store/features/shop/features/all_products/data/mapper/product_mapper.dart';
-import 'package:t_store/features/shop/features/all_products/data/models/product_model.dart';
+import 'package:t_store/common/widgets/shimmer/shimmer_products_grid_layout.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/all_product_cubit.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/all_products_state.dart';
@@ -38,7 +34,7 @@ class AllProductsPage extends StatelessWidget {
             child: BlocBuilder<AllProductsCubit, AllProductsState>(
               builder: (context, state) {
                 if (state is AllProductsLoadingState) {
-                  return _loadingWidget();
+                  return ShimmerProductsGridLayout();
                 }
                 if (state is AllProductsLoadedState) {
                   if (state.products!.isEmpty) {
@@ -73,18 +69,6 @@ class AllProductsPage extends StatelessWidget {
       leadingOnPressed: () {
         AllProductsCubit().close();
       },
-    );
-  }
-
-  Widget _loadingWidget() {
-    return Skeletonizer(
-      enabled: true,
-      child: TGridLayout(
-        itemCount: 6,
-        itemBuilder: (p0, p1) => TVerticalProductCard(
-          product: ProductModel.empty().toEntity(),
-        ),
-      ),
     );
   }
 }
