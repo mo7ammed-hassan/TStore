@@ -7,6 +7,7 @@ import 'package:t_store/features/shop/features/sub_category/presentation/cubits/
 import 'package:t_store/features/shop/features/sub_category/presentation/widgets/build_sub_categories.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/helpers/helper_functions.dart';
 
 class SubCategoryPage extends StatelessWidget {
   final CategoryEntity category;
@@ -14,6 +15,7 @@ class SubCategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = HelperFunctions.isDarkMode(context);
     return BlocProvider(
       create: (context) =>
           SubCategoryCubit()..fetchSubCategory(categoryId: category.id),
@@ -35,6 +37,7 @@ class SubCategoryPage extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Container(
                   decoration: BoxDecoration(
+                    color: isDark ? Colors.grey : Colors.transparent,
                     borderRadius: BorderRadius.circular(TSizes.md),
                     border: Border.all(
                       color: Colors.grey,
