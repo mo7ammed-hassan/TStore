@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/common/widgets/brands/brand_card.dart';
-import 'package:t_store/common/widgets/layouts/grid_layout.dart';
-import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:t_store/common/widgets/products/sortable/sortable_dropdown.dart';
 import 'package:t_store/common/widgets/products/sortable/sortable_products.dart';
+import 'package:t_store/common/widgets/shimmer/shimmer_products_grid_layout.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/features/shop/features/all_brands/domain/entities/brand_entity.dart';
 import 'package:t_store/features/shop/features/all_brands/presentation/cubits/product_by_brand_cubit.dart';
 import 'package:t_store/features/shop/features/all_brands/presentation/cubits/product_by_brand_state.dart';
-import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
 class BrandProductsPage extends StatelessWidget {
@@ -36,9 +33,10 @@ class BrandProductsPage extends StatelessWidget {
                 TBrandCard(brand: brand),
                 const SizedBox(height: TSizes.spaceBtwSections),
                 const TSectionHeading(
-                    title: 'Products', showActionButton: false),
+                  title: 'Products',
+                  showActionButton: false,
+                ),
                 const SizedBox(height: TSizes.spaceBtwItems),
-                
                 BlocBuilder<ProductsByBrandCubit, ProductsByBrandState>(
                   builder: (context, state) {
                     if (state is ProductsByBrandLoadingState ||
@@ -83,20 +81,13 @@ class BrandProductsPage extends StatelessWidget {
   }
 
   Widget _loadingProductList() {
-    return Column(
+    return const Column(
       children: [
-        const SortableDropdown(
+        SortableDropdown(
           initialValue: 'Name',
         ),
-        const SizedBox(height: TSizes.spaceBtwSections),
-        Skeletonizer(
-          child: TGridLayout(
-            itemCount: 6,
-            itemBuilder: (context, index) => const TVerticalProductCard(
-              product: ProductEntity.empty(),
-            ),
-          ),
-        ),
+        SizedBox(height: TSizes.spaceBtwSections),
+        ShimmerProductsGridLayout(),
       ],
     );
   }

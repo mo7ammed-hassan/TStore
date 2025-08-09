@@ -34,7 +34,7 @@ class SubCategorySection extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(height: TSizes.spaceBtwItems),
+          const SizedBox(height: TSizes.spaceBtwItems / 2),
           SizedBox(
             height: 120,
             child: BuildSubCategoryProducts(subCategoryId: subCategory.id),

@@ -61,62 +61,50 @@ class _HomePageState extends State<HomePage> {
               const SliverToBoxAdapter(child: HomeHeaderSection()),
 
               // Featured Section Heading
-              SliverPadding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: TSizes.spaceBtwItems,
-                ),
-                sliver: SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      TSectionHeading(
-                        title: 'Featured Products',
-                        onPressed: () {
-                          context.pushPage(
-                            AllProductsPage(
-                              title: 'Featured Products',
-                              products: productsCubit.featuredProducts,
-                              future:
-                                  GetFeturedProductsUseCase().call(params: 10),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: TSizes.spaceBtwItems),
-                    ],
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: TSizes.spaceBtwItems,
+                  ),
+                  child: TSectionHeading(
+                    title: 'Featured Products',
+                    onPressed: () {
+                      context.pushPage(
+                        AllProductsPage(
+                          title: 'Featured Products',
+                          products: productsCubit.featuredProducts,
+                          future: GetFeturedProductsUseCase().call(params: 10),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
 
               // Featured Products Grid
               const FeaturedProductSection(),
-
               const SliverToBoxAdapter(
                 child: SizedBox(height: TSizes.spaceBtwSections),
               ),
 
               // Popular Section Heading
-              SliverPadding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: TSizes.spaceBtwItems,
-                ),
-                sliver: SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      TSectionHeading(
-                        title: 'Popular Products',
-                        onPressed: () {
-                          context.pushPage(
-                            AllProductsPage(
-                              title: 'Popular Products',
-                              products: productsCubit.allProducts,
-                              future: GetAllPopularProductsUseCase()
-                                  .call(params: 10),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: TSizes.spaceBtwItems / 2),
-                    ],
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: TSizes.spaceBtwItems,
+                  ),
+                  child: TSectionHeading(
+                    title: 'Popular Products',
+                    onPressed: () {
+                      context.pushPage(
+                        AllProductsPage(
+                          title: 'Popular Products',
+                          products: productsCubit.allProducts,
+                          future:
+                              GetAllPopularProductsUseCase().call(params: 10),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),

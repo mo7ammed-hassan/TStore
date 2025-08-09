@@ -43,7 +43,7 @@ class SubCategoryPage extends StatelessWidget {
                   ),
                   child: TRoundedImage(
                     width: double.infinity,
-                    height: MediaQuery.of(context).size.height * 0.2,
+                    height: MediaQuery.of(context).size.height * 0.18,
                     aplayImageRaduis: true,
                     imageUrl: TImages.defaultProductImage,
                   ),
