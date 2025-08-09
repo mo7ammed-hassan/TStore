@@ -9,20 +9,22 @@ import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
 class TProductCardHeader extends StatelessWidget {
-  const TProductCardHeader(
-      {super.key,
-      this.thumbnail,
-      required this.discountPrice,
-      required this.productId});
+  const TProductCardHeader({
+    super.key,
+    this.thumbnail,
+    required this.discountPrice,
+    required this.productId,
+  });
   final String? thumbnail;
   final String discountPrice;
   final String productId;
+
   @override
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
     return TRoundedContainer(
       height: 180,
-      width: 180,
+      width: double.infinity,
       padding: const EdgeInsets.all(TSizes.sm),
       backgroundColor: isDark ? AppColors.dark : AppColors.light,
       child: Stack(

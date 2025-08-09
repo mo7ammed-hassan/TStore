@@ -52,14 +52,16 @@ class TCategoryTab extends StatelessWidget {
             ),
 
             const SliverToBoxAdapter(
-                child: SizedBox(height: TSizes.spaceBtwItems)),
+              child: SizedBox(height: TSizes.spaceBtwItems),
+            ),
 
             ///  Product Grid as Sliver
             BuildProductsList(categoryId: category.id),
 
             /// Bottom spacing
             const SliverToBoxAdapter(
-                child: SizedBox(height: TSizes.spaceBtwSections)),
+              child: SizedBox(height: TSizes.spaceBtwSections),
+            ),
           ],
         ),
       ),

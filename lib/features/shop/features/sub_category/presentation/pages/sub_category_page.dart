@@ -18,36 +18,44 @@ class SubCategoryPage extends StatelessWidget {
       create: (context) =>
           SubCategoryCubit()..fetchSubCategory(categoryId: category.id),
       child: Scaffold(
-        appBar: _appBar(context),
-        body: const SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: TSizes.spaceBtwItems,
-              vertical: TSizes.defaultSpace,
-            ),
-            child: Column(
-              children: [
-                TRoundedImage(
-                  width: double.infinity,
-                  aplayImageRaduis: true,
-                  imageUrl: TImages.defaultProductImage,
-                ),
-                SizedBox(height: TSizes.spaceBtwSections / 2),
-                BuildSubCategoriesSections(),
-              ],
-            ),
+        appBar: TAppBar(
+          showBackArrow: true,
+          title: Text(
+            category.name,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
-      ),
-    );
-  }
-
-  TAppBar _appBar(BuildContext context) {
-    return TAppBar(
-      showBackArrow: true,
-      title: Text(
-        category.name,
-        style: Theme.of(context).textTheme.headlineSmall,
+        body: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: TSizes.spaceBtwItems,
+            vertical: TSizes.defaultSpace,
+          ),
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(TSizes.md),
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 1,
+                    ),
+                  ),
+                  child: TRoundedImage(
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    aplayImageRaduis: true,
+                    imageUrl: TImages.defaultProductImage,
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: SizedBox(height: TSizes.spaceBtwSections / 2),
+              ),
+              SliverToBoxAdapter(child: const BuildSubCategoriesSections()),
+            ],
+          ),
+        ),
       ),
     );
   }

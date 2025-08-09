@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/styles/shadows.dart';
-import 'package:t_store/common/widgets/animation_containers/open_container_wrapper.dart';
 import 'package:t_store/common/widgets/products/product_cards/sections/product_card_body.dart';
 import 'package:t_store/common/widgets/products/product_cards/sections/product_card_footer.dart';
 import 'package:t_store/common/widgets/products/product_cards/sections/product_card_header.dart';
@@ -20,11 +19,25 @@ class TVerticalProductCard extends StatelessWidget {
     ProductsCubit cubit = ProductsCubit();
     final isDark = HelperFunctions.isDarkMode(context);
 
-    return OpenContainerWrapper(
-      radius: const Radius.circular(TSizes.productImageRadius),
-      nextScreen: ProductDetailPage(product: product),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          PageRouteBuilder(
+            transitionDuration: const Duration(milliseconds: 400),
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return ProductDetailPage(product: product);
+            },
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          ),
+        );
+      },
       child: Container(
-        width: 180,
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(TSizes.productImageRadius),
@@ -34,17 +47,20 @@ class TVerticalProductCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TProductCardHeader(
-              productId: product.id,
-              thumbnail: product.thumbnail,
-              discountPrice: product.discountPercentage.toString(),
+            Expanded(
+              flex: 4,
+              child: TProductCardHeader(
+                productId: product.id,
+                thumbnail: product.thumbnail,
+                discountPrice: product.discountPercentage.toString(),
+              ),
             ),
             const SizedBox(height: TSizes.spaceBtwItems / 2),
             TProductCardBody(
               title: product.title,
               brandTitle: product.brand?.name ?? '',
             ),
-            const Spacer(),
+            const SizedBox(height: TSizes.spaceBtwItems / 2),
             TProductCartFooter(
               price: cubit.getProductPrice(product),
               product: product,

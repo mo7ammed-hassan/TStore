@@ -15,19 +15,24 @@ class TProductCartFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: FittedBox(
-            child: TProductPriceText(price: price ?? '', isLarge: false),
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: TSizes.sm,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: FittedBox(
+              child: TProductPriceText(price: price ?? '', isLarge: false),
+            ),
           ),
-        ),
-        const SizedBox(width: TSizes.sm),
-        TAddIcon(
-          product: product,
-        ),
-      ],
+          const SizedBox(width: TSizes.sm),
+          TAddIcon(
+            product: product,
+          ),
+        ],
+      ),
     );
   }
 }

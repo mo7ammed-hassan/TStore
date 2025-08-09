@@ -12,39 +12,41 @@ class TPromoSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => PromoSliderCubit()),
-        BlocProvider(create: (_) => BannerCubit()..fetchBanners()),
-      ],
-      child: BlocBuilder<BannerCubit, BannerState>(
-        builder: (context, state) {
-          if (state is BannerLoadingState || state is BannerInitial) {
-            return const BannerPlaceholder();
-          }
-
-          if (state is BannerFailureState) {
-            return Center(child: Text(state.errorMessage));
-          }
-
-          if (state is BannerLoadedState) {
-            final banners = state.allBanners;
-
-            if (banners.isEmpty) {
-              return const Center(child: Text('No banners found!'));
+    return SliverToBoxAdapter(
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_) => PromoSliderCubit()),
+          BlocProvider(create: (_) => BannerCubit()..fetchBanners()),
+        ],
+        child: BlocBuilder<BannerCubit, BannerState>(
+          builder: (context, state) {
+            if (state is BannerLoadingState || state is BannerInitial) {
+              return const BannerPlaceholder();
             }
 
-            return Column(
-              children: [
-                TPromoCarousel(banners: banners),
-                const SizedBox(height: TSizes.spaceBtwItems),
-                TPromoSliderIndicators(length: banners.length),
-              ],
-            );
-          }
+            if (state is BannerFailureState) {
+              return Center(child: Text(state.errorMessage));
+            }
 
-          return const Center(child: Text('Unexpected error occurred.'));
-        },
+            if (state is BannerLoadedState) {
+              final banners = state.allBanners;
+
+              if (banners.isEmpty) {
+                return const Center(child: Text('No banners found!'));
+              }
+
+              return Column(
+                children: [
+                  TPromoCarousel(banners: banners),
+                  const SizedBox(height: TSizes.spaceBtwItems),
+                  TPromoSliderIndicators(length: banners.length),
+                ],
+              );
+            }
+
+            return const Center(child: Text('Unexpected error occurred.'));
+          },
+        ),
       ),
     );
   }

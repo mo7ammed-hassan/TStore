@@ -12,28 +12,29 @@ class BuildSubCategoryProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<ProductEntity>>(
-        future: context
-            .read<SubCategoryCubit>()
-            .fetchProductsSpecificCategory(categoryId: subCategoryId),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const ShimmerSubCategoryProducts();
+      future: context
+          .read<SubCategoryCubit>()
+          .fetchProductsSpecificCategory(categoryId: subCategoryId),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const ShimmerSubCategoryProducts();
+        }
+
+        if (snapshot.hasError) {
+          return Center(child: Text(snapshot.error.toString()));
+        }
+
+        if (snapshot.hasData) {
+          if (snapshot.data!.isEmpty) {
+            return const Center(child: Text('No products found'));
           }
 
-          if (snapshot.hasError) {
-            return Center(child: Text(snapshot.error.toString()));
-          }
+          return _buildSubCategoryProducts(products: snapshot.data!);
+        }
 
-          if (snapshot.hasData) {
-            if (snapshot.data!.isEmpty) {
-              return const Center(child: Text('No products found'));
-            }
-
-            return _buildSubCategoryProducts(products: snapshot.data!);
-          }
-
-          return const Center(child: Text('Something went wrong!'));
-        });
+        return const Center(child: Text('Something went wrong!'));
+      },
+    );
   }
 
   Widget _buildSubCategoryProducts({required List<ProductEntity> products}) {

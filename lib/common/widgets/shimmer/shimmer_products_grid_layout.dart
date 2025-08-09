@@ -1,24 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:skeletonizer/skeletonizer.dart';
-import 'package:t_store/common/widgets/layouts/grid_layout.dart';
-import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
-import 'package:t_store/features/shop/features/all_products/data/mapper/product_mapper.dart';
-import 'package:t_store/features/shop/features/all_products/data/models/product_model.dart';
+import 'package:t_store/common/widgets/shimmer/shimmer_vertical_product_card.dart';
+import 'package:t_store/utils/constants/sizes.dart';
 
 class ShimmerProductsGridLayout extends StatelessWidget {
   final int itemCount;
   const ShimmerProductsGridLayout({super.key, this.itemCount = 4});
 
+  static Widget sliver() {
+    return SliverGrid(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return const ShimmerVerticalProductCard();
+        },
+        childCount: 4,
+      ),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 0.65,
+        mainAxisSpacing: TSizes.gridViewSpacing,
+        crossAxisSpacing: TSizes.gridViewSpacing,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Skeletonizer(
-      enabled: true,
-      child: TGridLayout(
-        itemCount: itemCount,
-        itemBuilder: (p0, p1) => TVerticalProductCard(
-          product: ProductModel.empty().toEntity(),
-        ),
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 0.65,
+        mainAxisSpacing: TSizes.gridViewSpacing,
+        crossAxisSpacing: TSizes.gridViewSpacing,
       ),
+      itemBuilder: (context, index) {
+        return ShimmerVerticalProductCard();
+      },
+      itemCount: itemCount,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
     );
   }
 }

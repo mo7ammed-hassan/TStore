@@ -1,53 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/common/widgets/animated_widget/animated_fade_grid_item.dart';
-import 'package:t_store/common/widgets/animated_widget/animated_grid_layout.dart';
-import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:t_store/common/widgets/custom_grid_view/products_grid_view.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_products_grid_layout.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/products_cubit.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/products_state.dart';
+import 'package:t_store/utils/constants/sizes.dart';
 
 class PopularProductsSection extends StatelessWidget {
   const PopularProductsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    context.read<ProductsCubit>().fetchPopularProducts();
     return BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
         if (state is ProductsLoadingState || state is ProductsInitialState) {
-          return const ShimmerProductsGridLayout(itemCount: 4);
-        }
-        if (state is ProductsFailureState) {
-          return _errorWidget(state.allProductsError!);
-        } else if (state is ProductsLoadedState) {
-          if (state.allProducts.isEmpty) {
-            return _errorWidget('No products found!');
-          }
-          return AnimatedGridLayout(
-            itemCount: state.allProducts.length,
-            itemBuilder: (context, index) => TVerticalProductCard(
-              product: state.allProducts[index],
-            ),
-            animatedEffect: ({required child, isVisible, onAdd, onRemove}) {
-              return AnimatedFadeGridItem(
-                isVisible: isVisible!,
-                onRemove: onRemove!,
-                duration: const Duration(milliseconds: 250),
-                child: child,
-              );
-            },
+          return SliverToBoxAdapter(
+            child: const ShimmerProductsGridLayout(),
           );
         }
 
-        return const Center(child: Text('Something went wrong!'));
+        if (state is ProductsFailureState) {
+          return _errorSliver(state.featuredProductsError!);
+        }
+
+        if (state is ProductsLoadedState) {
+          if (state.featuredProducts.isEmpty) {
+            return _errorSliver('No products found!');
+          }
+
+          return SliverPadding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: TSizes.spaceBtwItems),
+            sliver: ProductsGridView.sliver(state.featuredProducts),
+          );
+        }
+
+        return _errorSliver('Something went wrong!');
       },
     );
   }
 
-  Widget _errorWidget(String errorMessage) {
-    return Center(
-      child: Text(errorMessage),
+  SliverToBoxAdapter _errorSliver(String errorMessage) {
+    return SliverToBoxAdapter(
+      child: Center(
+        key: const Key('featured_products_error'),
+        child: Text(errorMessage),
+      ),
     );
   }
 }
