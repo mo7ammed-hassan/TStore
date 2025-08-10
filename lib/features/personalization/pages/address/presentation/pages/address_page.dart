@@ -6,6 +6,7 @@ import 'package:t_store/features/personalization/pages/address/presentation/cubi
 import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_state.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/pages/add_new_address_page.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/build_addresses_list_view.dart';
+import 'package:t_store/service_locator.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
@@ -15,7 +16,7 @@ class AddressPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AddressCubit()..fetchAllAddresses(),
+      create: (context) => getIt<AddressCubit>()..fetchAddresses(),
       child: Scaffold(
         floatingActionButton: _buildFloatingActionButton(),
         appBar: _buildAppBar(context),
@@ -43,7 +44,6 @@ class AddressPage extends StatelessWidget {
 
   Widget _buildFloatingActionButton() {
     return Builder(
-      //👈 Wrap with Builder
       builder: (context) {
         final addressCubit = context.read<AddressCubit>();
         return FloatingActionButton(
@@ -53,7 +53,7 @@ class AddressPage extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => BlocProvider.value(
-                  value: addressCubit, // Pass the ✅ Same instance
+                  value: addressCubit,
                   child: const AddNewAddressPage(),
                 ),
               ),

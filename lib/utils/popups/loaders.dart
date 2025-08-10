@@ -135,6 +135,35 @@ class Loaders {
       ),
     );
   }
+
+  static void showLoading({String? message}) {
+    showDialog(
+      context: AppContext.context,
+      barrierDismissible: false,
+      builder: (_) => PopScope(
+        canPop: false,
+        child: Dialog(
+          backgroundColor: Colors.transparent,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircularProgressIndicator(
+                color: AppColors.primary,
+              ),
+              if (message != null) ...[
+                const SizedBox(height: 16),
+                Text(
+                  message,
+                  style: Theme.of(AppContext.context).textTheme.bodyMedium,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class AppContext {

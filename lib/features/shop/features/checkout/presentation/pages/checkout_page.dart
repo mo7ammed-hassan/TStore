@@ -26,11 +26,15 @@ class CheckoutPage extends StatelessWidget {
           slivers: [
             CartItemsSection(showAddRemoveButtons: false, sliverList: true),
             SliverToBoxAdapter(
-                child: SizedBox(height: TSizes.spaceBtwSections)),
+              child: SizedBox(height: TSizes.spaceBtwSections),
+            ),
             SliverToBoxAdapter(child: CouponFiled()),
             SliverToBoxAdapter(
-                child: SizedBox(height: TSizes.spaceBtwSections)),
-            SliverToBoxAdapter(child: ChekoutOrderDetial()),
+              child: SizedBox(height: TSizes.spaceBtwSections),
+            ),
+            SliverToBoxAdapter(
+              child: ChekoutOrderDetial(),
+            ),
           ],
         ),
       ),

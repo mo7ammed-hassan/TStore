@@ -28,12 +28,7 @@ import 'package:t_store/features/personalization/domain/use_cases/update_user_fi
 import 'package:t_store/features/personalization/domain/use_cases/upload_data_usecases/upload_categories_use_case.dart';
 import 'package:t_store/features/personalization/domain/use_cases/upload_data_usecases/upload_product_use_case.dart';
 import 'package:t_store/features/personalization/domain/use_cases/upload_user_image_use_case.dart';
-import 'package:t_store/features/personalization/pages/address/data/repositories/address_repository_impl.dart';
-import 'package:t_store/features/personalization/pages/address/data/source/address_firebase_services.dart';
-import 'package:t_store/features/personalization/pages/address/domain/repositories/address_repository.dart';
-import 'package:t_store/features/personalization/pages/address/domain/usecases/add_address_use_case.dart';
-import 'package:t_store/features/personalization/pages/address/domain/usecases/delete_address_use_case.dart';
-import 'package:t_store/features/personalization/pages/address/domain/usecases/fetch_all_address_use_case.dart';
+import 'package:t_store/features/personalization/pages/address/address_injection.dart';
 import 'package:t_store/features/shop/features/all_brands/data/repository/brands_repository_impl.dart';
 import 'package:t_store/features/shop/features/all_brands/data/source/brands_firebase_services.dart';
 import 'package:t_store/features/shop/features/all_brands/domain/repository/brands_repository.dart';
@@ -252,20 +247,7 @@ Future<void> initializeDependencies() async {
   );
 
   // -- Address--
-  getIt.registerSingleton<AddressRepository>(
-    AddressRepositoryImpl(
-      AddressFirebaseServicesImpl(),
-    ),
-  );
-  getIt.registerSingleton<FetchAllAddressUseCase>(
-    FetchAllAddressUseCase(getIt.get<AddressRepository>()),
-  );
-  getIt.registerSingleton<AddAddressUseCase>(
-    AddAddressUseCase(getIt.get<AddressRepository>()),
-  );
-  getIt.registerSingleton<DeleteAddressUseCase>(
-    DeleteAddressUseCase(getIt.get<AddressRepository>()),
-  );
+  registerAddressDependencies(getIt);
 
   // --Cart--
   getIt.registerLazySingleton<FetchCartItemsUseCase>(

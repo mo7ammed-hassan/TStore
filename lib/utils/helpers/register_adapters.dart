@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:t_store/features/personalization/pages/address/data/models/address_model.dart';
 import 'package:t_store/features/shop/features/all_brands/data/models/brand_model.dart';
 import 'package:t_store/features/shop/features/all_products/data/models/product_attribute_model.dart';
 import 'package:t_store/features/shop/features/all_products/data/models/product_model.dart';
@@ -36,5 +37,9 @@ void rgisterAdapters() {
 
   if (!Hive.isAdapterRegistered(CartItemModelAdapter().typeId)) {
     Hive.registerAdapter(CartItemModelAdapter());
+  }
+
+  if (!Hive.isAdapterRegistered(AddressModelAdapter().typeId)) {
+    Hive.registerAdapter(AddressModelAdapter());
   }
 }

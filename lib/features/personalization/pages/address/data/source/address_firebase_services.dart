@@ -28,9 +28,11 @@ class AddressFirebaseServicesImpl extends AddressFirebaseServices {
           .doc(userId)
           .collection(FirebaseCollections.ADDRESS_COLLECTION);
 
-      final currentAddress = await collection.add(address.toJson());
+      final docRef = collection.doc();
+      final userAddress = address.copyWith(id: docRef.id);
+      await docRef.set(userAddress.toJson());
 
-      return Right(currentAddress.id);
+      return Right(docRef.id);
     } on Exception catch (e) {
       return Left('Error adding address: $e');
     }
