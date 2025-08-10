@@ -22,6 +22,16 @@ class CartCubit extends Cubit<CartState> {
     );
   }
 
+  double _orderTotal = 0.0;
+  double get orderTotal => _orderTotal;
+
+  void calcOrderTotal(double tax, double discount) {
+    if (tax < 0) tax = 0;
+    if (discount < 0) discount = 0;
+
+    _orderTotal = (totalPrice + tax) - discount;
+  }
+
   // -- Fetch Cart Items --
   Future<void> fetchCartItems() async {
     emit(CartLoadingState());
