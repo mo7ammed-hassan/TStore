@@ -29,41 +29,52 @@ class ShimmerVerticalProductCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          ShimmerWidget(
-            height: 10,
-            width: 100,
-            shapeBorder: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ShimmerWidget(
+                  height: 10,
+                  width: 100,
+                  shapeBorder: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    ShimmerWidget(
+                      height: 10,
+                      width: 60,
+                      shapeBorder: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    ShimmerWidget(
+                      height: 10,
+                      width: 10,
+                      shapeBorder: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              ShimmerWidget(
-                height: 10,
-                width: 60,
-                shapeBorder: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              const SizedBox(width: 8),
-              ShimmerWidget(
-                height: 10,
-                width: 10,
-                shapeBorder: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-            ],
           ),
           Spacer(),
           Row(
             children: [
               Expanded(
-                child: ShimmerWidget(
-                  height: 10,
-                  shapeBorder: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 4),
+                  child: ShimmerWidget(
+                    height: 10,
+                    shapeBorder: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                 ),
               ),
@@ -73,8 +84,8 @@ class ShimmerVerticalProductCard extends StatelessWidget {
                 width: 35,
                 shapeBorder: RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    bottomRight: Radius.circular(8),
+                    topLeft: Radius.circular(16),
+                    bottomRight: Radius.circular(16),
                   ),
                 ),
               ),
