@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_state.dart';
-import 'package:t_store/features/shop/features/cart/presentation/widgets/cart_items.dart';
+import 'package:t_store/features/shop/features/cart/presentation/widgets/cart_items_section.dart';
 import 'package:t_store/features/shop/features/checkout/presentation/pages/checkout_page.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
@@ -14,47 +14,24 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
-        if (state is CartLoadedState) {
-          if (state.cartItems.isEmpty) {
-            return Scaffold(
-              appBar: _appBar(context),
-              body: const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: TSizes.spaceBtwItems,
-                  vertical: TSizes.defaultSpace,
-                ),
-                child: CartItems(),
-              ),
-            );
-          }
-          return Scaffold(
-            bottomNavigationBar: _checkoutButton(context),
-            appBar: _appBar(context),
-            body: const Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: TSizes.spaceBtwItems,
-                vertical: TSizes.defaultSpace,
-              ),
-              child: CartItems(),
-            ),
-          );
-        }
+        final hasItems = state is CartLoadedState && state.cartItems.isNotEmpty;
+
         return Scaffold(
-          bottomNavigationBar: _checkoutButton(context),
-          appBar: _appBar(context),
+          appBar: _buildAppBar(context),
+          bottomNavigationBar: hasItems ? _buildCheckoutButton(context) : null,
           body: const Padding(
             padding: EdgeInsets.symmetric(
               horizontal: TSizes.spaceBtwItems,
               vertical: TSizes.defaultSpace,
             ),
-            child: CartItems(),
+            child: CartItemsSection(),
           ),
         );
       },
     );
   }
 
-  TAppBar _appBar(BuildContext context) {
+  TAppBar _buildAppBar(BuildContext context) {
     return TAppBar(
       showBackArrow: true,
       title: Text(
@@ -64,24 +41,19 @@ class CartPage extends StatelessWidget {
     );
   }
 
-  Widget _checkoutButton(BuildContext context) {
-    final cartCubit = context.read<CartCubit>();
-
+  Widget _buildCheckoutButton(BuildContext context) {
+    final totalPrice = context.read<CartCubit>().totalPrice;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: TSizes.defaultSpace,
         vertical: TSizes.spaceBtwItems,
       ),
       child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const CheckoutPage(),
-            ),
-          );
-        },
-        child: Text('Checkout \$${cartCubit.totalPrice.toStringAsFixed(2)}'),
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const CheckoutPage()),
+        ),
+        child: Text('Checkout \$${totalPrice.toStringAsFixed(2)}'),
       ),
     );
   }

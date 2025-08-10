@@ -29,19 +29,30 @@ class ShimmerCartItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /// Brand name
-                  ShimmerWidget(
-                    height: 10,
-                    width: 80,
-                    margin: const EdgeInsets.only(bottom: 6),
-                    shapeBorder: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4),
-                    ),
+                  Row(
+                    children: [
+                      ShimmerWidget(
+                        height: 10,
+                        width: 40,
+                        margin: const EdgeInsets.only(bottom: 6),
+                        shapeBorder: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                      const SizedBox(width: 7),
+                      ShimmerWidget(
+                        height: 10,
+                        width: 10,
+                        margin: const EdgeInsets.only(bottom: 6),
+                        shapeBorder: CircleBorder(),
+                      ),
+                    ],
                   ),
 
                   /// Product title
                   ShimmerWidget(
                     height: 14,
-                    width: double.infinity,
+                    width: MediaQuery.sizeOf(context).width * 0.35,
                     margin: const EdgeInsets.only(bottom: 6),
                     shapeBorder: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
@@ -93,7 +104,7 @@ class ShimmerCartItem extends StatelessWidget {
                       /// Price
                       ShimmerWidget(
                         height: 16,
-                        width: 60,
+                        width: 40,
                         shapeBorder: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4),
                         ),

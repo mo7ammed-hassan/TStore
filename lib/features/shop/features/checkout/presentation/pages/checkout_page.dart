@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
-import 'package:t_store/features/shop/features/cart/presentation/widgets/cart_items.dart';
+import 'package:t_store/features/shop/features/cart/presentation/widgets/cart_items_section.dart';
 import 'package:t_store/features/shop/features/checkout/presentation/widgets/checkout_button.dart';
 import 'package:t_store/features/shop/features/checkout/presentation/widgets/chekout_order_detial.dart';
 import 'package:t_store/features/shop/features/checkout/presentation/widgets/coupon_field.dart';
@@ -20,20 +20,18 @@ class CheckoutPage extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
-      body: const SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(TSizes.spaceBtwItems),
-          child: Column(
-            children: [
-              CartItems(showAddRemoveButtons: false),
-              SizedBox(height: TSizes.spaceBtwSections),
-
-              CouponFiled(),
-              SizedBox(height: TSizes.spaceBtwSections),
-              
-              ChekoutOrderDetial(),
-            ],
-          ),
+      body: Padding(
+        padding: EdgeInsets.all(TSizes.spaceBtwItems),
+        child: const CustomScrollView(
+          slivers: [
+            CartItemsSection(showAddRemoveButtons: false, sliverList: true),
+            SliverToBoxAdapter(
+                child: SizedBox(height: TSizes.spaceBtwSections)),
+            SliverToBoxAdapter(child: CouponFiled()),
+            SliverToBoxAdapter(
+                child: SizedBox(height: TSizes.spaceBtwSections)),
+            SliverToBoxAdapter(child: ChekoutOrderDetial()),
+          ],
         ),
       ),
     );
