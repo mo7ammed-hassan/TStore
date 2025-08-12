@@ -49,8 +49,10 @@ class PricingSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Order Total', style: Theme.of(context).textTheme.titleMedium),
-            Text('\$${cartCubit.orderTotal.toStringAsFixed(2)}',
-                style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              '\$${cartCubit.orderTotal.toStringAsFixed(2)}',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
           ],
         ),
       ],

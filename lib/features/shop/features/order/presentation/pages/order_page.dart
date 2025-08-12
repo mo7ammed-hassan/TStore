@@ -13,7 +13,7 @@ class OrderPage extends StatelessWidget {
       body: const Padding(
         padding: EdgeInsets.symmetric(
           horizontal: TSizes.spaceBtwItems,
-          vertical: TSizes.defaultSpace,
+          vertical: TSizes.defaultSpace / 2,
         ),
         child: OrderListItems(),
       ),

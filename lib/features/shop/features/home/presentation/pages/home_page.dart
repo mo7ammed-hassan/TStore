@@ -31,12 +31,6 @@ class _HomePageState extends State<HomePage> {
     productsCubit.fetchInitialData();
   }
 
-  @override
-  void dispose() {
-    productsCubit.close();
-    super.dispose();
-  }
-
   Future<void> _onRefresh() async {
     TFullScreenLoader.openLoadingDialog(
       'Loading data...',

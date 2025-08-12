@@ -8,12 +8,14 @@ import 'package:t_store/utils/helpers/helper_functions.dart';
 class SuccessPage extends StatelessWidget {
   final String image, title, subtitle;
   final VoidCallback? onPressed;
+  final bool animation;
   const SuccessPage({
     super.key,
     required this.image,
     required this.title,
     required this.subtitle,
     this.onPressed,
+    this.animation = true,
   });
 
   @override
@@ -24,7 +26,7 @@ class SuccessPage extends StatelessWidget {
           padding: TSpacingStyles.paddingWithAppBarHeight * 2,
           child: Column(
             children: [
-              Lottie.asset(
+              (animation ? Lottie.asset : Image.asset)(
                 image,
                 width: HelperFunctions.screenWidth() * 0.6,
               ),

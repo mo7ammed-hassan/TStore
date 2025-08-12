@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/all_products/domain/usecases/get_popular_products_use_case.dart';
@@ -18,9 +17,6 @@ class ProductsCubit extends Cubit<ProductsState> {
 
   Future<void> fetchPopularProducts({bool forceRefresh = false}) async {
     if (!forceRefresh && _hasFetchedPopularProducts && allProducts.isNotEmpty) {
-      if (kDebugMode) {
-        print('Products Already fetched');
-      }
       return;
     }
 
@@ -54,9 +50,6 @@ class ProductsCubit extends Cubit<ProductsState> {
         _hasFetchedFeaturedProducts &&
         featuredProducts.isNotEmpty &&
         featuredProducts.length == limit) {
-      if (kDebugMode) {
-        print('Featured Products Already fetched');
-      }
       return;
     }
 
@@ -84,15 +77,8 @@ class ProductsCubit extends Cubit<ProductsState> {
     );
   }
 
- 
-
   Future<void> fetchInitialData() async {
-    emit(
-      ProductsLoadingState(
-        isLoadingAllProducts: true,
-        isLoadingFeaturedProducts: true,
-      ),
-    );
+    if (_hasFetchedFeaturedProducts && _hasFetchedPopularProducts) return;
 
     await Future.wait([
       fetchPopularProducts(forceRefresh: true).catchError((_) {}),
