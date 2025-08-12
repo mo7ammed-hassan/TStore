@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
-import 'package:t_store/features/shop/features/store/presentation/widgets/build_brands_section.dart';
+import 'package:t_store/common/widgets/brand/build_brands_section.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
 class AllBrandsPage extends StatelessWidget {

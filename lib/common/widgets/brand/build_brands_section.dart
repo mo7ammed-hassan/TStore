@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_bramds_list.dart';
 import 'package:t_store/features/shop/features/all_brands/presentation/cubits/brand_cubit.dart';
 import 'package:t_store/features/shop/features/all_brands/presentation/cubits/brand_state.dart';
-import 'package:t_store/features/shop/features/store/presentation/widgets/brands_grid_view.dart';
+import 'package:t_store/common/widgets/brand/brands_grid_view.dart';
 import 'package:t_store/service_locator.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 

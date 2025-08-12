@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/features/shop/features/home/presentation/cubits/category/category_cubit.dart';
-import 'package:t_store/features/shop/features/store/presentation/widgets/build_brands_section.dart';
+import 'package:t_store/common/widgets/brand/build_brands_section.dart';
 import 'package:t_store/common/widgets/appbar/tabbar.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
