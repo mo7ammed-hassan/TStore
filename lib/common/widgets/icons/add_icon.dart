@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_state.dart';
+import 'package:t_store/features/shop/features/product_details/presentation/pages/product_detail_page.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
@@ -19,7 +20,23 @@ class TAddIcon extends StatelessWidget {
         context.read<CartCubit>().getItemQuantity(itemId: product.id);
     return GestureDetector(
       onTap: itemQuantity > 0
-          ? null
+          ? () {
+              Navigator.of(context).push(
+                PageRouteBuilder(
+                  transitionDuration: const Duration(milliseconds: 400),
+                  pageBuilder: (context, animation, secondaryAnimation) {
+                    return ProductDetailPage(product: product);
+                  },
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                ),
+              );
+            }
           : () async {
               await cartCubit.addItemToCart(
                 showMessage: true,

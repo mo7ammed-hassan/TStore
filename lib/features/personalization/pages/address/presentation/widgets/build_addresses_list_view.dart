@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_cubit.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_state.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/widgets/add_address_button.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/address_list_view.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
@@ -9,7 +10,8 @@ import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/popups/loaders.dart';
 
 class BuildAddressesListView extends StatelessWidget {
-  const BuildAddressesListView({super.key});
+  const BuildAddressesListView({super.key, this.showAddBbuton = false});
+  final bool showAddBbuton;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,21 @@ class BuildAddressesListView extends StatelessWidget {
 
         if (state is FetchAddressesSuccessState) {
           if (state.addresses.isEmpty) {
-            return _emptyAddressesMessage();
+            return showAddBbuton
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Spacer(),
+                      _emptyAddressesMessage(),
+                      Spacer(flex: 2),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: const AddAddressButton(),
+                      ),
+                      Spacer(),
+                    ],
+                  )
+                : _emptyAddressesMessage();
           }
           return Stack(
             children: [
@@ -41,7 +57,6 @@ class BuildAddressesListView extends StatelessWidget {
 
         return const SizedBox.shrink();
       },
-      
       listener: (context, state) {
         if (state is SelectedAddressLoadingState) {
           Loaders.showLoading();

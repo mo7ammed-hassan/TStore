@@ -75,7 +75,7 @@ class AddressSection extends StatelessWidget {
           value: addressCubit,
           child: const Padding(
             padding: EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
-            child: BuildAddressesListView(),
+            child: BuildAddressesListView(showAddBbuton: true),
           ),
         );
       },
