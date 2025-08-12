@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_cubit.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/widgets/build_addresses_list_view.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
 class AddressSection extends StatelessWidget {
@@ -9,16 +12,20 @@ class AddressSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final addressCubit = context.watch<AddressCubit>();
+    final selectedAddress = addressCubit.selectedAddress;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const TSectionHeading(
+        TSectionHeading(
           title: 'Shiping Address',
           showActionButton: true,
           buttonTitle: 'Change',
+          onPressed: () => _showAddressBottomSheet(context),
         ),
         Text(
-          'Mohamed Hasan',
+          selectedAddress.name,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         const SizedBox(height: TSizes.spaceBtwItems / 2),
@@ -31,7 +38,7 @@ class AddressSection extends StatelessWidget {
             ),
             const SizedBox(width: TSizes.spaceBtwItems),
             Text(
-              '+201096493188',
+              selectedAddress.phoneNumber,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
@@ -46,12 +53,32 @@ class AddressSection extends StatelessWidget {
             ),
             const SizedBox(width: TSizes.spaceBtwItems),
             Text(
-              'South Liana, Maine 87695, EGY',
+              '${selectedAddress.state}, ${selectedAddress.city}, ${selectedAddress.postalCode}, ${selectedAddress.country}',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
         ),
       ],
+    );
+  }
+
+  void _showAddressBottomSheet(BuildContext context) {
+    final addressCubit = context.read<AddressCubit>();
+
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (_) {
+        return BlocProvider.value(
+          value: addressCubit,
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
+            child: BuildAddressesListView(),
+          ),
+        );
+      },
     );
   }
 }

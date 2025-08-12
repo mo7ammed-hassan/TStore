@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_cubit.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_state.dart';
-import 'package:t_store/features/personalization/pages/address/presentation/widgets/single_address_card.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/widgets/address_list_view.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/helpers/navigation.dart';
+import 'package:t_store/utils/popups/loaders.dart';
 
 class BuildAddressesListView extends StatelessWidget {
   const BuildAddressesListView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AddressCubit, AddressState>(
+    return BlocConsumer<AddressCubit, AddressState>(
       buildWhen: (previous, current) =>
           current is FetchAddressesSuccessState ||
           current is FetchAddressesFailureState ||
@@ -28,7 +29,7 @@ class BuildAddressesListView extends StatelessWidget {
           }
           return Stack(
             children: [
-              _buildAddressesList(state.addresses, context),
+              AddressListView(addresses: state.addresses),
               if (state is SelectedAddressLoadingState) _loadingWidget(),
             ],
           );
@@ -38,7 +39,17 @@ class BuildAddressesListView extends StatelessWidget {
           return _errorMessage();
         }
 
-        return const SizedBox();
+        return const SizedBox.shrink();
+      },
+      
+      listener: (context, state) {
+        if (state is SelectedAddressLoadingState) {
+          Loaders.showLoading();
+        }
+
+        if (state is SelectedAddressSuccessState) {
+          context.popPage(context);
+        }
       },
     );
   }
@@ -60,28 +71,6 @@ class BuildAddressesListView extends StatelessWidget {
     );
   }
 
-  Widget _buildAddressesList(
-      List<AddressEntity> addresses, BuildContext context) {
-    return ListView.separated(
-      itemCount: addresses.length,
-      itemBuilder: (context, index) {
-        final address = addresses[index];
-        return SingleAddressCard(
-          address: address,
-          onTap: () => context.read<AddressCubit>().selecteAddress(address),
-          onLongPress: () => _showDeleteBottomSheet(
-            context: context,
-            addressCubit: context.read<AddressCubit>(),
-            addressId: address.id,
-          ),
-        );
-      },
-      separatorBuilder: (context, index) => const SizedBox(
-        height: TSizes.spaceBtwItems,
-      ),
-    );
-  }
-
   Widget _errorMessage() {
     return const Center(
       child: Text(
@@ -89,52 +78,6 @@ class BuildAddressesListView extends StatelessWidget {
         style: TextStyle(fontSize: TSizes.md),
         textAlign: TextAlign.center,
       ),
-    );
-  }
-
-  // Function to show the Bottom Sheet for deletion
-  void _showDeleteBottomSheet({
-    required BuildContext context,
-    required AddressCubit addressCubit,
-    required String addressId,
-  }) {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Are you sure you want to delete this address?🤔',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('Cancel'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      addressCubit.deleteAddress(addressId: addressId);
-                    },
-                    child: const Text(
-                      'Delete ❌',
-                      style: TextStyle(color: Colors.red),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }

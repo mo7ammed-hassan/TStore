@@ -42,7 +42,7 @@ class AddressModel {
   factory AddressModel.fromSnapshot(DocumentSnapshot snapshot) {
     final data = snapshot.data() as Map<String, dynamic>?;
     return AddressModel(
-      id: data?['id'] ,
+      id: snapshot.id,
       name: data?['name'] ?? '',
       phoneNumber: data?['phoneNumber'] ?? '',
       street: data?['street'] ?? '',
@@ -113,7 +113,7 @@ class AddressModel {
 extension AddressXModel on AddressModel {
   AddressEntity toEntity() {
     return AddressEntity(
-      id: id ?? '',
+      id: id!,
       name: name,
       phoneNumber: phoneNumber,
       street: street,

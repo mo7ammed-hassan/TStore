@@ -12,7 +12,7 @@ abstract class AddressLocalDataSource {
 
 class AddressLocalDataSourceImpl implements AddressLocalDataSource {
   Future<Box<AddressModel>> _openUserBox(String userId) async {
-    return await Hive.openBox<AddressModel>('addresses_$userId');
+    return await Hive.openBox<AddressModel>('$userId-Addresses');
   }
 
   @override
@@ -36,7 +36,7 @@ class AddressLocalDataSourceImpl implements AddressLocalDataSource {
   @override
   Future<void> updateAddress(String userId, AddressModel address) async {
     final box = await _openUserBox(userId);
-    await box.put(address.id, address);
+    await box.put(address.id.toString(), address);
   }
 
   @override
@@ -50,19 +50,7 @@ class AddressLocalDataSourceImpl implements AddressLocalDataSource {
     final box = await _openUserBox(userId);
     try {
       return box.values.firstWhere(
-        (address) => address.selectedAddress,
-        orElse: () => AddressModel(
-          id: '',
-          name: '',
-          phoneNumber: '',
-          street: '',
-          city: '',
-          state: '',
-          country: '',
-          postalCode: '',
-          createdAt: null,
-          selectedAddress: false,
-        ),
+        (element) => element.selectedAddress == true,
       );
     } catch (_) {
       return null;

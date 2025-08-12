@@ -42,14 +42,16 @@ class AddressEntity {
 extension AddressModelMapper on AddressEntity {
   AddressModel toModel() {
     return AddressModel(
-        name: name,
-        phoneNumber: phoneNumber,
-        street: street,
-        city: city,
-        state: state,
-        country: country,
-        postalCode: postalCode,
-        createdAt: createdAt,
-        selectedAddress: selectedAddress);
+      id: id,
+      name: name,
+      phoneNumber: phoneNumber,
+      street: street,
+      city: city,
+      state: state,
+      country: country,
+      postalCode: postalCode,
+      createdAt: createdAt,
+      selectedAddress: selectedAddress,
+    );
   }
 }

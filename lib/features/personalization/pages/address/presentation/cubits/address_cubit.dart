@@ -28,24 +28,22 @@ class AddressCubit extends Cubit<AddressState> {
       emit(FetchAddressesLoadingState());
     }
 
+    /// --- Local call
     final localAddresses = await localDataSource.getAllAddresses(userId);
-
     if (localAddresses.isNotEmpty) {
-      selectedAddress = localAddresses
-          .firstWhere((element) => element.selectedAddress,
-              orElse: () => AddressModel.empty())
-          .toEntity();
-      emit(
-        FetchAddressesSuccessState(
-          localAddresses.map((e) => e.toEntity()).toList(),
-        ),
-      );
+      final selectAddress = await localDataSource.getSelectedAddress(userId);
+      if (selectAddress != null) {
+        selectedAddress = selectAddress.toEntity();
+      }
+
+      final userAddresses = localAddresses.map((e) => e.toEntity()).toList();
+      emit(FetchAddressesSuccessState(userAddresses));
 
       return;
     }
 
+    /// --- Remote call
     var result = await _addressUsecases.fetchAllAddressUseCase();
-
     result.fold(
       (failure) {
         emit(FetchAddressesFailureState());
@@ -53,24 +51,34 @@ class AddressCubit extends Cubit<AddressState> {
       (addresses) async {
         selectedAddress = addresses.firstWhere(
           (element) => element.selectedAddress,
-          orElse: () => AddressEntity.empty(),
         );
-        await localDataSource.addAddress(userId, addresses.first.toModel());
+
+        final listStorage = addresses
+            .map(
+              (e) => localDataSource.addAddress(userId, e.toModel()),
+            )
+            .toList();
+        await Future.wait(listStorage);
+
         isFirstTime = false;
         emit(FetchAddressesSuccessState(addresses));
       },
     );
   }
 
-  // --Selected Address--
+  // -- Selected Address--
   Future<void> selecteAddress(AddressEntity newSelectedAddress) async {
     emit(SelectedAddressLoadingState());
+
     try {
-      if (selectedAddress.id.isNotEmpty) {
+      final currentSelected = await localDataSource.getSelectedAddress(userId);
+      if (currentSelected != null && currentSelected.id!.isNotEmpty) {
+        currentSelected.selectedAddress = false;
         await _addressUsecases.updateAddressUsecase(params: (
-          selectedAddress.id,
+          currentSelected.id!,
           false,
         ));
+        await localDataSource.updateAddress(userId, currentSelected);
       }
 
       newSelectedAddress.selectedAddress = true;
@@ -81,13 +89,12 @@ class AddressCubit extends Cubit<AddressState> {
         true,
       ));
 
-      await localDataSource.updateAddress(userId, newSelectedAddress.toModel());
+      await localDataSource.updateAddress(userId, selectedAddress.toModel());
+      fetchAddresses();
 
       emit(SelectedAddressSuccessState(selectedAddress));
     } catch (e) {
-      emit(
-        SelectedAddressFailureState(e.toString()),
-      );
+      emit(SelectedAddressFailureState(e.toString()));
     }
   }
 
