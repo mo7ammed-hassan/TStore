@@ -46,7 +46,7 @@ class BuildAddressesListView extends StatelessWidget {
           return Stack(
             children: [
               AddressListView(addresses: state.addresses),
-              if (state is SelectedAddressLoadingState) _loadingWidget(),
+              //if (state is SelectedAddressLoadingState) _loadingWidget(),
             ],
           );
         }

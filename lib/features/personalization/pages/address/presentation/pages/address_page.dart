@@ -6,7 +6,6 @@ import 'package:t_store/features/personalization/pages/address/presentation/cubi
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/add_address_button.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/build_addresses_list_view.dart';
 import 'package:t_store/service_locator.dart';
-import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
 class AddressPage extends StatelessWidget {
@@ -27,12 +26,12 @@ class AddressPage extends StatelessWidget {
                   padding: EdgeInsets.all(TSizes.spaceBtwItems),
                   child: BuildAddressesListView(),
                 ),
-                if (state is SelectedAddressLoadingState)
-                  const Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.primary,
-                    ),
-                  ),
+                // if (state is SelectedAddressLoadingState)
+                //   const Center(
+                //     child: CircularProgressIndicator(
+                //       color: AppColors.primary,
+                //     ),
+                //   ),
               ],
             );
           },

@@ -40,6 +40,7 @@ class AddressCubit extends Cubit<AddressState> {
 
       final userAddresses = localAddresses.map((e) => e.toEntity()).toList();
       emit(FetchAddressesSuccessState(userAddresses));
+      isFirstTime = false;
 
       return;
     }
@@ -72,8 +73,8 @@ class AddressCubit extends Cubit<AddressState> {
 
   // -- Selected Address--
   Future<void> selecteAddress(AddressEntity newSelectedAddress) async {
+    if (newSelectedAddress.id == selectedAddress.id) return;
     emit(SelectedAddressLoadingState());
-
     try {
       final currentSelected = await localDataSource.getSelectedAddress(userId);
       if (currentSelected != null && currentSelected.id!.isNotEmpty) {

@@ -4,11 +4,10 @@ import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_cubit.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/build_addresses_list_view.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
 
 class AddressSection extends StatelessWidget {
-  const AddressSection({
-    super.key,
-  });
+  const AddressSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,45 +18,15 @@ class AddressSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TSectionHeading(
-          title: 'Shiping Address',
+          title: 'Shipping Address',
           showActionButton: true,
           buttonTitle: 'Change',
           onPressed: () => _showAddressBottomSheet(context),
         ),
-        Text(
-          selectedAddress.name,
-          style: Theme.of(context).textTheme.bodyLarge,
-        ),
-        const SizedBox(height: TSizes.spaceBtwItems / 2),
-        Row(
-          children: [
-            const Icon(
-              Icons.phone,
-              color: Colors.grey,
-              size: 16,
-            ),
-            const SizedBox(width: TSizes.spaceBtwItems),
-            Text(
-              selectedAddress.phoneNumber,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ],
-        ),
-        const SizedBox(height: TSizes.spaceBtwItems / 2),
-        Row(
-          children: [
-            const Icon(
-              Icons.location_history,
-              color: Colors.grey,
-              size: 16,
-            ),
-            const SizedBox(width: TSizes.spaceBtwItems),
-            Text(
-              '${selectedAddress.state}, ${selectedAddress.city}, ${selectedAddress.postalCode}, ${selectedAddress.country}',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ],
-        ),
+        if (selectedAddress.id.isNotEmpty)
+          AddressDetails(address: selectedAddress)
+        else
+          const Text('Please Select Address'),
       ],
     );
   }
@@ -79,6 +48,63 @@ class AddressSection extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class AddressDetails extends StatelessWidget {
+  final AddressEntity address;
+
+  const AddressDetails({super.key, required this.address});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          address.name,
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+        const SizedBox(height: TSizes.spaceBtwItems / 2),
+        AddressInfoRow(
+          icon: Icons.phone,
+          text: address.phoneNumber,
+        ),
+        const SizedBox(height: TSizes.spaceBtwItems / 2),
+        AddressInfoRow(
+          icon: Icons.location_history,
+          text: '${address.state}, ${address.city}, '
+              '${address.postalCode}, ${address.country}',
+        ),
+      ],
+    );
+  }
+}
+
+class AddressInfoRow extends StatelessWidget {
+  final IconData icon;
+  final String text;
+
+  const AddressInfoRow({
+    super.key,
+    required this.icon,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(icon, color: Colors.grey, size: 16),
+        const SizedBox(width: TSizes.spaceBtwItems),
+        Expanded(
+          child: Text(
+            text,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ),
+      ],
     );
   }
 }
