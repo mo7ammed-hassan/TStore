@@ -15,6 +15,7 @@ class AddressListView extends StatelessWidget {
       itemCount: addresses.length,
       itemBuilder: (context, index) {
         final address = addresses[index];
+        print('Addrees ID is ${address.id}');
         return SingleAddressCard(
           address: address,
           onTap: () => context.read<AddressCubit>().selecteAddress(address),

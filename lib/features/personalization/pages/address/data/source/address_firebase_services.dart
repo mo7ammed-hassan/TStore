@@ -49,6 +49,7 @@ class AddressFirebaseServicesImpl extends AddressFirebaseServices {
           .collection(FirebaseCollections.ADDRESS_COLLECTION)
           .doc(addressId)
           .delete();
+          
     } catch (e) {
       throw e.toString();
     }

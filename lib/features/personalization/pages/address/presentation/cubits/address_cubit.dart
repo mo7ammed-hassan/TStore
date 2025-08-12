@@ -24,6 +24,8 @@ class AddressCubit extends Cubit<AddressState> {
 
   // -- Fetch Addresses--
   Future<void> fetchAddresses() async {
+    // final deletstorage =
+    //        await  localDataSource.clearAll(userId,);
     if (isFirstTime) {
       emit(FetchAddressesLoadingState());
     }
@@ -51,6 +53,7 @@ class AddressCubit extends Cubit<AddressState> {
       (addresses) async {
         selectedAddress = addresses.firstWhere(
           (element) => element.selectedAddress,
+          orElse: () => AddressEntity.empty(),
         );
 
         final listStorage = addresses
@@ -58,6 +61,7 @@ class AddressCubit extends Cubit<AddressState> {
               (e) => localDataSource.addAddress(userId, e.toModel()),
             )
             .toList();
+
         await Future.wait(listStorage);
 
         isFirstTime = false;
@@ -102,21 +106,18 @@ class AddressCubit extends Cubit<AddressState> {
   Future<void> addNewAddress(AddressModel address) async {
     emit(AddAddressLoadingState());
 
-    // Save address data
     final addressData = address.copyWith(createdAt: DateTime.now());
-
     var result = await _addressUsecases.addressUseCase(params: addressData);
-
     result.fold(
       (failure) {
         emit(AddAddressFailureState());
       },
       (addressId) async {
         // Save address id
-        addressData.id = addressId;
-        await localDataSource.addAddress(userId, address);
+        final newAddress = addressData.copyWith(id: addressId);
+        await localDataSource.addAddress(userId, newAddress);
         // trigger SelectedAddress
-        await selecteAddress(addressData.toEntity());
+        await selecteAddress(newAddress.toEntity());
         // trigger FetchAddresses
         await fetchAddresses();
         // resetForm();

@@ -30,7 +30,7 @@ class AddressLocalDataSourceImpl implements AddressLocalDataSource {
   @override
   Future<void> deleteAddress(String userId, String addressId) async {
     final box = await _openUserBox(userId);
-    await box.delete(addressId);
+    await box.delete(addressId.toString());
   }
 
   @override

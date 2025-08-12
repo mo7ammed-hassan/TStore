@@ -113,7 +113,7 @@ class AddressModel {
 extension AddressXModel on AddressModel {
   AddressEntity toEntity() {
     return AddressEntity(
-      id: id!,
+      id: id ?? '',
       name: name,
       phoneNumber: phoneNumber,
       street: street,
