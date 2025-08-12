@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:t_store/common/widgets/shimmer/shimmer_verify_brand.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
 import 'package:t_store/utils/constants/colors.dart';
 
@@ -31,40 +32,14 @@ class ShimmerHorizantalProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ShimmerWidget(
-                  height: 20,
-                  width: 80,
-                  shapeBorder: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                ShimmerWidget(
-                  height: 15,
+                  height: 10,
                   width: 100,
                   shapeBorder: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
                 const SizedBox(height: 8),
-                Row(
-                  children: [
-                    ShimmerWidget(
-                      height: 10,
-                      width: 60,
-                      shapeBorder: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    ShimmerWidget(
-                      height: 10,
-                      width: 10,
-                      shapeBorder: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                  ],
-                ),
+                const ShimmerVerifyBrand(),
                 const SizedBox(height: 8),
                 Spacer(),
                 Row(

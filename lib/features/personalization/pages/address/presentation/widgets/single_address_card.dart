@@ -44,11 +44,7 @@ class SingleAddressCard extends StatelessWidget {
                 : Colors.transparent,
             padding: const EdgeInsets.all(TSizes.md),
             showBorder: true,
-            borderColor: isSelectedAddress
-                ? Colors.transparent
-                : isDark
-                    ? AppColors.darkerGrey
-                    : AppColors.grey,
+            borderColor: isSelectedAddress ? Colors.transparent : null,
             child: Stack(
               children: [
                 Positioned(

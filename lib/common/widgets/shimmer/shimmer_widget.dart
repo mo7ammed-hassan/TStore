@@ -13,7 +13,9 @@ class ShimmerWidget extends StatelessWidget {
     super.key,
     this.width = double.infinity,
     this.height,
-    this.shapeBorder = const RoundedRectangleBorder(),
+    this.shapeBorder = const RoundedRectangleBorder(
+      borderRadius: BorderRadiusGeometry.all(Radius.circular(8.0)),
+    ),
     this.padding,
     this.margin,
     this.child,

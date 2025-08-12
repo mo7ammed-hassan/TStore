@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
-import 'package:t_store/features/shop/features/all_brands/presentation/widgets/build_brands_list.dart';
+import 'package:t_store/features/shop/features/store/presentation/widgets/build_brands_section.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
 class AllBrandsPage extends StatelessWidget {
@@ -16,14 +16,16 @@ class AllBrandsPage extends StatelessWidget {
           horizontal: TSizes.spaceBtwItems,
           vertical: TSizes.defaultSpace,
         ),
-        child: Column(
-          children: [
-            TSectionHeading(
-              title: 'Brands',
-              showActionButton: false,
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: TSectionHeading(
+                title: 'Brands',
+                showActionButton: false,
+              ),
             ),
-            SizedBox(height: TSizes.spaceBtwItems),
-            Expanded(child: BuildBrandsList()),
+            SliverToBoxAdapter(child: SizedBox(height: TSizes.spaceBtwItems)),
+            BuildBrandsSection(),
           ],
         ),
       ),

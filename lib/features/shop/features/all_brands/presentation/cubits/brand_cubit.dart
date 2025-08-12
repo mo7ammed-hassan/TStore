@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/shop/features/all_brands/domain/entities/brand_entity.dart';
 import 'package:t_store/features/shop/features/all_brands/domain/usecases/get_all_brands_use_case.dart';
@@ -12,19 +11,19 @@ class BrandCubit extends Cubit<BrandState> {
   final List<BrandEntity> featuredBrands = [];
   final List<BrandEntity> allBrands = [];
 
-  // --flag to check if the brands are already loaded--
   bool isAllBrandsLoaded = false;
   bool isFeaturedBrandsLoaded = false;
 
+  Future<void> fetchInitialData() async {
+    await Future.wait([
+      fetchAllBrands(),
+      fetchFeaturedBrands(),
+    ]);
+  }
+
   // -- Get Featured Brands --
   Future<void> fetchFeaturedBrands() async {
-    if (isFeaturedBrandsLoaded) {
-      if (kDebugMode) {
-        print('Featured Brands: Already Loaded');
-      }
-
-      return;
-    }
+    if (isFeaturedBrandsLoaded) return;
 
     emit(BrandLoading(
       isLoadingAllBrands: false,
@@ -42,9 +41,7 @@ class BrandCubit extends Cubit<BrandState> {
       (brands) {
         featuredBrands.clear();
         featuredBrands.addAll(brands);
-        if (kDebugMode) {
-          print('Featured Brands: Success');
-        }
+
         isFeaturedBrandsLoaded = true;
         emit(BrandLoaded(featuredBrands: brands, allbrands: allBrands));
       },
@@ -53,12 +50,7 @@ class BrandCubit extends Cubit<BrandState> {
 
   // -- Get All Brands --
   Future<void> fetchAllBrands() async {
-    if (isAllBrandsLoaded) {
-      if (kDebugMode) {
-        print('All Brands: Already Loaded');
-      }
-      return;
-    }
+    if (isAllBrandsLoaded) return;
 
     emit(BrandLoading(
       isLoadingAllBrands: true,
@@ -74,9 +66,7 @@ class BrandCubit extends Cubit<BrandState> {
       (brands) {
         allBrands.clear();
         allBrands.addAll(brands);
-        if (kDebugMode) {
-          print('All Brands: Success');
-        }
+
         isAllBrandsLoaded = true;
         emit(BrandLoaded(allbrands: brands, featuredBrands: featuredBrands));
       },

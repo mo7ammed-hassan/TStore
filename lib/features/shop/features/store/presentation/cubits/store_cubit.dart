@@ -10,7 +10,6 @@ class StoreCubit extends Cubit<StoreState> {
   StoreCubit() : super(StoreInitial());
 
   // -- fetch Brands--
-
   Future<void> fetchBrandsSpecificCategory({required String categoryId}) async {
     emit(StoreBrandLoading());
 
@@ -53,7 +52,6 @@ class StoreCubit extends Cubit<StoreState> {
   }
 
   // --fetch Products specific brand --
-
   Future<void> fetchProductsSpecificBrand(
       {required String brandId, int limit = 3}) async {
     emit(StoreProductSpecificBrandLoading());

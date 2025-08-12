@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/shop/features/home/domain/entites/category_entity.dart';
 import 'package:t_store/features/shop/features/home/domain/use_cases/category_use_case.dart';
@@ -22,12 +21,7 @@ class CategoryCubit extends Cubit<CategoryState> {
   bool _hasFetched = false;
 
   Future<void> getAllCategories() async {
-    if (_hasFetched && allCategories.isNotEmpty) {
-      if (kDebugMode) {
-        print("Categories already fetched, no need to fetch again.");
-      }
-      return;
-    }
+    if (_hasFetched && allCategories.isNotEmpty) return;
 
     emit(const CategoryLoadingState());
 

@@ -5,9 +5,9 @@ import 'package:t_store/common/widgets/shimmer/shimmer_products_grid_layout.dart
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_cubit.dart';
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_state.dart';
 
-class BuildProductsList extends StatelessWidget {
+class ProductsSection extends StatelessWidget {
   final String categoryId;
-  const BuildProductsList({super.key, required this.categoryId});
+  const ProductsSection({super.key, required this.categoryId});
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +16,7 @@ class BuildProductsList extends StatelessWidget {
         .fetchProductsSpecificCategory(categoryId: categoryId);
 
     return BlocBuilder<StoreCubit, StoreState>(
-      buildWhen: (previous, current) =>
-          current is StoreProductLoaded ||
-          current is StoreProductError ||
-          current is StoreProductLoading,
+      buildWhen: _buildWhen,
       builder: (context, state) {
         if (state is StoreProductLoading) {
           return ShimmerProductsGridLayout.sliver();
@@ -45,4 +42,9 @@ class BuildProductsList extends StatelessWidget {
       },
     );
   }
+
+  bool _buildWhen(StoreState previous, current) =>
+      current is StoreProductLoaded ||
+      current is StoreProductError ||
+      current is StoreProductLoading;
 }
