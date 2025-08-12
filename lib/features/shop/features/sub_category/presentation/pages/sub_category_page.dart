@@ -55,7 +55,7 @@ class SubCategoryPage extends StatelessWidget {
               SliverToBoxAdapter(
                 child: SizedBox(height: TSizes.spaceBtwSections / 2),
               ),
-              SliverToBoxAdapter(child: const BuildSubCategoriesSections()),
+              const BuildSubCategoriesSections(),
             ],
           ),
         ),

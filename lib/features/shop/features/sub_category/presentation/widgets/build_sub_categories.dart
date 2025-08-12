@@ -10,42 +10,45 @@ class BuildSubCategoriesSections extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SubCategoryCubit, SubCategoryState>(
-      buildWhen: (previous, current) {
-        if (current is SubCategoryLoaded ||
-            current is SubCategoryLoading ||
-            current is SubCategoryFailure) {
-          return true;
-        }
-        return false;
-      },
+      buildWhen: _buildWhen,
       builder: (context, state) {
         if (state is SubCategoryLoading) {
-          return Center(child: CircularProgressIndicator());
+          return const SliverToBoxAdapter(
+            child: Center(child: CircularProgressIndicator()),
+          );
         }
 
         if (state is SubCategoryFailure) {
-          return Center(child: Text(state.error));
+          return SliverToBoxAdapter(child: Center(child: Text(state.error)));
         }
 
         if (state is SubCategoryLoaded) {
           if (state.subCategories.isEmpty) {
-            return const Center(child: Text('No sub categories found'));
+            return const SliverToBoxAdapter(
+              child: Center(child: Text('No sub categories found')),
+            );
           }
 
-          return SizedBox(
-            height: MediaQuery.of(context).size.height * 0.2,
-            child: ListView.builder(
-              itemCount: state.subCategories.length,
-              itemBuilder: (context, index) {
-                final subCategory = state.subCategories[index];
-                return SubCategorySection(subCategory: subCategory);
-              },
-            ),
+          return SliverList.builder(
+            itemCount: state.subCategories.length,
+            itemBuilder: (context, index) {
+              final subCategory = state.subCategories[index];
+              return SubCategorySection(subCategory: subCategory);
+            },
           );
         }
 
-        return const Center(child: Text('Something went wrong!'));
+        return const SliverToBoxAdapter();
       },
     );
+  }
+
+  bool _buildWhen(SubCategoryState previous, SubCategoryState current) {
+    if (current is SubCategoryLoaded ||
+        current is SubCategoryLoading ||
+        current is SubCategoryFailure) {
+      return true;
+    }
+    return false;
   }
 }

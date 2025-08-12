@@ -15,14 +15,18 @@ class TAddIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartCubit = context.read<CartCubit>();
-    return InkWell(
-      onTap: () async {
-        await cartCubit.addItemToCart(
-          showMessage: true,
-          product: product,
-          selectedVariation: product.productVariations!.first,
-        );
-      },
+    final itemQuantity =
+        context.read<CartCubit>().getItemQuantity(itemId: product.id);
+    return GestureDetector(
+      onTap: itemQuantity > 0
+          ? null
+          : () async {
+              await cartCubit.addItemToCart(
+                showMessage: true,
+                product: product,
+                selectedVariation: product.productVariations!.first,
+              );
+            },
       child: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
