@@ -28,45 +28,48 @@ class ShimmerHorizantalProductCard extends StatelessWidget {
           const SizedBox(width: 8),
           Flexible(
             fit: FlexFit.loose,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ShimmerWidget(
-                  height: 10,
-                  width: 100,
-                  shapeBorder: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ShimmerWidget(
+                    height: 10,
+                    width: 100,
+                    shapeBorder: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                const ShimmerVerifyBrand(),
-                const SizedBox(height: 8),
-                Spacer(),
-                Row(
-                  children: [
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: ShimmerWidget(
-                        height: 10,
+                  const SizedBox(height: 8),
+                  const ShimmerVerifyBrand(),
+                  const SizedBox(height: 8),
+                  Spacer(),
+                  Row(
+                    children: [
+                      Flexible(
+                        fit: FlexFit.loose,
+                        child: ShimmerWidget(
+                          height: 10,
+                          shapeBorder: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      ShimmerWidget(
+                        height: 35,
+                        width: 35,
                         shapeBorder: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(8),
+                            bottomRight: Radius.circular(8),
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 8),
-                    ShimmerWidget(
-                      height: 35,
-                      width: 35,
-                      shapeBorder: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(8),
-                          bottomRight: Radius.circular(8),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],
