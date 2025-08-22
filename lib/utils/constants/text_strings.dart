@@ -1,4 +1,5 @@
 class TTexts {
+  const TTexts._();
   // -- GLOBAL Texts
   static const String and = "and";
   static const String skip = "Skip";
@@ -67,4 +68,10 @@ class TTexts {
   // -- Home
   static const String homeAppbarTitle = "Good day for shopping";
   static const String homeAppbarSubTitle = "Mohamed Hassan";
+
+  static const String paymentDetails = "Paymet Details";
+
+  static const String paymentStatus = 'Payment Status';
+
+  static const String paymentMethod = 'Payment Method';
 }

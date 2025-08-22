@@ -30,6 +30,8 @@ class TImages {
       "assets/images/animations/110052-paper-plane.json";
   static const String pencilAnimation =
       "assets/images/animations/140429-pencil-drawing.json";
+      static const String successPyment =
+      "assets//images//animations//success.json";
 
   // --Lottie Animation
   static const String cartAnimation =

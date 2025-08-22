@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/device/device_utlity.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
 class TAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -52,5 +51,5 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(TDeviceUtils.getAppBarHeight());
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }

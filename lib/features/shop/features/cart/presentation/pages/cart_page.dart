@@ -4,7 +4,7 @@ import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_state.dart';
 import 'package:t_store/features/shop/features/cart/presentation/widgets/cart_items_section.dart';
-import 'package:t_store/features/shop/features/checkout/presentation/pages/checkout_page.dart';
+import 'package:t_store/features/shop/features/checkout/presentation/pages/order_review_screen.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
 class CartPage extends StatelessWidget {
@@ -51,7 +51,7 @@ class CartPage extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => const CheckoutPage()),
+          MaterialPageRoute(builder: (_) => const OrderReviewScreen()),
         ),
         child: Text('Checkout \$${totalPrice.toStringAsFixed(2)}'),
       ),

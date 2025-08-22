@@ -6,8 +6,8 @@ import 'package:t_store/features/shop/features/checkout/presentation/widgets/che
 import 'package:t_store/features/shop/features/checkout/presentation/widgets/coupon_field.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
-class CheckoutPage extends StatelessWidget {
-  const CheckoutPage({super.key});
+class OrderReviewScreen extends StatelessWidget {
+  const OrderReviewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

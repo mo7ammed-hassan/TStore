@@ -9,8 +9,8 @@ class TElevetedButtonTheme {
       elevation: 0,
       foregroundColor: Colors.white,
       backgroundColor: Colors.blue,
-      disabledForegroundColor: Colors.grey,
-      disabledBackgroundColor: Colors.grey,
+      // disabledForegroundColor: Colors.grey,
+      // disabledBackgroundColor: Colors.grey,
       side: const BorderSide(color: Colors.blue),
       padding: const EdgeInsets.symmetric(vertical: 18),
       textStyle: const TextStyle(
@@ -30,9 +30,9 @@ class TElevetedButtonTheme {
       elevation: 0,
       foregroundColor: Colors.white,
       backgroundColor: Colors.blue,
-      disabledForegroundColor: Colors.grey,
-      disabledBackgroundColor: Colors.grey,
-      side: const BorderSide(color: Colors.blue),
+      // disabledForegroundColor: Colors.grey,
+      // disabledBackgroundColor: Colors.grey,
+      side: const BorderSide(color:  Colors.blue),
       padding: const EdgeInsets.symmetric(vertical: 18),
       textStyle: const TextStyle(
         fontSize: 16,
