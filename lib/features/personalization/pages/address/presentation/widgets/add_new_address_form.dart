@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store/features/personalization/cubit/user_state.dart';
 import 'package:t_store/features/personalization/pages/address/data/models/address_model.dart';
-import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_cubit.dart';
-import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_state.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_state.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/popups/loaders.dart';
 import 'package:t_store/utils/validators/validation.dart';
@@ -19,7 +18,7 @@ class AddNewAddressForm extends StatefulWidget {
 class _AddNewAddressFormState extends State<AddNewAddressForm> {
   late final AddressCubit addressCubit;
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
@@ -37,7 +36,6 @@ class _AddNewAddressFormState extends State<AddNewAddressForm> {
 
   @override
   void dispose() {
-    super.dispose();
     nameController.dispose();
     phoneController.dispose();
     streetController.dispose();
@@ -45,6 +43,7 @@ class _AddNewAddressFormState extends State<AddNewAddressForm> {
     cityController.dispose();
     stateController.dispose();
     countryController.dispose();
+    super.dispose();
   }
 
   @override
@@ -153,18 +152,11 @@ class _AddNewAddressFormState extends State<AddNewAddressForm> {
           const SizedBox(height: TSizes.defaultSpace),
           BlocListener<AddressCubit, AddressState>(
             listener: (context, state) {
-              if (state is AddAddressLoadingState) {
-                Loaders.showLoading(message: 'Adding your address');
+              if (state.status == AddressStatus.loading) {
+                Loaders.showLoading(message: 'Adding your address...');
               }
 
-              if (state is DeleteAddressLoadingState ||
-                  state is UpdateUserDataLoadingState) {
-                Loaders.showLoading();
-              }
-
-              if (state is AddAddressSuccessState ||
-                  state is DeleteAddressSuccessState ||
-                  state is UpdateUserDataLoadingState) {
+              if (state.status == AddressStatus.addedSuccess) {
                 Navigator.pop(context);
                 Navigator.pop(context);
                 Loaders.customToast(
@@ -172,11 +164,12 @@ class _AddNewAddressFormState extends State<AddNewAddressForm> {
                 );
               }
 
-              if (state is AddAddressFailureState) {
+              if (state.status == AddressStatus.failure) {
                 Navigator.pop(context);
                 Loaders.errorSnackBar(
                   title: 'Error',
-                  message: 'There was an error adding your address',
+                  message: state.errorMessage ??
+                      'There was an error adding your address',
                 );
               }
             },
@@ -184,21 +177,19 @@ class _AddNewAddressFormState extends State<AddNewAddressForm> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () async {
-                  if (addressCubit.validateForm(formKey)) {
-                    final AddressModel address = AddressModel(
-                      name: nameController.text,
-                      phoneNumber: phoneController.text,
-                      street: streetController.text,
-                      postalCode: postalCodeController.text,
-                      city: cityController.text,
-                      state: stateController.text,
-                      country: countryController.text,
-                      createdAt: DateTime.now(),
-                      selectedAddress: true,
-                    );
+                  final AddressModel address = AddressModel(
+                    name: nameController.text,
+                    phoneNumber: phoneController.text,
+                    street: streetController.text,
+                    postalCode: postalCodeController.text,
+                    city: cityController.text,
+                    state: stateController.text,
+                    country: countryController.text,
+                    createdAt: DateTime.now(),
+                    selectedAddress: true,
+                  );
 
-                    await addressCubit.addNewAddress(address);
-                  }
+                  await addressCubit.addAddress(address.toEntity());
                 },
                 child: const Text('Save'),
               ),

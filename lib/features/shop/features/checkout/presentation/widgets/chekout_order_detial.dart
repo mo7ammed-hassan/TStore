@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_cubit.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
 import 'package:t_store/features/shop/features/checkout/presentation/widgets/address_section.dart';
 import 'package:t_store/features/shop/features/checkout/presentation/widgets/payment_section.dart';
 import 'package:t_store/features/shop/features/checkout/presentation/widgets/pricing_section.dart';
@@ -28,7 +28,7 @@ class ChekoutOrderDetial extends StatelessWidget {
           const PaymentSection(),
           const SizedBox(height: TSizes.spaceBtwSections),
           BlocProvider(
-            create: (context) => getIt<AddressCubit>()..fetchAddresses(),
+            create: (context) => getIt<AddressCubit>()..fetchAllAddresses(),
             child: const AddressSection(),
           ),
         ],

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:t_store/common/core/errors/failures.dart';
 import 'package:t_store/features/personalization/pages/address/data/models/address_model.dart';
 import 'package:t_store/features/personalization/pages/address/data/source/address_firebase_services.dart';
 import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
@@ -22,8 +23,15 @@ class AddressRepositoryImpl extends AddressRepository {
   }
 
   @override
-  Future<void> deleteAddress({required String addressId}) async {
-    await addressFirebaseServices.deleteAddress(addressId: addressId);
+  Future<Either<Failure, Unit>> deleteAddress(
+      {required String addressId}) async {
+    try {
+      await addressFirebaseServices.deleteAddress(addressId: addressId);
+
+      return Right(unit);
+    } on Exception catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
   }
 
   @override

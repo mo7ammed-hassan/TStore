@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
-import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_cubit.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/single_address_card.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
@@ -17,7 +17,8 @@ class AddressListView extends StatelessWidget {
         final address = addresses[index];
         return SingleAddressCard(
           address: address,
-          onTap: () => context.read<AddressCubit>().selecteAddress(address),
+          onTap: () =>
+              context.read<AddressCubit>().updateSelectAddress(address),
           onLongPress: () => _showDeleteBottomSheet(
             context: context,
             addressCubit: context.read<AddressCubit>(),
@@ -60,7 +61,7 @@ class AddressListView extends StatelessWidget {
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
-                      addressCubit.deleteAddress(addressId: addressId);
+                      addressCubit.deleteAddress(addressId);
                     },
                     child: const Text(
                       'Delete ❌',

@@ -25,7 +25,6 @@ class AddressEntity {
     required this.selectedAddress,
   });
 
-  // Empty constructor for Firestore
   AddressEntity.empty()
       : id = '',
         name = '',
@@ -37,6 +36,33 @@ class AddressEntity {
         postalCode = '',
         createdAt = null,
         selectedAddress = false;
+
+  /// copyWith method to create a copy of the AddressEntity with modified fields
+  AddressEntity copyWith({
+    String? id,
+    String? name,
+    String? phoneNumber,
+    String? street,
+    String? city,
+    String? state,
+    String? country,
+    String? postalCode,
+    DateTime? createdAt,
+    bool? selectedAddress,
+  }) {
+    return AddressEntity(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      street: street ?? this.street,
+      city: city ?? this.city,
+      state: state ?? this.state,
+      country: country ?? this.country,
+      postalCode: postalCode ?? this.postalCode,
+      createdAt: createdAt ?? this.createdAt,
+      selectedAddress: selectedAddress ?? this.selectedAddress,
+    );
+  }
 }
 
 extension AddressModelMapper on AddressEntity {
@@ -50,7 +76,7 @@ extension AddressModelMapper on AddressEntity {
       state: state,
       country: country,
       postalCode: postalCode,
-      createdAt: createdAt,
+      createdAt: DateTime.now(),
       selectedAddress: selectedAddress,
     );
   }

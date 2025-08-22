@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
-import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_cubit.dart';
-import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_state.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_state.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
@@ -24,14 +24,14 @@ class SingleAddressCard extends StatelessWidget {
 
     return BlocBuilder<AddressCubit, AddressState>(
       buildWhen: (previous, current) {
-        if (current is SelectedAddressSuccessState) {
+        if (current.selectedAddress != null) {
           return true;
         }
         return false;
       },
       builder: (context, state) {
-        var selectAddress = context.read<AddressCubit>().selectedAddress;
-        var isSelectedAddress = selectAddress.id == address.id;
+        var selectAddress = context.read<AddressCubit>().state.selectedAddress;
+        var isSelectedAddress = selectAddress?.id == address.id;
 
         return InkWell(
           onTap: onTap,

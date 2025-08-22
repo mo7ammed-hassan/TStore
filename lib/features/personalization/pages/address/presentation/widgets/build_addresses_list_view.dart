@@ -1,78 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_cubit.dart';
-import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_state.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_state.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/add_address_button.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/address_list_view.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/popups/loaders.dart';
 
 class BuildAddressesListView extends StatelessWidget {
-  const BuildAddressesListView({super.key, this.showAddBbuton = false});
-  final bool showAddBbuton;
+  const BuildAddressesListView({super.key, this.showAddButton = false});
+  final bool showAddButton;
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AddressCubit, AddressState>(
-      buildWhen: (previous, current) =>
-          current is FetchAddressesSuccessState ||
-          current is FetchAddressesFailureState ||
-          current is FetchAddressesLoadingState,
-      builder: (context, state) {
-        if (state is FetchAddressesLoadingState) {
-          return _loadingWidget();
-        }
-
-        if (state is FetchAddressesSuccessState) {
-          if (state.addresses.isEmpty) {
-            return showAddBbuton
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Spacer(),
-                      _emptyAddressesMessage(),
-                      Spacer(flex: 2),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: const AddAddressButton(),
-                      ),
-                      Spacer(),
-                    ],
-                  )
-                : _emptyAddressesMessage();
-          }
-          return Stack(
-            children: [
-              AddressListView(addresses: state.addresses),
-              //if (state is SelectedAddressLoadingState) _loadingWidget(),
-            ],
-          );
-        }
-
-        if (state is FetchAddressesFailureState) {
-          return _errorMessage();
-        }
-
-        return const SizedBox.shrink();
-      },
+      buildWhen: (old, current) =>
+          old.status != current.status || old.addresses != current.addresses,
       listener: (context, state) {
-        if (state is SelectedAddressLoadingState) {
-          Loaders.showLoading();
-        }
-
-        if (state is SelectedAddressSuccessState) {
-          context.popPage(context);
+        if (state.status == AddressStatus.failure &&
+            state.errorMessage != null) {
+          Loaders.errorSnackBar(title: state.errorMessage!);
         }
       },
-    );
-  }
+      builder: (context, state) {
+        switch (state.status) {
+          case AddressStatus.loading:
+            return const Center(
+              child: CircularProgressIndicator(color: AppColors.primary),
+            );
 
-  // Loading Widget
-  Widget _loadingWidget() {
-    return const Center(
-      child: CircularProgressIndicator(color: AppColors.primary),
+          case AddressStatus.success:
+          case AddressStatus.addedSuccess:
+            if (state.addresses.isEmpty) {
+              return showAddButton
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Spacer(),
+                        _emptyAddressesMessage(),
+                        const Spacer(flex: 2),
+                        const Align(
+                          alignment: Alignment.bottomRight,
+                          child: AddAddressButton(),
+                        ),
+                        const Spacer(),
+                      ],
+                    )
+                  : _emptyAddressesMessage();
+            }
+            return Stack(
+              children: [
+                AddressListView(addresses: state.addresses),
+                if (showAddButton)
+                  const Positioned(
+                    bottom: kToolbarHeight,
+                    right: 0,
+                    child: AddAddressButton(),
+                  ),
+              ],
+            );
+
+          case AddressStatus.failure:
+            return _errorMessage();
+
+          case AddressStatus.empty:
+            return _emptyAddressesMessage();
+
+          case AddressStatus.initial:
+            return const SizedBox.shrink();
+
+          
+           
+        }
+      },
     );
   }
 

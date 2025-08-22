@@ -144,21 +144,30 @@ class Loaders {
         canPop: false,
         child: Dialog(
           backgroundColor: Colors.transparent,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const CircularProgressIndicator(
-                color: AppColors.primary,
-              ),
-              if (message != null) ...[
-                const SizedBox(height: 16),
-                Text(
-                  message,
-                  style: Theme.of(AppContext.context).textTheme.bodyMedium,
-                  textAlign: TextAlign.center,
+          child: Container(
+            padding: EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: HelperFunctions.isDarkMode(AppContext.context)
+                  ? AppColors.darkerGrey.withValues(alpha: 0.9)
+                  : AppColors.grey.withValues(alpha: 0.9),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const CircularProgressIndicator(
+                  color: AppColors.primary,
                 ),
+                if (message != null) ...[
+                  const SizedBox(height: 16),
+                  Text(
+                    message,
+                    style: Theme.of(AppContext.context).textTheme.bodyMedium,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ],
-            ],
+            ),
           ),
         ),
       ),

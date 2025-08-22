@@ -20,7 +20,7 @@ class SortableDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       decoration: const InputDecoration(prefixIcon: Icon(Iconsax.sort)),
-      value: initialValue,
+      initialValue: initialValue,
       items: _buildDropdownMenuItem(),
       onChanged: onChanged,
     );

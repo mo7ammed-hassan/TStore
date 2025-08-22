@@ -17,7 +17,7 @@ class TAddIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartCubit = context.read<CartCubit>();
     final itemQuantity =
-        context.read<CartCubit>().getItemQuantity(itemId: product.id);
+        context.watch<CartCubit>().getItemQuantity(itemId: product.id);
     return GestureDetector(
       onTap: itemQuantity > 0
           ? () {

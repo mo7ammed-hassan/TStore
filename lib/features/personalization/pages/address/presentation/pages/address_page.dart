@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
-import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_cubit.dart';
-import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_state.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_state.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/add_address_button.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/build_addresses_list_view.dart';
 import 'package:t_store/service_locator.dart';
@@ -14,25 +14,15 @@ class AddressPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<AddressCubit>()..fetchAddresses(),
+      create: (context) => getIt<AddressCubit>()..fetchAllAddresses(),
       child: Scaffold(
         floatingActionButton: const AddAddressButton(),
         appBar: _buildAppBar(context),
         body: BlocBuilder<AddressCubit, AddressState>(
           builder: (context, state) {
-            return Stack(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(TSizes.spaceBtwItems),
-                  child: BuildAddressesListView(),
-                ),
-                // if (state is SelectedAddressLoadingState)
-                //   const Center(
-                //     child: CircularProgressIndicator(
-                //       color: AppColors.primary,
-                //     ),
-                //   ),
-              ],
+            return const Padding(
+              padding: EdgeInsets.all(TSizes.spaceBtwItems),
+              child: BuildAddressesListView(),
             );
           },
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
-import 'package:t_store/features/personalization/pages/address/presentation/cubits/address_cubit.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/build_addresses_list_view.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
@@ -12,7 +12,7 @@ class AddressSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final addressCubit = context.watch<AddressCubit>();
-    final selectedAddress = addressCubit.selectedAddress;
+    final selectedAddress = addressCubit.state.selectedAddress;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,8 +23,8 @@ class AddressSection extends StatelessWidget {
           buttonTitle: 'Change',
           onPressed: () => _showAddressBottomSheet(context),
         ),
-        if (selectedAddress.id.isNotEmpty)
-          AddressDetails(address: selectedAddress)
+        if (selectedAddress?.id.isNotEmpty == true)
+          AddressDetails(address: selectedAddress!)
         else
           const Text('Please Select Address'),
       ],
@@ -44,7 +44,9 @@ class AddressSection extends StatelessWidget {
           value: addressCubit,
           child: const Padding(
             padding: EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
-            child: BuildAddressesListView(showAddBbuton: true),
+            child: BuildAddressesListView(
+              showAddButton: true,
+            ),
           ),
         );
       },
