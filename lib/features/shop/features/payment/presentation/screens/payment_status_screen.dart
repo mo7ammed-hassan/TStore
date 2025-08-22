@@ -3,6 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/features/shop/features/payment/presentation/widgets/payment_summary.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
+import 'package:t_store/utils/helpers/helper_functions.dart';
 
 class PaymentStatusScreen extends StatelessWidget {
   const PaymentStatusScreen({
@@ -83,16 +84,16 @@ class PaymentStatusScreen extends StatelessWidget {
 
   Widget _buildRow(BuildContext context,
       {required String label, required String value, TextStyle? style}) {
+    final isDark = HelperFunctions.isDarkMode(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           '$label:',
           style: style ??
-              Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(color: Color(0xFF5a5e64)),
+              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: isDark ? Colors.grey : Color(0xFF5a5e64),
+                  ),
         ),
         Text(value, style: Theme.of(context).textTheme.bodyLarge),
       ],

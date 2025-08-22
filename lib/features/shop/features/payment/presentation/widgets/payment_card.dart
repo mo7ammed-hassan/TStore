@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/features/shop/features/payment/data/models/payment_method.dart';
+import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/helpers/helper_functions.dart';
 
 class PaymentMethodCard extends StatelessWidget {
   final PaymentMethod method;
@@ -20,6 +22,7 @@ class PaymentMethodCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = HelperFunctions.isDarkMode(context);
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
@@ -29,12 +32,12 @@ class PaymentMethodCard extends StatelessWidget {
         curve: Curves.easeOut,
         child: Container(
           padding: const EdgeInsets.all(8),
-          decoration: _buildCardDecoration(),
+          decoration: _buildCardDecoration(isDark),
           child: Row(
             children: [
               _buildLogoBox(context),
               const SizedBox(width: 16),
-              _buildInfoSection(),
+              _buildInfoSection(context),
               _buildSelectionIndicator(),
             ],
           ),
@@ -45,13 +48,13 @@ class PaymentMethodCard extends StatelessWidget {
 
   // --- UI parts ---
 
-  BoxDecoration _buildCardDecoration() {
+  BoxDecoration _buildCardDecoration(bool isDark) {
     return BoxDecoration(
-      color: Colors.white,
+      color: isDark ? AppColors.dark : Colors.white,
       borderRadius: BorderRadius.circular(12),
       boxShadow: [
         BoxShadow(
-          color: Colors.grey.shade200,
+          color: isDark ? AppColors.dark : Colors.grey.shade200,
           blurRadius: 6,
           offset: const Offset(0, 2),
         ),
@@ -61,25 +64,25 @@ class PaymentMethodCard extends StatelessWidget {
 
   Widget _buildLogoBox(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.25,
+      width: MediaQuery.of(context).size.width * 0.24,
       height: 60,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade300, width: 1),
+        border: Border.all(color: Colors.grey, width: 1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Image.asset(method.icon, fit: BoxFit.contain),
     );
   }
 
-  Widget _buildInfoSection() {
+  Widget _buildInfoSection(BuildContext context) {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             method.name,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.titleSmall,
           ),
           const Text(
             '**** **** 1234',
