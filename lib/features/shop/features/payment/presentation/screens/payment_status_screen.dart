@@ -25,8 +25,7 @@ class PaymentStatusScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TAppBar(
-        showBackArrow: true,
-        leadingOnPressed: () {},
+        showBackArrow: false,
         title: Text(TTexts.paymentStatus),
       ),
       body: Padding(
