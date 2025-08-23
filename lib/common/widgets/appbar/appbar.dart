@@ -3,6 +3,8 @@ import 'package:iconsax/iconsax.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 
 class TAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
@@ -23,10 +25,10 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: TSizes.md),
+      padding: context.responsiveInsets.symmetric(horizontal: TSizes.md),
       child: AppBar(
         automaticallyImplyLeading: false,
-        leadingWidth: 38,
+        leadingWidth: context.horzSize(38),
         leading: showBackArrow
             ? IconButton(
                 onPressed: () {

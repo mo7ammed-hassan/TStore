@@ -4,6 +4,8 @@ import 'package:t_store/features/shop/features/home/domain/entites/category_enti
 import 'package:t_store/features/shop/features/sub_category/presentation/pages/sub_category_page.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class CategoriesListView extends StatelessWidget {
   final List<CategoryEntity> categories;
@@ -15,7 +17,7 @@ class CategoriesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 85,
+      height: context.vertSize(90),
       child: NotificationListener<ScrollNotification>(
         onNotification: (scrollNotification) {
           if (scrollNotification.metrics.pixels ==
@@ -42,8 +44,8 @@ class CategoriesListView extends StatelessWidget {
               },
             );
           },
-          separatorBuilder: (context, index) => SizedBox(
-            width: TSizes.spaceBtwItems / 2,
+          separatorBuilder: (context, index) => ResponsiveGap.horizontal(
+            TSizes.spaceBtwItems / 2,
           ),
         ),
       ),

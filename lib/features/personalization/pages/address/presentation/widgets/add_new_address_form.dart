@@ -6,6 +6,7 @@ import 'package:t_store/features/personalization/pages/address/presentation/cubi
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_state.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/popups/loaders.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/validators/validation.dart';
 
 class AddNewAddressForm extends StatefulWidget {
@@ -62,7 +63,7 @@ class _AddNewAddressFormState extends State<AddNewAddressForm> {
               labelText: 'Name',
             ),
           ),
-          const SizedBox(height: TSizes.spaceBtwInputFields),
+          ResponsiveGap.vertical(TSizes.spaceBtwInputFields),
           TextFormField(
             controller: phoneController,
             textInputAction: TextInputAction.next,
@@ -73,7 +74,7 @@ class _AddNewAddressFormState extends State<AddNewAddressForm> {
               labelText: 'Phone Number',
             ),
           ),
-          const SizedBox(height: TSizes.spaceBtwInputFields),
+          ResponsiveGap.vertical(TSizes.spaceBtwInputFields),
           Row(
             children: [
               Expanded(
@@ -105,7 +106,7 @@ class _AddNewAddressFormState extends State<AddNewAddressForm> {
               ),
             ],
           ),
-          const SizedBox(height: TSizes.spaceBtwInputFields),
+          ResponsiveGap.vertical(TSizes.spaceBtwInputFields),
           Row(
             children: [
               Expanded(
@@ -137,7 +138,7 @@ class _AddNewAddressFormState extends State<AddNewAddressForm> {
               ),
             ],
           ),
-          const SizedBox(height: TSizes.spaceBtwInputFields),
+          ResponsiveGap.vertical(TSizes.spaceBtwInputFields),
           TextFormField(
             controller: countryController,
             validator: (value) =>

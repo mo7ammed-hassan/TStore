@@ -9,6 +9,7 @@ import 'package:t_store/features/shop/features/store/presentation/cubits/store_c
 import 'package:t_store/features/shop/features/store/presentation/widgets/store_header.dart';
 import 'package:t_store/features/shop/features/store/presentation/widgets/category_tab.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class StorePage extends StatelessWidget {
   const StorePage({super.key});
@@ -54,7 +55,8 @@ class StorePage extends StatelessWidget {
 
   TAppBar _buildAppBar(BuildContext context) {
     return TAppBar(
-      title: Text('Store', style: Theme.of(context).textTheme.headlineMedium),
+      title: ResponsiveText('Store',
+          style: Theme.of(context).textTheme.titleLarge),
       actions: [
         TCartCounterIcon(
           onPressed: () => context.pushPage(const CartPage()),

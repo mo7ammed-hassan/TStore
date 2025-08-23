@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 import '../constants/colors.dart';
 import '../helpers/helper_functions.dart';
@@ -97,7 +100,7 @@ class Loaders {
         elevation: 0,
         duration: Duration(seconds: duration),
         content: Container(
-          padding: const EdgeInsets.all(12),
+          padding: context.responsiveInsets.all(12),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             color: backgroundColor.withValues(alpha: 0.9),
@@ -105,13 +108,13 @@ class Loaders {
           child: Row(
             children: [
               Icon(icon, color: Colors.white),
-              const SizedBox(width: 12),
+              ResponsiveGap.horizontal(12),
               Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    ResponsiveText(
                       title,
                       style: Theme.of(context)
                           .textTheme
@@ -119,7 +122,7 @@ class Loaders {
                           ?.copyWith(color: Colors.white),
                     ),
                     if (message.isNotEmpty)
-                      Text(
+                      ResponsiveText(
                         message,
                         style: Theme.of(context)
                             .textTheme

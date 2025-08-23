@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TSectionHeading extends StatelessWidget {
   final String title, buttonTitle;
@@ -21,24 +22,25 @@ class TSectionHeading extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
+        ResponsiveText(
           title,
-          style: Theme.of(context)
-              .textTheme
-              .headlineSmall!
-              .apply(color: textColor),
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                color: textColor,
+                fontWeight: FontWeight.w600,
+                fontSize: 15.5,
+              ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
         if (showActionButton)
           TextButton(
             onPressed: onPressed,
-            child: Text(
+            child: ResponsiveText(
               buttonTitle,
               style: Theme.of(context)
                   .textTheme
-                  .bodyLarge!
-                  .apply(color: AppColors.primary),
+                  .bodySmall!
+                  .copyWith(color: AppColors.primary, fontSize: 13),
             ),
           )
       ],

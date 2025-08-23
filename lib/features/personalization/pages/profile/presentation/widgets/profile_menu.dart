@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class ProfileMenu extends StatelessWidget {
   const ProfileMenu({
@@ -19,13 +21,13 @@ class ProfileMenu extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Padding(
-        padding:
-            const EdgeInsets.symmetric(vertical: TSizes.spaceBtwItems / 1.5),
+        padding: context.responsiveInsets
+            .symmetric(vertical: TSizes.spaceBtwItems / 1.5),
         child: Row(
           children: [
             Expanded(
               flex: 3,
-              child: Text(
+              child: ResponsiveText(
                 title,
                 style: Theme.of(context).textTheme.bodySmall,
                 overflow: TextOverflow.ellipsis,
@@ -33,7 +35,7 @@ class ProfileMenu extends StatelessWidget {
             ),
             Expanded(
               flex: 5,
-              child: Text(
+              child: ResponsiveText(
                 value,
                 style: Theme.of(context).textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
@@ -48,4 +50,3 @@ class ProfileMenu extends StatelessWidget {
     );
   }
 }
-

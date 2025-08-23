@@ -9,6 +9,9 @@ import 'package:t_store/utils/constants/enums.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TBrandCard extends StatelessWidget {
   const TBrandCard({super.key, this.showBorder = true, required this.brand});
@@ -21,7 +24,7 @@ class TBrandCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => context.pushPage(BrandProductsPage(brand: brand)),
       child: TRoundedContainer(
-        padding: const EdgeInsets.all(TSizes.sm),
+        padding: context.responsiveInsets.all(TSizes.sm),
         showBorder: showBorder,
         backgroundColor: Colors.transparent,
         child: Row(
@@ -33,7 +36,7 @@ class TBrandCard extends StatelessWidget {
                 imageColor: (isDark ? AppColors.light : AppColors.dark),
               ),
             ),
-            const SizedBox(width: TSizes.spaceBtwItems / 2),
+            ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -43,10 +46,13 @@ class TBrandCard extends StatelessWidget {
                     title: brand.name,
                     brandTextSize: TextSizes.large,
                   ),
-                  Text(
+                  ResponsiveText(
                     '${brand.productCount} Products',
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.labelMedium,
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelSmall
+                        ?.copyWith(color: Colors.grey, fontSize: 11),
                   ),
                 ],
               ),

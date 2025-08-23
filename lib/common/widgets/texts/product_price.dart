@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TProductPriceText extends StatelessWidget {
   const TProductPriceText({
@@ -18,7 +19,7 @@ class TProductPriceText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return ResponsiveText(
       '$currencySign$price',
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
@@ -26,7 +27,7 @@ class TProductPriceText extends StatelessWidget {
           ? Theme.of(context).textTheme.bodyLarge!.apply(
                 decoration: lineThrough ? TextDecoration.lineThrough : null,
               )
-          : Theme.of(context).textTheme.bodyLarge!.apply(
+          : Theme.of(context).textTheme.bodyMedium!.apply(
                 decoration: lineThrough ? TextDecoration.lineThrough : null,
               ),
     );

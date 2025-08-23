@@ -7,6 +7,8 @@ import 'package:t_store/features/personalization/pages/profile/presentation/page
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class CloseAccountButton extends StatelessWidget {
   const CloseAccountButton({super.key});
@@ -27,12 +29,12 @@ class CloseAccountButton extends StatelessWidget {
           builder: (context) {
             return TextButton(
               onPressed: () => _showDeleteAccountPopup(context),
-              child: const Text(
+              child: const ResponsiveText(
                 'Close Account',
                 style: TextStyle(
                   color: Colors.red,
                   fontWeight: FontWeight.w700,
-                  fontSize: 16,
+                  fontSize: 15,
                 ),
               ),
             );
@@ -47,8 +49,8 @@ class CloseAccountButton extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Delete Account'),
-          content: const Text(
+          title: const ResponsiveText('Delete Account'),
+          content: const ResponsiveText(
             'Are you sure you want to delete your account permanently? '
             'This action is not reversible and all of your data will be removed permanently.',
           ),
@@ -58,7 +60,7 @@ class CloseAccountButton extends StatelessWidget {
                 side: BorderSide.none,
               ),
               onPressed: () => Navigator.pop(context),
-              child: const Text('Cancel'),
+              child: const ResponsiveText('Cancel'),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -69,8 +71,9 @@ class CloseAccountButton extends StatelessWidget {
                 context.read<DeleteUserAccountCubit>().deleteUserAccount();
                 Navigator.pop(context);
               },
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: TSizes.lg),
+              child: Padding(
+                padding:
+                    context.responsiveInsets.symmetric(horizontal: TSizes.lg),
                 child: Text('Delete'),
               ),
             ),

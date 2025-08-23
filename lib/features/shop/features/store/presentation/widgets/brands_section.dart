@@ -4,6 +4,7 @@ import 'package:t_store/common/widgets/shimmer/shimmer_brand_show_case.dart';
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_cubit.dart';
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_state.dart';
 import 'package:t_store/features/shop/features/store/presentation/widgets/brand_list_view.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class BrandsSection extends StatelessWidget {
   const BrandsSection({super.key});
@@ -23,7 +24,7 @@ class BrandsSection extends StatelessWidget {
         if (state is StoreBrandLoaded) {
           if (state.brands.isEmpty) {
             return const SliverToBoxAdapter(
-              child: Center(child: Text('No brands found!')),
+              child: Center(child: ResponsiveText('No brands found!')),
             );
           }
 
@@ -32,7 +33,7 @@ class BrandsSection extends StatelessWidget {
 
         if (state is StoreBrandError) {
           return SliverToBoxAdapter(
-            child: Center(child: Text(state.error)),
+            child: Center(child: ResponsiveText(state.error)),
           );
         }
 

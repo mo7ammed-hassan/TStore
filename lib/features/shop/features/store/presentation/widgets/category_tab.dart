@@ -11,6 +11,8 @@ import 'package:t_store/features/shop/features/store/presentation/widgets/produc
 import 'package:t_store/service_locator.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class TCategoryTab extends StatelessWidget {
   final CategoryEntity category;
@@ -23,15 +25,15 @@ class TCategoryTab extends StatelessWidget {
         .fetchBrandsSpecificCategory(categoryId: category.id);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
+      padding: context.responsiveInsets.symmetric(
         vertical: TSizes.md,
         horizontal: TSizes.spaceBtwItems,
       ),
       child: CustomScrollView(
         slivers: [
           const BrandsSection(),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: TSizes.spaceBtwItems + 2),
+          SliverToBoxAdapter(
+            child: ResponsiveGap.vertical(TSizes.spaceBtwItems + 2),
           ),
           SliverToBoxAdapter(
             child: TSectionHeading(
@@ -40,12 +42,12 @@ class TCategoryTab extends StatelessWidget {
               onPressed: () => _viewAllProducts(context),
             ),
           ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: TSizes.spaceBtwItems),
+          SliverToBoxAdapter(
+            child: ResponsiveGap.vertical(TSizes.spaceBtwItems),
           ),
           ProductsSection(categoryId: category.id),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: TSizes.spaceBtwSections),
+          SliverToBoxAdapter(
+            child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
           ),
         ],
       ),

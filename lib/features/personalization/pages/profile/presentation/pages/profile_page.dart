@@ -9,6 +9,9 @@ import 'package:t_store/features/personalization/pages/profile/presentation/widg
 import 'package:t_store/features/personalization/pages/profile/presentation/widgets/profile_header.dart';
 import 'package:t_store/features/personalization/pages/profile/presentation/widgets/profile_information_section.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class ProfilePage extends StatelessWidget {
   final UserEntity? userData;
@@ -17,34 +20,35 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TAppBar(title: Text('Profile'), showBackArrow: true),
+      appBar:
+          const TAppBar(title: ResponsiveText('Profile'), showBackArrow: true),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(TSizes.spaceBtwItems),
+        padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
         child: Column(
           children: [
             const ProfileHeader(),
             const Divider(),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            ResponsiveGap.vertical(TSizes.spaceBtwItems),
             const TSectionHeading(
               title: 'Profile Information',
               showActionButton: false,
             ),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            ResponsiveGap.vertical(TSizes.spaceBtwItems),
             const ProfileInformationSection(),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            ResponsiveGap.vertical(TSizes.spaceBtwItems),
             const Divider(),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            ResponsiveGap.vertical(TSizes.spaceBtwItems),
 
             ///Heading
             const TSectionHeading(
               title: 'Personal Information',
               showActionButton: false,
             ),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            ResponsiveGap.vertical(TSizes.spaceBtwItems),
             PersonalInformationSection(user: userData!),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            ResponsiveGap.vertical(TSizes.spaceBtwItems),
             const Divider(),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            ResponsiveGap.vertical(TSizes.spaceBtwItems),
 
             const CloseAccountButton(),
           ],

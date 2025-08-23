@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 
 class TCircularIcon extends StatelessWidget {
   final IconData icon;
@@ -29,7 +30,7 @@ class TCircularIcon extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
-        padding: EdgeInsets.all(8.0),
+        padding: context.responsiveInsets.all(8.0),
         decoration: BoxDecoration(
           color: backgroundColor != null
               ? backgroundColor!
@@ -38,7 +39,12 @@ class TCircularIcon extends StatelessWidget {
                   : AppColors.white.withValues(alpha: 0.9),
           shape: BoxShape.circle,
         ),
-        child: Icon(icon, size: size, color: color),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Center(
+            child: Icon(icon, size: size, color: color),
+          ),
+        ),
       ),
     );
   }

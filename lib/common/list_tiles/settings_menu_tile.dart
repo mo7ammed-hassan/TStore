@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TSettingMenuTile extends StatelessWidget {
   const TSettingMenuTile({
@@ -19,12 +21,15 @@ class TSettingMenuTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon, color: AppColors.primary, size: 28),
-      title: Text(
+      leading: Icon(icon, color: AppColors.primary, size: context.horzSize(28)),
+      title: ResponsiveText(
         title,
-        style: Theme.of(context).textTheme.titleMedium,
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(fontWeight: FontWeight.w500),
       ),
-      subtitle: Text(
+      subtitle: ResponsiveText(
         subtitle,
         style: Theme.of(context).textTheme.labelMedium,
         overflow: TextOverflow.ellipsis,

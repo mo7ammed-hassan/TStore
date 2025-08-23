@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
@@ -31,35 +34,36 @@ class TAnimationLoaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = HelperFunctions.isDarkMode(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: MediaQuery.sizeOf(context).height * 0.035),
+          SizedBox(height: MediaQuery.sizeOf(context).height * 0.06),
           Lottie.asset(
             animation,
             width: MediaQuery.of(context).size.width * 0.8,
           ), // Display Lottie animation
-          const SizedBox(height: TSizes.defaultSpace),
-          Text(
+          ResponsiveGap.vertical(TSizes.defaultSpace),
+          ResponsiveText(
             text,
             style: Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: TSizes.defaultSpace),
+          ResponsiveGap.vertical(TSizes.defaultSpace),
           showAction
               ? SizedBox(
                   width: MediaQuery.sizeOf(context).width * 0.7,
                   child: OutlinedButton(
                     onPressed: onActionPressed,
                     style: OutlinedButton.styleFrom(
-                        backgroundColor: AppColors.dark),
-                    child: Text(
+                      foregroundColor: isDark ? Colors.white : Colors.black,
+                      backgroundColor:
+                          isDark ? null : AppColors.primaryBackground,
+                    ),
+                    child: ResponsiveText(
                       actionText!,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium!
-                          .apply(color: AppColors.light),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                 )

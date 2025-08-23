@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/utils/constants/enums.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TBrandTitleText extends StatelessWidget {
   const TBrandTitleText({
@@ -19,7 +20,7 @@ class TBrandTitleText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return ResponsiveText(
       title,
       textAlign: textAlign,
       maxLines: maxLines,
@@ -30,7 +31,11 @@ class TBrandTitleText extends StatelessWidget {
           : brandTextSize == TextSizes.medium
               ? Theme.of(context).textTheme.bodyLarge!.apply(color: color)
               : brandTextSize == TextSizes.large
-                  ? Theme.of(context).textTheme.titleLarge!.apply(color: color)
+                  ? Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .apply(color: color)
+                      .copyWith(fontWeight: FontWeight.w500)
                   : Theme.of(context).textTheme.bodyMedium!.apply(color: color),
     );
   }

@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:t_store/features/shop/features/payment/data/models/payment_method.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class PaymentMethodCard extends StatelessWidget {
   final PaymentMethod method;
@@ -31,22 +35,20 @@ class PaymentMethodCard extends StatelessWidget {
         duration: _animationDuration,
         curve: Curves.easeOut,
         child: Container(
-          padding: const EdgeInsets.all(8),
+          padding: context.responsiveInsets.all(8),
           decoration: _buildCardDecoration(isDark),
           child: Row(
             children: [
               _buildLogoBox(context),
               const SizedBox(width: 16),
               _buildInfoSection(context),
-              _buildSelectionIndicator(),
+              _buildSelectionIndicator(context),
             ],
           ),
         ),
       ),
     );
   }
-
-  // --- UI parts ---
 
   BoxDecoration _buildCardDecoration(bool isDark) {
     return BoxDecoration(
@@ -64,8 +66,8 @@ class PaymentMethodCard extends StatelessWidget {
 
   Widget _buildLogoBox(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.24,
-      height: 60,
+      width: context.horzSize(90),
+      height: context.vertSize(60),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 1),
@@ -79,25 +81,27 @@ class PaymentMethodCard extends StatelessWidget {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          ResponsiveText(
             method.name,
-            style: Theme.of(context).textTheme.titleSmall,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
-          const Text(
+          ResponsiveGap.vertical(4),
+          ResponsiveText(
             '**** **** 1234',
-            style: TextStyle(fontSize: 14, color: Colors.grey),
+            style: Theme.of(context).textTheme.labelMedium,
           ),
         ],
       ),
     );
   }
 
-  Widget _buildSelectionIndicator() {
+  Widget _buildSelectionIndicator(BuildContext context) {
     return AnimatedContainer(
       duration: _animationDuration,
-      width: 24,
-      height: 24,
+      width: context.horzSize(24),
+      height: context.vertSize(24),
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
@@ -116,8 +120,8 @@ class PaymentMethodCard extends StatelessWidget {
       ),
       child: AnimatedContainer(
         duration: _animationDuration,
-        width: 12,
-        height: 12,
+        width: context.horzSize(12),
+        height: context.vertSize(12),
         decoration: BoxDecoration(
           color: selected
               ? Color(0xFF007df3).withValues(alpha: 0.9)

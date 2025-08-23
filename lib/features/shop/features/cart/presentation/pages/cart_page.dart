@@ -6,6 +6,8 @@ import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_sta
 import 'package:t_store/features/shop/features/cart/presentation/widgets/cart_items_section.dart';
 import 'package:t_store/features/shop/features/checkout/presentation/pages/order_review_screen.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -19,11 +21,9 @@ class CartPage extends StatelessWidget {
         return Scaffold(
           appBar: _buildAppBar(context),
           bottomNavigationBar: hasItems ? _buildCheckoutButton(context) : null,
-          body: const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: TSizes.spaceBtwItems,
-              vertical: TSizes.defaultSpace,
-            ),
+          body: ResponsivePadding.symmetric(
+            horizontal: TSizes.spaceBtwItems,
+            vertical: TSizes.defaultSpace,
             child: CartItemsSection(),
           ),
         );
@@ -34,26 +34,26 @@ class CartPage extends StatelessWidget {
   TAppBar _buildAppBar(BuildContext context) {
     return TAppBar(
       showBackArrow: true,
-      title: Text(
+      title: ResponsiveText(
         'Cart',
-        style: Theme.of(context).textTheme.headlineSmall,
+        style: Theme.of(context).textTheme.titleLarge,
       ),
     );
   }
 
   Widget _buildCheckoutButton(BuildContext context) {
     final totalPrice = context.read<CartCubit>().totalPrice;
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: TSizes.defaultSpace,
-        vertical: TSizes.spaceBtwItems,
-      ),
+    return ResponsivePadding.symmetric(
+      horizontal: TSizes.defaultSpace,
+      vertical: TSizes.spaceBtwItems,
       child: ElevatedButton(
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (_) => const OrderReviewScreen()),
         ),
-        child: Text('Checkout \$${totalPrice.toStringAsFixed(2)}'),
+        child: ResponsiveText(
+          'Checkout \$${totalPrice.toStringAsFixed(2)}',
+        ),
       ),
     );
   }

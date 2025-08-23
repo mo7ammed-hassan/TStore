@@ -9,6 +9,7 @@ import 'package:t_store/features/shop/features/product_details/presentation/page
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class TVerticalProductCard extends StatelessWidget {
   final ProductEntity product;
@@ -55,12 +56,12 @@ class TVerticalProductCard extends StatelessWidget {
                 discountPrice: product.discountPercentage.toString(),
               ),
             ),
-            const SizedBox(height: TSizes.spaceBtwItems / 2),
+            ResponsiveGap.vertical(TSizes.spaceBtwItems / 1.8),
             TProductCardBody(
               title: product.title,
               brandTitle: product.brand?.name ?? '',
             ),
-            const SizedBox(height: TSizes.spaceBtwItems / 2),
+            ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
             TProductCartFooter(
               price: cubit.getProductPrice(product),
               product: product,

@@ -3,6 +3,9 @@ import 'package:t_store/common/widgets/images/circular_image.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TVerticalImageText extends StatelessWidget {
   final String image, title;
@@ -26,7 +29,7 @@ class TVerticalImageText extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
-        width: 85,
+        width: context.horzSize(75),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -35,11 +38,11 @@ class TVerticalImageText extends StatelessWidget {
               fit: BoxFit.fitWidth,
               isNetworkImage: isNetworkImage,
               backgroundColor: backgroundColor,
-              padding: TSizes.sm * 1.4,
+              padding: context.horzSize(TSizes.sm * 1.4),
               imageColor: (isDark ? AppColors.light : AppColors.dark),
             ),
-            const SizedBox(height: TSizes.spaceBtwItems / 2),
-            Text(
+            ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
+            ResponsiveText(
               title,
               style: Theme.of(context)
                   .textTheme

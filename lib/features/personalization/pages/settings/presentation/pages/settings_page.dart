@@ -16,6 +16,8 @@ import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/popups/loaders.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -29,19 +31,20 @@ class SettingsPage extends StatelessWidget {
             // --Header
             TPrimaryHeaderConatiner(
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   TAppBar(
-                    title: Text(
+                    title: ResponsiveText(
                       'Account',
                       style: Theme.of(context)
                           .textTheme
-                          .headlineMedium!
-                          .apply(color: AppColors.white),
+                          .headlineSmall!
+                          .copyWith(color: AppColors.white, fontSize: 20),
                     ),
                   ),
-                  const SizedBox(height: TSizes.spaceBtwSections),
-                  const UserProfileTile(),
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  ResponsiveGap.vertical(TSizes.spaceBtwSections),
+                  Flexible(fit: FlexFit.loose, child: const UserProfileTile()),
+                  ResponsiveGap.vertical(TSizes.spaceBtwSections),
                 ],
               ),
             ),
@@ -56,8 +59,8 @@ class SettingsPage extends StatelessWidget {
                     title: 'Account Settings',
                     showActionButton: false,
                   ),
-                  const SizedBox(
-                    height: TSizes.spaceBtwItems,
+                  ResponsiveGap.vertical(
+                    TSizes.spaceBtwItems,
                   ),
                   TSettingMenuTile(
                     icon: Iconsax.safe_home,
@@ -122,15 +125,15 @@ class SettingsPage extends StatelessWidget {
                     subtitle: 'Manage data usage and connectivity',
                     onTap: () {},
                   ),
-                  const SizedBox(
-                    height: TSizes.spaceBtwSections,
+                  ResponsiveGap.vertical(
+                    TSizes.spaceBtwSections,
                   ),
                   const TSectionHeading(
                     title: 'General Settings',
                     showActionButton: false,
                   ),
-                  const SizedBox(
-                    height: TSizes.spaceBtwItems,
+                  ResponsiveGap.vertical(
+                    TSizes.spaceBtwItems,
                   ),
                   TSettingMenuTile(
                     icon: Iconsax.document_upload,
@@ -159,7 +162,7 @@ class SettingsPage extends StatelessWidget {
                     trailing: Switch(value: false, onChanged: (value) {}),
                   ),
 
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  ResponsiveGap.vertical(TSizes.spaceBtwSections),
                   // Logout Button
                   SizedBox(
                     width: double.infinity,
@@ -178,10 +181,10 @@ class SettingsPage extends StatelessWidget {
                           },
                         );
                       },
-                      child: const Text('Logout'),
+                      child: const ResponsiveText('Logout'),
                     ),
                   ),
-                  const SizedBox(height: TSizes.spaceBtwItems * 2.5),
+                  ResponsiveGap.vertical(TSizes.spaceBtwItems * 2.5),
                 ],
               ),
             ),

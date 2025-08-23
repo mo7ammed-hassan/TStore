@@ -4,6 +4,8 @@ import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 
 class TCircularImage extends StatelessWidget {
   const TCircularImage({
@@ -32,7 +34,7 @@ class TCircularImage extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      padding: EdgeInsets.all(padding),
+      padding: context.responsiveInsets.all(padding),
       decoration: BoxDecoration(
         color: backgroundColor ?? (isDark ? AppColors.black : AppColors.white),
         borderRadius: BorderRadius.circular(100),
@@ -46,9 +48,9 @@ class TCircularImage extends StatelessWidget {
                   fit: fit,
                   color: (isDark ? AppColors.light : AppColors.dark),
                   progressIndicatorBuilder: (context, url, progress) =>
-                      const ShimmerWidget(
-                    height: 75,
-                    width: 75,
+                      ShimmerWidget(
+                    height: context.horzSize(75),
+                    width: context.horzSize(75),
                     shapeBorder: CircleBorder(),
                   ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),

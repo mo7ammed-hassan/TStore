@@ -13,9 +13,11 @@ class UserCubit extends Cubit<UserState> {
   final TextEditingController lastNameController = TextEditingController();
 
   final GlobalKey<FormState> fromKey = GlobalKey<FormState>();
-  String previousImage  = '';
+  String previousImage = '';
+  bool firstTime = true;
 
-  Future<void> fetchUserData() async {
+  Future<void> fetchUserData({bool forchFetch = false}) async {
+    if (!firstTime && !forchFetch) return;
     emit(FetchUserDataLoadingState());
 
     var returnedData = await getIt<FetchUserDataUseCase>().call();
@@ -27,8 +29,9 @@ class UserCubit extends Cubit<UserState> {
       (userData) {
         firstNameController.text = userData.firstName;
         lastNameController.text = userData.lastName;
-        previousImage  = userData.profilePicture ?? '';
+        previousImage = userData.profilePicture ?? '';
         emit(FetchUserDataLoadedState(userData));
+        firstTime = false;
       },
     );
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class ConfirmPaymentButton extends StatelessWidget {
   final bool enabled;
@@ -14,13 +16,15 @@ class ConfirmPaymentButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: context.responsiveInsets.all(16),
         child: ElevatedButton(
           onPressed: enabled ? onPressed : null,
           style: ElevatedButton.styleFrom(
             minimumSize: const Size(double.infinity, 50),
           ),
-          child: const Text("Confirm Payment", style: TextStyle(fontSize: 16)),
+          child: const ResponsiveText(
+            "Confirm Payment",
+          ),
         ),
       ),
     );

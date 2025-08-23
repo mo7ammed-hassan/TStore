@@ -7,6 +7,7 @@ import 'package:t_store/features/shop/features/all_products/domain/entity/produc
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/all_product_cubit.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/all_products_state.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
 
 class AllProductsPage extends StatelessWidget {
   const AllProductsPage({
@@ -26,11 +27,9 @@ class AllProductsPage extends StatelessWidget {
       child: Scaffold(
         appBar: _appBar(context),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: TSizes.spaceBtwItems,
-              vertical: TSizes.defaultSpace,
-            ),
+          child: ResponsivePadding.symmetric(
+            horizontal: TSizes.spaceBtwItems,
+            vertical: TSizes.defaultSpace,
             child: BlocBuilder<AllProductsCubit, AllProductsState>(
               builder: (context, state) {
                 if (state is AllProductsLoadingState) {

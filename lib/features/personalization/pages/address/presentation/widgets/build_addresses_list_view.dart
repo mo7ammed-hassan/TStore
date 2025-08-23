@@ -7,6 +7,7 @@ import 'package:t_store/features/personalization/pages/address/presentation/widg
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/popups/loaders.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class BuildAddressesListView extends StatelessWidget {
   const BuildAddressesListView({super.key, this.showAddButton = false});
@@ -69,9 +70,6 @@ class BuildAddressesListView extends StatelessWidget {
 
           case AddressStatus.initial:
             return const SizedBox.shrink();
-
-          
-           
         }
       },
     );
@@ -79,7 +77,7 @@ class BuildAddressesListView extends StatelessWidget {
 
   Widget _emptyAddressesMessage() {
     return const Center(
-      child: Text(
+      child: ResponsiveText(
         'You don\'t have any addresses yet. Add one now! 🤓',
         style: TextStyle(fontSize: TSizes.md),
         textAlign: TextAlign.center,
@@ -89,7 +87,7 @@ class BuildAddressesListView extends StatelessWidget {
 
   Widget _errorMessage() {
     return const Center(
-      child: Text(
+      child: ResponsiveText(
         'There was an error, Please try again later 🫤',
         style: TextStyle(fontSize: TSizes.md),
         textAlign: TextAlign.center,

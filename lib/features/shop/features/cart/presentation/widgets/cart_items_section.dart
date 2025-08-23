@@ -4,6 +4,7 @@ import 'package:t_store/common/widgets/shimmer/shimmer_cart_items_list.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_state.dart';
 import 'package:t_store/features/shop/features/cart/presentation/widgets/cart_items_list.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class CartItemsSection extends StatelessWidget {
   const CartItemsSection({
@@ -50,9 +51,9 @@ class CartItemsSection extends StatelessWidget {
   Widget _buildMessage(String message) {
     if (sliverList) {
       return SliverToBoxAdapter(
-        child: Center(child: Text(message)),
+        child: Center(child: ResponsiveText(message)),
       );
     }
-    return Center(child: Text(message));
+    return Center(child: ResponsiveText(message));
   }
 }

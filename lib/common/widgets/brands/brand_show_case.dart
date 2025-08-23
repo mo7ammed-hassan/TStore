@@ -4,6 +4,8 @@ import 'package:t_store/common/widgets/brands/brand_products_section.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:t_store/features/shop/features/all_brands/domain/entities/brand_entity.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class TBrandShowcase extends StatelessWidget {
   final BrandEntity brand;
@@ -14,12 +16,12 @@ class TBrandShowcase extends StatelessWidget {
     return TRoundedContainer(
       showBorder: true,
       backgroundColor: Colors.transparent,
-      padding: const EdgeInsets.all(TSizes.md),
+      padding: context.responsiveInsets.all(TSizes.md),
       child: Column(
         children: [
           // Brand with Product Conunt
           TBrandCard(brand: brand, showBorder: false),
-          const SizedBox(height: TSizes.spaceBtwItems),
+          ResponsiveGap.vertical(TSizes.spaceBtwItems),
           //Brand Top 3 Product Image
           BrandProductsSection(brandId: brand.id),
         ],

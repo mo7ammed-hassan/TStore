@@ -5,6 +5,7 @@ import 'package:t_store/common/widgets/success_pages/success_page.dart';
 import 'package:t_store/features/authentication/presentation/manager/cubits/signup/verify_email_cubit.dart';
 import 'package:t_store/features/authentication/presentation/manager/cubits/signup/verify_email_state.dart';
 import 'package:t_store/features/authentication/presentation/pages/login_page.dart';
+import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/personalization/domain/use_cases/delete_account_use_case.dart';
 import 'package:t_store/features/navigation_menu/navigation_screen.dart';
 import 'package:t_store/service_locator.dart';
@@ -48,6 +49,7 @@ class VerifyEmailPage extends StatelessWidget {
               //     message: state.errorMessage.toString(),
               //   );
             } else if (state is VerifiyEmailSuccessState) {
+              context.read<UserCubit>().fetchUserData(forchFetch: true);
               context.removeAllSaveStack(
                 SuccessPage(
                   title: TTexts.yourAccountCreatedTitle,

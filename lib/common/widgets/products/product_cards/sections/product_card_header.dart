@@ -7,6 +7,8 @@ import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 
 class TProductCardHeader extends StatelessWidget {
   const TProductCardHeader({
@@ -23,9 +25,9 @@ class TProductCardHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
     return TRoundedContainer(
-      height: 180,
+      height: context.vertSize(180),
       width: double.infinity,
-      padding: const EdgeInsets.all(TSizes.sm),
+      padding: context.responsiveInsets.all(TSizes.sm),
       backgroundColor: isDark ? AppColors.dark : AppColors.light,
       child: Stack(
         children: [

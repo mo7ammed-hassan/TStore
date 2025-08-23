@@ -7,6 +7,9 @@ import 'package:t_store/features/shop/features/payment/presentation/widgets/conf
 import 'package:t_store/features/shop/features/payment/presentation/widgets/payment_card.dart';
 import 'package:t_store/features/shop/features/payment/presentation/widgets/payment_summary.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
 
 class PaymentScreen extends StatelessWidget {
   const PaymentScreen({super.key});
@@ -25,14 +28,13 @@ class PaymentScreen extends StatelessWidget {
             if (state.loading) {
               return const Center(child: CircularProgressIndicator());
             }
-
             return Column(
               children: [
                 Expanded(
                   child: ListView.separated(
-                    padding: const EdgeInsets.all(16),
+                    padding: context.responsiveInsets.all(16),
                     itemCount: state.methods.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 12),
+                    separatorBuilder: (_, __) => ResponsiveGap.vertical(12.0),
                     itemBuilder: (context, index) {
                       final method = state.methods[index];
                       return PaymentMethodCard(
@@ -44,9 +46,9 @@ class PaymentScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                ResponsivePadding.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
                   child: const PaymentSummary(),
                 ),
                 ConfirmPaymentButton(

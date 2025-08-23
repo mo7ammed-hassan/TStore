@@ -7,6 +7,8 @@ import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_sta
 import 'package:t_store/features/shop/features/product_details/presentation/pages/product_detail_page.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TAddIcon extends StatelessWidget {
   const TAddIcon({super.key, this.onTap, required this.product});
@@ -53,8 +55,8 @@ class TAddIcon extends StatelessWidget {
           color: AppColors.dark,
         ),
         child: SizedBox(
-          width: TSizes.iconLg * 1.2,
-          height: TSizes.iconLg * 1.2,
+          width: context.horzSize(TSizes.iconLg * 1.2),
+          height: context.horzSize(TSizes.iconLg * 1.2),
           child: Center(
             child: BlocBuilder<CartCubit, CartState>(
               builder: (context, state) {
@@ -62,13 +64,14 @@ class TAddIcon extends StatelessWidget {
                     .read<CartCubit>()
                     .getItemQuantity(itemId: product.id);
                 return itemQuantity >= 1
-                    ? Text(
+                    ? ResponsiveText(
                         itemQuantity.toString(),
-                        style: TextStyle(color: AppColors.white),
+                        style: TextStyle(color: AppColors.white, fontSize: 13),
                       )
                     : Icon(
                         Iconsax.add,
                         color: AppColors.white,
+                        size: context.horzSize(20),
                       );
               },
             ),

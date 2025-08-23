@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/features/shop/features/payment/presentation/widgets/payment_summary.dart';
+import 'package:t_store/features/shop/features/payment/presentation/widgets/payment_summary_row.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class PaymentStatusScreen extends StatelessWidget {
   const PaymentStatusScreen({
@@ -30,25 +33,27 @@ class PaymentStatusScreen extends StatelessWidget {
         title: Text(TTexts.paymentStatus),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        padding: context.responsiveInsets.symmetric(horizontal: 24.0),
         child: Column(
           children: [
             Spacer(),
             Expanded(
               flex: 3,
-              child: (animation ? Lottie.asset : Image.asset)(imagePath,
-                  fit: BoxFit.scaleDown),
+              child: (animation ? Lottie.asset : Lottie.asset)(
+                imagePath,
+                fit: BoxFit.scaleDown,
+              ),
             ),
-            SizedBox(height: 14),
-            Text(
+            ResponsiveGap.vertical(14),
+            ResponsiveText(
               title,
               style: Theme.of(context)
                   .textTheme
                   .titleLarge
                   ?.copyWith(fontSize: 20),
             ),
-            SizedBox(height: 8),
-            Text(
+            ResponsiveGap.vertical(8),
+            ResponsiveText(
               subTitle,
               style:
                   Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 13),
@@ -57,15 +62,15 @@ class PaymentStatusScreen extends StatelessWidget {
               flex: 2,
             ),
             if (paymentSuccess) ...[
-              _buildRow(context, label: TTexts.paymentMethod, value: 'VISA'),
-              SizedBox(height: 14),
-              _buildRow(context, label: 'Date', value: '26 Oct 2025'),
-              SizedBox(height: 14),
-              _buildRow(context, label: 'Transaction ID', value: 'FT54JN0'),
-              SizedBox(height: 14),
+              PaymentSummaryRow(label: TTexts.paymentMethod, value: 'VISA'),
+              ResponsiveGap.vertical(14),
+              PaymentSummaryRow(label: 'Date', value: '26 Oct 2025'),
+              ResponsiveGap.vertical(14),
+              PaymentSummaryRow(label: 'Transaction ID', value: 'FT54JN0'),
+              ResponsiveGap.vertical(14),
               PaymentSummary(),
             ],
-            SizedBox(height: 24),
+            ResponsiveGap.vertical(24),
             SafeArea(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -75,28 +80,10 @@ class PaymentStatusScreen extends StatelessWidget {
                 child: Text('Back to Home'),
               ),
             ),
-            SizedBox(height: 10),
+            ResponsiveGap.vertical(10),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildRow(BuildContext context,
-      {required String label, required String value, TextStyle? style}) {
-    final isDark = HelperFunctions.isDarkMode(context);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          '$label:',
-          style: style ??
-              Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: isDark ? Colors.grey : Color(0xFF5a5e64),
-                  ),
-        ),
-        Text(value, style: Theme.of(context).textTheme.bodyLarge),
-      ],
     );
   }
 }

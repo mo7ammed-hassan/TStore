@@ -4,6 +4,7 @@ import 'package:t_store/common/widgets/shimmer/category_shimmer.dart';
 import 'package:t_store/features/shop/features/home/presentation/cubits/category/category_cubit.dart';
 import 'package:t_store/features/shop/features/home/presentation/cubits/category/category_state.dart';
 import 'package:t_store/features/shop/features/home/presentation/widgets/categories/categories_list_view.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class THomeCategories extends StatelessWidget {
   const THomeCategories({super.key});
@@ -23,7 +24,7 @@ class THomeCategories extends StatelessWidget {
         }
 
         if (state is CategoryFailureState) {
-          return Center(child: Text(state.errorMessage));
+          return Center(child: ResponsiveText(state.errorMessage));
         }
 
         return _errorWiget(context);
@@ -33,7 +34,7 @@ class THomeCategories extends StatelessWidget {
 
   Center _errorWiget(BuildContext context) {
     return Center(
-      child: Text(
+      child: ResponsiveText(
         'No Categories Found!',
         style:
             Theme.of(context).textTheme.bodyMedium!.apply(color: Colors.white),

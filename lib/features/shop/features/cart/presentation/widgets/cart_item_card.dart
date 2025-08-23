@@ -11,6 +11,9 @@ import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cub
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text_span.dart';
 
 class CartItemCard extends StatelessWidget {
   const CartItemCard({
@@ -31,12 +34,12 @@ class CartItemCard extends StatelessWidget {
           children: [
             TRoundedImage(
               imageUrl: cartItem.product.imageUrl,
-              width: 60,
-              height: 60,
+              width: context.horzSize(65),
+              height: context.horzSize(65),
               padding: const EdgeInsets.all(TSizes.sm),
               backgroundColor: isDark ? AppColors.darkerGrey : AppColors.light,
             ),
-            const SizedBox(width: TSizes.spaceBtwItems),
+            ResponsiveGap.horizontal(TSizes.spaceBtwItems),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,37 +49,46 @@ class CartItemCard extends StatelessWidget {
                     title: cartItem.product.title,
                     maxLines: 1,
                   ),
-                  Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'Color  ',
-                          style: Theme.of(context).textTheme.bodySmall,
+
+                  /// --- Colors ----
+                  ResponsiveTextSpan(
+                    text: 'Color  ',
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          color: Colors.grey,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
                         ),
-                        TextSpan(
-                          text:
-                              '${cartItem.product.variation.attributeValues['Colors']}  ',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        if (cartItem
-                                .product.variation.attributeValues['Sizes'] !=
-                            null)
-                          TextSpan(
-                            text: 'Size  ',
-                            style: Theme.of(context).textTheme.bodySmall,
+                    children: [
+                      ResponsiveTextSpan(
+                        text:
+                            '${cartItem.product.variation.attributeValues['Colors']}  ',
+                        style: Theme.of(context).textTheme.labelLarge,
+                      ),
+                    ],
+                  ),
+
+                  // --- Sizes --
+                  if (cartItem.product.variation.attributeValues['Sizes'] !=
+                      null)
+                    ResponsiveTextSpan(
+                      text: 'Size  ',
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: Colors.grey,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
                           ),
+                      children: [
                         if (cartItem
                                 .product.variation.attributeValues['Sizes'] !=
                             null)
-                          TextSpan(
+                          ResponsiveTextSpan(
                             text:
                                 '${cartItem.product.variation.attributeValues['Sizes']}  ',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: Theme.of(context).textTheme.labelLarge,
                           ),
                       ],
                     ),
-                  ),
-                  const SizedBox(height: TSizes.spaceBtwItems),
+                  ResponsiveGap.vertical(TSizes.spaceBtwItems),
                   if (showAddRemoveButtons)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -86,7 +98,8 @@ class CartItemCard extends StatelessWidget {
                           cartItem: cartItem,
                         ),
                         TProductPriceText(
-                            price: cartItem.totalPrice.toString()),
+                          price: cartItem.totalPrice.toString(),
+                        ),
                       ],
                     ),
                 ],

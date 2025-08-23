@@ -4,6 +4,8 @@ import 'package:t_store/common/widgets/texts/brand_title_text.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/enums.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class TBrandTitleWithVerifiedIcon extends StatelessWidget {
   final String title;
@@ -37,11 +39,11 @@ class TBrandTitleWithVerifiedIcon extends StatelessWidget {
             brandTextSize: brandTextSize,
           ),
         ),
-        const SizedBox(width: TSizes.xs),
+        ResponsiveGap.horizontal(TSizes.xs),
         Icon(
           Iconsax.verify5,
           color: iconColor,
-          size: TSizes.iconXs,
+          size: context.horzSize(TSizes.iconXs),
         )
       ],
     );

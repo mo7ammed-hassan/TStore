@@ -6,6 +6,8 @@ import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_en
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TProductQuantityButtons extends StatelessWidget {
   const TProductQuantityButtons({
@@ -23,9 +25,9 @@ class TProductQuantityButtons extends StatelessWidget {
         TCircularIcon(
           backgroundColor: isDark ? AppColors.darkerGrey : AppColors.light,
           icon: Iconsax.minus,
-          width: 32,
-          height: 32,
-          size: TSizes.md,
+          width: context.horzSize(32),
+          height: context.horzSize(32),
+          size: context.horzSize(TSizes.md),
           color: isDark ? AppColors.white : AppColors.black,
           onPressed: () async {
             await context.read<CartCubit>().changeItemQuantity(
@@ -35,7 +37,7 @@ class TProductQuantityButtons extends StatelessWidget {
           },
         ),
         const SizedBox(width: TSizes.spaceBtwItems),
-        Text(
+        ResponsiveText(
           cartItem.quantity.toString(),
           style: Theme.of(context).textTheme.titleSmall,
         ),
@@ -43,13 +45,15 @@ class TProductQuantityButtons extends StatelessWidget {
         TCircularIcon(
           backgroundColor: AppColors.primary,
           icon: Iconsax.add,
-          width: 32,
-          height: 32,
-          size: TSizes.md,
+          width: context.horzSize(32),
+          height: context.horzSize(32),
+          size: context.horzSize(TSizes.md),
           color: AppColors.white,
           onPressed: () async {
             await context.read<CartCubit>().changeItemQuantity(
-                item: cartItem, quantity: cartItem.quantity + 1);
+                  item: cartItem,
+                  quantity: cartItem.quantity + 1,
+                );
           },
         ),
       ],

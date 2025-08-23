@@ -9,6 +9,8 @@ import 'package:t_store/features/shop/features/all_brands/presentation/cubits/pr
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 
 class BuildBrandProductsImages extends StatelessWidget {
   const BuildBrandProductsImages({super.key});
@@ -52,19 +54,19 @@ class BuildBrandProductsImages extends StatelessWidget {
 
   Widget _topBrandImage(BuildContext context, {required String image}) {
     return TRoundedContainer(
-      height: 100,
+      height: context.vertSize(100),
       backgroundColor: HelperFunctions.isDarkMode(context)
           ? AppColors.darkerGrey
           : AppColors.light,
-      margin: const EdgeInsets.only(right: TSizes.sm),
-      padding: const EdgeInsets.all(TSizes.md),
+      margin: context.responsiveInsets.only(right: TSizes.sm),
+      padding: context.responsiveInsets.all(TSizes.md),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
         child: CachedNetworkImage(
           imageUrl: image,
           fit: BoxFit.contain,
           placeholder: (context, url) => ShimmerWidget(
-            height: 100,
+            height: context.vertSize(100),
             width: double.infinity,
           ),
           errorWidget: (context, error, stackTrace) =>

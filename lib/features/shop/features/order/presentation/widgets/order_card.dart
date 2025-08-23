@@ -4,6 +4,10 @@ import 'package:t_store/common/widgets/custom_shapes/containers/rounded_containe
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class OrderCard extends StatelessWidget {
   const OrderCard({super.key});
@@ -12,7 +16,7 @@ class OrderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
     return TRoundedContainer(
-      padding: const EdgeInsets.all(TSizes.md),
+      padding: context.responsiveInsets.all(TSizes.md),
       showBorder: true,
       backgroundColor: isDark ? AppColors.dark : AppColors.light,
       child: Column(
@@ -21,56 +25,56 @@ class OrderCard extends StatelessWidget {
           Row(
             children: [
               const Icon(Iconsax.ship),
-              const SizedBox(width: TSizes.spaceBtwItems / 2),
+              ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
               Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.min, // to take only required space
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    ResponsiveText(
                       'Proccessing',
                       style: Theme.of(context).textTheme.bodyLarge!.apply(
                             color: AppColors.primary,
                             fontSizeDelta: 1, // reduce the size
                           ),
                     ),
-                    Text(
+                    ResponsiveText(
                       '11 Nov 2024',
-                      style: Theme.of(context).textTheme.headlineSmall,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),
               ),
               IconButton(
                 onPressed: () {},
-                icon: const Icon(
+                icon: Icon(
                   Iconsax.arrow_right_34,
-                  size: TSizes.iconSm,
+                  size: context.horzSize(18),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: TSizes.spaceBtwItems),
+          ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
           Row(
             children: [
               Expanded(
                 child: Row(
                   children: [
                     const Icon(Iconsax.tag),
-                    const SizedBox(width: TSizes.spaceBtwItems / 2),
+                    ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
                     Expanded(
                       child: Column(
                         mainAxisSize:
                             MainAxisSize.min, // to take only required space
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          ResponsiveText(
                             'Order',
                             style: Theme.of(context).textTheme.labelMedium,
                           ),
-                          Text(
+                          ResponsiveText(
                             '[#256f2]',
-                            style: Theme.of(context).textTheme.titleMedium,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ],
                       ),
@@ -82,20 +86,20 @@ class OrderCard extends StatelessWidget {
                 child: Row(
                   children: [
                     const Icon(Iconsax.calendar),
-                    const SizedBox(width: TSizes.spaceBtwItems / 2),
+                    ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
                     Expanded(
                       child: Column(
                         mainAxisSize:
                             MainAxisSize.min, // to take only required space
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          ResponsiveText(
                             'Shipping Date',
                             style: Theme.of(context).textTheme.labelMedium,
                           ),
-                          Text(
+                          ResponsiveText(
                             '03 Feb 2024',
-                            style: Theme.of(context).textTheme.titleMedium,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ],
                       ),

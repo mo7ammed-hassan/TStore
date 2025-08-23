@@ -4,6 +4,8 @@ import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 
 class ShimmerBrandProductsImages extends StatelessWidget {
   const ShimmerBrandProductsImages({super.key});
@@ -15,12 +17,12 @@ class ShimmerBrandProductsImages extends StatelessWidget {
         3,
         (index) => Expanded(
           child: TRoundedContainer(
-            height: 100,
+            height: context.vertSize(100),
             backgroundColor: HelperFunctions.isDarkMode(context)
                 ? AppColors.darkerGrey
                 : AppColors.light,
-            margin: const EdgeInsets.only(right: TSizes.sm),
-            padding: const EdgeInsets.all(2),
+            margin: context.responsiveInsets.only(right: TSizes.sm),
+            padding: context.responsiveInsets.all(2),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
               child: ShimmerWidget(),

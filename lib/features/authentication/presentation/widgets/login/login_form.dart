@@ -12,6 +12,7 @@ import 'package:t_store/features/authentication/presentation/pages/forget_passwo
 import 'package:t_store/features/authentication/presentation/pages/signup_page.dart';
 import 'package:t_store/features/authentication/presentation/pages/verify_email_page.dart';
 import 'package:t_store/features/navigation_menu/navigation_screen.dart';
+import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
@@ -166,6 +167,7 @@ class TLoginForm extends StatelessWidget {
   }
 
   void _navigateToMenuPage(BuildContext context) {
+    context.read<UserCubit>().fetchUserData(forchFetch: true);
     context.removeAll(const NavigationScreen());
   }
 }

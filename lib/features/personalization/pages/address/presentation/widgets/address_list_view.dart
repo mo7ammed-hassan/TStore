@@ -4,6 +4,9 @@ import 'package:t_store/features/personalization/pages/address/domain/entities/a
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/single_address_card.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class AddressListView extends StatelessWidget {
   const AddressListView({super.key, required this.addresses});
@@ -26,8 +29,8 @@ class AddressListView extends StatelessWidget {
           ),
         );
       },
-      separatorBuilder: (context, index) => const SizedBox(
-        height: TSizes.spaceBtwItems,
+      separatorBuilder: (context, index) => ResponsiveGap.vertical(
+        TSizes.spaceBtwItems,
       ),
     );
   }
@@ -41,36 +44,43 @@ class AddressListView extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Are you sure you want to delete this address?🤔',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('Cancel'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      addressCubit.deleteAddress(addressId);
-                    },
-                    child: const Text(
-                      'Delete ❌',
-                      style: TextStyle(color: Colors.red),
+          padding:
+              context.responsiveInsets.symmetric(horizontal: 16, vertical: 8),
+          child: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ResponsiveText(
+                  'Are you sure you want to delete this address?🤔',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                ),
+                ResponsiveGap.vertical(20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const ResponsiveText(
+                        'Cancel',
+                        style: TextStyle(fontSize: 14),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        addressCubit.deleteAddress(addressId);
+                      },
+                      child: const ResponsiveText(
+                        'Delete ❌',
+                        style: TextStyle(color: Colors.red, fontSize: 14),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },

@@ -8,6 +8,7 @@ import 'package:t_store/features/personalization/pages/profile/presentation/page
 import 'package:t_store/features/personalization/pages/profile/presentation/widgets/user_profile_image.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
 
 class UserProfileTile extends StatelessWidget {
   const UserProfileTile({super.key});
@@ -19,8 +20,8 @@ class UserProfileTile extends StatelessWidget {
         if (state is FetchUserDataLoadedState) {
           return ListTile(
             leading: UserProfileImage(
-              width: 55,
-              height: 55,
+              width: context.horzSize(45),
+              height: context.horzSize(45),
               image: state.userData.profilePicture,
             ),
             title: Text(

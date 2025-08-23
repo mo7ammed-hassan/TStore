@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TProductTitleText extends StatelessWidget {
   const TProductTitleText({
@@ -15,11 +16,11 @@ class TProductTitleText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return ResponsiveText(
       title,
       style: smallSize
           ? Theme.of(context).textTheme.labelLarge
-          : Theme.of(context).textTheme.titleSmall,
+          : Theme.of(context).textTheme.bodyLarge,
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
       textAlign: textAlign,

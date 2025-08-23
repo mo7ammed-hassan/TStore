@@ -8,6 +8,9 @@ import 'package:t_store/features/personalization/pages/address/presentation/cubi
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class SingleAddressCard extends StatelessWidget {
   const SingleAddressCard(
@@ -42,7 +45,7 @@ class SingleAddressCard extends StatelessWidget {
             backgroundColor: isSelectedAddress
                 ? AppColors.primary.withValues(alpha: 0.4)
                 : Colors.transparent,
-            padding: const EdgeInsets.all(TSizes.md),
+            padding: context.responsiveInsets.all(TSizes.md),
             showBorder: true,
             borderColor: isSelectedAddress ? Colors.transparent : null,
             child: Stack(
@@ -61,24 +64,25 @@ class SingleAddressCard extends StatelessWidget {
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    ResponsiveText(
                       address.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
-                    const SizedBox(height: TSizes.sm / 2),
-                    Text(
+                    ResponsiveGap.vertical(TSizes.sm / 2),
+                    ResponsiveText(
                       address.phoneNumber,
-                      style: Theme.of(context).textTheme.titleSmall,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                    const SizedBox(height: TSizes.sm / 2),
-                    Text(
+                    ResponsiveGap.vertical(TSizes.sm / 2),
+                    ResponsiveText(
                       '${address.street}, ${address.state}, ${address.country}, ${address.postalCode}',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.titleSmall,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),

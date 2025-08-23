@@ -7,6 +7,8 @@ import 'package:t_store/features/personalization/pages/profile/cuits/upload_user
 import 'package:t_store/features/personalization/pages/profile/cuits/upload_user_profile_image_state.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/popups/loaders.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class UserProfileImage extends StatelessWidget {
   const UserProfileImage({
@@ -47,8 +49,8 @@ class UserProfileImage extends StatelessWidget {
                   padding: 0,
                   isNetworkImage: true,
                   image: state.url,
-                  width: width ?? 75,
-                  height: height ?? 75,
+                  width: context.horzSize(width ?? 75),
+                  height: context.horzSize(width ?? 75),
                 );
               } else if (state is UploadUserProfileImageFailureState) {
                 return TCircularImage(
@@ -57,13 +59,13 @@ class UserProfileImage extends StatelessWidget {
                   image: context.read<UserCubit>().previousImage != ''
                       ? context.read<UserCubit>().previousImage
                       : TImages.user,
-                  width: width ?? 75,
-                  height: height ?? 75,
+                  width: context.horzSize(width ?? 75),
+                  height: context.horzSize(width ?? 75),
                 );
               } else if (state is UplaodUserProfileImageLoadingState) {
                 return ShimmerWidget(
-                  height: height ?? 75,
-                  width: width ?? 75,
+                  height: context.horzSize(width ?? 75),
+                  width: context.horzSize(width ?? 75),
                   shapeBorder: const CircleBorder(),
                 );
               } else {
@@ -73,8 +75,8 @@ class UserProfileImage extends StatelessWidget {
                   image: (image != '')
                       ? context.read<UserCubit>().previousImage
                       : TImages.user,
-                  width: width ?? 75,
-                  height: height ?? 75,
+                  width: context.horzSize(width ?? 75),
+                  height: context.horzSize(width ?? 75),
                 );
               }
             },
@@ -89,9 +91,10 @@ class UserProfileImage extends StatelessWidget {
                         .read<UploadUserProfileImageCubit>()
                         .uploadUserImage();
                   },
-                  child: const Text(
+                  child: const ResponsiveText(
                     'Change Profile Picture',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                    style:
+                        TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600),
                   ),
                 );
               },

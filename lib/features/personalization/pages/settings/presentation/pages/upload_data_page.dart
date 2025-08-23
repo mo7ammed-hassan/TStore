@@ -6,6 +6,9 @@ import 'package:t_store/features/personalization/pages/settings/presentation/cub
 import 'package:t_store/features/personalization/pages/settings/presentation/widgets/main_record_section.dart';
 import 'package:t_store/features/personalization/pages/settings/presentation/widgets/relationships_section.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class UploadDataPage extends StatelessWidget {
   const UploadDataPage({super.key});
@@ -15,25 +18,31 @@ class UploadDataPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => UploadDataCubit(),
       child: Scaffold(
-        appBar: _appBar(),
+        appBar: TAppBar(
+          showBackArrow: true,
+          title: ResponsiveText(
+            'Upload Data',
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+        ),
         body: SingleChildScrollView(
-          padding: const EdgeInsets.all(TSizes.spaceBtwItems),
+          padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
           child: Column(
             children: [
               const TSectionHeading(
                   title: 'Main Record', showActionButton: false),
-              const SizedBox(height: TSizes.spaceBtwItems),
+              ResponsiveGap.vertical(TSizes.spaceBtwItems),
               const MainRecordSection(),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              ResponsiveGap.vertical(TSizes.spaceBtwSections),
               const TSectionHeading(
                   title: 'Relationships', showActionButton: false),
               Text(
                 'Make sure you have already uploaded all the content above',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              const SizedBox(height: TSizes.spaceBtwItems),
+              ResponsiveGap.vertical(TSizes.spaceBtwItems),
               const RelationshipsSection(),
-              const SizedBox(height: TSizes.spaceBtwSections * 2),
+              ResponsiveGap.vertical(TSizes.spaceBtwSections * 2),
               Builder(
                 builder: (context) {
                   return SizedBox(
@@ -44,7 +53,10 @@ class UploadDataPage extends StatelessWidget {
                             .read<UploadDataCubit>()
                             .deleteDummyData(collection: 'Products');
                       },
-                      child: const Text('Delete Products'),
+                      child: const ResponsiveText(
+                        'Delete Products',
+                        style: TextStyle(fontSize: 14),
+                      ),
                     ),
                   );
                 },
@@ -52,16 +64,6 @@ class UploadDataPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  TAppBar _appBar() {
-    return const TAppBar(
-      showBackArrow: true,
-      title: Text(
-        'Upload Data',
-        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700),
       ),
     );
   }

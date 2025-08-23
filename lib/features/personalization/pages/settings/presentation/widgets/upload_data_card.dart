@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class UploadDataCard extends StatelessWidget {
   final IconData leadingIcon;
@@ -21,15 +23,20 @@ class UploadDataCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(leadingIcon, color: AppColors.primary, size: 30),
-      trailing: Icon(trailingIcon, color: AppColors.primary, size: 28),
-      title: Text(
+      leading: Icon(leadingIcon,
+          color: AppColors.primary, size: context.horzSize(26)),
+      trailing: Icon(trailingIcon,
+          color: AppColors.primary, size: context.horzSize(23)),
+      title: ResponsiveText(
         title,
-        style: Theme.of(context).textTheme.titleMedium,
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(fontWeight: FontWeight.w500),
         maxLines: 3,
         overflow: TextOverflow.ellipsis,
       ),
-      subtitle: subtitle != null ? Text(subtitle!) : null,
+      subtitle: subtitle != null ? ResponsiveText(subtitle!) : null,
       onTap: onTap,
     );
   }

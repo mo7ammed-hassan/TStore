@@ -81,6 +81,8 @@ class ProductCardHorizantal extends StatelessWidget {
                       children: [
                         Expanded(
                           child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            alignment: AlignmentGeometry.centerLeft,
                             child: TProductPriceText(
                               price: product.productrice,
                               maxLines: 2,

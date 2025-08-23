@@ -13,6 +13,9 @@ import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/popups/full_screen_loader.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -57,7 +60,7 @@ class _HomePageState extends State<HomePage> {
               // Featured Section Heading
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
+                  padding: context.responsiveInsets.symmetric(
                     horizontal: TSizes.spaceBtwItems,
                   ),
                   child: TSectionHeading(
@@ -77,16 +80,14 @@ class _HomePageState extends State<HomePage> {
 
               // Featured Products Grid
               const FeaturedProductSection(),
-              const SliverToBoxAdapter(
-                child: SizedBox(height: TSizes.spaceBtwSections),
+              SliverToBoxAdapter(
+                child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
               ),
 
               // Popular Section Heading
               SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: TSizes.spaceBtwItems,
-                  ),
+                child: ResponsivePadding.symmetric(
+                  horizontal: TSizes.spaceBtwItems,
                   child: TSectionHeading(
                     title: 'Popular Products',
                     onPressed: () {
@@ -106,8 +107,8 @@ class _HomePageState extends State<HomePage> {
               // Popular Products Grid
               const PopularProductsSection(),
 
-              const SliverToBoxAdapter(
-                child: SizedBox(height: TSizes.spaceBtwSections),
+              SliverToBoxAdapter(
+                child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
               ),
             ],
           ),

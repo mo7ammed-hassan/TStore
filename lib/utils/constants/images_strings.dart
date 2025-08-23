@@ -30,8 +30,7 @@ class TImages {
       "assets/images/animations/110052-paper-plane.json";
   static const String pencilAnimation =
       "assets/images/animations/140429-pencil-drawing.json";
-      static const String successPyment =
-      "assets//images//animations//success.json";
+  static const String successPyment = "assets/images/animations/success.json";
 
   // --Lottie Animation
   static const String cartAnimation =
@@ -80,5 +79,5 @@ class TImages {
       "assets/icons/payment_methods/successful_payment_icon.png";
 
   static const String defaultProductImage =
-      "https://static.thenounproject.com/png/1077596-200.png";    
+      "https://static.thenounproject.com/png/1077596-200.png";
 }
