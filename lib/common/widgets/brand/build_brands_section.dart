@@ -6,6 +6,7 @@ import 'package:t_store/features/shop/features/all_brands/presentation/cubits/br
 import 'package:t_store/common/widgets/brand/brands_grid_view.dart';
 import 'package:t_store/service_locator.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class BuildBrandsSection extends StatelessWidget {
   const BuildBrandsSection({super.key, this.feturerand = false});
@@ -31,7 +32,7 @@ class BuildBrandsSection extends StatelessWidget {
 
             if (state is BrandError) {
               return SliverToBoxAdapter(
-                child: Center(child: Text(state.featuredBrandsMessage!)),
+                child: Center(child: ResponsiveText(state.featuredBrandsMessage!)),
               );
             }
 
@@ -41,7 +42,7 @@ class BuildBrandsSection extends StatelessWidget {
 
               if (brands.isEmpty) {
                 return const SliverToBoxAdapter(
-                  child: Center(child: Text('No brands found!')),
+                  child: Center(child: ResponsiveText('No brands found!')),
                 );
               }
 

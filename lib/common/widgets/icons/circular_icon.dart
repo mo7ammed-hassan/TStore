@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 
 class TCircularIcon extends StatelessWidget {
@@ -28,9 +29,9 @@ class TCircularIcon extends StatelessWidget {
       onTap: onPressed,
       customBorder: CircleBorder(),
       child: Container(
-        width: width,
-        height: height,
-        padding: context.responsiveInsets.all(8.0),
+        width: width != null ? context.horzSize(width!) : null,
+        height: height != null ? context.horzSize(height!) : null,
+        padding: context.responsiveInsets.all(7.0),
         decoration: BoxDecoration(
           color: backgroundColor != null
               ? backgroundColor!
@@ -42,7 +43,11 @@ class TCircularIcon extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: Center(
-            child: Icon(icon, size: size, color: color),
+            child: Icon(
+              icon,
+              size: size != null ? context.horzSize(size!) : null,
+              color: color,
+            ),
           ),
         ),
       ),

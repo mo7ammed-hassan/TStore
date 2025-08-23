@@ -8,6 +8,7 @@ import 'package:t_store/features/shop/features/all_products/presentation/cubits/
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/all_products_state.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class AllProductsPage extends StatelessWidget {
   const AllProductsPage({
@@ -37,7 +38,9 @@ class AllProductsPage extends StatelessWidget {
                 }
                 if (state is AllProductsLoadedState) {
                   if (state.products!.isEmpty) {
-                    return const Center(child: Text('No products found'));
+                    return const Center(
+                      child: ResponsiveText('No products found'),
+                    );
                   }
                   return TSortableProducts(
                     products: state.products ?? products ?? [],
@@ -45,10 +48,11 @@ class AllProductsPage extends StatelessWidget {
                 }
                 if (state is AllProductsFailureState) {
                   return Center(
-                    child: Text('Error: ${state.error}'),
+                    child: ResponsiveText('Error: ${state.error}'),
                   );
                 } else {
-                  return const Center(child: Text('No products found.'));
+                  return const Center(
+                      child: ResponsiveText('No products found.'));
                 }
               },
             ),
@@ -61,9 +65,9 @@ class AllProductsPage extends StatelessWidget {
   TAppBar _appBar(BuildContext context) {
     return TAppBar(
       showBackArrow: true,
-      title: Text(
+      title: ResponsiveText(
         title,
-        style: Theme.of(context).textTheme.headlineSmall,
+        style: Theme.of(context).textTheme.titleLarge,
       ),
       leadingOnPressed: () {
         AllProductsCubit().close();

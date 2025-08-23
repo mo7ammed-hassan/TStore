@@ -13,6 +13,9 @@ import 'package:t_store/features/shop/features/product_details/presentation/page
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class ProductCardHorizantal extends StatelessWidget {
   final ProductEntity product;
@@ -25,8 +28,8 @@ class ProductCardHorizantal extends StatelessWidget {
       radius: const Radius.circular(TSizes.productImageRadius),
       nextScreen: ProductDetailPage(product: product),
       child: Container(
-        width: 310,
-        padding: const EdgeInsets.all(2),
+        width: context.horzSize(310),
+        padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(TSizes.productImageRadius),
           color: isDark ? AppColors.darkerGrey : AppColors.softGrey,
@@ -36,14 +39,14 @@ class ProductCardHorizantal extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             TRoundedContainer(
-              height: 120,
-              padding: const EdgeInsets.all(TSizes.xs),
+              height: context.horzSize(120),
+              padding: context.responsiveInsets.all(TSizes.xs),
               backgroundColor: isDark ? AppColors.dark : AppColors.grey,
               child: Stack(
                 children: [
                   SizedBox(
-                    height: 120,
-                    width: 120,
+                    height: context.horzSize(120),
+                    width: context.horzSize(120),
                     child: TRoundedImage(
                       fit: BoxFit.contain,
                       imageUrl: product.thumbnail,
@@ -55,7 +58,7 @@ class ProductCardHorizantal extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: TSizes.spaceBtwItems / 2),
+            ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: TSizes.sm, top: TSizes.sm),
@@ -70,7 +73,7 @@ class ProductCardHorizantal extends StatelessWidget {
                           title: product.title,
                           smallSize: true,
                         ),
-                        const SizedBox(height: TSizes.spaceBtwItems / 2),
+                        ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
                         TBrandTitleWithVerifiedIcon(
                           title: product.brand?.name ?? '',
                         ),
@@ -89,7 +92,7 @@ class ProductCardHorizantal extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: TSizes.sm),
+                        ResponsiveGap.horizontal(TSizes.sm),
                         TAddIcon(product: product),
                       ],
                     )

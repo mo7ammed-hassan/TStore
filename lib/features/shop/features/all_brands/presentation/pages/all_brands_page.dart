@@ -3,6 +3,7 @@ import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/common/widgets/brand/build_brands_section.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class AllBrandsPage extends StatelessWidget {
   const AllBrandsPage({super.key});
@@ -35,9 +36,9 @@ class AllBrandsPage extends StatelessWidget {
   TAppBar _appBar(BuildContext context) {
     return TAppBar(
       showBackArrow: true,
-      title: Text(
+      title: ResponsiveText(
         'Brands',
-        style: Theme.of(context).textTheme.headlineSmall,
+        style: Theme.of(context).textTheme.titleLarge,
       ),
     );
   }

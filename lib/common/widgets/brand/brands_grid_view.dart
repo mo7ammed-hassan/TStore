@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/brands/brand_card.dart';
 import 'package:t_store/features/shop/features/all_brands/domain/entities/brand_entity.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
 
 class BrandsGridView extends StatelessWidget {
   const BrandsGridView({super.key, required this.brands});
@@ -13,9 +14,9 @@ class BrandsGridView extends StatelessWidget {
       itemCount: brands.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisExtent: 80,
-        mainAxisSpacing: TSizes.defaultSpace / 2,
-        crossAxisSpacing: TSizes.defaultSpace / 2,
+        mainAxisExtent: context.horzSize(75),
+        mainAxisSpacing: context.horzSize(TSizes.defaultSpace / 2),
+        crossAxisSpacing: context.horzSize(TSizes.defaultSpace / 2),
       ),
       itemBuilder: (context, index) {
         final brand = brands[index];

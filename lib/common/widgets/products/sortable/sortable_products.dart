@@ -6,6 +6,7 @@ import 'package:t_store/common/widgets/products/product_cards/product_card_verti
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/sortable_product_cubit.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 import 'sortable_dropdown.dart';
 
@@ -29,7 +30,7 @@ class TSortableProducts extends StatelessWidget {
                     .read<SortableProductCubit>()
                     .sortProducts(value.toString()),
               ),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              ResponsiveGap.vertical(TSizes.spaceBtwSections),
               BlocBuilder<SortableProductCubit, List<ProductEntity>>(
                 builder: (context, state) {
                   return AnimatedGridLayout(
