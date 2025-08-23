@@ -15,7 +15,7 @@ class TCircularImage extends StatelessWidget {
     this.height = 56,
     this.padding = TSizes.sm,
     this.backgroundColor,
-    this.fit = BoxFit.cover,
+    this.fit = BoxFit.scaleDown,
     this.isNetworkImage = true,
     this.imageColor,
   });
@@ -32,8 +32,8 @@ class TCircularImage extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
     return Container(
-      width: width,
-      height: height,
+      width: context.horzSize(width),
+      height: context.horzSize(height),
       padding: context.responsiveInsets.all(padding),
       decoration: BoxDecoration(
         color: backgroundColor ?? (isDark ? AppColors.black : AppColors.white),

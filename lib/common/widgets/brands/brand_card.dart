@@ -31,12 +31,14 @@ class TBrandCard extends StatelessWidget {
           children: [
             Flexible(
               child: TCircularImage(
+                width: 52,
+                height: 52,
                 image: brand.image,
                 backgroundColor: Colors.transparent,
                 imageColor: (isDark ? AppColors.light : AppColors.dark),
               ),
             ),
-            ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
+            ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2.5),
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
