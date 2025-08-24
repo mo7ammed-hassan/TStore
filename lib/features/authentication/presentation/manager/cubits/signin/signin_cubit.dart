@@ -5,7 +5,7 @@ import 'package:t_store/features/authentication/data/models/user_signin_model.da
 import 'package:t_store/features/authentication/domain/use_cases/is_verified_email_use_case.dart';
 import 'package:t_store/features/authentication/domain/use_cases/signin_usecase.dart';
 import 'package:t_store/features/authentication/presentation/manager/cubits/signin/signin_state.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 
 class SignInCubit extends Cubit<SignInState> {
   SignInCubit() : super(SigninInitialState());

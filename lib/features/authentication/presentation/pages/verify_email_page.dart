@@ -8,7 +8,7 @@ import 'package:t_store/features/authentication/presentation/pages/login_page.da
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/personalization/domain/use_cases/delete_account_use_case.dart';
 import 'package:t_store/features/navigation_menu/navigation_screen.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';

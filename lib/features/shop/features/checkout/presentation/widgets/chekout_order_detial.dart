@@ -5,7 +5,7 @@ import 'package:t_store/features/personalization/pages/address/presentation/cubi
 import 'package:t_store/features/shop/features/checkout/presentation/widgets/address_section.dart';
 import 'package:t_store/features/shop/features/checkout/presentation/widgets/payment_section.dart';
 import 'package:t_store/features/shop/features/checkout/presentation/widgets/pricing_section.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/personalization/domain/use_cases/delete_user_account_use_case.dart';
 import 'package:t_store/features/personalization/pages/profile/cuits/delete_user_account_state.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 
 class DeleteUserAccountCubit extends Cubit<DeleteUserAccountState> {
   DeleteUserAccountCubit() : super(DeleteUserAccountInitialState());

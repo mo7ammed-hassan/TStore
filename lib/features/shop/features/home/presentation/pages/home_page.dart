@@ -7,7 +7,7 @@ import 'package:t_store/features/shop/features/all_products/presentation/pages/a
 import 'package:t_store/features/shop/features/home/presentation/widgets/featured_product_section.dart';
 import 'package:t_store/features/shop/features/home/presentation/widgets/popular_products_section.dart';
 import 'package:t_store/features/shop/features/home/presentation/widgets/home_header_section.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/helpers/navigation.dart';

@@ -3,7 +3,7 @@ import 'package:t_store/features/shop/features/all_brands/domain/entities/brand_
 import 'package:t_store/features/shop/features/all_brands/domain/usecases/get_all_brands_use_case.dart';
 import 'package:t_store/features/shop/features/all_brands/domain/usecases/get_featured_brands_use_case.dart';
 import 'package:t_store/features/shop/features/all_brands/presentation/cubits/brand_state.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 
 class BrandCubit extends Cubit<BrandState> {
   BrandCubit() : super(BrandInitial());

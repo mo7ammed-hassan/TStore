@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/shop/features/home/domain/entites/banner_entity.dart';
 import 'package:t_store/features/shop/features/home/domain/use_cases/banner_use_case.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 
 part 'banner_state.dart';
 

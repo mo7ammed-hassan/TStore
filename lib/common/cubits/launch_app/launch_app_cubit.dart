@@ -4,7 +4,7 @@ import 'package:t_store/common/core/hive_boxes/open_boxes.dart';
 import 'package:t_store/common/cubits/launch_app/launch_app_state.dart';
 import 'package:t_store/features/authentication/domain/use_cases/is_first_launch_use_case.dart';
 import 'package:t_store/features/authentication/domain/use_cases/is_verified_email_use_case.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 
 class LaunchAppCubit extends Cubit<LaunchAppState> {
   LaunchAppCubit() : super(LaunchAppInitial());

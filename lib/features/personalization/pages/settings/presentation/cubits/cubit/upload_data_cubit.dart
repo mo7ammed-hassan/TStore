@@ -3,7 +3,7 @@ import 'package:t_store/features/personalization/data/models/products/product_up
 import 'package:t_store/features/personalization/domain/repository/upload_data_repository.dart';
 import 'package:t_store/features/personalization/domain/use_cases/upload_data_usecases/upload_categories_use_case.dart';
 import 'package:t_store/features/personalization/domain/use_cases/upload_data_usecases/upload_product_use_case.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 
 part 'upload_data_state.dart';

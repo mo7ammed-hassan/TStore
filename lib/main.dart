@@ -9,7 +9,7 @@ import 'package:t_store/bloc_observier.dart';
 import 'package:t_store/common/core/hive_boxes/open_boxes.dart';
 import 'package:t_store/common/cubits/launch_app/launch_app_cubit.dart';
 import 'package:t_store/firebase_options.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:t_store/utils/helpers/register_adapters.dart';
 

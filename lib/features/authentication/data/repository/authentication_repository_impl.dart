@@ -4,7 +4,7 @@ import 'package:t_store/features/authentication/data/models/user_creation_model.
 import 'package:t_store/features/authentication/data/models/user_signin_model.dart';
 import 'package:t_store/features/authentication/data/source/authentication_source/authentication_firebase_services.dart';
 import 'package:t_store/features/authentication/domain/repository/authentication_repository.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
   @override

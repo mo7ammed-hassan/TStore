@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/app_entry_point.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/utils/helpers/app_focus_handler.dart';
 import 'package:t_store/utils/popups/loaders.dart';
 import 'package:t_store/utils/theme/theme.dart';

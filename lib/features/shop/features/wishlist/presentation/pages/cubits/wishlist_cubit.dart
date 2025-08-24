@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/shop/features/all_products/domain/repository/product_repository.dart';
 import 'package:t_store/features/shop/features/wishlist/data/source/wislist_local_sources.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubits/wishlist_state.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 
 class WishlistCubit extends Cubit<WishlistState> {
   WishlistCubit() : super(WishlistInitial());

@@ -8,7 +8,7 @@ import 'package:t_store/features/authentication/data/models/user_creation_model.
 import 'package:t_store/features/authentication/data/models/user_signin_model.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubits/favorite_button_cubit.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubits/wishlist_cubit.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 
 abstract class AuthenticationFirebaseServices {
   Future<Either> signup(UserCreationModel userCreationModel);

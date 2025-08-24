@@ -4,7 +4,7 @@ import 'package:t_store/features/shop/features/all_products/domain/entity/produc
 import 'package:t_store/features/shop/features/all_products/domain/usecases/get_products_specific_category_use_case.dart';
 import 'package:t_store/features/shop/features/home/domain/use_cases/sub_categories_use_case.dart';
 import 'package:t_store/features/shop/features/sub_category/presentation/cubits/sub_category_state.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 
 class SubCategoryCubit extends Cubit<SubCategoryState> {
   SubCategoryCubit() : super(SubCategoryInitial());

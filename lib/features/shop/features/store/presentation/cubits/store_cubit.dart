@@ -4,7 +4,7 @@ import 'package:t_store/features/shop/features/all_brands/domain/usecases/get_br
 import 'package:t_store/features/shop/features/all_products/domain/usecases/get_all_products_by_brand_use_cse.dart';
 import 'package:t_store/features/shop/features/all_products/domain/usecases/get_products_specific_category_use_case.dart';
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_state.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 
 class StoreCubit extends Cubit<StoreState> {
   StoreCubit() : super(StoreInitial());

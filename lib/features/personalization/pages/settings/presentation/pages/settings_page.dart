@@ -11,7 +11,7 @@ import 'package:t_store/features/personalization/pages/address/presentation/page
 import 'package:t_store/features/personalization/pages/settings/presentation/pages/upload_data_page.dart';
 import 'package:t_store/features/shop/features/cart/presentation/pages/cart_page.dart';
 import 'package:t_store/features/shop/features/order/presentation/pages/order_page.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/navigation.dart';

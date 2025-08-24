@@ -4,7 +4,7 @@ import 'package:t_store/features/authentication/data/models/user_signin_model.da
 import 'package:t_store/features/personalization/data/source/remote/user_firebase_services.dart';
 import 'package:t_store/features/personalization/domain/use_cases/re_auth_user_account_use_case.dart';
 import 'package:t_store/features/personalization/pages/profile/cuits/re_auth_user_state.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 
 class ReAuthUserCubit extends Cubit<ReAuthUserState> {
   ReAuthUserCubit() : super(ReAuthLoadingState());

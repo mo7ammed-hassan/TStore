@@ -5,7 +5,7 @@ import 'package:t_store/features/shop/features/all_products/domain/usecases/get_
 import 'package:t_store/features/shop/features/all_products/presentation/pages/all_products_page.dart';
 import 'package:t_store/features/shop/features/home/domain/entites/category_entity.dart';
 import 'package:t_store/features/shop/features/sub_category/presentation/widgets/build_sub_category_products.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
 

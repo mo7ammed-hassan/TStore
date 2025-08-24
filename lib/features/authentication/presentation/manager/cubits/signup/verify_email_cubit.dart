@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/authentication/domain/use_cases/is_verified_email_use_case.dart';
 import 'package:t_store/features/authentication/domain/use_cases/send_email_verification_usecase.dart';
 import 'package:t_store/features/authentication/presentation/manager/cubits/signup/verify_email_state.dart';
-import 'package:t_store/service_locator.dart';
+import 'package:t_store/config/service_locator.dart';
 
 class VerifyEmailCubit extends Cubit<VerifyEmailState> {
   int index = 0;
