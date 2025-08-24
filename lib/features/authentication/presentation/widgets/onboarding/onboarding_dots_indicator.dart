@@ -5,6 +5,8 @@ import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/device/device_utlity.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 
 class OnboardingDotsIndicator extends StatelessWidget {
   const OnboardingDotsIndicator({super.key});
@@ -18,7 +20,7 @@ class OnboardingDotsIndicator extends StatelessWidget {
       buildWhen: (previous, current) => previous != current,
       builder: (context, currentIndex) {
         return Positioned(
-          bottom: TDeviceUtils.getBottomNavigationBarHeight() + 25,
+          bottom: TDeviceUtils.getBottomNavigationBarHeight() + 20,
           left: TSizes.defaultSpace,
           right: TSizes.defaultSpace,
           child: Row(
@@ -27,9 +29,9 @@ class OnboardingDotsIndicator extends StatelessWidget {
               final isActive = index == currentIndex;
               return AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
-                margin: const EdgeInsets.symmetric(horizontal: 4),
-                height: 3.5,
-                width: isActive ? 43 : 20,
+                margin: context.responsiveInsets.symmetric(horizontal: 4),
+                height: context.vertSize(3.5),
+                width: isActive ? context.horzSize(40) : context.horzSize(18),
                 decoration: BoxDecoration(
                   color: isActive
                       ? isDarkMode

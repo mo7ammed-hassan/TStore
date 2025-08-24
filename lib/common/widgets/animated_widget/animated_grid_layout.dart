@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
 
 class AnimatedGridLayout extends StatefulWidget {
   final int itemCount;
   final IndexedWidgetBuilder itemBuilder;
-  final double mainAxisExtent;
+
   final Widget Function({
     bool? isVisible,
     VoidCallback? onRemove,
@@ -16,7 +17,6 @@ class AnimatedGridLayout extends StatefulWidget {
     super.key,
     required this.itemCount,
     required this.itemBuilder,
-    this.mainAxisExtent = 290,
     required this.animatedEffect,
   });
 
@@ -62,9 +62,9 @@ class _AnimatedGridLayoutState extends State<AnimatedGridLayout> {
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
+        childAspectRatio: context.horzSize(50) / context.vertSize(86),
         mainAxisSpacing: TSizes.gridViewSpacing, //vertical
         crossAxisSpacing: TSizes.gridViewSpacing,
-        mainAxisExtent: widget.mainAxisExtent,
       ),
       itemBuilder: (context, index) {
         return widget.animatedEffect(

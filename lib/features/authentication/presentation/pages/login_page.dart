@@ -8,6 +8,7 @@ import 'package:t_store/features/authentication/presentation/widgets/login/login
 import 'package:t_store/features/authentication/presentation/widgets/login/login_header.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -28,7 +29,7 @@ class LoginPage extends StatelessWidget {
             ),
             // Divider
             const TFormDivider(dividerText: TTexts.orSignInWith),
-            const SizedBox(height: TSizes.spaceBtwSections),
+            ResponsiveGap.vertical(TSizes.spaceBtwSections),
             // Footer
             const TSocialButtons(),
           ],

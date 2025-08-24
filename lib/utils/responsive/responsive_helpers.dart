@@ -73,7 +73,7 @@ double getResponsiveSize(
   BuildContext context,
   Axis? axis,
   double size, {
-  double minScale = 0.8,
+  double minScale = 0.85,
   double maxScale = 1.2,
 }) {
   double scaleFactor = axis == Axis.vertical

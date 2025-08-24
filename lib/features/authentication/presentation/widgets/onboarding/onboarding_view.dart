@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
@@ -21,20 +20,29 @@ class OnBoardingView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image(
-            width: HelperFunctions.screenWidth() * 0.8,
-            height: HelperFunctions.screenWidth() * 0.7,
-            image: AssetImage(image),
+          Flexible(
+            fit: FlexFit.loose,
+            child: Image(
+              image: AssetImage(image),
+            ),
           ),
+          ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
           ResponsiveText(
             title,
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context)
+                .textTheme
+                .headlineMedium
+                ?.copyWith(fontSize: 22),
             textAlign: TextAlign.center,
           ),
           ResponsiveGap.vertical(TSizes.spaceBtwItems),
           ResponsiveText(
             subtitle,
-            style: Theme.of(context).textTheme.bodyMedium,
+            maxLines: 5,
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(fontSize: 13.5),
             textAlign: TextAlign.center,
           ),
         ],

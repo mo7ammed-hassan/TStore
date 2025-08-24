@@ -26,7 +26,7 @@ class StoreHeader extends StatelessWidget {
       backgroundColor: HelperFunctions.isDarkMode(context)
           ? AppColors.black
           : AppColors.white,
-      expandedHeight: context.vertSize(400),
+      expandedHeight: context.vertSize(410),
       flexibleSpace: Padding(
         padding: context.responsiveInsets.all(TSizes.defaultSpace),
         child: CustomScrollView(

@@ -33,7 +33,7 @@ class FeaturedProductSection extends StatelessWidget {
           return SliverPadding(
             padding:
                 const EdgeInsets.symmetric(horizontal: TSizes.spaceBtwItems),
-            sliver: ProductsGridView.sliver(state.featuredProducts),
+            sliver: ProductsGridView.sliver(context,state.featuredProducts),
           );
         }
 

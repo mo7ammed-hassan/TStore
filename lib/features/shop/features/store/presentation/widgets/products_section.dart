@@ -42,7 +42,7 @@ class _ProductsSectionState extends State<ProductsSection> {
             );
           }
 
-          return ProductsGridView.sliver(state.products);
+          return ProductsGridView.sliver(context, state.products);
         }
 
         return const SliverToBoxAdapter(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
 
 class ProductsGridView extends StatelessWidget {
   final List<ProductEntity> products;
@@ -13,7 +14,7 @@ class ProductsGridView extends StatelessWidget {
     this.useSliver = false,
   });
 
-  static Widget sliver(List<ProductEntity> products) {
+  static Widget sliver(BuildContext context, List<ProductEntity> products) {
     return SliverGrid(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
@@ -22,11 +23,12 @@ class ProductsGridView extends StatelessWidget {
         },
         childCount: products.length,
       ),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.65,
-        mainAxisSpacing: TSizes.gridViewSpacing,
-        crossAxisSpacing: TSizes.gridViewSpacing,
+        //childAspectRatio: 0.65,
+        childAspectRatio: context.horzSize(50) / context.vertSize(86),
+        mainAxisSpacing: context.vertSize(TSizes.gridViewSpacing),
+        crossAxisSpacing: context.horzSize(TSizes.gridViewSpacing),
       ),
     );
   }
@@ -34,7 +36,7 @@ class ProductsGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (useSliver) {
-      return ProductsGridView.sliver(products);
+      return ProductsGridView.sliver(context, products);
     }
 
     return GridView.builder(

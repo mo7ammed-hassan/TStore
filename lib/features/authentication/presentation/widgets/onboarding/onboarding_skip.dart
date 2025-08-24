@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/authentication/presentation/manager/cubits/onboarding/onboarding_cubit.dart';
-import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/device/device_utlity.dart';
-import 'package:t_store/utils/responsive/responsive_helpers.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class OnBoardingSkip extends StatelessWidget {
@@ -17,8 +15,8 @@ class OnBoardingSkip extends StatelessWidget {
     final cubit = context.read<OnboardingCubit>();
 
     return Positioned(
-      top: TDeviceUtils.getAppBarHeight() / 2,
-      right: context.horzSize(TSizes.defaultSpace / 2),
+      top: TDeviceUtils.getAppBarHeight() / 1.5,
+      right: 4,
       child: TextButton(
         onPressed: () {
           context.read<OnboardingCubit>().skipPage();
