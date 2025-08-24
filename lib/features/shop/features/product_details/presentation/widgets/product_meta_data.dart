@@ -81,7 +81,7 @@ class TProductMetaData extends StatelessWidget {
               image: product.brand?.image ?? TImages.defaultProductImage,
               width: 32,
               height: 32,
-              backgroundColor: isDark ? AppColors.black : AppColors.white,
+              backgroundColor: isDark ? AppColors.black : AppColors.light,
             ),
             ResponsiveGap.horizontal(5),
             TBrandTitleWithVerifiedIcon(
