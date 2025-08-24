@@ -28,7 +28,7 @@ class ProductCardHorizantal extends StatelessWidget {
       radius: const Radius.circular(TSizes.productImageRadius),
       nextScreen: ProductDetailPage(product: product),
       child: Container(
-        width: context.horzSize(310),
+        width: context.horzSize(280),
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(TSizes.productImageRadius),
@@ -45,8 +45,8 @@ class ProductCardHorizantal extends StatelessWidget {
               child: Stack(
                 children: [
                   SizedBox(
-                    height: context.horzSize(120),
-                    width: context.horzSize(120),
+                    height: context.horzSize(110),
+                    width: context.horzSize(110),
                     child: TRoundedImage(
                       fit: BoxFit.contain,
                       imageUrl: product.thumbnail,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_verify_brand.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
 import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class ShimmerVerticalProductCard extends StatelessWidget {
   const ShimmerVerticalProductCard({super.key});
@@ -29,7 +30,7 @@ class ShimmerVerticalProductCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 8),
+          ResponsiveGap.vertical(8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4.0),
             child: Column(
@@ -42,7 +43,7 @@ class ShimmerVerticalProductCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                const SizedBox(height: 16),
+                ResponsiveGap.vertical(16),
                 const ShimmerVerifyBrand(),
               ],
             ),
@@ -61,7 +62,7 @@ class ShimmerVerticalProductCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 8),
+              ResponsiveGap.horizontal(8),
               ShimmerWidget(
                 height: 35,
                 width: 35,

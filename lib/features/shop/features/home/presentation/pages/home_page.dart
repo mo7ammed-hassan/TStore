@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
               // Featured Products Grid
               const FeaturedProductSection(),
               SliverToBoxAdapter(
-                child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
+                child: ResponsiveGap.vertical(TSizes.spaceBtwSections / 2),
               ),
 
               // Popular Section Heading

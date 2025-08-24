@@ -17,7 +17,7 @@ class FeaturedProductSection extends StatelessWidget {
           return SliverPadding(
             padding:
                 const EdgeInsets.symmetric(horizontal: TSizes.spaceBtwItems),
-            sliver: ShimmerProductsGridLayout.sliver(),
+            sliver: ShimmerProductsGridLayout.sliver(context),
           );
         }
 

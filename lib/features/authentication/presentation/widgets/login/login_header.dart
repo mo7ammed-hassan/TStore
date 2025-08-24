@@ -25,14 +25,17 @@ class TLoginHeader extends StatelessWidget {
         ),
         ResponsiveText(
           TTexts.loginTitle,
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: Theme.of(context)
+              .textTheme
+              .headlineMedium
+              ?.copyWith(fontSize: 23),
         ),
         ResponsiveGap.vertical(TSizes.sm),
         ResponsiveText(
           TTexts.loginSubTitle,
           maxLines: 2,
           style:
-              Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13.5),
+              Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13.3),
         ),
       ],
     );

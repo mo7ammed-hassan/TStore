@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/shop/features/sub_category/presentation/cubits/sub_category_cubit.dart';
 import 'package:t_store/features/shop/features/sub_category/presentation/cubits/sub_category_state.dart';
 import 'package:t_store/features/shop/features/sub_category/presentation/widgets/sub_category_section.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class BuildSubCategoriesSections extends StatelessWidget {
   const BuildSubCategoriesSections({super.key});
@@ -25,7 +26,7 @@ class BuildSubCategoriesSections extends StatelessWidget {
         if (state is SubCategoryLoaded) {
           if (state.subCategories.isEmpty) {
             return const SliverToBoxAdapter(
-              child: Center(child: Text('No sub categories found')),
+              child: Center(child: ResponsiveText('No sub categories found')),
             );
           }
 

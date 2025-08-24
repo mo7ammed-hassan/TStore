@@ -8,6 +8,8 @@ import 'package:t_store/features/shop/features/sub_category/presentation/widgets
 import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class SubCategorySection extends StatelessWidget {
   const SubCategorySection({
@@ -18,7 +20,7 @@ class SubCategorySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: TSizes.spaceBtwSections),
+      padding: context.responsiveInsets.only(bottom: TSizes.spaceBtwSections),
       child: Column(
         children: [
           TSectionHeading(
@@ -34,7 +36,7 @@ class SubCategorySection extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(height: TSizes.spaceBtwItems / 2),
+          ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
           SizedBox(
             height: 120,
             child: BuildSubCategoryProducts(subCategoryId: subCategory.id),

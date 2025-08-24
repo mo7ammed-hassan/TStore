@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_vertical_product_card.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
 
 class ShimmerProductsGridLayout extends StatelessWidget {
   final int itemCount;
   const ShimmerProductsGridLayout({super.key, this.itemCount = 4});
 
-  static Widget sliver() {
+  static Widget sliver(BuildContext context) {
     return SliverGrid(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
@@ -14,11 +15,11 @@ class ShimmerProductsGridLayout extends StatelessWidget {
         },
         childCount: 4,
       ),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.65,
-        mainAxisSpacing: TSizes.gridViewSpacing,
-        crossAxisSpacing: TSizes.gridViewSpacing,
+        childAspectRatio: context.horzSize(50) / context.vertSize(86),
+        mainAxisSpacing: context.vertSize(TSizes.gridViewSpacing),
+        crossAxisSpacing: context.horzSize(TSizes.gridViewSpacing),
       ),
     );
   }
@@ -28,9 +29,9 @@ class ShimmerProductsGridLayout extends StatelessWidget {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.65,
-        mainAxisSpacing: TSizes.gridViewSpacing,
-        crossAxisSpacing: TSizes.gridViewSpacing,
+        childAspectRatio: context.horzSize(50) / context.vertSize(86),
+        mainAxisSpacing: context.vertSize(TSizes.gridViewSpacing),
+        crossAxisSpacing: context.horzSize(TSizes.gridViewSpacing),
       ),
       itemBuilder: (context, index) {
         return ShimmerVerticalProductCard();

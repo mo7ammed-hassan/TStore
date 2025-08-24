@@ -9,8 +9,10 @@ import 'package:t_store/config/service_locator.dart';
 class SubCategoryCubit extends Cubit<SubCategoryState> {
   SubCategoryCubit() : super(SubCategoryInitial());
 
+  bool isFirstTiem = true;
+
   void fetchSubCategory({required String categoryId}) async {
-    emit(SubCategoryLoading());
+    if (isFirstTiem) emit(SubCategoryLoading());
 
     final result = await SubCategoriesUseCase().call(params: categoryId);
 
@@ -19,6 +21,7 @@ class SubCategoryCubit extends Cubit<SubCategoryState> {
     result.fold(
       (error) => emit(SubCategoryFailure(error)),
       (subCategories) {
+        isFirstTiem = false;
         emit(SubCategoryLoaded(subCategories));
       },
     );

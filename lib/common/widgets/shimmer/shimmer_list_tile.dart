@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
 
 class ShimmerListTile extends StatelessWidget {
   const ShimmerListTile({super.key});
@@ -14,25 +15,27 @@ class ShimmerListTile extends StatelessWidget {
       highlightColor: isDark ? Colors.grey[700]! : Colors.grey[100]!,
       period: const Duration(milliseconds: 1550),
       child: ListTile(
-        leading: Container(
-          width: 50,
-          height: 50,
-          decoration: BoxDecoration(
-            color: isDark ? Colors.grey[700]! : Colors.grey[100]!,
-            shape: BoxShape.circle,
+        leading: FittedBox(
+          child: Container(
+            width: context.horzSize(45),
+            height: context.horzSize(45),
+            decoration: BoxDecoration(
+              color: isDark ? Colors.grey[700]! : Colors.grey[100]!,
+              shape: BoxShape.circle,
+            ),
           ),
         ),
         title: Container(
           width: double.infinity,
-          height: 16,
+          height: context.vertSize(16),
           decoration: BoxDecoration(
             color: Colors.grey,
             borderRadius: BorderRadius.circular(5),
           ),
         ),
         subtitle: Container(
-          width: 150,
-          height: 14,
+          width: context.horzSize(150),
+          height: context.vertSize(14),
           decoration: BoxDecoration(
             color: Colors.grey,
             borderRadius: BorderRadius.circular(5),
@@ -40,8 +43,9 @@ class ShimmerListTile extends StatelessWidget {
         ),
         trailing: IconButton(
           onPressed: () {},
-          icon: const Icon(
+          icon: Icon(
             Iconsax.edit,
+            size: context.horzSize(20),
             color: Colors.grey,
           ),
         ),

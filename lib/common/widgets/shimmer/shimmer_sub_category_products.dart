@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_horizantal_product_card.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class ShimmerSubCategoryProducts extends StatelessWidget {
   const ShimmerSubCategoryProducts({super.key});
@@ -13,11 +15,11 @@ class ShimmerSubCategoryProducts extends StatelessWidget {
         itemCount: 4,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) => SizedBox(
-          width: 310,
+          width: context.horzSize(280),
           child: const ShimmerHorizantalProductCard(),
         ),
         separatorBuilder: (BuildContext context, int index) =>
-            const SizedBox(width: TSizes.spaceBtwItems),
+            ResponsiveGap.horizontal(TSizes.spaceBtwItems),
       ),
     );
   }

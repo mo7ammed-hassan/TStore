@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_verify_brand.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
 import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class ShimmerHorizantalProductCard extends StatelessWidget {
   const ShimmerHorizantalProductCard({super.key});
@@ -19,13 +21,13 @@ class ShimmerHorizantalProductCard extends StatelessWidget {
       child: Row(
         children: [
           ShimmerWidget(
-            height: 120,
-            width: 120,
+            height: context.horzSize(110),
+            width: context.horzSize(110),
             shapeBorder: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16.0),
             ),
           ),
-          const SizedBox(width: 8),
+          ResponsiveGap.horizontal(8),
           Flexible(
             fit: FlexFit.loose,
             child: Padding(
@@ -34,31 +36,33 @@ class ShimmerHorizantalProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ShimmerWidget(
-                    height: 10,
-                    width: 100,
+                    height: context.vertSize(10),
+                    width: context.horzSize(100),
                     shapeBorder: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  ResponsiveGap.vertical(8),
                   const ShimmerVerifyBrand(),
-                  const SizedBox(height: 8),
+                  ResponsiveGap.vertical(8),
                   Spacer(),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Flexible(
                         fit: FlexFit.loose,
                         child: ShimmerWidget(
-                          height: 10,
+                          height: context.vertSize(10),
+                          width: context.horzSize(80),
                           shapeBorder: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      ResponsiveGap.horizontal(8),
                       ShimmerWidget(
-                        height: 35,
-                        width: 35,
+                        height: context.horzSize(35),
+                        width: context.horzSize(35),
                         shapeBorder: RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(8),

@@ -28,7 +28,7 @@ class _ProductsSectionState extends State<ProductsSection> {
       buildWhen: _buildWhen,
       builder: (context, state) {
         if (state is StoreProductLoading) {
-          return ShimmerProductsGridLayout.sliver();
+          return ShimmerProductsGridLayout.sliver(context);
         }
 
         if (state is StoreProductError) {

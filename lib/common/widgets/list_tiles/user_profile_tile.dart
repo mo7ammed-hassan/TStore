@@ -9,6 +9,7 @@ import 'package:t_store/features/personalization/pages/profile/presentation/widg
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class UserProfileTile extends StatelessWidget {
   const UserProfileTile({super.key});
@@ -26,28 +27,29 @@ class UserProfileTile extends StatelessWidget {
                 image: state.userData.profilePicture,
               ),
             ),
-            title: Text(
+            title: ResponsiveText(
               "${state.userData.firstName} ${state.userData.lastName}",
               style: Theme.of(context)
                   .textTheme
-                  .headlineSmall!
-                  .apply(color: AppColors.white),
+                  .titleLarge!
+                  .copyWith(color: AppColors.white, fontSize: 16),
               overflow: TextOverflow.ellipsis,
             ),
-            subtitle: Text(
+            subtitle: ResponsiveText(
               state.userData.userEmail,
               style: Theme.of(context)
                   .textTheme
-                  .bodyMedium!
-                  .apply(color: AppColors.white),
+                  .bodyMedium
+                  ?.copyWith(color: AppColors.white, fontSize: 13.5),
               overflow: TextOverflow.ellipsis,
             ),
             trailing: IconButton(
               onPressed: () {
                 context.pushPage(ProfilePage(userData: state.userData));
               },
-              icon: const Icon(
+              icon: Icon(
                 Iconsax.edit,
+                size: context.horzSize(20),
                 color: AppColors.white,
               ),
             ),

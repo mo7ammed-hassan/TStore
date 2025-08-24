@@ -41,11 +41,11 @@ class ProductsGridView extends StatelessWidget {
 
     return GridView.builder(
       padding: EdgeInsets.zero,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.65,
-        mainAxisSpacing: TSizes.gridViewSpacing,
-        crossAxisSpacing: TSizes.gridViewSpacing,
+        childAspectRatio: context.horzSize(50) / context.vertSize(86),
+        mainAxisSpacing: context.vertSize(TSizes.gridViewSpacing),
+        crossAxisSpacing: context.horzSize(TSizes.gridViewSpacing),
       ),
       itemBuilder: (context, index) {
         final product = products[index];

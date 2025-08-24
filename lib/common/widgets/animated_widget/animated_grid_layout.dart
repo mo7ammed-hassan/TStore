@@ -63,8 +63,8 @@ class _AnimatedGridLayoutState extends State<AnimatedGridLayout> {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: context.horzSize(50) / context.vertSize(86),
-        mainAxisSpacing: TSizes.gridViewSpacing, //vertical
-        crossAxisSpacing: TSizes.gridViewSpacing,
+        mainAxisSpacing: context.vertSize(TSizes.gridViewSpacing),
+        crossAxisSpacing: context.horzSize(TSizes.gridViewSpacing),
       ),
       itemBuilder: (context, index) {
         return widget.animatedEffect(

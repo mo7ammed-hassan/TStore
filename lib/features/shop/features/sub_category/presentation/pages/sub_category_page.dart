@@ -8,6 +8,9 @@ import 'package:t_store/features/shop/features/sub_category/presentation/widgets
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class SubCategoryPage extends StatelessWidget {
   final CategoryEntity category;
@@ -22,16 +25,14 @@ class SubCategoryPage extends StatelessWidget {
       child: Scaffold(
         appBar: TAppBar(
           showBackArrow: true,
-          title: Text(
+          title: ResponsiveText(
             category.name,
             style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: TSizes.spaceBtwItems,
-            vertical: TSizes.defaultSpace,
-          ),
+        body: ResponsivePadding.symmetric(
+          horizontal: TSizes.spaceBtwItems,
+          vertical: TSizes.defaultSpace,
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
@@ -53,7 +54,7 @@ class SubCategoryPage extends StatelessWidget {
                 ),
               ),
               SliverToBoxAdapter(
-                child: SizedBox(height: TSizes.spaceBtwSections / 2),
+                child: ResponsiveGap.vertical(TSizes.spaceBtwSections / 2),
               ),
               const BuildSubCategoriesSections(),
             ],

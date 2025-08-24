@@ -17,7 +17,8 @@ class ShimmerBrandProductsImages extends StatelessWidget {
         3,
         (index) => Expanded(
           child: TRoundedContainer(
-            height: context.vertSize(100),
+            height: context.vertSize(85),
+            width: context.vertSize(85),
             backgroundColor: HelperFunctions.isDarkMode(context)
                 ? AppColors.darkerGrey
                 : AppColors.light,

@@ -6,6 +6,7 @@ import 'package:t_store/features/shop/features/all_products/domain/entity/produc
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_variation_entity.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/cubits/images_product_cubit.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/cubits/product_variation_cubit.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
 
 class BuildChoiceChips extends StatelessWidget {
   const BuildChoiceChips(
@@ -18,7 +19,7 @@ class BuildChoiceChips extends StatelessWidget {
     return BlocBuilder<ProductVariationCubit, ProductVariationEntity>(
       builder: (context, state) {
         return Wrap(
-          spacing: 8,
+          spacing: context.horzSize(8),
           children: attribute.value.values.map((attributeValue) {
             final available = _isAttributeAvailableInVariation(
                 context, attribute.value.name, attributeValue);

@@ -5,6 +5,8 @@ import 'package:t_store/common/widgets/shimmer/shimmer_sub_category_products.dar
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/sub_category/presentation/cubits/sub_category_cubit.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class BuildSubCategoryProducts extends StatelessWidget {
   const BuildSubCategoryProducts({super.key, required this.subCategoryId});
@@ -21,18 +23,18 @@ class BuildSubCategoryProducts extends StatelessWidget {
         }
 
         if (snapshot.hasError) {
-          return Center(child: Text(snapshot.error.toString()));
+          return Center(child: ResponsiveText(snapshot.error.toString()));
         }
 
         if (snapshot.hasData) {
           if (snapshot.data!.isEmpty) {
-            return const Center(child: Text('No products found'));
+            return const Center(child: ResponsiveText('No products found'));
           }
 
           return _buildSubCategoryProducts(products: snapshot.data!);
         }
 
-        return const Center(child: Text('Something went wrong!'));
+        return const Center(child: ResponsiveText('Something went wrong!'));
       },
     );
   }
@@ -44,7 +46,7 @@ class BuildSubCategoryProducts extends StatelessWidget {
       itemBuilder: (context, index) =>
           ProductCardHorizantal(product: products[index]),
       separatorBuilder: (BuildContext context, int index) =>
-          const SizedBox(width: TSizes.spaceBtwItems),
+          ResponsiveGap.horizontal(TSizes.spaceBtwItems),
     );
   }
 }

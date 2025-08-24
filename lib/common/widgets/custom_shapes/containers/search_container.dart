@@ -52,7 +52,7 @@ class TSearchConatiner extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .labelLarge
-                    ?.copyWith(color: Colors.grey, fontSize: 13),
+                    ?.copyWith(color: Colors.grey, fontSize: 13.2),
               ),
             ],
           ),

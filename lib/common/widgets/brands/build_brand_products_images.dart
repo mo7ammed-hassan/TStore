@@ -54,20 +54,23 @@ class BuildBrandProductsImages extends StatelessWidget {
 
   Widget _topBrandImage(BuildContext context, {required String image}) {
     return TRoundedContainer(
-      height: context.vertSize(100),
+      height: context.horzSize(85),
+      width: context.horzSize(85),
       backgroundColor: HelperFunctions.isDarkMode(context)
           ? AppColors.darkerGrey
           : AppColors.light,
       margin: context.responsiveInsets.only(right: TSizes.sm),
-      padding: context.responsiveInsets.all(TSizes.md),
+      padding: context.responsiveInsets.all(TSizes.sm),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
         child: CachedNetworkImage(
           imageUrl: image,
+          height: context.horzSize(85),
+          width: context.horzSize(85),
           fit: BoxFit.contain,
           placeholder: (context, url) => ShimmerWidget(
-            height: context.vertSize(100),
-            width: double.infinity,
+            height: context.horzSize(85),
+            width: context.horzSize(85),
           ),
           errorWidget: (context, error, stackTrace) =>
               const Icon(Icons.error_rounded),

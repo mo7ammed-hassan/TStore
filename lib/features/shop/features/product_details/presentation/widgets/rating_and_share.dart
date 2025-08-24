@@ -39,7 +39,7 @@ class TRatingAndShare extends StatelessWidget {
         // Share button
         IconButton(
           onPressed: () {},
-          icon: Icon(Icons.share, size: context.horzSize(TSizes.iconMd / 1.2)),
+          icon: Icon(Icons.share, size: context.horzSize(TSizes.iconMd)),
         )
       ],
     );

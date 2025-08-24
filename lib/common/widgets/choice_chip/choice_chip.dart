@@ -24,7 +24,7 @@ class TChoiceChip extends StatelessWidget {
             ? const SizedBox()
             : ResponsiveText(
                 text,
-                fontSize: 13,
+                fontSize: 14,
               ),
         selected: selected,
         onSelected: onSelected,
