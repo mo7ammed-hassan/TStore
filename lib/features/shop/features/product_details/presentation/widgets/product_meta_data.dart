@@ -12,6 +12,8 @@ import 'package:t_store/utils/constants/enums.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TProductMetaData extends StatelessWidget {
   const TProductMetaData({
@@ -35,12 +37,12 @@ class TProductMetaData extends StatelessWidget {
                     rate: '$salePersentage%',
                   )
                 : const SizedBox(),
-            const SizedBox(width: TSizes.spaceBtwItems),
+            ResponsiveGap.horizontal(TSizes.spaceBtwItems),
 
             // Discount price
             if (product.productType == ProductType.single.toString() &&
                 product.salePrice! > 0)
-              Text(
+              ResponsiveText(
                 product.price.toDouble().toString(),
                 style: Theme.of(context)
                     .textTheme
@@ -51,28 +53,28 @@ class TProductMetaData extends StatelessWidget {
         ),
         if (product.productType == ProductType.single.toString() &&
             product.salePrice! > 0)
-          const SizedBox(width: TSizes.spaceBtwItems / 2),
+          ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
         TProductPriceText(price: cubit.getProductPrice(product), isLarge: true),
-        const SizedBox(height: TSizes.spaceBtwItems / 1.5),
+        ResponsiveGap.vertical(TSizes.spaceBtwItems / 1.5),
         TProductTitleText(
           title: product.title,
         ),
-        const SizedBox(height: TSizes.spaceBtwItems / 1.5),
+        ResponsiveGap.vertical(TSizes.spaceBtwItems / 1.5),
         Row(
           children: [
             const TProductTitleText(
               title: 'Status',
             ),
-            const SizedBox(
-              width: TSizes.spaceBtwItems,
+            ResponsiveGap.horizontal(
+              TSizes.spaceBtwItems,
             ),
-            Text(
+            ResponsiveText(
               cubit.getPrroductStockStatus(product.stock),
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ],
         ),
-        const SizedBox(height: TSizes.spaceBtwItems / 1.5),
+        ResponsiveGap.vertical(TSizes.spaceBtwItems / 1.5),
         Row(
           children: [
             TCircularImage(
@@ -81,7 +83,7 @@ class TProductMetaData extends StatelessWidget {
               height: 32,
               backgroundColor: isDark ? AppColors.black : AppColors.white,
             ),
-            const SizedBox(width: 5),
+            ResponsiveGap.horizontal(5),
             TBrandTitleWithVerifiedIcon(
               title: product.brand?.name ?? '',
               brandTextSize: TextSizes.medium,

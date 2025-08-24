@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/circular_conatiner.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TChoiceChip extends StatelessWidget {
   const TChoiceChip({
@@ -19,7 +20,12 @@ class TChoiceChip extends StatelessWidget {
     return Theme(
       data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
       child: ChoiceChip(
-        label: isColor != null ? const SizedBox() : Text(text),
+        label: isColor != null
+            ? const SizedBox()
+            : ResponsiveText(
+                text,
+                fontSize: 13,
+              ),
         selected: selected,
         onSelected: onSelected,
         labelStyle: TextStyle(color: selected ? AppColors.white : null),

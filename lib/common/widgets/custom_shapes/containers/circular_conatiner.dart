@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
 
 class TCircularContainer extends StatelessWidget {
   final double? width, height, raduis;
@@ -21,8 +22,8 @@ class TCircularContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
-      height: height,
+      width: width != null ? context.horzSize(width!) : null,
+      height: height != null ? context.horzSize(height!) : null,
       padding: EdgeInsets.all(padding),
       margin: margin,
       decoration: BoxDecoration(

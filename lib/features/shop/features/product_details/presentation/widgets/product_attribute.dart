@@ -5,6 +5,7 @@ import 'package:t_store/features/shop/features/all_products/domain/entity/produc
 import 'package:t_store/features/shop/features/product_details/presentation/widgets/build_choice_chips.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/widgets/variation_details.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class TProductAttributes extends StatelessWidget {
   final ProductEntity product;
@@ -15,7 +16,7 @@ class TProductAttributes extends StatelessWidget {
     return Column(
       children: [
         const VariationDetails(),
-        const SizedBox(height: TSizes.spaceBtwItems),
+        ResponsiveGap.vertical(TSizes.spaceBtwItems),
         _buildAttributesList(context),
       ],
     );
@@ -42,7 +43,7 @@ class TProductAttributes extends StatelessWidget {
           title: attribute.value.name,
           showActionButton: false,
         ),
-        const SizedBox(height: TSizes.spaceBtwItems / 2),
+        ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
         BuildChoiceChips(attribute: attribute, product: product),
       ],
     );

@@ -15,6 +15,10 @@ import 'package:t_store/features/shop/features/product_details/presentation/widg
 import 'package:t_store/features/shop/features/product_details/presentation/widgets/rating_and_share.dart';
 import 'package:t_store/utils/constants/enums.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class ProductDetailPage extends StatelessWidget {
   final ProductEntity product;
@@ -33,45 +37,44 @@ class ProductDetailPage extends StatelessWidget {
         ),
       ],
       child: Scaffold(
-        bottomNavigationBar: TBottomAddToCart(product: product),
+        bottomNavigationBar:
+            SafeArea(child: TBottomAddToCart(product: product)),
         body: SingleChildScrollView(
           child: Column(
             children: [
               TProductDetailImageSlider(product: product),
-              Padding(
-                padding: const EdgeInsets.only(
-                  bottom: TSizes.defaultSpace,
-                  right: TSizes.spaceBtwItems,
-                  left: TSizes.spaceBtwItems,
-                ),
+              ResponsivePadding.only(
+                bottom: TSizes.defaultSpace,
+                right: TSizes.spaceBtwItems,
+                left: TSizes.spaceBtwItems,
                 child: Column(
                   children: [
                     // -Rating & Share
                     const TRatingAndShare(),
-                    const SizedBox(height: TSizes.spaceBtwItems / 2),
+                    ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
                     // - Price, Title, Stock, Brand
                     TProductMetaData(product: product),
-                    const SizedBox(height: TSizes.spaceBtwItems),
+                    ResponsiveGap.vertical(TSizes.spaceBtwItems),
                     // - Attributes
                     if (product.productType == ProductType.variable.toString())
                       TProductAttributes(product: product),
                     if (product.productType == ProductType.variable.toString())
-                      const SizedBox(height: TSizes.spaceBtwSections),
+                      ResponsiveGap.vertical(TSizes.spaceBtwSections),
                     // - Checkout Button
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {},
-                        child: const Text('Checkout'),
+                        child: const ResponsiveText('Checkout'),
                       ),
                     ),
-                    const SizedBox(height: TSizes.spaceBtwSections),
+                    ResponsiveGap.vertical(TSizes.spaceBtwSections),
                     // -- Description
                     const TSectionHeading(
                       title: 'Description',
                       showActionButton: false,
                     ),
-                    const SizedBox(height: TSizes.spaceBtwItems),
+                    ResponsiveGap.vertical(TSizes.spaceBtwItems),
                     ReadMoreText(
                       product.description ??
                           'This is a Product description. there are more things that can be added to this description',
@@ -86,10 +89,10 @@ class ProductDetailPage extends StatelessWidget {
                     ),
 
                     // Reviews
-                    const SizedBox(height: TSizes.spaceBtwItems),
+                    ResponsiveGap.vertical(TSizes.spaceBtwItems),
                     const Divider(),
-                    const SizedBox(height: TSizes.spaceBtwItems),
-                    const OpenContainerWrapper(
+                    ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
+                    OpenContainerWrapper(
                       nextScreen: ProductReviewPage(),
                       radius: Radius.circular(0),
                       closedElevation: 0,
@@ -102,7 +105,8 @@ class ProductDetailPage extends StatelessWidget {
                           ),
                           IconButton(
                             onPressed: null,
-                            icon: Icon(Iconsax.arrow_right_3, size: 18),
+                            icon: Icon(Iconsax.arrow_right_3,
+                                size: context.horzSize(18)),
                           ),
                         ],
                       ),

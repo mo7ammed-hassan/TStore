@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text_span.dart';
 
 class TRatingAndShare extends StatelessWidget {
   const TRatingAndShare({
@@ -15,32 +18,28 @@ class TRatingAndShare extends StatelessWidget {
         // Rating
         Row(
           children: [
-            const Icon(
+            Icon(
               Iconsax.star5,
               color: Colors.amber,
-              size: 24,
+              size: context.horzSize(TSizes.iconMd),
             ),
-            const SizedBox(width: TSizes.spaceBtwItems / 2),
-            Text.rich(
-              TextSpan(
-                children: [
-                  TextSpan(
-                    text: '4.8 ',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  TextSpan(
-                    text: '(157)',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                ],
-              ),
+            ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
+            ResponsiveTextSpan(
+              text: '4.8 ',
+              style: Theme.of(context).textTheme.bodyLarge,
+              children: [
+                ResponsiveTextSpan(
+                  text: '(157)',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ],
             ),
           ],
         ),
         // Share button
         IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.share, size: TSizes.iconMd),
+          icon: Icon(Icons.share, size: context.horzSize(TSizes.iconMd / 1.2)),
         )
       ],
     );

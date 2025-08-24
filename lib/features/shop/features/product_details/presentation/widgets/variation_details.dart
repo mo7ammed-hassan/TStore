@@ -8,6 +8,9 @@ import 'package:t_store/features/shop/features/all_products/domain/entity/produc
 import 'package:t_store/features/shop/features/product_details/presentation/cubits/product_variation_cubit.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class VariationDetails extends StatelessWidget {
   const VariationDetails({super.key});
@@ -21,12 +24,12 @@ class VariationDetails extends StatelessWidget {
         if (state.id.isEmpty) return const SizedBox();
 
         return TRoundedContainer(
-          padding: const EdgeInsets.all(TSizes.md),
+          padding: context.responsiveInsets.all(TSizes.md),
           backgroundColor: isDark ? AppColors.darkGrey : AppColors.grey,
           child: Column(
             children: [
               _buildVariationHeader(context, state),
-              const SizedBox(height: TSizes.spaceBtwItems),
+              ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
               if (state.description != null && state.description!.isNotEmpty)
                 _buildDescription(state.description!),
             ],
@@ -48,7 +51,7 @@ class VariationDetails extends StatelessWidget {
           title: 'Variation',
           showActionButton: false,
         ),
-        const SizedBox(width: TSizes.spaceBtwSections),
+        ResponsiveGap.horizontal(TSizes.spaceBtwSections),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -70,13 +73,13 @@ class VariationDetails extends StatelessWidget {
           title: 'Price:',
           smallSize: true,
         ),
-        const SizedBox(width: TSizes.spaceBtwItems),
+        ResponsiveGap.horizontal(TSizes.spaceBtwItems),
         TProductPriceText(price: price),
         if (originalPrice != null)
           Row(
             children: [
-              const SizedBox(width: TSizes.spaceBtwItems),
-              Text(
+              ResponsiveGap.horizontal(TSizes.spaceBtwItems),
+              ResponsiveText(
                 '\$${originalPrice.toString()}',
                 style: Theme.of(context).textTheme.titleSmall!.apply(
                       decoration: TextDecoration.lineThrough,
@@ -96,10 +99,11 @@ class VariationDetails extends StatelessWidget {
           title: 'Stock:',
           smallSize: true,
         ),
-        const SizedBox(width: TSizes.spaceBtwItems),
-        Text(
+        ResponsiveGap.horizontal(TSizes.spaceBtwItems),
+        ResponsiveText(
           stockStatus,
-          style: Theme.of(context).textTheme.titleMedium,
+          style:
+              Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 14),
         ),
       ],
     );

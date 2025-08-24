@@ -12,6 +12,7 @@ import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 
 class TProductDetailImageSlider extends StatelessWidget {
   final ProductEntity product;
@@ -46,7 +47,7 @@ class TProductDetailImageSlider extends StatelessWidget {
           height: MediaQuery.sizeOf(context).height * 0.45,
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.all(TSizes.productImageRadius * 2),
+              padding: context.responsiveInsets.all(TSizes.productImageRadius * 2),
               child: GestureDetector(
                 onTap: () => showEnlargedImage(selectedImage, context),
                 child: CachedNetworkImage(
