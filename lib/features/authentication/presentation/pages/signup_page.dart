@@ -8,6 +8,9 @@ import 'package:t_store/features/authentication/presentation/widgets/signup/sign
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
@@ -27,22 +30,25 @@ class SignupPage extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(
+            padding: context.responsiveInsets.symmetric(
               vertical: TSizes.defaultSpace,
               horizontal: TSizes.defaultSpace / 2,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                ResponsiveText(
                   TTexts.signupTitle,
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall
+                      ?.copyWith(fontSize: 19),
                 ),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                ResponsiveGap.vertical(TSizes.spaceBtwSections),
                 const TSignupForm(),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                ResponsiveGap.vertical(TSizes.spaceBtwSections),
                 const TFormDivider(dividerText: TTexts.orSignUpWith),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                ResponsiveGap.vertical(TSizes.spaceBtwSections),
                 const TSocialButtons(),
               ],
             ),

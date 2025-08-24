@@ -19,7 +19,7 @@ class ResponsiveText extends StatelessWidget {
   const ResponsiveText(
     this.text, {
     super.key,
-    this.fontSize = 16,
+    this.fontSize = 15,
     this.fontWeight,
     this.color,
     this.textAlign,

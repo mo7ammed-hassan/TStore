@@ -29,3 +29,9 @@ class UpdateUserFailureState extends UserState {
 }
 
 class UpdateUserDataLoadingState extends UserState {}
+
+class LogoutState extends UserState {}
+
+class LogoutLoading extends UserState {}
+
+class LogoutError extends UserState {}

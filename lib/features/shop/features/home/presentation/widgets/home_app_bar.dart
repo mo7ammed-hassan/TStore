@@ -54,8 +54,10 @@ class THomeAppBar extends StatelessWidget {
             "${state.userData.firstName} ${state.userData.lastName}",
             style: Theme.of(context)
                 .textTheme
-                .bodyLarge!
-                .apply(color: AppColors.grey, fontSizeFactor: 1.1)
+                .headlineSmall!
+                .apply(
+                  color: AppColors.grey,
+                )
                 .copyWith(fontWeight: FontWeight.w700),
           );
         }

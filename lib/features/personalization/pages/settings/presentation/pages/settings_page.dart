@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/list_tiles/settings_menu_tile.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/primary_header_conatiner.dart';
 import 'package:t_store/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
-import 'package:t_store/features/authentication/domain/use_cases/logout_use_case.dart';
 import 'package:t_store/features/authentication/presentation/pages/login_page.dart';
+import 'package:t_store/features/personalization/cubit/user_cubit.dart';
+import 'package:t_store/features/personalization/cubit/user_state.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/pages/address_page.dart';
 import 'package:t_store/features/personalization/pages/settings/presentation/pages/upload_data_page.dart';
 import 'package:t_store/features/shop/features/cart/presentation/pages/cart_page.dart';
 import 'package:t_store/features/shop/features/order/presentation/pages/order_page.dart';
-import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
@@ -166,22 +167,22 @@ class SettingsPage extends StatelessWidget {
                   // Logout Button
                   SizedBox(
                     width: double.infinity,
-                    child: OutlinedButton(
-                      onPressed: () async {
-                        var result = await getIt<LogoutUseCase>().call();
-                        return result.fold(
-                          (errorMessage) {
-                            Loaders.errorSnackBar(
-                              title: 'Error',
-                              message: errorMessage,
-                            );
-                          },
-                          (successMessage) {
-                            context.removeAll(const LoginPage());
-                          },
-                        );
+                    child: BlocListener<UserCubit, UserState>(
+                      listener: (context, state) {
+                        if (state is LogoutLoading) {
+                          Loaders.showLoading(message: 'Logout...');
+                        } else if (state is LogoutState) {
+                          context.popPage(context);
+                          context.removeAll(const LoginPage());
+                        } else if (state is LogoutError) {
+                          context.popPage(context);
+                          Loaders.errorSnackBar(title: 'logout Failure');
+                        }
                       },
-                      child: const ResponsiveText('Logout'),
+                      child: OutlinedButton(
+                        onPressed: () => context.read<UserCubit>().logout(),
+                        child: const ResponsiveText('Logout'),
+                      ),
                     ),
                   ),
                   ResponsiveGap.vertical(TSizes.spaceBtwItems * 2.5),

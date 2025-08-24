@@ -14,7 +14,7 @@ class BrandsGridView extends StatelessWidget {
       itemCount: brands.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisExtent: context.horzSize(70),
+        mainAxisExtent: context.horzSize(72),
         mainAxisSpacing: context.horzSize(TSizes.defaultSpace / 2),
         crossAxisSpacing: context.horzSize(TSizes.defaultSpace / 2),
       ),

@@ -19,10 +19,12 @@ class UserProfileTile extends StatelessWidget {
       builder: (context, state) {
         if (state is FetchUserDataLoadedState) {
           return ListTile(
-            leading: UserProfileImage(
-              width: context.horzSize(45),
-              height: context.horzSize(45),
-              image: state.userData.profilePicture,
+            leading: FittedBox(
+              child: UserProfileImage(
+                width: context.horzSize(45),
+                height: context.horzSize(45),
+                image: state.userData.profilePicture,
+              ),
             ),
             title: Text(
               "${state.userData.firstName} ${state.userData.lastName}",

@@ -21,6 +21,7 @@ class TBrandCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDark = HelperFunctions.isDarkMode(context);
+    //final productCount = context.read<ProductsByBrandCubit>().products.length;
     return GestureDetector(
       onTap: () => context.pushPage(BrandProductsPage(brand: brand)),
       child: TRoundedContainer(

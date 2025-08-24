@@ -10,6 +10,7 @@ import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/popups/full_screen_loader.dart';
 import 'package:t_store/utils/popups/loaders.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class TSocialButtons extends StatelessWidget {
   const TSocialButtons({
@@ -56,7 +57,7 @@ class TSocialButtons extends StatelessWidget {
               );
             }),
           ),
-          const SizedBox(width: TSizes.spaceBtwItems),
+          ResponsiveGap.horizontal(TSizes.spaceBtwItems),
           const TSocialButton(socialIcon: TImages.facebook),
         ],
       ),

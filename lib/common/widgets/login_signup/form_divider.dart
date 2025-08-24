@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TFormDivider extends StatelessWidget {
   final String dividerText;
@@ -24,7 +25,7 @@ class TFormDivider extends StatelessWidget {
             endIndent: 5,
           ),
         ),
-        Text(
+        ResponsiveText(
           dividerText,
           style: Theme.of(context).textTheme.labelMedium,
         ),

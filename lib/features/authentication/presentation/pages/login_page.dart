@@ -16,7 +16,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        padding: TSpacingStyles.paddingWithAppBarHeight,
+        padding: TSpacingStyles.paddingWithAppBarHeight(context),
         child: Column(
           children: [
             // Logo, Title & sub-title

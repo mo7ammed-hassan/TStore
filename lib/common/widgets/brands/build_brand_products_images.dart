@@ -30,7 +30,7 @@ class BuildBrandProductsImages extends StatelessWidget {
 
         if (state is ProductsByBrandLoadedState) {
           if (state.products.isEmpty) {
-            return const SizedBox();
+            return const SizedBox.shrink();
           }
 
           return Row(

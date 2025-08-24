@@ -143,6 +143,7 @@ class Loaders {
     showDialog(
       context: AppContext.context,
       barrierDismissible: false,
+      useSafeArea: true,
       builder: (_) => PopScope(
         canPop: false,
         child: Dialog(

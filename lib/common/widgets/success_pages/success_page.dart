@@ -23,7 +23,7 @@ class SuccessPage extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: TSpacingStyles.paddingWithAppBarHeight * 2,
+          padding: TSpacingStyles.paddingWithAppBarHeight(context) * 2,
           child: Column(
             children: [
               (animation ? Lottie.asset : Image.asset)(

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store/features/authentication/domain/use_cases/logout_use_case.dart';
 import 'package:t_store/features/personalization/domain/use_cases/fetch_user_data_use_case.dart';
 import 'package:t_store/features/personalization/cubit/user_state.dart';
 import 'package:t_store/features/personalization/domain/use_cases/update_user_filed_use_case.dart';
@@ -55,6 +56,20 @@ class UserCubit extends Cubit<UserState> {
       (message) async {
         emit(UpdateUserSuccessState(message));
         await fetchUserData();
+      },
+    );
+  }
+
+  Future<void> logout() async {
+    emit(LogoutLoading());
+    final result = await getIt<LogoutUseCase>().call();
+
+    result.fold(
+      (error) {
+        emit(LogoutError());
+      },
+      (message) async {
+        emit(LogoutState());
       },
     );
   }

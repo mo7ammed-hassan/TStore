@@ -13,6 +13,8 @@ import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/popups/full_screen_loader.dart';
 import 'package:t_store/utils/popups/loaders.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 import 'package:t_store/utils/validators/validation.dart';
 
 class TSignupForm extends StatelessWidget {
@@ -36,19 +38,19 @@ class TSignupForm extends StatelessWidget {
                   _lastNameField(context),
                 ],
               ),
-              const SizedBox(height: TSizes.spaceBtwInputFields),
+              ResponsiveGap.vertical(TSizes.spaceBtwInputFields),
               _userNameField(context),
-              const SizedBox(height: TSizes.spaceBtwInputFields),
+              ResponsiveGap.vertical(TSizes.spaceBtwInputFields),
               _emailField(context),
-              const SizedBox(height: TSizes.spaceBtwInputFields),
+              ResponsiveGap.vertical(TSizes.spaceBtwInputFields),
               _phoneNumberField(context),
-              const SizedBox(height: TSizes.spaceBtwInputFields),
+              ResponsiveGap.vertical(TSizes.spaceBtwInputFields),
               PasswordField(
                 controller: context.read<SignupCubit>().passwordController,
               ),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              ResponsiveGap.vertical(TSizes.spaceBtwSections),
               const TTermAndCondationCheckbox(),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              ResponsiveGap.vertical(TSizes.spaceBtwSections),
               _createAccount(context),
             ],
           ),
@@ -171,7 +173,7 @@ class TSignupForm extends StatelessWidget {
                   .isPrivacyAccepted;
               context.read<SignupCubit>().signup(isPrivacyAccepted);
             },
-            child: const Text(TTexts.createAccount),
+            child: const ResponsiveText(TTexts.createAccount),
           );
         }),
       ),

@@ -11,6 +11,9 @@ import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/popups/full_screen_loader.dart';
 import 'package:t_store/utils/popups/loaders.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 import 'package:t_store/utils/validators/validation.dart';
 
 class ForgetPasswordPage extends StatelessWidget {
@@ -23,6 +26,7 @@ class ForgetPasswordPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
+            iconSize: context.horzSize(20),
             icon: const Icon(CupertinoIcons.clear),
             onPressed: () => context.removePage(const ForgetPasswordPage()),
           ),
@@ -36,18 +40,22 @@ class ForgetPasswordPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                ResponsiveText(
                   TTexts.forgetPassword,
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall
+                      ?.copyWith(fontSize: 19),
                 ),
-                const SizedBox(height: TSizes.spaceBtwItems),
-                Text(
+                ResponsiveGap.vertical(TSizes.spaceBtwItems),
+                ResponsiveText(
                   TTexts.forgetPasswordSubTitle,
+                  maxLines: 10,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
-                const SizedBox(height: TSizes.spaceBtwSections * 2),
+                ResponsiveGap.vertical(TSizes.spaceBtwSections * 1.2),
                 _emailField(context),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                ResponsiveGap.vertical(TSizes.spaceBtwSections),
                 _submitButton(context),
               ],
             ),
@@ -97,7 +105,7 @@ class ForgetPasswordPage extends StatelessWidget {
           onPressed: () {
             context.read<ResetPasswordCubit>().resetPassword();
           },
-          child: const Text(TTexts.submit),
+          child: const ResponsiveText(TTexts.submit),
         ),
       ),
     );

@@ -19,6 +19,9 @@ import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/popups/full_screen_loader.dart';
 import 'package:t_store/utils/popups/loaders.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 import 'package:t_store/utils/validators/validation.dart';
 
 class TLoginForm extends StatelessWidget {
@@ -32,22 +35,22 @@ class TLoginForm extends StatelessWidget {
         child: Form(
           key: context.read<SignInCubit>().formKey,
           child: Padding(
-            padding: const EdgeInsets.symmetric(
+            padding: context.responsiveInsets.symmetric(
               vertical: TSizes.spaceBtwSections,
             ),
             child: Column(
               children: [
                 _emailField(context),
-                const SizedBox(height: TSizes.spaceBtwInputFields),
+                ResponsiveGap.vertical(TSizes.spaceBtwInputFields),
                 PasswordField(
                   controller: context.read<SignInCubit>().passwordController,
                 ),
-                const SizedBox(height: TSizes.spaceBtwInputFields / 2),
+                ResponsiveGap.vertical(TSizes.spaceBtwInputFields / 2),
                 // Remember Me & Forget Password
                 _rememberMeAndForgetPassword(context),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                ResponsiveGap.vertical(TSizes.spaceBtwSections),
                 _signIn(context),
-                const SizedBox(height: TSizes.spaceBtwItems),
+                ResponsiveGap.vertical(TSizes.spaceBtwItems),
                 _createAccount(context),
               ],
             ),
@@ -87,7 +90,10 @@ class TLoginForm extends StatelessWidget {
               },
             ),
             const SizedBox(width: 5),
-            const Text(TTexts.rememberMe),
+            const ResponsiveText(
+              TTexts.rememberMe,
+              fontSize: 13,
+            ),
           ],
         ),
         TextButton(
@@ -99,11 +105,9 @@ class TLoginForm extends StatelessWidget {
               ),
             );
           },
-          child: const Text(
+          child: const ResponsiveText(
             TTexts.forgetPassword,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-            ),
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
           ),
         ),
       ],
@@ -146,7 +150,7 @@ class TLoginForm extends StatelessWidget {
 
               context.read<SignInCubit>().signIn(isRememberMe);
             },
-            child: const Text(TTexts.signIn),
+            child: const ResponsiveText(TTexts.signIn),
           );
         }),
       ),
@@ -161,7 +165,7 @@ class TLoginForm extends StatelessWidget {
           // Navigate to Sign Up screen
           context.pushPage(const SignupPage());
         },
-        child: const Text(TTexts.createAccount),
+        child: const ResponsiveText(TTexts.createAccount),
       ),
     );
   }

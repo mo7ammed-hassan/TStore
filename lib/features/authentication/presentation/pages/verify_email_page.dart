@@ -15,6 +15,10 @@ import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/popups/loaders.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class VerifyEmailPage extends StatelessWidget {
   const VerifyEmailPage({super.key, this.email});
@@ -30,6 +34,7 @@ class VerifyEmailPage extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(CupertinoIcons.clear),
+              iconSize: context.horzSize(20),
               onPressed: () async {
                 context.removeAll(const LoginPage());
                 await getIt<DeleteAccountUseCase>().call();
@@ -64,30 +69,34 @@ class VerifyEmailPage extends StatelessWidget {
           },
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(TSizes.defaultSpace),
+              padding: context.responsiveInsets.all(TSizes.defaultSpace),
               child: Column(
                 children: [
                   Image(
                     width: HelperFunctions.screenWidth() * 0.6,
                     image: const AssetImage(TImages.deliveredEmailIllustration),
                   ),
-                  const SizedBox(height: TSizes.spaceBtwSections),
-                  Text(
+                  ResponsiveGap.vertical(TSizes.spaceBtwSections),
+                  ResponsiveText(
                     TTexts.confirmEmail,
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall
+                        ?.copyWith(fontSize: 20),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: TSizes.spaceBtwItems),
+                  ResponsiveGap.vertical(TSizes.spaceBtwItems),
                   _userEmail(context),
-                  const SizedBox(height: TSizes.spaceBtwItems),
-                  Text(
+                  ResponsiveGap.vertical(TSizes.spaceBtwItems),
+                  ResponsiveText(
                     TTexts.confirmEmailSubTitle,
+                    maxLines: 10,
                     style: Theme.of(context).textTheme.labelMedium,
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  ResponsiveGap.vertical(TSizes.spaceBtwSections),
                   _continueButton(context),
-                  const SizedBox(height: TSizes.spaceBtwItems),
+                  ResponsiveGap.vertical(TSizes.spaceBtwItems),
                   _resendButton(context),
                 ],
               ),
@@ -98,8 +107,8 @@ class VerifyEmailPage extends StatelessWidget {
     );
   }
 
-  Text _userEmail(BuildContext context) {
-    return Text(
+  Widget _userEmail(BuildContext context) {
+    return ResponsiveText(
       email ?? '',
       style: Theme.of(context).textTheme.bodyLarge,
       textAlign: TextAlign.center,
@@ -114,7 +123,7 @@ class VerifyEmailPage extends StatelessWidget {
           onPressed: () {
             context.read<VerifyEmailCubit>().checkEmailVerification();
           },
-          child: const Text(TTexts.tContinue),
+          child: const ResponsiveText(TTexts.tContinue),
         );
       }),
     );
@@ -128,10 +137,10 @@ class VerifyEmailPage extends StatelessWidget {
           onPressed: () {
             context.read<VerifyEmailCubit>().sendVerifyEmail();
           },
-          child: Text(
+          child: ResponsiveText(
             TTexts.resendEmail,
             style: const TextStyle()
-                .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
+                .copyWith(fontSize: 13, fontWeight: FontWeight.w500),
           ),
         );
       }),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
 
 class TSocialButton extends StatelessWidget {
   final String socialIcon;
@@ -21,8 +22,9 @@ class TSocialButton extends StatelessWidget {
       child: IconButton(
         onPressed: onPressed,
         icon: Image(
-          width: TSizes.iconLg,
-          height: TSizes.iconLg,
+          width: context.horzSize(TSizes.iconLg),
+          height: context.horzSize(TSizes.iconLg),
+          fit: BoxFit.scaleDown,
           image: AssetImage(socialIcon),
         ),
       ),

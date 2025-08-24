@@ -6,6 +6,7 @@ import 'package:t_store/features/shop/features/all_brands/presentation/cubits/br
 import 'package:t_store/common/widgets/brand/brands_grid_view.dart';
 import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class BuildBrandsSection extends StatelessWidget {
@@ -18,7 +19,7 @@ class BuildBrandsSection extends StatelessWidget {
     return BlocProvider(
       create: (context) => brandCubit..fetchInitialData(),
       child: SliverPadding(
-        padding: const EdgeInsets.only(bottom: TSizes.sm),
+        padding: context.responsiveInsets.only(bottom: TSizes.sm),
         sliver: BlocBuilder<BrandCubit, BrandState>(
           builder: (context, state) {
             if (state is BrandLoading || state is BrandInitial) {
@@ -32,7 +33,8 @@ class BuildBrandsSection extends StatelessWidget {
 
             if (state is BrandError) {
               return SliverToBoxAdapter(
-                child: Center(child: ResponsiveText(state.featuredBrandsMessage!)),
+                child:
+                    Center(child: ResponsiveText(state.featuredBrandsMessage!)),
               );
             }
 

@@ -6,6 +6,10 @@ import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class ResetPasswordPage extends StatelessWidget {
   const ResetPasswordPage({super.key});
@@ -17,6 +21,7 @@ class ResetPasswordPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
+            iconSize: context.horzSize(20),
             icon: const Icon(CupertinoIcons.clear),
             onPressed: () => context.removePage(const ResetPasswordPage()),
           ),
@@ -24,28 +29,35 @@ class ResetPasswordPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.spaceBtwItems),
+          padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
           child: Column(
             children: [
               Image(
                 width: HelperFunctions.screenWidth() * 0.6,
                 image: const AssetImage(TImages.deliveredEmailIllustration),
               ),
-              const SizedBox(height: TSizes.spaceBtwSections),
-              Text(
+              ResponsiveGap.vertical(TSizes.spaceBtwSections),
+              ResponsiveText(
                 TTexts.changeYourPasswordTitle,
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineMedium
+                    ?.copyWith(fontSize: 20),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: TSizes.spaceBtwItems),
-              Text(
+              ResponsiveGap.vertical(TSizes.spaceBtwItems),
+              ResponsiveText(
                 TTexts.changeYourPasswordSubTitle,
-                style: Theme.of(context).textTheme.labelMedium,
+                maxLines: 5,
+                style: Theme.of(context)
+                    .textTheme
+                    .labelMedium
+                    ?.copyWith(fontSize: 12),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              ResponsiveGap.vertical(TSizes.spaceBtwSections),
               _doneButton(context),
-              const SizedBox(height: TSizes.spaceBtwItems),
+              ResponsiveGap.vertical(TSizes.spaceBtwItems),
               _resendEmail(context),
             ],
           ),
@@ -59,7 +71,7 @@ class ResetPasswordPage extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () => context.removeAll(const LoginPage()),
-        child: const Text(TTexts.done),
+        child: const ResponsiveText(TTexts.done),
       ),
     );
   }
@@ -72,10 +84,10 @@ class ResetPasswordPage extends StatelessWidget {
           onPressed: () {
             context.removePage(const ResetPasswordPage());
           },
-          child: Text(
+          child: ResponsiveText(
             TTexts.resendEmail,
             style: const TextStyle()
-                .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
+                .copyWith(fontSize: 13, fontWeight: FontWeight.w500),
           ),
         );
       }),

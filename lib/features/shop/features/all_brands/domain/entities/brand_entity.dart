@@ -15,6 +15,8 @@ class BrandEntity {
     this.productCount,
   });
 
+  int? get getProductCount => productCount;
+
   // -- empty --
   static BrandEntity empty() {
     return BrandEntity(

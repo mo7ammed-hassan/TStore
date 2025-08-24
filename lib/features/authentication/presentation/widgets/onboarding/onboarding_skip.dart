@@ -4,6 +4,8 @@ import 'package:t_store/features/authentication/presentation/manager/cubits/onbo
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/device/device_utlity.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class OnBoardingSkip extends StatelessWidget {
   const OnBoardingSkip({
@@ -16,7 +18,7 @@ class OnBoardingSkip extends StatelessWidget {
 
     return Positioned(
       top: TDeviceUtils.getAppBarHeight() / 2,
-      right: TSizes.defaultSpace / 2,
+      right: context.horzSize(TSizes.defaultSpace / 2),
       child: TextButton(
         onPressed: () {
           context.read<OnboardingCubit>().skipPage();
@@ -29,7 +31,7 @@ class OnBoardingSkip extends StatelessWidget {
             return shouldShowSkip
                 ? TextButton(
                     onPressed: cubit.skipPage,
-                    child: Text(
+                    child: ResponsiveText(
                       TTexts.skip,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),

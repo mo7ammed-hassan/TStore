@@ -14,16 +14,25 @@ import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
-class TCategoryTab extends StatelessWidget {
+class TCategoryTab extends StatefulWidget {
   final CategoryEntity category;
   const TCategoryTab({super.key, required this.category});
 
   @override
-  Widget build(BuildContext context) {
+  State<TCategoryTab> createState() => _TCategoryTabState();
+}
+
+class _TCategoryTabState extends State<TCategoryTab> {
+  @override
+  void initState() {
+    super.initState();
     context
         .read<StoreCubit>()
-        .fetchBrandsSpecificCategory(categoryId: category.id);
+        .fetchBrandsSpecificCategory(categoryId: widget.category.id);
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: context.responsiveInsets.symmetric(
         vertical: TSizes.md,
@@ -45,7 +54,7 @@ class TCategoryTab extends StatelessWidget {
           SliverToBoxAdapter(
             child: ResponsiveGap.vertical(TSizes.spaceBtwItems),
           ),
-          ProductsSection(categoryId: category.id),
+          ProductsSection(categoryId: widget.category.id),
           SliverToBoxAdapter(
             child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
           ),
@@ -58,7 +67,7 @@ class TCategoryTab extends StatelessWidget {
     context.pushPage(
       AllProductsPage(
         future: getIt.get<GetProductsSpecificCategoryUseCase>().call(
-              params: GetAllParams(id: category.id, limit: 10),
+              params: GetAllParams(id: widget.category.id, limit: 10),
             ),
         title: 'All Products',
       ),

@@ -8,6 +8,9 @@ import 'package:t_store/common/widgets/appbar/tabbar.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class StoreHeader extends StatelessWidget {
   final VoidCallback onViewAllBrands;
@@ -23,14 +26,11 @@ class StoreHeader extends StatelessWidget {
       backgroundColor: HelperFunctions.isDarkMode(context)
           ? AppColors.black
           : AppColors.white,
-      expandedHeight: 420,
+      expandedHeight: context.vertSize(400),
       flexibleSpace: Padding(
-        padding: const EdgeInsets.all(TSizes.defaultSpace),
+        padding: context.responsiveInsets.all(TSizes.defaultSpace),
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(
-              child: SizedBox(height: TSizes.spaceBtwItems),
-            ),
             const SliverToBoxAdapter(
               child: TSearchConatiner(
                 text: 'Search in Store',
@@ -38,8 +38,8 @@ class StoreHeader extends StatelessWidget {
                 showBackground: false,
               ),
             ),
-            const SliverToBoxAdapter(
-              child: SizedBox(height: TSizes.spaceBtwItems),
+            SliverToBoxAdapter(
+              child: ResponsiveGap.vertical(TSizes.spaceBtwItems),
             ),
             SliverToBoxAdapter(
               child: TSectionHeading(
@@ -47,8 +47,8 @@ class StoreHeader extends StatelessWidget {
                 onPressed: onViewAllBrands,
               ),
             ),
-            const SliverToBoxAdapter(
-              child: SizedBox(height: TSizes.spaceBtwItems / 2),
+            SliverToBoxAdapter(
+              child: ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
             ),
             const BuildBrandsSection(feturerand: true),
           ],

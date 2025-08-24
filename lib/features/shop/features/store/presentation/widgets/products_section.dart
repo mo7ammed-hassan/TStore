@@ -5,16 +5,25 @@ import 'package:t_store/common/widgets/shimmer/shimmer_products_grid_layout.dart
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_cubit.dart';
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_state.dart';
 
-class ProductsSection extends StatelessWidget {
+class ProductsSection extends StatefulWidget {
   final String categoryId;
   const ProductsSection({super.key, required this.categoryId});
 
   @override
-  Widget build(BuildContext context) {
+  State<ProductsSection> createState() => _ProductsSectionState();
+}
+
+class _ProductsSectionState extends State<ProductsSection> {
+  @override
+  void initState() {
+    super.initState();
     context
         .read<StoreCubit>()
-        .fetchProductsSpecificCategory(categoryId: categoryId);
+        .fetchProductsSpecificCategory(categoryId: widget.categoryId);
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<StoreCubit, StoreState>(
       buildWhen: _buildWhen,
       builder: (context, state) {

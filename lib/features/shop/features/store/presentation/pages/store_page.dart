@@ -33,18 +33,20 @@ class StorePage extends StatelessWidget {
             .toList();
         return DefaultTabController(
           length: context.read<CategoryCubit>().featuredCategories.length,
-          child: Scaffold(
-            appBar: _buildAppBar(context),
-            body: NestedScrollView(
-              headerSliverBuilder: (_, __) => [
-                StoreHeader(
-                  onViewAllBrands: () =>
-                      context.pushPage(const AllBrandsPage()),
+          child: SafeArea(
+            child: Scaffold(
+              appBar: _buildAppBar(context),
+              body: NestedScrollView(
+                headerSliverBuilder: (_, __) => [
+                  StoreHeader(
+                    onViewAllBrands: () =>
+                        context.pushPage(const AllBrandsPage()),
+                  ),
+                ],
+                body: TabBarView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: categoryTabs,
                 ),
-              ],
-              body: TabBarView(
-                physics: const NeverScrollableScrollPhysics(),
-                children: categoryTabs,
               ),
             ),
           ),
@@ -55,8 +57,10 @@ class StorePage extends StatelessWidget {
 
   TAppBar _buildAppBar(BuildContext context) {
     return TAppBar(
-      title: ResponsiveText('Store',
-          style: Theme.of(context).textTheme.titleLarge),
+      title: ResponsiveText(
+        'Store',
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
       actions: [
         TCartCounterIcon(
           onPressed: () => context.pushPage(const CartPage()),

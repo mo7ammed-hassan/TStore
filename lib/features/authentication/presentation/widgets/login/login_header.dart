@@ -3,6 +3,8 @@ import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TLoginHeader extends StatelessWidget {
   const TLoginHeader({
@@ -21,14 +23,16 @@ class TLoginHeader extends StatelessWidget {
           ),
           height: HelperFunctions.screenWidth() * 0.5,
         ),
-        Text(
+        ResponsiveText(
           TTexts.loginTitle,
           style: Theme.of(context).textTheme.headlineMedium,
         ),
-        const SizedBox(height: TSizes.sm),
-        Text(
+        ResponsiveGap.vertical(TSizes.sm),
+        ResponsiveText(
           TTexts.loginSubTitle,
-          style: Theme.of(context).textTheme.bodyLarge,
+          maxLines: 2,
+          style:
+              Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13.5),
         ),
       ],
     );
