@@ -10,6 +10,9 @@ import 'package:t_store/features/shop/features/all_brands/domain/entities/brand_
 import 'package:t_store/features/shop/features/all_brands/presentation/cubits/product_by_brand_cubit.dart';
 import 'package:t_store/features/shop/features/all_brands/presentation/cubits/product_by_brand_state.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class BrandProductsPage extends StatelessWidget {
   const BrandProductsPage({super.key, required this.brand});
@@ -23,20 +26,18 @@ class BrandProductsPage extends StatelessWidget {
       child: Scaffold(
         appBar: _appBar(context),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: TSizes.spaceBtwItems,
-              vertical: TSizes.defaultSpace,
-            ),
+          child: ResponsivePadding.symmetric(
+            horizontal: TSizes.spaceBtwItems,
+            vertical: TSizes.defaultSpace,
             child: Column(
               children: [
                 TBrandCard(brand: brand),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                ResponsiveGap.vertical(TSizes.spaceBtwSections),
                 const TSectionHeading(
                   title: 'Products',
                   showActionButton: false,
                 ),
-                const SizedBox(height: TSizes.spaceBtwItems),
+                ResponsiveGap.vertical(TSizes.spaceBtwItems),
                 BlocBuilder<ProductsByBrandCubit, ProductsByBrandState>(
                   builder: (context, state) {
                     if (state is ProductsByBrandLoadingState ||
@@ -46,20 +47,23 @@ class BrandProductsPage extends StatelessWidget {
 
                     if (state is ProductsByBrandErrorState) {
                       return Center(
-                        child: Text(state.message),
+                        child: ResponsiveText(state.message),
                       );
                     }
 
                     if (state is ProductsByBrandLoadedState) {
                       if (state.products.isEmpty) {
-                        return const Center(child: Text('No products found!'));
+                        return const Center(
+                          child: ResponsiveText('No products found!'),
+                        );
                       }
                       return TSortableProducts(
                         products: state.products,
                       );
                     }
 
-                    return const Center(child: Text('Something went wrong!'));
+                    return const Center(
+                        child: ResponsiveText('Something went wrong!'));
                   },
                 ),
               ],
@@ -81,13 +85,13 @@ class BrandProductsPage extends StatelessWidget {
   }
 
   Widget _loadingProductList() {
-    return const Column(
+    return Column(
       children: [
-        SortableDropdown(
+        const SortableDropdown(
           initialValue: 'Name',
         ),
-        SizedBox(height: TSizes.spaceBtwSections),
-        ShimmerProductsGridLayout(),
+        ResponsiveGap.vertical(TSizes.spaceBtwSections),
+        const ShimmerProductsGridLayout(),
       ],
     );
   }
