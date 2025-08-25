@@ -59,7 +59,7 @@ class StorePage extends StatelessWidget {
     return TAppBar(
       title: ResponsiveText(
         'Store',
-        style: Theme.of(context).textTheme.titleLarge,
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
       ),
       actions: [
         TCartCounterIcon(

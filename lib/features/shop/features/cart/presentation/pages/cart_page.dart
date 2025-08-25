@@ -36,7 +36,7 @@ class CartPage extends StatelessWidget {
       showBackArrow: true,
       title: ResponsiveText(
         'Cart',
-        style: Theme.of(context).textTheme.titleLarge,
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
       ),
     );
   }

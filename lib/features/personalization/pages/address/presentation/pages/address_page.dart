@@ -37,7 +37,7 @@ class AddressPage extends StatelessWidget {
       showBackArrow: true,
       title: ResponsiveText(
         'Address',
-        style: Theme.of(context).textTheme.titleLarge,
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
       ),
     );
   }

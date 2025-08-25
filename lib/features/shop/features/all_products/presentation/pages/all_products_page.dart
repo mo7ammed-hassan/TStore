@@ -67,7 +67,7 @@ class AllProductsPage extends StatelessWidget {
       showBackArrow: true,
       title: ResponsiveText(
         title,
-        style: Theme.of(context).textTheme.titleLarge,
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
       ),
       leadingOnPressed: () {
         AllProductsCubit().close();

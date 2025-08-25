@@ -27,7 +27,8 @@ class SubCategoryPage extends StatelessWidget {
           showBackArrow: true,
           title: ResponsiveText(
             category.name,
-            style: Theme.of(context).textTheme.headlineSmall,
+            style:
+                Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
           ),
         ),
         body: ResponsivePadding.symmetric(

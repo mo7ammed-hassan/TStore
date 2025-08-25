@@ -75,7 +75,7 @@ class BrandProductsPage extends StatelessWidget {
       showBackArrow: true,
       title: Text(
         'Brand',
-        style: Theme.of(context).textTheme.headlineSmall,
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
       ),
     );
   }

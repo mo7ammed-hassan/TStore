@@ -20,8 +20,13 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-          const TAppBar(title: ResponsiveText('Profile'), showBackArrow: true),
+      appBar: TAppBar(
+        title: ResponsiveText(
+          'Profile',
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
+        ),
+        showBackArrow: true,
+      ),
       body: SingleChildScrollView(
         padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
         child: Column(

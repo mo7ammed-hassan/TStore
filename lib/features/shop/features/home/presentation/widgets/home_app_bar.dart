@@ -52,13 +52,10 @@ class THomeAppBar extends StatelessWidget {
         if (state is FetchUserDataLoadedState) {
           return ResponsiveText(
             "${state.userData.firstName} ${state.userData.lastName}",
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall!
-                .apply(
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w700,
                   color: AppColors.grey,
-                )
-                .copyWith(fontWeight: FontWeight.w700),
+                ),
           );
         }
         return _loadingWidget(context);

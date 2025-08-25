@@ -11,6 +11,7 @@ import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:t_store/utils/responsive/responsive_helpers.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class StoreHeader extends StatelessWidget {
   final VoidCallback onViewAllBrands;
@@ -57,7 +58,11 @@ class StoreHeader extends StatelessWidget {
       bottom: TTabBar(
         tabs: categories
             .map(
-              (category) => Tab(child: Text(category.name)),
+              (category) => Tab(
+                  child: ResponsiveText(
+                category.name,
+                fontSize: 13.5,
+              )),
             )
             .toList(),
       ),

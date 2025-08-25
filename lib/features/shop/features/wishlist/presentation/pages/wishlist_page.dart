@@ -27,8 +27,10 @@ class WishlistPage extends StatelessWidget {
 
   TAppBar _buildAppBar(BuildContext context) {
     return TAppBar(
-      title: ResponsiveText('Wishlist',
-          style: Theme.of(context).textTheme.titleLarge),
+      title: ResponsiveText(
+        'Wishlist',
+       style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
+      ),
       actions: [
         TCircularIcon(
           icon: Iconsax.add,
