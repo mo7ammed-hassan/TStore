@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/device/device_utlity.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TRatingProgressIndicator extends StatelessWidget {
   const TRatingProgressIndicator({
@@ -16,7 +17,7 @@ class TRatingProgressIndicator extends StatelessWidget {
       children: [
         Expanded(
           flex: 1,
-          child: Text(
+          child: ResponsiveText(
             text,
             style: Theme.of(context).textTheme.bodyMedium,
           ),

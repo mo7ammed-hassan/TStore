@@ -10,6 +10,7 @@ import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class PaymentScreen extends StatelessWidget {
   const PaymentScreen({super.key});
@@ -21,7 +22,11 @@ class PaymentScreen extends StatelessWidget {
       child: Scaffold(
         appBar: TAppBar(
           showBackArrow: true,
-          title: Text(TTexts.paymentDetails),
+          title: ResponsiveText(
+            TTexts.paymentDetails,
+            style:
+                Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
+          ),
         ),
         body: BlocBuilder<PaymentCubit, PaymentState>(
           builder: (context, state) {

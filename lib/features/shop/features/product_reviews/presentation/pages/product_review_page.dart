@@ -4,6 +4,9 @@ import 'package:t_store/features/shop/features/product_reviews/presentation/widg
 import 'package:t_store/features/shop/features/product_reviews/presentation/widgets/rating_bar_indicator.dart';
 import 'package:t_store/features/shop/features/product_reviews/presentation/widgets/user_review_card.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class ProductReviewPage extends StatelessWidget {
   const ProductReviewPage({super.key});
@@ -15,28 +18,33 @@ class ProductReviewPage extends StatelessWidget {
         showBackArrow: true,
         title: Text(
           'Review & Rating',
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
         ),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.spaceBtwItems),
+          padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              const ResponsiveText(
                 'Ratings and reviews are verified and are from people who use the same type of product that you see',
+                maxLines: 5,
+                fontSize: 13,
               ),
-              const SizedBox(height: TSizes.spaceBtwItems),
+              ResponsiveGap.vertical(TSizes.spaceBtwItems),
 
               // overall Product Rating
               const TOverallProductRating(),
               const TRatingBarIndicator(rating: 4.5),
-              Text(
+              ResponsiveText(
                 '12,611 Reviews',
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodySmall
+                    ?.copyWith(fontSize: 12),
               ),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              ResponsiveGap.vertical(TSizes.spaceBtwSections),
               const UserReviewCard(),
               const UserReviewCard(),
             ],

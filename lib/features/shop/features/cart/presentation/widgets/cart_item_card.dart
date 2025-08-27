@@ -11,7 +11,6 @@ import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cub
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
-import 'package:t_store/utils/responsive/responsive_helpers.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text_span.dart';
 
@@ -27,15 +26,21 @@ class CartItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
+    final sizeValue = cartItem.product.variation.attributeValues['Size'] ??
+        cartItem.product.variation.attributeValues['Sizes'];
+    final colorValue = cartItem.product.variation.attributeValues['Colors'] ??
+        cartItem.product.variation.attributeValues['Color'];
+
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TRoundedImage(
               imageUrl: cartItem.product.imageUrl,
-              width: context.horzSize(65),
-              height: context.horzSize(65),
+              width: 65,
+              height: 65,
               padding: const EdgeInsets.all(TSizes.sm),
               backgroundColor: isDark ? AppColors.darkerGrey : AppColors.light,
             ),
@@ -51,25 +56,24 @@ class CartItemCard extends StatelessWidget {
                   ),
 
                   /// --- Colors ----
-                  ResponsiveTextSpan(
-                    text: 'Color  ',
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: Colors.grey,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
+                  if (colorValue != null)
+                    ResponsiveTextSpan(
+                      text: 'Color  ',
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: Colors.grey,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
+                      children: [
+                        ResponsiveTextSpan(
+                          text: '$colorValue  ',
+                          style: Theme.of(context).textTheme.labelLarge,
                         ),
-                    children: [
-                      ResponsiveTextSpan(
-                        text:
-                            '${cartItem.product.variation.attributeValues['Colors']}  ',
-                        style: Theme.of(context).textTheme.labelLarge,
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
 
                   // --- Sizes --
-                  if (cartItem.product.variation.attributeValues['Sizes'] !=
-                      null)
+                  if (sizeValue != null)
                     ResponsiveTextSpan(
                       text: 'Size  ',
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
@@ -78,14 +82,10 @@ class CartItemCard extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                       children: [
-                        if (cartItem
-                                .product.variation.attributeValues['Sizes'] !=
-                            null)
-                          ResponsiveTextSpan(
-                            text:
-                                '${cartItem.product.variation.attributeValues['Sizes']}  ',
-                            style: Theme.of(context).textTheme.labelLarge,
-                          ),
+                        ResponsiveTextSpan(
+                          text: '$sizeValue  ',
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
                       ],
                     ),
                   ResponsiveGap.vertical(TSizes.spaceBtwItems),

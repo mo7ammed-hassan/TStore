@@ -17,6 +17,7 @@ import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/popups/loaders.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
@@ -52,7 +53,7 @@ class SettingsPage extends StatelessWidget {
 
             // --Body
             Padding(
-              padding: const EdgeInsets.all(TSizes.defaultSpace),
+              padding: context.responsiveInsets.all(TSizes.defaultSpace - 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

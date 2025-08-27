@@ -22,8 +22,8 @@ class UserProfileTile extends StatelessWidget {
           return ListTile(
             leading: FittedBox(
               child: UserProfileImage(
-                width: context.horzSize(45),
-                height: context.horzSize(45),
+                width: 45,
+                height: 45,
                 image: state.userData.profilePicture,
               ),
             ),
@@ -49,7 +49,7 @@ class UserProfileTile extends StatelessWidget {
               },
               icon: Icon(
                 Iconsax.edit,
-                size: context.horzSize(20),
+                size: context.horzSize(22),
                 color: AppColors.white,
               ),
             ),

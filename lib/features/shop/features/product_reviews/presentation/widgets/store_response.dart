@@ -3,6 +3,7 @@ import 'package:t_store/common/widgets/custom_shapes/containers/rounded_containe
 import 'package:t_store/common/widgets/texts/read_more_text.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class StoreResponse extends StatelessWidget {
   const StoreResponse({
@@ -20,13 +21,13 @@ class StoreResponse extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              ResponsiveText(
                 'T\'Store',
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-              Text(
+              ResponsiveText(
                 '20 Nov 2024',
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.labelLarge,
               ),
             ],
           ),

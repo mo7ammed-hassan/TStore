@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
 
 class TRoundedImage extends StatelessWidget {
   final String imageUrl;
@@ -37,8 +38,8 @@ class TRoundedImage extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: width,
-        height: height,
+        width: width != null ? context.horzSize(width!) : null,
+        height: height != null ? context.horzSize(height!) : null,
         padding: padding,
         decoration: BoxDecoration(
           border: border,
@@ -58,8 +59,12 @@ class TRoundedImage extends StatelessWidget {
                     fit: fit,
                   ),
                   placeholder: (context, url) => ShimmerWidget(
-                    width: width ?? double.infinity,
-                    height: height ?? double.infinity,
+                    width: width != null
+                        ? context.horzSize(width!)
+                        : double.infinity,
+                    height: height != null
+                        ? context.horzSize(height!)
+                        : double.infinity,
                     shapeBorder: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(borderRadius),
                     ),

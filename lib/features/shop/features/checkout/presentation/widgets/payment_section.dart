@@ -4,6 +4,8 @@ import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class PaymentSection extends StatelessWidget {
   const PaymentSection({
@@ -20,20 +22,19 @@ class PaymentSection extends StatelessWidget {
           showActionButton: true,
           buttonTitle: 'Change',
         ),
-        const SizedBox(height: TSizes.spaceBtwItems / 2),
         Row(
           children: [
             TRoundedImage(
               width: 55,
               height: 30,
-              backgroundColor: isDark ? AppColors.light : AppColors.white,
+              backgroundColor: isDark ? AppColors.dark : AppColors.light,
               imageUrl: TImages.visa,
               fit: BoxFit.contain,
               padding: const EdgeInsets.all(2),
               borderRadius: 5,
             ),
-            const SizedBox(width: TSizes.spaceBtwItems),
-            Text(
+            ResponsiveGap.horizontal(TSizes.spaceBtwItems),
+            ResponsiveText(
               'Visa',
               style: Theme.of(context).textTheme.bodyLarge,
             ),

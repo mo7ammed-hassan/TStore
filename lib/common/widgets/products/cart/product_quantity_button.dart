@@ -25,8 +25,8 @@ class TProductQuantityButtons extends StatelessWidget {
         TCircularIcon(
           backgroundColor: isDark ? AppColors.darkerGrey : AppColors.light,
           icon: Iconsax.minus,
-          width: context.horzSize(28),
-          height: context.horzSize(28),
+          width: 28,
+          height: 28,
           size: context.horzSize(TSizes.md),
           color: isDark ? AppColors.white : AppColors.black,
           onPressed: () async {
@@ -45,8 +45,8 @@ class TProductQuantityButtons extends StatelessWidget {
         TCircularIcon(
           backgroundColor: AppColors.primary,
           icon: Iconsax.add,
-          width: context.horzSize(28),
-          height: context.horzSize(28),
+          width: 28,
+          height: 28,
           size: context.horzSize(TSizes.md),
           color: AppColors.white,
           onPressed: () async {

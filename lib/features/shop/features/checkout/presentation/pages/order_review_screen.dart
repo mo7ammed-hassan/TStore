@@ -5,6 +5,10 @@ import 'package:t_store/features/shop/features/checkout/presentation/widgets/che
 import 'package:t_store/features/shop/features/checkout/presentation/widgets/chekout_order_detial.dart';
 import 'package:t_store/features/shop/features/checkout/presentation/widgets/coupon_field.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart'
+    show ResponsiveGap;
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class OrderReviewScreen extends StatelessWidget {
   const OrderReviewScreen({super.key});
@@ -15,25 +19,25 @@ class OrderReviewScreen extends StatelessWidget {
       bottomNavigationBar: const CheckoutButton(),
       appBar: TAppBar(
         showBackArrow: true,
-        title: Text(
+        title: ResponsiveText(
           'Order Review',
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(TSizes.spaceBtwItems),
-        child: const CustomScrollView(
+        padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
+        child: CustomScrollView(
           slivers: [
             CartItemsSection(showAddRemoveButtons: false, sliverList: true),
             SliverToBoxAdapter(
-              child: SizedBox(height: TSizes.spaceBtwSections),
+              child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
             ),
-            SliverToBoxAdapter(child: CouponFiled()),
+            SliverToBoxAdapter(child: const CouponFiled()),
             SliverToBoxAdapter(
-              child: SizedBox(height: TSizes.spaceBtwSections),
+              child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
             ),
             SliverToBoxAdapter(
-              child: ChekoutOrderDetial(),
+              child: const ChekoutOrderDetial(),
             ),
           ],
         ),

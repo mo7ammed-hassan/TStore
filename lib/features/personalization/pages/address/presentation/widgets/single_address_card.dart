@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_state.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/widgets/address_details.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class SingleAddressCard extends StatelessWidget {
-  const SingleAddressCard(
-      {super.key,
-      required this.address,
-      required this.onTap,
-      this.onLongPress});
+  const SingleAddressCard({
+    super.key,
+    required this.address,
+    required this.onTap,
+    this.onLongPress,
+  });
   final AddressEntity address;
   final VoidCallback onTap;
   final VoidCallback? onLongPress;
@@ -40,14 +39,37 @@ class SingleAddressCard extends StatelessWidget {
           onTap: onTap,
           borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
           onLongPress: onLongPress,
-          child: TRoundedContainer(
+          child: Container(
             width: double.infinity,
-            backgroundColor: isSelectedAddress
-                ? AppColors.primary.withValues(alpha: 0.4)
-                : Colors.transparent,
             padding: context.responsiveInsets.all(TSizes.md),
-            showBorder: true,
-            borderColor: isSelectedAddress ? Colors.transparent : null,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
+              color: isSelectedAddress
+                  ? isDark
+                      ? const Color.fromARGB(255, 43, 56, 131)
+                      : AppColors.lightContainer
+                  : Colors.transparent,
+              border: isDark
+                  ? null
+                  : Border.all(
+                      color: isSelectedAddress
+                          ? Colors.transparent
+                          : AppColors.borderPrimary,
+                      width: 0.3,
+                    ),
+              boxShadow: [
+                if (!isSelectedAddress)
+                  BoxShadow(
+                    color: isDark
+                        ? Colors.grey.withValues(alpha: 0.1)
+                        : AppColors.light.withValues(alpha: 0.1),
+                    blurRadius: 0,
+                    offset: const Offset(0, 0),
+                  )
+              ],
+            ),
+            // showBorder: true,
+            // borderColor: isSelectedAddress ? Colors.transparent : null,
             child: Stack(
               children: [
                 Positioned(
@@ -58,34 +80,11 @@ class SingleAddressCard extends StatelessWidget {
                     color: isSelectedAddress
                         ? isDark
                             ? AppColors.light
-                            : AppColors.dark
+                            : AppColors.primary
                         : null,
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ResponsiveText(
-                      address.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    ResponsiveGap.vertical(TSizes.sm / 2),
-                    ResponsiveText(
-                      address.phoneNumber,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    ResponsiveGap.vertical(TSizes.sm / 2),
-                    ResponsiveText(
-                      '${address.street}, ${address.state}, ${address.country}, ${address.postalCode}',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
-                ),
+                AddressDetails(address: address),
               ],
             ),
           ),

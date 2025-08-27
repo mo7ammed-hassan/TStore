@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/features/shop/features/product_reviews/presentation/widgets/rating_progress_indicator.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TOverallProductRating extends StatelessWidget {
   const TOverallProductRating({
@@ -12,7 +13,7 @@ class TOverallProductRating extends StatelessWidget {
       children: [
         Expanded(
           flex: 3,
-          child: Text(
+          child: ResponsiveText(
             '4.5',
             style: Theme.of(context).textTheme.displayLarge,
           ),

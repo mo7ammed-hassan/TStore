@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
 
 class TReadMoreText extends StatelessWidget {
   const TReadMoreText({
@@ -24,13 +25,17 @@ class TReadMoreText extends StatelessWidget {
       trimMode: trimMode,
       trimCollapsedText: trimCollapsedText,
       trimExpandedText: trimExpandedText,
-      moreStyle: const TextStyle(
-        fontSize: 14,
+      preDataTextStyle: TextStyle(
+        fontSize: getResponsiveFontSize(context, fontSize: 11),
+        fontWeight: FontWeight.bold,
+      ),
+      moreStyle: TextStyle(
+        fontSize: getResponsiveFontSize(context, fontSize: 11),
         fontWeight: FontWeight.bold,
         color: AppColors.primary,
       ),
-      lessStyle: const TextStyle(
-        fontSize: 14,
+      lessStyle: TextStyle(
+        fontSize: getResponsiveFontSize(context, fontSize: 11),
         fontWeight: FontWeight.bold,
         color: AppColors.primary,
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:t_store/common/widgets/divider/custom_divider.dart';
 import 'package:t_store/features/shop/features/payment/presentation/widgets/payment_summary_row.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
@@ -14,19 +15,7 @@ class PaymentSummary extends StatelessWidget {
         ),
         ResponsiveGap.vertical(14.0),
 
-        Row(
-          // --- Divider
-          children: List.generate(
-            25,
-            (index) => Expanded(
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 2),
-                height: 1.1,
-                color: Color(0xFF5a5e64),
-              ),
-            ),
-          ),
-        ),
+        CustomDivider(),
         ResponsiveGap.vertical(18.0),
         
         PaymentSummaryRow(

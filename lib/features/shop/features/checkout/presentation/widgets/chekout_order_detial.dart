@@ -8,6 +8,7 @@ import 'package:t_store/features/shop/features/checkout/presentation/widgets/pri
 import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class ChekoutOrderDetial extends StatelessWidget {
   const ChekoutOrderDetial({super.key});
@@ -22,11 +23,10 @@ class ChekoutOrderDetial extends StatelessWidget {
       child: Column(
         children: [
           const PricingSection(),
-          const SizedBox(height: TSizes.spaceBtwItems),
+          ResponsiveGap.vertical(TSizes.spaceBtwItems + 5),
           const Divider(),
-          const SizedBox(height: TSizes.spaceBtwItems),
           const PaymentSection(),
-          const SizedBox(height: TSizes.spaceBtwSections),
+          ResponsiveGap.vertical(TSizes.spaceBtwSections / 1.8),
           BlocProvider(
             create: (context) => getIt<AddressCubit>()..fetchAllAddresses(),
             child: const AddressSection(),

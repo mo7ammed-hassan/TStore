@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
 import 'package:t_store/features/shop/features/payment/presentation/screens/payment_screen.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class CheckoutButton extends StatelessWidget {
   const CheckoutButton({super.key});
@@ -11,7 +13,7 @@ class CheckoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartCubit = context.read<CartCubit>();
     return Padding(
-      padding: const EdgeInsets.symmetric(
+      padding: context.responsiveInsets.symmetric(
         horizontal: TSizes.defaultSpace,
         vertical: TSizes.spaceBtwItems,
       ),
@@ -24,7 +26,8 @@ class CheckoutButton extends StatelessWidget {
             ),
           );
         },
-        child: Text('Pay Now \$${cartCubit.orderTotal.toStringAsFixed(2)}'),
+        child: ResponsiveText(
+            'Pay Now \$${cartCubit.orderTotal.toStringAsFixed(2)}'),
       ),
     );
   }

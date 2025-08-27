@@ -54,7 +54,7 @@ class ProductDetailPage extends StatelessWidget {
                     ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
                     // - Price, Title, Stock, Brand
                     TProductMetaData(product: product),
-                    ResponsiveGap.vertical(TSizes.spaceBtwItems),
+                    ResponsiveGap.vertical(TSizes.spaceBtwItems + 5),
                     // - Attributes
                     if (product.productType == ProductType.variable.toString())
                       TProductAttributes(product: product),
@@ -82,10 +82,14 @@ class ProductDetailPage extends StatelessWidget {
                       trimMode: TrimMode.Line,
                       trimCollapsedText: ' Show more',
                       trimExpandedText: ' Less',
-                      moreStyle: const TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.w800),
-                      lessStyle: const TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.w800),
+                      moreStyle: TextStyle(
+                        fontSize: getResponsiveFontSize(context, fontSize: 12),
+                        fontWeight: FontWeight.w800,
+                      ),
+                      lessStyle: TextStyle(
+                        fontSize: getResponsiveFontSize(context, fontSize: 12),
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
 
                     // Reviews

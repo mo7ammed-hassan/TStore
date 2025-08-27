@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store/common/widgets/divider/custom_divider.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
+import 'package:t_store/features/shop/features/payment/presentation/widgets/payment_summary_row.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class PricingSection extends StatelessWidget {
   const PricingSection({
@@ -15,45 +18,26 @@ class PricingSection extends StatelessWidget {
 
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Subtotal', style: Theme.of(context).textTheme.bodyMedium),
-            Text(
-              '\$${cartCubit.totalPrice}',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ],
+        PaymentSummaryRow(
+          label: 'Subtotal',
+          value: '\$${cartCubit.totalPrice}',
         ),
-        const SizedBox(height: TSizes.spaceBtwItems / 2),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Shipping Free',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            Text('\$6.0', style: Theme.of(context).textTheme.labelLarge),
-          ],
+        ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
+        PaymentSummaryRow(
+          label: 'Shipping Free',
+          value: '\$6.0',
         ),
-        const SizedBox(height: TSizes.spaceBtwItems / 2),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Tax Free', style: Theme.of(context).textTheme.bodyMedium),
-            Text('\$10.0', style: Theme.of(context).textTheme.labelLarge),
-          ],
+        ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
+        PaymentSummaryRow(
+          label: 'Tax Free',
+          value: '\$10.0',
         ),
-        const SizedBox(height: TSizes.spaceBtwItems),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Order Total', style: Theme.of(context).textTheme.titleMedium),
-            Text(
-              '\$${cartCubit.orderTotal.toStringAsFixed(2)}',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-          ],
+        ResponsiveGap.vertical(TSizes.spaceBtwItems),
+        const CustomDivider(),
+        ResponsiveGap.vertical(18.0),
+        PaymentSummaryRow(
+          label: 'Order Total',
+          value: '\$${cartCubit.orderTotal.toStringAsFixed(2)}',
         ),
       ],
     );

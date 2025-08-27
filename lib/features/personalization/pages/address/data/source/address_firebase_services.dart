@@ -49,7 +49,6 @@ class AddressFirebaseServicesImpl extends AddressFirebaseServices {
           .collection(FirebaseCollections.ADDRESS_COLLECTION)
           .doc(addressId)
           .delete();
-          
     } catch (e) {
       throw e.toString();
     }
@@ -89,7 +88,7 @@ class AddressFirebaseServicesImpl extends AddressFirebaseServices {
           .doc(addressId)
           .update({'selectedAddress': isSelected});
     } catch (e) {
-      throw e.toString();
+      return;
     }
   }
 }

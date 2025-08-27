@@ -4,6 +4,9 @@ import 'package:t_store/features/shop/features/product_reviews/presentation/widg
 import 'package:t_store/features/shop/features/product_reviews/presentation/widgets/store_response.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class UserReviewCard extends StatelessWidget {
   const UserReviewCard({super.key});
@@ -18,36 +21,48 @@ class UserReviewCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
+                  radius: context.horzSize(17),
                   backgroundImage: AssetImage(TImages.userProfileImage1),
                 ),
-                const SizedBox(width: TSizes.spaceBtwItems),
-                Text('Ahmed Hossam',
-                    style: Theme.of(context).textTheme.titleLarge),
+                ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
+                ResponsiveText(
+                  'Ahmed Hossam',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
               ],
             ),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.more_vert,
+                size: context.horzSize(17),
+              ),
+            ),
           ],
         ),
-        const SizedBox(height: TSizes.spaceBtwItems),
+        ResponsiveGap.vertical(TSizes.spaceBtwItems / 2.5),
         Row(
           children: [
             const TRatingBarIndicator(rating: 3.5),
-            const SizedBox(width: TSizes.spaceBtwItems),
-            Text(
+            ResponsiveGap.horizontal(TSizes.spaceBtwItems),
+            ResponsiveText(
               '20 Nov 2024',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
         ),
-        const SizedBox(height: TSizes.spaceBtwItems),
+        ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
         const TReadMoreText(
           text:
               'Ratings and reviews are verified and are from people who use the same type of product that you see',
         ),
-        const SizedBox(height: TSizes.spaceBtwItems),
+        ResponsiveGap.vertical(TSizes.spaceBtwItems),
         const StoreResponse(),
-        const SizedBox(height: TSizes.spaceBtwSections),
+        ResponsiveGap.vertical(TSizes.spaceBtwSections),
       ],
     );
   }
