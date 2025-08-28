@@ -23,6 +23,7 @@ class AddressSection extends StatelessWidget {
           title: 'Shipping Address',
           showActionButton: true,
           buttonTitle: 'Change',
+          fontSize: 14.5,
           onPressed: () => _showAddressBottomSheet(context),
         ),
         if (selectedAddress?.id.isNotEmpty == true)
@@ -56,5 +57,3 @@ class AddressSection extends StatelessWidget {
     );
   }
 }
-
-

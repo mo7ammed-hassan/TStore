@@ -23,7 +23,10 @@ class AddressInfoRow extends StatelessWidget {
         Expanded(
           child: ResponsiveText(
             text,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(fontSize: 13.5),
           ),
         ),
       ],

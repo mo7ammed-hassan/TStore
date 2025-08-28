@@ -7,6 +7,7 @@ class TSectionHeading extends StatelessWidget {
   final Color? textColor;
   final bool showActionButton;
   final void Function()? onPressed;
+  final double? fontSize;
 
   const TSectionHeading({
     super.key,
@@ -15,6 +16,7 @@ class TSectionHeading extends StatelessWidget {
     this.showActionButton = true,
     this.onPressed,
     this.textColor,
+    this.fontSize,
   });
 
   @override
@@ -27,7 +29,7 @@ class TSectionHeading extends StatelessWidget {
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                 color: textColor,
                 fontWeight: FontWeight.w600,
-                fontSize: 15.5,
+                fontSize: fontSize ?? 15.5,
               ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
@@ -37,10 +39,10 @@ class TSectionHeading extends StatelessWidget {
             onPressed: onPressed,
             child: ResponsiveText(
               buttonTitle,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall!
-                  .copyWith(color: AppColors.primary, fontSize: 13),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    color: AppColors.primary,
+                    fontSize: (fontSize ?? 15.5) - 2,
+                  ),
             ),
           )
       ],

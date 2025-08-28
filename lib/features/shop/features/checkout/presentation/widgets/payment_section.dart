@@ -21,11 +21,12 @@ class PaymentSection extends StatelessWidget {
           title: 'Payment Method',
           showActionButton: true,
           buttonTitle: 'Change',
+          fontSize: 14.5,
         ),
         Row(
           children: [
             TRoundedImage(
-              width: 55,
+              width: 52,
               height: 30,
               backgroundColor: isDark ? AppColors.dark : AppColors.light,
               imageUrl: TImages.visa,
@@ -36,7 +37,10 @@ class PaymentSection extends StatelessWidget {
             ResponsiveGap.horizontal(TSizes.spaceBtwItems),
             ResponsiveText(
               'Visa',
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(fontSize: 14),
             ),
           ],
         ),
