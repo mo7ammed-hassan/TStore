@@ -38,7 +38,7 @@ class TProductAttributes extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (attribute.key.isOdd) const SizedBox(height: TSizes.spaceBtwItems),
+        if (attribute.key.isOdd) ResponsiveGap.vertical(TSizes.spaceBtwItems),
         TSectionHeading(
           title: attribute.value.name,
           showActionButton: false,

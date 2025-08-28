@@ -9,8 +9,11 @@ import 'package:t_store/features/shop/features/product_details/presentation/cubi
 import 'package:t_store/utils/responsive/responsive_helpers.dart';
 
 class BuildChoiceChips extends StatelessWidget {
-  const BuildChoiceChips(
-      {super.key, required this.attribute, required this.product});
+  const BuildChoiceChips({
+    super.key,
+    required this.attribute,
+    required this.product,
+  });
   final MapEntry<int, ProductAttributeEntity> attribute;
   final ProductEntity product;
 
@@ -22,7 +25,10 @@ class BuildChoiceChips extends StatelessWidget {
           spacing: context.horzSize(8),
           children: attribute.value.values.map((attributeValue) {
             final available = _isAttributeAvailableInVariation(
-                context, attribute.value.name, attributeValue);
+              context,
+              attribute.value.name,
+              attributeValue,
+            );
 
             return TChoiceChip(
               text: attributeValue,
@@ -47,20 +53,30 @@ class BuildChoiceChips extends StatelessWidget {
 
   // Check if the attribute value is available in variations
   bool _isAttributeAvailableInVariation(
-      BuildContext context, String attributeName, String attributeValue) {
+    BuildContext context,
+    String attributeName,
+    String attributeValue,
+  ) {
     return context
         .read<ProductVariationCubit>()
         .getAttributesAvailityInVariation(
-            product.productVariations!, attributeName)
+          product.productVariations!,
+          attributeName,
+        )
         .contains(attributeValue);
   }
 
   // Handle selection of an attribute
-  void _onAttributeSelected(BuildContext context,
-      MapEntry<int, ProductAttributeEntity> attribute, String attributeValue) {
-    context
-        .read<ProductVariationCubit>()
-        .onSelectedAttribute(product, attribute.value.name, attributeValue);
+  void _onAttributeSelected(
+    BuildContext context,
+    MapEntry<int, ProductAttributeEntity> attribute,
+    String attributeValue,
+  ) {
+    context.read<ProductVariationCubit>().onSelectedAttribute(
+          product,
+          attribute.value.name,
+          attributeValue,
+        );
 
     // Update selected image
     context.read<ImagesProductCubit>().selectImage(

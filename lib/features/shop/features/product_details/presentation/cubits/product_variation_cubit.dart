@@ -90,7 +90,9 @@ class ProductVariationCubit extends Cubit<ProductVariationEntity> {
             variation.attributeValues[attribute] != null &&
             variation.attributeValues[attribute]!.isNotEmpty &&
             variation.stock > 0)
-        .map((variation) => variation.attributeValues[attribute])
+        .map(
+          (variation) => variation.attributeValues[attribute],
+        )
         .toSet();
 
     return availableVariationAttributesValues;
