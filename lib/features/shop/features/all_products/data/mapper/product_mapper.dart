@@ -23,7 +23,7 @@ extension ProductEntityMapper on ProductEntity {
       brand: brand?.toModel(),
       description: description,
       categoryId: categoryId,
-      images: images ?? [],
+      images: images ?? const [],
       productType: productType,
       productAttributes: productAttributes.map((e) => e.toModel()).toList(),
       productVariations:
@@ -55,20 +55,20 @@ extension ProductModelMapper on ProductModel {
   }
 }
 
-extension ProductToProductCartItemModelMapper on ProductEntity {
+extension ProductEntityCartItemMapper on ProductEntity {
   ProductCartItemEntity toCartItemProductEntity(
       {ProductVariationEntity? variation}) {
     final hasVariation = variation != null;
-    final hasSalePrice = !hasVariation && salePrice != null;
 
     return ProductCartItemEntity(
       id: id,
       title: title,
-      price: hasVariation
-          ? variation.price.toDouble()
-          : hasSalePrice
-              ? (salePrice! > 0 ? salePrice! : price.toDouble())
-              : price.toDouble(),
+      price: _calculatePrice(
+        basePrice: price.toDouble(),
+        salePrice: salePrice,
+        variationPrice: variation?.price.toDouble(),
+        variationSalePrice: variation?.salePrice,
+      ),
       imageUrl: variation?.image ?? '',
       variation:
           hasVariation ? variation.toModel() : ProductVariationModel.empty(),
@@ -77,21 +77,38 @@ extension ProductToProductCartItemModelMapper on ProductEntity {
   }
 }
 
-extension ProductToProductCartItemEntityMapper on ProductModel {
+extension ProductModelCartItemMapper on ProductModel {
   ProductCartItemModel toCartItemProductModel(
       {ProductVariationModel? variation}) {
     final hasVariation = variation != null;
     return ProductCartItemModel(
       id: id,
       title: title,
-      price: hasVariation
-          ? variation.price.toDouble()
-          : salePrice > 0
-              ? salePrice
-              : price.toDouble(),
+      price: _calculatePrice(
+        basePrice: price.toDouble(),
+        salePrice: salePrice,
+        variationPrice: variation?.price.toDouble(),
+        variationSalePrice: variation?.salePrice,
+      ),
       imageUrl: variation?.image,
       variation: hasVariation ? variation : ProductVariationModel.empty(),
       brand: brand?.name ?? '',
     );
   }
+}
+
+double _calculatePrice({
+  required double basePrice,
+  double? salePrice,
+  double? variationPrice,
+  double? variationSalePrice,
+}) {
+  if (variationSalePrice != null && variationSalePrice > 0) {
+    return variationSalePrice;
+  } else if (variationPrice != null) {
+    return variationPrice;
+  } else if (salePrice != null && salePrice > 0) {
+    return salePrice;
+  }
+  return basePrice;
 }

@@ -4,6 +4,7 @@ import 'package:t_store/common/widgets/texts/product_price.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class TProductCartFooter extends StatelessWidget {
   const TProductCartFooter({
@@ -30,7 +31,8 @@ class TProductCartFooter extends StatelessWidget {
               child: TProductPriceText(price: price ?? '', isLarge: false),
             ),
           ),
-          const SizedBox(width: TSizes.sm),
+          ResponsiveGap.horizontal(TSizes.sm),
+          
           TAddIcon(
             product: product,
           ),

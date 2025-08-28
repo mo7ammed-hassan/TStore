@@ -67,7 +67,9 @@ class CartCubit extends Cubit<CartState> {
     final ProductCartItemEntity productModel = ProductCartItemEntity(
       id: product.id,
       title: product.title,
-      price: selectedVariation.price.toDouble(),
+      price: (selectedVariation.salePrice > 0)
+          ? selectedVariation.salePrice
+          : selectedVariation.price.toDouble(),
       imageUrl: selectedVariation.image,
       variation: selectedVariation.toModel(),
       brand: product.brand?.name ?? '',
@@ -165,6 +167,6 @@ class CartCubit extends Cubit<CartState> {
   // -- Private helper to emit state safely
   void _emitUpdateCart() {
     final updatedCartItems = List<CartItemEntity>.from(_cartItems);
-    emit(CartLoadedState(updatedCartItems));
+    emit(CartLoadedState(updatedCartItems, totalPrice));
   }
 }

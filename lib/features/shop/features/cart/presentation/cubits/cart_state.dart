@@ -8,15 +8,15 @@ abstract class CartState extends Equatable {
   List<Object> get props => [];
 }
 
-
 class CartInitialState extends CartState {}
 
 class CartLoadingState extends CartState {}
 
 class CartLoadedState extends CartState {
   final List<CartItemEntity> cartItems;
+  final double totalPrice;
 
-  const CartLoadedState( this.cartItems);
+  const CartLoadedState(this.cartItems, this.totalPrice);
 
   @override
   List<Object> get props => [cartItems];

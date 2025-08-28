@@ -1,6 +1,5 @@
 import 'package:t_store/features/shop/features/all_products/data/models/product_variation_model.dart';
 
-
 class ProductCartItemEntity {
   final String id;
   final String title;
@@ -9,13 +8,14 @@ class ProductCartItemEntity {
   final ProductVariationModel variation;
   final String brand;
 
-  ProductCartItemEntity(
-      {required this.id,
-      required this.title,
-      required this.price,
-      required this.imageUrl,
-      required this.variation,
-      required this.brand});
+  ProductCartItemEntity({
+    required this.id,
+    required this.title,
+    required this.price,
+    required this.imageUrl,
+    required this.variation,
+    required this.brand,
+  });
 
   static ProductCartItemEntity empty() {
     return ProductCartItemEntity(

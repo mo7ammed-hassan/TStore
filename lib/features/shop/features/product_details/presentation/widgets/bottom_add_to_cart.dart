@@ -8,6 +8,9 @@ import 'package:t_store/features/shop/features/product_details/presentation/cubi
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TBottomAddToCart extends StatefulWidget {
   const TBottomAddToCart({super.key, required this.product});
@@ -40,11 +43,10 @@ class _TBottomAddToCartState extends State<TBottomAddToCart> {
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
     _updateQuantityIfNeeded(context);
-
     final cartCubit = context.read<CartCubit>();
 
     return Container(
-      padding: const EdgeInsets.symmetric(
+      padding: context.responsiveInsets.symmetric(
         horizontal: TSizes.defaultSpace,
         vertical: TSizes.spaceBtwItems / 2,
       ),
@@ -72,16 +74,17 @@ class _TBottomAddToCartState extends State<TBottomAddToCart> {
                   }
                 },
               ),
-              const SizedBox(width: TSizes.spaceBtwItems),
+              ResponsiveGap.horizontal(TSizes.spaceBtwItems),
               ValueListenableBuilder(
-                  valueListenable: quantityNotifier,
-                  builder: (context, value, child) {
-                    return Text(
-                      value.toString(),
-                      style: Theme.of(context).textTheme.titleSmall,
-                    );
-                  }),
-              const SizedBox(width: TSizes.spaceBtwItems),
+                valueListenable: quantityNotifier,
+                builder: (context, value, child) {
+                  return Text(
+                    value.toString(),
+                    style: Theme.of(context).textTheme.titleSmall,
+                  );
+                },
+              ),
+              ResponsiveGap.horizontal(TSizes.spaceBtwItems),
               TCircularIcon(
                 backgroundColor: AppColors.black,
                 icon: Iconsax.add,
@@ -94,7 +97,7 @@ class _TBottomAddToCartState extends State<TBottomAddToCart> {
               ),
             ],
           ),
-          const SizedBox(width: TSizes.spaceBtwSections),
+          ResponsiveGap.horizontal(TSizes.spaceBtwSections),
           ElevatedButton(
             onPressed: () async {
               await cartCubit.addItemToCart(
@@ -106,11 +109,11 @@ class _TBottomAddToCartState extends State<TBottomAddToCart> {
               );
             },
             style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.all(TSizes.md),
+              padding: context.responsiveInsets.all(TSizes.md),
               backgroundColor: AppColors.black,
               side: const BorderSide(color: AppColors.black),
             ),
-            child: const Text('Add to cart'),
+            child: const ResponsiveText('Add to cart'),
           ),
         ],
       ),

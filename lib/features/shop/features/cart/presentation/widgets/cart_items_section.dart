@@ -62,10 +62,11 @@ class CartItemsSection extends StatelessWidget {
       );
     }
     return Center(
-        child: ResponsiveText(
-      message,
-      fontSize: 14,
-    ));
+      child: ResponsiveText(
+        message,
+        fontSize: 13,
+      ),
+    );
   }
 
   Widget _emptyCart(BuildContext context) {
@@ -82,17 +83,18 @@ class CartItemsSection extends StatelessWidget {
           )
         : Center(
             child: Column(
-            children: [
-              Spacer(
-                flex: 1,
-              ),
-              LottieBuilder.asset(TImages.cartAnimation),
-              ResponsiveGap.vertical(TSizes.spaceBtwItems * 2),
-              _buildMessage('Oops! your cart is empty, let\'s fill it'),
-              Spacer(
-                flex: 2,
-              ),
-            ],
-          ));
+              children: [
+                Spacer(
+                  flex: 1,
+                ),
+                Expanded(child: LottieBuilder.asset(TImages.cartAnimation)),
+                ResponsiveGap.vertical(TSizes.spaceBtwItems * 2),
+                _buildMessage('Oops! your cart is empty, let\'s fill it'),
+                Spacer(
+                  flex: 2,
+                ),
+              ],
+            ),
+          );
   }
 }

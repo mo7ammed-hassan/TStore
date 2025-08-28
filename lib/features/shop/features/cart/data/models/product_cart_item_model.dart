@@ -18,11 +18,12 @@ class ProductCartItemModel {
   @HiveField(5)
   final String? brand;
 
-  ProductCartItemModel(
-      {required this.id,
-      required this.title,
-      required this.price,
-      required this.imageUrl,
-      required this.variation,
-      required this.brand});
+  ProductCartItemModel({
+    required this.id,
+    required this.title,
+    required this.price,
+    required this.imageUrl,
+    required this.variation,
+    required this.brand,
+  });
 }

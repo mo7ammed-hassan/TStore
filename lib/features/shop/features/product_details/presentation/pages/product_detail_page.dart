@@ -4,7 +4,10 @@ import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
 import 'package:t_store/common/widgets/animation_containers/open_container_wrapper.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
+import 'package:t_store/features/shop/features/all_products/data/mapper/product_mapper.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
+import 'package:t_store/features/shop/features/cart/data/mapper/product_cart_item_mapper.dart';
+import 'package:t_store/features/shop/features/checkout/presentation/pages/order_review_screen.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/cubits/images_product_cubit.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/cubits/product_variation_cubit.dart';
 import 'package:t_store/features/shop/features/product_reviews/presentation/pages/product_review_page.dart';
@@ -63,10 +66,30 @@ class ProductDetailPage extends StatelessWidget {
                     // - Checkout Button
                     SizedBox(
                       width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: const ResponsiveText('Checkout'),
-                      ),
+                      child: Builder(builder: (context) {
+                        return ElevatedButton(
+                          onPressed: () {
+                            final selectedariation = context
+                                .read<ProductVariationCubit>()
+                                .selectedVariation;
+                                
+                            final cartItem = product
+                                .toCartItemProductEntity(
+                                  variation: selectedariation,
+                                )
+                                .toCartItemEntity();
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    OrderReviewScreen(items: [cartItem]),
+                              ),
+                            );
+                          },
+                          child: const ResponsiveText('Checkout'),
+                        );
+                      }),
                     ),
                     ResponsiveGap.vertical(TSizes.spaceBtwSections),
                     // -- Description
@@ -109,8 +132,10 @@ class ProductDetailPage extends StatelessWidget {
                           ),
                           IconButton(
                             onPressed: null,
-                            icon: Icon(Iconsax.arrow_right_3,
-                                size: context.horzSize(18)),
+                            icon: Icon(
+                              Iconsax.arrow_right_3,
+                              size: context.horzSize(18),
+                            ),
                           ),
                         ],
                       ),

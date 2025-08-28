@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
+import 'package:t_store/features/shop/features/checkout/presentation/cubits/checkout_cubit.dart';
+import 'package:t_store/features/shop/features/checkout/presentation/cubits/checkout_state.dart';
 import 'package:t_store/features/shop/features/payment/presentation/screens/payment_screen.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
@@ -11,14 +12,25 @@ class CheckoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartCubit = context.watch<CartCubit>();
+    final total = context.select<CheckoutCubit, double?>((cubit) {
+      final state = cubit.state;
+      if (state is CheckoutLoaded) {
+        return state.orderSummary.total;
+      }
+      return null;
+    });
+
+    if (total == null) {
+      return const SizedBox.shrink();
+    }
+
     return Padding(
       padding: context.responsiveInsets.symmetric(
         horizontal: TSizes.defaultSpace,
         vertical: TSizes.spaceBtwItems,
       ),
       child: ElevatedButton(
-        onPressed: cartCubit.orderTotal > 10
+        onPressed: total > 10
             ? () {
                 Navigator.push(
                   context,
@@ -29,7 +41,7 @@ class CheckoutButton extends StatelessWidget {
               }
             : null,
         child: ResponsiveText(
-          'Confirm Order \$${cartCubit.orderTotal.toStringAsFixed(2)}',
+          'Confirm Order \$${total.toStringAsFixed(2)}',
         ),
       ),
     );
