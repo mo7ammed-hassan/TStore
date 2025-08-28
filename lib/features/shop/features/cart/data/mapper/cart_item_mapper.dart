@@ -14,7 +14,7 @@ extension CartItemMapper on CartItemModel {
 }
 
 /// Converts a [CartItemEntity] to a [CartItemModel].
-extension EventModelMapper on CartItemEntity {
+extension CartModelMapper on CartItemEntity {
   CartItemModel toModel() {
     return CartItemModel(
       id: id ?? '',
@@ -23,3 +23,6 @@ extension EventModelMapper on CartItemEntity {
     );
   }
 }
+
+
+

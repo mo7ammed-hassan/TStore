@@ -41,7 +41,7 @@ extension ProductCartItemToCartItemModelMapper on ProductCartItemModel {
 }
 
 extension ProductCartItemToCartItemEntityMapper on ProductCartItemEntity {
-  CartItemEntity toCartItemModel({int quantity = 1}) {
+  CartItemEntity toCartItemEntity({int quantity = 1}) {
     return CartItemEntity(
       id: '',
       product: this,
