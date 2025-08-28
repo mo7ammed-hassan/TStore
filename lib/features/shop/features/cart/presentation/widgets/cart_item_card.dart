@@ -107,14 +107,16 @@ class CartItemCard extends StatelessWidget {
                 ],
               ),
             ),
-            IconButton(
-              onPressed: () =>
-                  context.read<CartCubit>().removeItemFromCart(item: cartItem),
-              icon: Icon(
-                Iconsax.trash,
-                color: Colors.redAccent,
-              ),
-            )
+            if (showAddRemoveButtons)
+              IconButton(
+                onPressed: () => context
+                    .read<CartCubit>()
+                    .removeItemFromCart(item: cartItem),
+                icon: Icon(
+                  Iconsax.trash,
+                  color: Colors.redAccent,
+                ),
+              )
           ],
         ),
       ],
