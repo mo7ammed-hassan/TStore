@@ -8,6 +8,7 @@ import 'package:t_store/features/shop/features/checkout/presentation/widgets/pri
 import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class ChekoutOrderDetial extends StatelessWidget {
@@ -17,7 +18,7 @@ class ChekoutOrderDetial extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return TRoundedContainer(
-      padding: const EdgeInsets.all(TSizes.md),
+      padding: context.responsiveInsets.all(TSizes.md),
       showBorder: true,
       backgroundColor: isDark ? AppColors.black : AppColors.white,
       child: Column(

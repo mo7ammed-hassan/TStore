@@ -11,21 +11,23 @@ class CheckoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartCubit = context.read<CartCubit>();
+    final cartCubit = context.watch<CartCubit>();
     return Padding(
       padding: context.responsiveInsets.symmetric(
         horizontal: TSizes.defaultSpace,
         vertical: TSizes.spaceBtwItems,
       ),
       child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const PaymentScreen(),
-            ),
-          );
-        },
+        onPressed: cartCubit.orderTotal > 10
+            ? () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PaymentScreen(),
+                  ),
+                );
+              }
+            : null,
         child: ResponsiveText(
           'Confirm Order \$${cartCubit.orderTotal.toStringAsFixed(2)}',
         ),

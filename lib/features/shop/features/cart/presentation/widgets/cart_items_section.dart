@@ -7,6 +7,7 @@ import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_sta
 import 'package:t_store/features/shop/features/cart/presentation/widgets/cart_items_list.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
@@ -36,7 +37,7 @@ class CartItemsSection extends StatelessWidget {
 
         if (state is CartLoadedState) {
           if (state.cartItems.isEmpty) {
-            return _emptyCart();
+            return _emptyCart(context);
           }
 
           return sliverList
@@ -47,7 +48,9 @@ class CartItemsSection extends StatelessWidget {
                 );
         }
 
-        return const SizedBox.shrink();
+        return sliverList
+            ? const SliverToBoxAdapter()
+            : const SizedBox.shrink();
       },
     );
   }
@@ -65,20 +68,31 @@ class CartItemsSection extends StatelessWidget {
     ));
   }
 
-  Widget _emptyCart() {
-    return Center(
-        child: Column(
-      children: [
-        Spacer(
-          flex: 1,
-        ),
-        LottieBuilder.asset(TImages.cartAnimation),
-        ResponsiveGap.vertical(TSizes.spaceBtwItems),
-        _buildMessage('Oops! your cart is empty, let\'s fill it'),
-        Spacer(
-          flex: 2,
-        ),
-      ],
-    ));
+  Widget _emptyCart(BuildContext context) {
+    return sliverList
+        ? SliverToBoxAdapter(
+            child: Column(
+              children: [
+                SizedBox(
+                  width: context.horzSize(200),
+                  child: LottieBuilder.asset(TImages.cartAnimation),
+                ),
+              ],
+            ),
+          )
+        : Center(
+            child: Column(
+            children: [
+              Spacer(
+                flex: 1,
+              ),
+              LottieBuilder.asset(TImages.cartAnimation),
+              ResponsiveGap.vertical(TSizes.spaceBtwItems * 2),
+              _buildMessage('Oops! your cart is empty, let\'s fill it'),
+              Spacer(
+                flex: 2,
+              ),
+            ],
+          ));
   }
 }

@@ -13,7 +13,7 @@ class PricingSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartCubit = context.read<CartCubit>();
+    final cartCubit = context.watch<CartCubit>();
     cartCubit.calcOrderTotal(10.0, 6.0);
 
     return Column(
