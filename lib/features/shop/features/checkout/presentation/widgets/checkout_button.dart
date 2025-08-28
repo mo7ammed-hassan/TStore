@@ -27,7 +27,8 @@ class CheckoutButton extends StatelessWidget {
           );
         },
         child: ResponsiveText(
-            'Pay Now \$${cartCubit.orderTotal.toStringAsFixed(2)}'),
+          'Confirm Order \$${cartCubit.orderTotal.toStringAsFixed(2)}',
+        ),
       ),
     );
   }

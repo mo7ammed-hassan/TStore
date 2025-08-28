@@ -69,7 +69,7 @@ class TTexts {
   static const String homeAppbarTitle = "Good day for shopping";
   static const String homeAppbarSubTitle = "Mohamed Hassan";
 
-  static const String paymentDetails = "Paymet Details";
+  static const String paymentDetails = "Select Payment";
 
   static const String paymentStatus = 'Payment Status';
 

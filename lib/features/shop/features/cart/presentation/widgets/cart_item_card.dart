@@ -11,6 +11,7 @@ import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cub
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text_span.dart';
 
@@ -41,7 +42,7 @@ class CartItemCard extends StatelessWidget {
               imageUrl: cartItem.product.imageUrl,
               width: 65,
               height: 65,
-              padding: const EdgeInsets.all(TSizes.sm),
+              padding: context.responsiveInsets.all(TSizes.sm),
               backgroundColor: isDark ? AppColors.darkerGrey : AppColors.light,
             ),
             ResponsiveGap.horizontal(TSizes.spaceBtwItems),
@@ -88,8 +89,8 @@ class CartItemCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ResponsiveGap.vertical(TSizes.spaceBtwItems),
-                  if (showAddRemoveButtons)
+                  if (showAddRemoveButtons) ...[
+                    ResponsiveGap.vertical(TSizes.md),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -102,19 +103,18 @@ class CartItemCard extends StatelessWidget {
                         ),
                       ],
                     ),
+                  ],
                 ],
               ),
             ),
-            if (showAddRemoveButtons)
-              IconButton(
-                onPressed: () => context
-                    .read<CartCubit>()
-                    .removeItemFromCart(item: cartItem),
-                icon: Icon(
-                  Iconsax.trash,
-                  color: Colors.redAccent,
-                ),
-              )
+            IconButton(
+              onPressed: () =>
+                  context.read<CartCubit>().removeItemFromCart(item: cartItem),
+              icon: Icon(
+                Iconsax.trash,
+                color: Colors.redAccent,
+              ),
+            )
           ],
         ),
       ],
