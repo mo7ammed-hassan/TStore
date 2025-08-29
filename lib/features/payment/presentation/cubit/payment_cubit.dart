@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/navigation_menu/navigation_screen.dart';
-import 'package:t_store/features/shop/features/payment/data/models/payment_method.dart';
-import 'package:t_store/features/shop/features/payment/presentation/cubit/payment_state.dart'
+import 'package:t_store/features/payment/data/models/payment_method.dart';
+import 'package:t_store/features/payment/presentation/cubit/payment_state.dart'
     show PaymentState;
-import 'package:t_store/features/shop/features/payment/presentation/screens/payment_status_screen.dart';
+import 'package:t_store/features/payment/presentation/screens/payment_status_screen.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 
 class PaymentCubit extends Cubit<PaymentState> {

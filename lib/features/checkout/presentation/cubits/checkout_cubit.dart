@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
-import 'package:t_store/features/shop/features/checkout/models/order_summary_model.dart';
-import 'package:t_store/features/shop/features/checkout/presentation/cubits/checkout_state.dart';
+import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
+import 'package:t_store/features/checkout/presentation/cubits/checkout_state.dart';
 
 class CheckoutCubit extends Cubit<CheckoutState> {
   CheckoutCubit() : super(CheckoutInitial());

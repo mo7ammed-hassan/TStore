@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/divider/custom_divider.dart';
-import 'package:t_store/features/shop/features/payment/presentation/widgets/payment_summary_row.dart';
+import 'package:t_store/features/payment/presentation/widgets/payment_summary_row.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class PaymentSummary extends StatelessWidget {

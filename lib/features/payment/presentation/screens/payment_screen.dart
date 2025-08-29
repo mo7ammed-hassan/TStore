@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
-import 'package:t_store/features/shop/features/payment/presentation/cubit/payment_cubit.dart';
-import 'package:t_store/features/shop/features/payment/presentation/cubit/payment_state.dart';
-import 'package:t_store/features/shop/features/payment/presentation/widgets/confirm_payment_button.dart';
-import 'package:t_store/features/shop/features/payment/presentation/widgets/payment_card.dart';
-import 'package:t_store/features/shop/features/payment/presentation/widgets/payment_summary.dart';
+import 'package:t_store/features/payment/presentation/cubit/payment_cubit.dart';
+import 'package:t_store/features/payment/presentation/cubit/payment_state.dart';
+import 'package:t_store/features/payment/presentation/widgets/confirm_payment_button.dart';
+import 'package:t_store/features/payment/presentation/widgets/payment_card.dart';
+import 'package:t_store/features/payment/presentation/widgets/payment_summary.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';

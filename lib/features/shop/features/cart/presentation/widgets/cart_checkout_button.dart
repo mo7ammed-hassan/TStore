@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
-import 'package:t_store/features/shop/features/checkout/presentation/pages/order_review_screen.dart';
+import 'package:t_store/features/checkout/presentation/pages/order_review_screen.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
@@ -26,7 +26,7 @@ class CartCheckoutButton extends StatelessWidget {
           ),
         ),
         child: ResponsiveText(
-          'Checkout \$${total.toStringAsFixed(2)}',
+          'Procced to Buy \$${total.toStringAsFixed(2)}',
         ),
       ),
     );

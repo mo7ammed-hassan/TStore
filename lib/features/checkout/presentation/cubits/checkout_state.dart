@@ -1,5 +1,5 @@
 import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
-import 'package:t_store/features/shop/features/checkout/models/order_summary_model.dart';
+import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
 
 sealed class CheckoutState {}
 

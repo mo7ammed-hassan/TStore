@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/features/shop/features/checkout/presentation/cubits/checkout_cubit.dart';
-import 'package:t_store/features/shop/features/checkout/presentation/cubits/checkout_state.dart';
-import 'package:t_store/features/shop/features/payment/presentation/screens/payment_screen.dart';
+import 'package:t_store/features/checkout/presentation/cubits/checkout_cubit.dart';
+import 'package:t_store/features/checkout/presentation/cubits/checkout_state.dart';
+import 'package:t_store/features/payment/presentation/screens/payment_screen.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/features/shop/features/payment/data/models/payment_method.dart';
+import 'package:t_store/features/payment/data/models/payment_method.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:t_store/utils/responsive/responsive_helpers.dart';

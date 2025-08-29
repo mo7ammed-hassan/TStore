@@ -1,4 +1,4 @@
-import 'package:t_store/features/shop/features/payment/data/models/payment_method.dart';
+import 'package:t_store/features/payment/data/models/payment_method.dart';
 
 class PaymentState {
   final List<PaymentMethod> methods;

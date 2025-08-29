@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
-import 'package:t_store/features/shop/features/payment/presentation/widgets/payment_summary.dart';
-import 'package:t_store/features/shop/features/payment/presentation/widgets/payment_summary_row.dart';
+import 'package:t_store/features/payment/presentation/widgets/payment_summary.dart';
+import 'package:t_store/features/payment/presentation/widgets/payment_summary_row.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';

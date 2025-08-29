@@ -7,7 +7,7 @@ import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/features/shop/features/all_products/data/mapper/product_mapper.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/cart/data/mapper/product_cart_item_mapper.dart';
-import 'package:t_store/features/shop/features/checkout/presentation/pages/order_review_screen.dart';
+import 'package:t_store/features/checkout/presentation/pages/order_review_screen.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/cubits/images_product_cubit.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/cubits/product_variation_cubit.dart';
 import 'package:t_store/features/shop/features/product_reviews/presentation/pages/product_review_page.dart';

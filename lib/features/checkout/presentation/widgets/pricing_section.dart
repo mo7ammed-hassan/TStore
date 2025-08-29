@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/divider/custom_divider.dart';
-import 'package:t_store/features/shop/features/checkout/models/order_summary_model.dart';
-import 'package:t_store/features/shop/features/payment/presentation/widgets/payment_summary_row.dart';
+import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
+import 'package:t_store/features/payment/presentation/widgets/payment_summary_row.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
