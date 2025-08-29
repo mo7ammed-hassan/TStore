@@ -42,37 +42,33 @@ class OrderReviewScreen extends StatelessWidget {
                 color: AppColors.primary,
               ));
             } else if (state.checkoutData != null) {
-              return AnimatedOpacity(
-                duration: Duration(microseconds: 350),
-                opacity: 1,
-                child: Padding(
-                  padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
-                  child: CustomScrollView(
-                    slivers: [
-                      SliverList.separated(
-                        itemCount: state.checkoutData?.items.length,
-                        itemBuilder: (_, index) => CartItemCard(
-                          key: ValueKey(state.checkoutData?.items[index].id),
-                          showAddRemoveButtons: false,
-                          cartItem: state.checkoutData!.items[index],
-                        ),
-                        separatorBuilder: (_, __) =>
-                            ResponsiveGap.vertical(TSizes.spaceBtwSections),
+              return Padding(
+                padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
+                child: CustomScrollView(
+                  slivers: [
+                    SliverList.separated(
+                      itemCount: state.checkoutData?.items.length,
+                      itemBuilder: (_, index) => CartItemCard(
+                        key: ValueKey(state.checkoutData?.items[index].id),
+                        showAddRemoveButtons: false,
+                        cartItem: state.checkoutData!.items[index],
                       ),
-                      SliverToBoxAdapter(
-                        child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
+                      separatorBuilder: (_, __) =>
+                          ResponsiveGap.vertical(TSizes.spaceBtwSections),
+                    ),
+                    SliverToBoxAdapter(
+                      child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
+                    ),
+                    SliverToBoxAdapter(child: const CouponFiled()),
+                    SliverToBoxAdapter(
+                      child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
+                    ),
+                    SliverToBoxAdapter(
+                      child: ChekoutOrderDetial(
+                        orderSummary: state.checkoutData!.orderSummary,
                       ),
-                      SliverToBoxAdapter(child: const CouponFiled()),
-                      SliverToBoxAdapter(
-                        child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
-                      ),
-                      SliverToBoxAdapter(
-                        child: ChekoutOrderDetial(
-                          orderSummary: state.checkoutData!.orderSummary,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               );
             } else if (!state.isLoading && state.checkoutData == null) {

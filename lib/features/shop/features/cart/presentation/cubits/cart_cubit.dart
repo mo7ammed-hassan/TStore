@@ -172,7 +172,7 @@ class CartCubit extends Cubit<CartState> {
 
   void clearAllItems() async {
     _cartItems.clear();
-    emit(CartLoadedState(_cartItems, 0));
+    _emitUpdateCart();
     await _cartUsecases.clearCartUsecase();
   }
 }
