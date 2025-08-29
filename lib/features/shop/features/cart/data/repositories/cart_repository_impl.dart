@@ -63,4 +63,9 @@ class CartRepositoryImpl extends CartRepository {
       return Left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<void> clearCart() async {
+    await cartManagementService.clearCart();
+  }
 }

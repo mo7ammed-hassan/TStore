@@ -10,6 +10,8 @@ abstract class CartManagementService {
 
   Future<void> changeItemQuantity(
       {required String itemId, required int quantity});
+
+  Future<void> clearCart();
 }
 
 class CartManagementServiceImpl implements CartManagementService {
@@ -65,6 +67,13 @@ class CartManagementServiceImpl implements CartManagementService {
     if (!cartBox.containsKey(cartItemId)) return;
 
     cartBox.delete(cartItemId);
+  }
+
+  @override
+  Future<void> clearCart() async {
+    var cartBox = await Hive.openBox<CartItemModel>(_boxName);
+    await cartBox.clear();
+    await cartBox.compact();
   }
 }
 

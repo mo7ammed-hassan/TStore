@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
 import 'package:t_store/features/payment/presentation/widgets/payment_summary.dart';
 import 'package:t_store/features/payment/presentation/widgets/payment_summary_row.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
@@ -17,6 +18,7 @@ class PaymentStatusScreen extends StatelessWidget {
     this.subTitle = 'There are many variations',
     this.title = 'Payment In Progress',
     this.onTap,
+    this.orderSummary,
   });
   final bool animation;
   final String imagePath;
@@ -24,6 +26,7 @@ class PaymentStatusScreen extends StatelessWidget {
   final String subTitle;
   final String title;
   final Function()? onTap;
+  final OrderSummaryModel? orderSummary;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +71,7 @@ class PaymentStatusScreen extends StatelessWidget {
               ResponsiveGap.vertical(14),
               PaymentSummaryRow(label: 'Transaction ID', value: 'FT54JN0'),
               ResponsiveGap.vertical(14),
-              PaymentSummary(),
+              PaymentSummary(orderSummary: orderSummary),
             ],
             ResponsiveGap.vertical(24),
             SafeArea(

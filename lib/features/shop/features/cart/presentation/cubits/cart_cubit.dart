@@ -169,4 +169,10 @@ class CartCubit extends Cubit<CartState> {
     final updatedCartItems = List<CartItemEntity>.from(_cartItems);
     emit(CartLoadedState(updatedCartItems, totalPrice));
   }
+
+  void clearAllItems() async {
+    _cartItems.clear();
+    emit(CartLoadedState(_cartItems, 0));
+    await _cartUsecases.clearCartUsecase();
+  }
 }

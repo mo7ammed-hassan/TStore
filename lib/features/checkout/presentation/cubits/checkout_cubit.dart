@@ -1,41 +1,51 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store/features/checkout/domain/entities/checkout_entity.dart';
+import 'package:t_store/features/checkout/domain/usecases/checkout_usecases.dart';
 import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
-import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
 import 'package:t_store/features/checkout/presentation/cubits/checkout_state.dart';
+import 'package:t_store/utils/constants/enums.dart';
 
 class CheckoutCubit extends Cubit<CheckoutState> {
-  CheckoutCubit() : super(CheckoutInitial());
+  CheckoutCubit(this.checoutUsecases) : super(CheckoutState());
+  final CheckoutUsecases checoutUsecases;
 
-  void loadCheckout(List<CartItemEntity> items) {
-    emit(CheckoutLoading());
+  Future<void> loadCheckout(List<CartItemEntity> items) async {
+    emit(state.copyWith(isLoading: true));
 
     try {
-      final subtotal = items.fold(0.0, (sum, item) => sum + item.totalPrice);
+      CheckoutEntity checkoutData =
+          await checoutUsecases.syncCartWithServerUseCase(items);
 
-      final discount = _calculateDiscount(items);
-      final shipping = _calculateShipping(items);
-      final total = subtotal - discount + shipping;
-
-      final orderSummary = OrderSummaryModel(
-        subtotal: subtotal,
-        discount: discount,
-        shipping: shipping,
-        total: total,
-      );
-
-      emit(CheckoutLoaded(items: items, orderSummary: orderSummary));
+      emit((state.copyWith(isLoading: false, checkoutData: checkoutData)));
     } catch (e) {
-      emit(CheckoutError(e.toString()));
+      emit(state.copyWith(isLoading: false, checkoutData: null));
     }
   }
 
-  double _calculateDiscount(List<CartItemEntity> items) {
-    // logic for coupon/discount
-    return 0.0;
-  }
+  Future<void> createOrderDraft(CheckoutEntity checkoutData) async {
+    if (state.order?.orderId != null &&
+        state.order?.orderStatus == OrderStatus.unCompleted.name) {
+      emit(
+        state.copyWith(
+          createOrderSuccess: true,
+        ),
+      );
+      return;
+    }
 
-  double _calculateShipping(List<CartItemEntity> items) {
-    // logic for shipping
-    return 10.0; // example
+    emit(state.copyWith(createOrderLoading: true, createOrderSuccess: false));
+    try {
+      final order = await checoutUsecases.createOrderDraftUsecase(checkoutData);
+
+      emit(
+        state.copyWith(
+          createOrderLoading: false,
+          createOrderSuccess: true,
+          order: order,
+        ),
+      );
+    } catch (e) {
+      emit(state.copyWith(createOrderLoading: false));
+    }
   }
 }

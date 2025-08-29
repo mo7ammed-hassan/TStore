@@ -13,6 +13,7 @@ import 'package:t_store/features/authentication/domain/use_cases/send_email_veri
 import 'package:t_store/features/authentication/domain/use_cases/signin_usecase.dart';
 import 'package:t_store/features/authentication/domain/use_cases/signin_with_google.dart';
 import 'package:t_store/features/authentication/domain/use_cases/signup_usecase.dart';
+import 'package:t_store/features/checkout/checkout_injection.dart';
 import 'package:t_store/features/personalization/data/repository/upload_data_repository_impl.dart';
 import 'package:t_store/features/personalization/data/repository/user_repository_impl.dart';
 import 'package:t_store/features/personalization/data/source/remote/firebase_storage_services.dart';
@@ -44,16 +45,9 @@ import 'package:t_store/features/shop/features/all_products/domain/usecases/get_
 import 'package:t_store/features/shop/features/all_products/domain/usecases/get_fetured_products_use_case.dart';
 import 'package:t_store/features/shop/features/all_products/domain/usecases/get_products_specific_category_use_case.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/products_cubit.dart';
-import 'package:t_store/features/shop/features/cart/data/repositories/cart_repository_impl.dart';
-import 'package:t_store/features/shop/features/cart/data/source/cart_local_storage_services.dart';
-import 'package:t_store/features/shop/features/cart/data/source/cart_mangment_service.dart';
-import 'package:t_store/features/shop/features/cart/domain/repositories/cart_repository.dart';
-import 'package:t_store/features/shop/features/cart/domain/usecases/add_item_to_cart_usecase.dart';
-import 'package:t_store/features/shop/features/cart/domain/usecases/cart_usecases.dart';
-import 'package:t_store/features/shop/features/cart/domain/usecases/change_cart_item_quantity_usecase.dart';
-import 'package:t_store/features/shop/features/cart/domain/usecases/fetch_cart_items_use_case.dart';
-import 'package:t_store/features/shop/features/cart/domain/usecases/remove_item_from_cart_usecase.dart';
-import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
+import 'package:t_store/features/shop/features/cart/cart_injection.dart'
+    show registerCartDependencies;
+
 import 'package:t_store/features/shop/features/home/data/repository/banner_repository_impl.dart';
 import 'package:t_store/features/shop/features/home/data/repository/category_repository_impl.dart';
 import 'package:t_store/features/shop/features/home/data/source/remote/banner_firebase_services.dart';
@@ -97,18 +91,6 @@ Future<void> initializeDependencies() async {
   getIt.registerSingleton<WishlistFirebaseServices>(
     WishlistFirebaseServicesImpl(),
   );
-  getIt.registerLazySingleton<CartLocalStorageServices>(
-    () => CartLocalStorageServicesImpl(),
-  );
-  // getIt.registerSingleton<DefaultCartItemFactory>(
-  //   DefaultCartItemFactory(ProductVariationCubit()),
-  // );
-  getIt.registerLazySingleton<CartManagementService>(
-    () => CartManagementServiceImpl(
-      getIt.get<CartLocalStorageServices>(), // Use get_it to get the instance
-      //getIt.get<DefaultCartItemFactory>(),
-    ),
-  );
 
   // ------Repositories------
   getIt.registerSingleton<OnboardingRepository>(
@@ -135,12 +117,6 @@ Future<void> initializeDependencies() async {
   getIt.registerSingleton<WishlistRepository>(
     WishlistRepositoryImpl(
       WishlistFirebaseServicesImpl(),
-    ),
-  );
-  getIt.registerSingleton<CartRepository>(
-    CartRepositoryImpl(
-      getIt.get<CartManagementService>(),
-      getIt.get<CartLocalStorageServices>(),
     ),
   );
 
@@ -250,22 +226,7 @@ Future<void> initializeDependencies() async {
   registerAddressDependencies(getIt);
 
   // --Cart--
-  getIt.registerLazySingleton<FetchCartItemsUseCase>(
-    () => FetchCartItemsUseCase(getIt.get<CartRepository>()),
-  );
-  getIt.registerLazySingleton<AddItemToCartUsecase>(
-    () => AddItemToCartUsecase(getIt.get<CartRepository>()),
-  );
-  getIt.registerLazySingleton<RemoveItemFromCartUsecase>(
-    () => RemoveItemFromCartUsecase(getIt.get<CartRepository>()),
-  );
-  getIt.registerLazySingleton<ChangeCartItemQuantityUsecase>(
-    () => ChangeCartItemQuantityUsecase(getIt.get<CartRepository>()),
-  );
-
-  getIt.registerLazySingleton<CartUsecases>(
-    () => CartUsecases(getIt(), getIt(), getIt(), getIt()),
-  );
+  registerCartDependencies((getIt));
 
   // -- Cubits--
   getIt.registerFactory<ProductsCubit>(() => ProductsCubit());
@@ -275,10 +236,8 @@ Future<void> initializeDependencies() async {
     () => FavoriteButtonCubit(getIt.get<WishlistCubit>()),
   );
 
-  getIt.registerFactory<CartCubit>(
-    () => CartCubit(getIt.get<CartUsecases>()),
-  );
-
   // -- HIVE BOXES --
   getIt.registerLazySingleton<OpenBoxes>(() => OpenBoxes());
+
+  registerCheckoutDependencies(getIt);
 }

@@ -17,11 +17,13 @@ class CartItemEntity {
     );
   }
 
-  // copyWith method to create a new instance with modified quantity
-  CartItemEntity copyWith({int? quantity}) {
+  CartItemEntity copyWith({int? quantity, double? price}) {
+    final updatedProduct =
+        price != null ? product.copyWith(price: price) : product;
+
     return CartItemEntity(
       id: id,
-      product: product,
+      product: updatedProduct,
       quantity: quantity ?? this.quantity,
     );
   }

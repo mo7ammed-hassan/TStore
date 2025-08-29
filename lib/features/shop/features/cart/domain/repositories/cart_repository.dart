@@ -12,4 +12,6 @@ abstract class CartRepository {
 
   Future<Either<Failure, Unit>> changeItemQuantity(
       {required String itemId, required int quantity});
+
+  Future<void> clearCart();
 }

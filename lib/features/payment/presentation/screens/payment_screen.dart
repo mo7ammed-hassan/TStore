@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_state.dart';
 import 'package:t_store/features/payment/presentation/widgets/confirm_payment_button.dart';
@@ -13,7 +14,8 @@ import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class PaymentScreen extends StatelessWidget {
-  const PaymentScreen({super.key});
+  const PaymentScreen({super.key, required this.orderSummary});
+  final OrderSummaryModel? orderSummary;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,7 @@ class PaymentScreen extends StatelessWidget {
                 ResponsivePadding.symmetric(
                   horizontal: 16,
                   vertical: 8,
-                  child: const PaymentSummary(),
+                  child: PaymentSummary(orderSummary: orderSummary),
                 ),
                 ConfirmPaymentButton(
                   enabled: state.selected != null,

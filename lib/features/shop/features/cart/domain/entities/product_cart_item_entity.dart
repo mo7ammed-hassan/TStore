@@ -17,6 +17,24 @@ class ProductCartItemEntity {
     required this.brand,
   });
 
+  ProductCartItemEntity copyWith({
+    ProductVariationModel? variation,
+    double? price,
+  }) {
+    final updatedVariation = variation != null
+        ? variation.copyWith(price: price ?? variation.price)
+        : this.variation.copyWith(price: price ?? this.variation.price);
+
+    return ProductCartItemEntity(
+      id: id,
+      title: title,
+      price: price ?? this.price,
+      imageUrl: imageUrl,
+      variation: updatedVariation,
+      brand: brand,
+    );
+  }
+
   static ProductCartItemEntity empty() {
     return ProductCartItemEntity(
       id: '',

@@ -39,6 +39,28 @@ class ProductVariationModel {
     this.attributeValues = const {},
   });
 
+  ProductVariationModel copyWith({
+    String? id,
+    String? sku,
+    String? image,
+    String? description,
+    double? price,
+    double? salePrice,
+    int? stock,
+    Map<String, String>? attributeValues,
+  }) {
+    return ProductVariationModel(
+      id: id ?? this.id,
+      sku: sku ?? this.sku,
+      image: image ?? this.image,
+      description: description ?? this.description,
+      price: price ?? this.price,
+      salePrice: salePrice ?? this.salePrice,
+      stock: stock ?? this.stock,
+      attributeValues: attributeValues ?? this.attributeValues,
+    );
+  }
+
   static ProductVariationModel empty() => const ProductVariationModel(
         id: '',
         sku: '',
@@ -72,6 +94,7 @@ class ProductVariationModel {
             ? (data['salePrice'] as num).toDouble()
             : null,
         stock: data['stock'] ?? 0,
-        attributeValues: Map<String, String>.from(data['attributeValues'] ?? {}),
+        attributeValues:
+            Map<String, String>.from(data['attributeValues'] ?? {}),
       );
 }

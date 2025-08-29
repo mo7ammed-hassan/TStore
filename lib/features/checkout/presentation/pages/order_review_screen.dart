@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:t_store/features/shop/features/cart/presentation/widgets/cart_item_card.dart';
 import 'package:t_store/features/checkout/presentation/cubits/checkout_cubit.dart';
@@ -21,7 +22,7 @@ class OrderReviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => CheckoutCubit()..loadCheckout(items),
+      create: (_) => getIt<CheckoutCubit>()..loadCheckout(items),
       child: Scaffold(
         bottomNavigationBar: const CheckoutButton(),
         appBar: TAppBar(
@@ -33,45 +34,51 @@ class OrderReviewScreen extends StatelessWidget {
           ),
         ),
         body: BlocBuilder<CheckoutCubit, CheckoutState>(
+          buildWhen: (previous, current) => current != previous,
           builder: (context, state) {
-            if (state is CheckoutLoading) {
+            if (state.isLoading) {
               return const Center(
                   child: CircularProgressIndicator(
                 color: AppColors.primary,
               ));
-            } else if (state is CheckoutLoaded) {
-              return Padding(
-                padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
-                child: CustomScrollView(
-                  slivers: [
-                    SliverList.separated(
-                      itemCount: state.items.length,
-                      itemBuilder: (_, index) => CartItemCard(
-                        key: ValueKey(state.items[index].id),
-                        showAddRemoveButtons: false,
-                        cartItem: state.items[index],
+            } else if (state.checkoutData != null) {
+              return AnimatedOpacity(
+                duration: Duration(microseconds: 350),
+                opacity: 1,
+                child: Padding(
+                  padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverList.separated(
+                        itemCount: state.checkoutData?.items.length,
+                        itemBuilder: (_, index) => CartItemCard(
+                          key: ValueKey(state.checkoutData?.items[index].id),
+                          showAddRemoveButtons: false,
+                          cartItem: state.checkoutData!.items[index],
+                        ),
+                        separatorBuilder: (_, __) =>
+                            ResponsiveGap.vertical(TSizes.spaceBtwSections),
                       ),
-                      separatorBuilder: (_, __) =>
-                          ResponsiveGap.vertical(TSizes.spaceBtwSections),
-                    ),
-                    SliverToBoxAdapter(
-                      child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
-                    ),
-                    SliverToBoxAdapter(child: const CouponFiled()),
-                    SliverToBoxAdapter(
-                      child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
-                    ),
-                    SliverToBoxAdapter(
-                      child: ChekoutOrderDetial(
-                        orderSummary: state.orderSummary,
+                      SliverToBoxAdapter(
+                        child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
                       ),
-                    ),
-                  ],
+                      SliverToBoxAdapter(child: const CouponFiled()),
+                      SliverToBoxAdapter(
+                        child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
+                      ),
+                      SliverToBoxAdapter(
+                        child: ChekoutOrderDetial(
+                          orderSummary: state.checkoutData!.orderSummary,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               );
-            } else if (state is CheckoutError) {
+            } else if (!state.isLoading && state.checkoutData == null) {
               return Center(child: Text(state.message));
             }
+
             return const SizedBox.shrink();
           },
         ),

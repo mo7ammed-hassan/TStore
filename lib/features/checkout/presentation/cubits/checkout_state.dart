@@ -1,23 +1,39 @@
-import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
-import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
+import 'package:t_store/features/checkout/domain/entities/checkout_entity.dart';
+import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 
-sealed class CheckoutState {}
-
-class CheckoutInitial extends CheckoutState {}
-
-class CheckoutLoading extends CheckoutState {}
-
-class CheckoutLoaded extends CheckoutState {
-  final List<CartItemEntity> items;
-  final OrderSummaryModel orderSummary;
-
-  CheckoutLoaded({
-    required this.items,
-    required this.orderSummary,
-  });
-}
-
-class CheckoutError extends CheckoutState {
+class CheckoutState {
+  final bool isLoading;
+  final CheckoutEntity? checkoutData;
   final String message;
-  CheckoutError(this.message);
+  final bool createOrderLoading;
+  final bool createOrderSuccess;
+  final OrderEntity? order;
+
+  CheckoutState({
+    this.isLoading = false,
+    this.checkoutData,
+    this.order,
+    this.message = '',
+    this.createOrderLoading = false,
+    this.createOrderSuccess = false,
+  });
+
+  // CopyWith method for immutability
+  CheckoutState copyWith({
+    bool? isLoading,
+    CheckoutEntity? checkoutData,
+    String? message,
+    OrderEntity? order,
+    bool? createOrderLoading,
+    bool? createOrderSuccess,
+  }) {
+    return CheckoutState(
+      isLoading: isLoading ?? this.isLoading,
+      checkoutData: checkoutData ?? this.checkoutData,
+      message: message ?? this.message,
+      order: order ?? this.order,
+      createOrderLoading: createOrderLoading ?? this.createOrderLoading,
+      createOrderSuccess: createOrderSuccess ?? this.createOrderSuccess,
+    );
+  }
 }

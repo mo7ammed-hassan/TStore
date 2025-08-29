@@ -20,12 +20,12 @@ class PricingSection extends StatelessWidget {
         ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
         PaymentSummaryRow(
           label: 'Shipping Free',
-          value: '\$${orderSummary.discount}',
+          value: '-\$${orderSummary.discount}',
         ),
         ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
         PaymentSummaryRow(
           label: 'Tax Free',
-          value: '\$${orderSummary.shipping}',
+          value: '+\$${orderSummary.shipping}',
         ),
         ResponsiveGap.vertical(TSizes.spaceBtwItems),
         const CustomDivider(),
