@@ -55,6 +55,21 @@ class AddressModel {
     );
   }
 
+  static AddressModel? fromJson(Map<String, dynamic>? data) {
+    return AddressModel(
+      id: data?['id'] ?? '',
+      name: data?['name'] ?? '',
+      phoneNumber: data?['phoneNumber'] ?? '',
+      street: data?['street'] ?? '',
+      city: data?['city'] ?? '',
+      state: data?['state'] ?? '',
+      country: data?['country'] ?? '',
+      postalCode: data?['postalCode'] ?? '',
+      createdAt: data?['createdAt']?.toDate(),
+      selectedAddress: data?['selectedAddress'] ?? false,
+    );
+  }
+
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,

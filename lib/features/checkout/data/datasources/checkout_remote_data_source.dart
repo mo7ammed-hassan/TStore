@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:t_store/common/core/firebase_collections/collections.dart';
 import 'package:t_store/features/checkout/data/models/checkout_model.dart';
 import 'package:t_store/features/checkout/data/models/order_model.dart';
+import 'package:t_store/features/personalization/pages/address/data/models/address_model.dart';
 import 'package:t_store/features/shop/features/all_products/data/models/product_model.dart';
 import 'package:t_store/features/shop/features/cart/data/mapper/cart_item_mapper.dart';
 import 'package:t_store/features/shop/features/cart/data/models/cart_item_model.dart';
@@ -37,9 +38,20 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
         .collection(FirebaseCollections.ORDERS_COLLECTION)
         .doc();
 
+    final userAddressDoc = await firebaseInstance
+        .collection(FirebaseCollections.USER_COLLECTION)
+        .doc(userId)
+        .collection(FirebaseCollections.ADDRESS_COLLECTION)
+        .where("selectedAddress", isEqualTo: true)
+        .limit(1)
+        .get();
+
+    final userAddress = AddressModel.fromSnapshot(userAddressDoc.docs.first);
+
     final order = OrderModel(
       orderId: orderRef.id,
       userId: userId,
+      shippingAddress: userAddress,
       checkoutModel: checkoutData,
       paymentStatus: PaymentStatus.pendingPayment.name,
       orderStatus: OrderStatus.unCompleted.name,

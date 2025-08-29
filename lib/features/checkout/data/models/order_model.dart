@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:t_store/features/checkout/data/models/checkout_model.dart';
+import 'package:t_store/features/personalization/pages/address/data/models/address_model.dart';
 
 class OrderModel {
   final String?
       orderId; // created draft id from server (nullable until draft created)
   final String? userId;
+  final AddressModel? shippingAddress;
   final CheckoutModel checkoutModel;
   final String paymentStatus;
   final String orderStatus;
@@ -14,6 +16,7 @@ class OrderModel {
   OrderModel({
     this.orderId,
     this.userId,
+    this.shippingAddress,
     required this.checkoutModel,
     required this.paymentStatus,
     required this.orderStatus,
@@ -25,6 +28,8 @@ class OrderModel {
     return OrderModel(
       orderId: json['orderId'] as String?,
       userId: json['userId'] as String?,
+      shippingAddress: AddressModel.fromJson(
+          json['shippingAddress'] as Map<String, dynamic>),
       checkoutModel:
           CheckoutModel.fromJson(json['checkoutModel'] as Map<String, dynamic>),
       paymentStatus: json['paymentStatus'] as String,
@@ -38,6 +43,7 @@ class OrderModel {
     return {
       'orderId': orderId,
       'userId': userId,
+      'shippingAddress': shippingAddress?.toJson(),
       'checkoutModel': checkoutModel.toJson(),
       'paymentStatus': paymentStatus,
       'orderStatus': orderStatus,
