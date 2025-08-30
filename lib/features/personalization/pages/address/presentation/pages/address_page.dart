@@ -24,7 +24,7 @@ class AddressPage extends StatelessWidget {
           builder: (context, state) {
             return ResponsivePadding.all(
               TSizes.spaceBtwItems,
-              child: const BuildAddressesListView(),
+              child: const BuildAddressesListView(fontSize: 14,),
             );
           },
         ),

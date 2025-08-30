@@ -13,13 +13,14 @@ class AddressCubit extends Cubit<AddressState> {
   final AddressLocalDataSource localDataSource;
   final AddressUsecases _addressUsecases;
   final userId = FirebaseAuth.instance.currentUser!.uid;
+  bool firstTime = true;
 
   Future<void> fetchAllAddresses() async {
     emit(state.copyWith(status: AddressStatus.loading));
 
     // -- Local Data Source --
     final localAddresses = await localDataSource.getAllAddresses(userId);
-    if (localAddresses.isNotEmpty) {
+    if (localAddresses.isNotEmpty && !firstTime) {
       final userAddresses = localAddresses.map((e) => e.toEntity()).toList();
 
       emit(state.copyWith(
@@ -59,6 +60,8 @@ class AddressCubit extends Cubit<AddressState> {
             orElse: () => AddressEntity.empty(),
           ),
         ));
+
+        firstTime = true;
       },
     );
   }

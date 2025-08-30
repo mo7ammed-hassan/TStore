@@ -7,11 +7,13 @@ import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 class AddressInfoRow extends StatelessWidget {
   final IconData icon;
   final String text;
+  final double fontSize;
 
   const AddressInfoRow({
     super.key,
     required this.icon,
     required this.text,
+    this.fontSize = 13.5,
   });
 
   @override
@@ -26,7 +28,7 @@ class AddressInfoRow extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium
-                ?.copyWith(fontSize: 13.5),
+                ?.copyWith(fontSize: fontSize),
           ),
         ),
       ],

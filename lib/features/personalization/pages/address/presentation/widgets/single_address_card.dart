@@ -16,10 +16,12 @@ class SingleAddressCard extends StatelessWidget {
     required this.address,
     required this.onTap,
     this.onLongPress,
+    this.fontSize = 13.5,
   });
   final AddressEntity address;
   final VoidCallback onTap;
   final VoidCallback? onLongPress;
+  final double fontSize;
   @override
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
@@ -84,7 +86,10 @@ class SingleAddressCard extends StatelessWidget {
                         : null,
                   ),
                 ),
-                AddressDetails(address: address),
+                AddressDetails(
+                  address: address,
+                  fontSize: fontSize,
+                ),
               ],
             ),
           ),

@@ -10,8 +10,10 @@ import 'package:t_store/utils/popups/loaders.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class BuildAddressesListView extends StatelessWidget {
-  const BuildAddressesListView({super.key, this.showAddButton = false});
+  const BuildAddressesListView(
+      {super.key, this.showAddButton = false, this.fontSize = 13.5});
   final bool showAddButton;
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,10 @@ class BuildAddressesListView extends StatelessWidget {
             }
             return Stack(
               children: [
-                AddressListView(addresses: state.addresses),
+                AddressListView(
+                  addresses: state.addresses,
+                  fontSize: fontSize,
+                ),
                 if (showAddButton)
                   const Positioned(
                     bottom: kToolbarHeight,

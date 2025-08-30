@@ -9,8 +9,10 @@ import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class AddressListView extends StatelessWidget {
-  const AddressListView({super.key, required this.addresses});
+  const AddressListView(
+      {super.key, required this.addresses, this.fontSize = 13.5});
   final List<AddressEntity> addresses;
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class AddressListView extends StatelessWidget {
       itemBuilder: (context, index) {
         final address = addresses[index];
         return SingleAddressCard(
+          fontSize: fontSize,
           address: address,
           onTap: () =>
               context.read<AddressCubit>().updateSelectAddress(address),
