@@ -45,14 +45,16 @@ class CloseAccountButton extends StatelessWidget {
   }
 
   void _showDeleteAccountPopup(BuildContext context) {
+    final cubit = context.read<DeleteUserAccountCubit>();
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           title: const ResponsiveText('Delete Account'),
           content: const ResponsiveText(
-            'Are you sure you want to delete your account permanently? '
-            'This action is not reversible and all of your data will be removed permanently.',
+            'Are you sure you want to delete your account permanently?\n\nThis action is not reversible and all of your data will be removed permanently.',
+            maxLines: 7,
+            textAlign: TextAlign.center,
           ),
           actions: [
             OutlinedButton(
@@ -60,7 +62,7 @@ class CloseAccountButton extends StatelessWidget {
                 side: BorderSide.none,
               ),
               onPressed: () => Navigator.pop(context),
-              child: const ResponsiveText('Cancel'),
+              child: const ResponsiveText('Cancel', fontSize: 13),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -68,13 +70,13 @@ class CloseAccountButton extends StatelessWidget {
                 side: BorderSide.none,
               ),
               onPressed: () {
-                context.read<DeleteUserAccountCubit>().deleteUserAccount();
+                cubit.deleteUserAccount();
                 Navigator.pop(context);
               },
               child: Padding(
                 padding:
                     context.responsiveInsets.symmetric(horizontal: TSizes.lg),
-                child: const Text('Delete'),
+                child: const ResponsiveText('Delete', fontSize: 13),
               ),
             ),
           ],

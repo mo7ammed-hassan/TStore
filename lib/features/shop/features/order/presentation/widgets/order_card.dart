@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/checkout/presentation/pages/order_review_screen.dart';
-import 'package:t_store/features/shop/features/order/presentation/cuits/order_cubit.dart';
+import 'package:t_store/features/shop/features/order/presentation/widgets/cancel_order_dialog.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
@@ -26,8 +25,12 @@ class OrderCard extends StatelessWidget {
       child: Dismissible(
         key: ValueKey(order.orderId),
         direction: DismissDirection.startToEnd,
-        onDismissed: (_) {
-          context.read<OrderCubit>().cancelOrder(order.orderId);
+        confirmDismiss: (_) async {
+          final result = await showCancelOrderDialog(
+            context,
+            orderId: order.orderId,
+          );
+          return result; // true => remove, false => keep
         },
         background: const TRoundedContainer(
           backgroundColor: Colors.red,
