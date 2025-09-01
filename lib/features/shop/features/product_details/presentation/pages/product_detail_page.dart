@@ -72,7 +72,7 @@ class ProductDetailPage extends StatelessWidget {
                             final selectedariation = context
                                 .read<ProductVariationCubit>()
                                 .selectedVariation;
-                                
+
                             final cartItem = product
                                 .toCartItemProductEntity(
                                   variation: selectedariation,

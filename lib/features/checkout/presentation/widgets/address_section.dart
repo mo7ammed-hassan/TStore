@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
+import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/features/checkout/presentation/cubits/checkout_cubit.dart';
+import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/address_details.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/build_addresses_list_view.dart';
@@ -13,8 +16,7 @@ class AddressSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final addressCubit = context.watch<AddressCubit>();
-    final selectedAddress = addressCubit.state.selectedAddress;
+    final address = context.watch<CheckoutCubit>().state.address;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,34 +28,43 @@ class AddressSection extends StatelessWidget {
           fontSize: 14.5,
           onPressed: () => _showAddressBottomSheet(context),
         ),
-        if (selectedAddress?.id.isNotEmpty == true)
-          AddressDetails(address: selectedAddress!)
+        if (address?.id.isNotEmpty == true)
+          AddressDetails(address: address!)
         else
           const ResponsiveText('Please Select Address'),
       ],
     );
   }
 
-  void _showAddressBottomSheet(BuildContext context) {
-    final addressCubit = context.read<AddressCubit>();
-
-    showModalBottomSheet(
+  Future _showAddressBottomSheet(BuildContext context) async {
+    final selectedAddress = await showModalBottomSheet<AddressEntity>(
+      sheetAnimationStyle: const AnimationStyle(
+        duration: Duration(milliseconds: 300),
+        reverseDuration: Duration(milliseconds: 300),
+      ),
       context: context,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (_) {
-        return BlocProvider.value(
-          value: addressCubit,
+        return BlocProvider(
+          create: (context) => getIt<AddressCubit>()..fetchAllAddresses(),
           child: Padding(
             padding: context.responsiveInsets
                 .symmetric(horizontal: TSizes.defaultSpace),
-            child: const BuildAddressesListView(
+            child: BuildAddressesListView(
               showAddButton: true,
+              onAddressSelected: (address) async {
+                Navigator.pop(context, address);
+              },
             ),
           ),
         );
       },
     );
+
+    if (selectedAddress != null && context.mounted) {
+      context.read<CheckoutCubit>().chengeAdress(selectedAddress);
+    }
   }
 }

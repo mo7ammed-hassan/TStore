@@ -6,6 +6,7 @@ import 'package:t_store/features/shop/features/product_details/presentation/cubi
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 
 class BuildImagesSlider extends StatelessWidget {
   const BuildImagesSlider({super.key, required this.product});
@@ -29,7 +30,8 @@ class BuildImagesSlider extends StatelessWidget {
                 onTap: () => cubit.selectImage(image),
                 child: TRoundedImage(
                   width: 80,
-                  padding: const EdgeInsets.all(TSizes.xs),
+                  height: 80,
+                  padding: context.responsiveInsets.all(TSizes.xs),
                   imageUrl: image,
                   backgroundColor: isDark ? AppColors.dark : AppColors.white,
                   border: Border.all(

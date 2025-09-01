@@ -9,4 +9,5 @@ abstract class AddressRepository {
   Future<Either<Failure, Unit>> deleteAddress({required String addressId});
   Future<void> updateSelectedAddress(
       {required String addressId, required bool isSelected});
+  Future<AddressEntity> getSelectedAddress();
 }

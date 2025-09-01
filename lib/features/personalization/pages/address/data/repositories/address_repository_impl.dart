@@ -56,4 +56,15 @@ class AddressRepositoryImpl extends AddressRepository {
     await addressFirebaseServices.updateSelectedAddress(
         addressId: addressId, isSelected: isSelected);
   }
+
+  @override
+  Future<AddressEntity> getSelectedAddress() async {
+    final address = await addressFirebaseServices.getSelectedAddress();
+
+    if (address != null) {
+      return address.toEntity();
+    }
+
+    return AddressEntity.empty();
+  }
 }

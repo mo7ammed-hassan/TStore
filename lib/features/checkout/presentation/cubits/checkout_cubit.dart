@@ -1,6 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/features/checkout/domain/entities/checkout_entity.dart';
 import 'package:t_store/features/checkout/domain/usecases/checkout_usecases.dart';
+import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
+import 'package:t_store/features/personalization/pages/address/domain/usecases/get_selected_address_usecase.dart';
 import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:t_store/features/checkout/presentation/cubits/checkout_state.dart';
 import 'package:t_store/utils/constants/enums.dart';
@@ -9,16 +12,26 @@ class CheckoutCubit extends Cubit<CheckoutState> {
   CheckoutCubit(this.checoutUsecases) : super(CheckoutState());
   final CheckoutUsecases checoutUsecases;
 
+  Future<void> init(List<CartItemEntity> items) async {
+    await Future.wait<void>([
+      loadCheckout(items).catchError((_) {}),
+      loadSelectedAddress().catchError((_) {}),
+    ]);
+  }
+
   Future<void> loadCheckout(List<CartItemEntity> items) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(status: CheckoutStatus.loading));
 
     try {
       CheckoutEntity checkoutData =
           await checoutUsecases.syncCartWithServerUseCase(items);
 
-      emit((state.copyWith(isLoading: false, checkoutData: checkoutData)));
+      emit(state.copyWith(
+        status: CheckoutStatus.success,
+        checkoutData: checkoutData,
+      ));
     } catch (e) {
-      emit(state.copyWith(isLoading: false, checkoutData: null));
+      emit(state.copyWith(status: CheckoutStatus.failure));
     }
   }
 
@@ -46,6 +59,19 @@ class CheckoutCubit extends Cubit<CheckoutState> {
       );
     } catch (e) {
       emit(state.copyWith(createOrderLoading: false));
+    }
+  }
+
+  Future<void> loadSelectedAddress() async {
+    final addressUsecases = getIt<GetSelectedAddressUsecase>();
+    final selectedAddress = await addressUsecases.call();
+
+    emit(state.copyWith(address: selectedAddress));
+  }
+
+  void chengeAdress(AddressEntity address) {
+    if (state.address != address) {
+      emit(state.copyWith(address: address));
     }
   }
 }

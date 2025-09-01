@@ -66,11 +66,16 @@ class TRoundedImage extends StatelessWidget {
           decoration: BoxDecoration(
             border: border,
             color: backgroundColor,
+            borderRadius: applyImageRadius
+                ? BorderRadius.circular(borderRadius + 5)
+                : BorderRadius.zero,
           ),
           child: _isNetworkImage
               ? CachedNetworkImage(
                   imageUrl: imageUrl,
                   fit: fit,
+                  width: finalWidth,
+                  height: finalHeight,
                   errorWidget: (context, url, error) => errorWidget,
                   placeholder: (context, url) => ShimmerWidget(
                     width: finalWidth,

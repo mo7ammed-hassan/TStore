@@ -8,24 +8,28 @@ import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 void showEnlargedImage(String image, BuildContext context) {
   showDialog(
     context: context,
-    builder: (_) => Dialog.fullscreen(
+    fullscreenDialog: false,
+    builder: (_) => Dialog(
       insetAnimationDuration: const Duration(microseconds: 850),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Padding(
-            padding: context.responsiveInsets.symmetric(
-              vertical: TSizes.defaultSpace * 2,
-              horizontal: TSizes.defaultSpace,
-            ),
-            child: CachedNetworkImage(
-              imageUrl: image,
-              alignment: Alignment.center,
-              fit: BoxFit.contain,
+          Flexible(
+            fit: FlexFit.loose,
+            child: Padding(
+              padding: context.responsiveInsets.symmetric(
+                vertical: TSizes.defaultSpace * 2,
+                horizontal: TSizes.defaultSpace,
+              ),
+              child: CachedNetworkImage(
+                imageUrl: image,
+                alignment: Alignment.center,
+                fit: BoxFit.contain,
+              ),
             ),
           ),
-          ResponsiveGap.vertical(TSizes.spaceBtwSections),
           Align(
             alignment: Alignment.center,
             child: SizedBox(
@@ -36,6 +40,7 @@ void showEnlargedImage(String image, BuildContext context) {
               ),
             ),
           ),
+          ResponsiveGap.vertical(TSizes.spaceBtwSections),
         ],
       ),
     ),

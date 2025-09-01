@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class CouponFiled extends StatelessWidget {
   const CouponFiled({
@@ -14,7 +17,7 @@ class CouponFiled extends StatelessWidget {
     return TRoundedContainer(
       showBorder: true,
       backgroundColor: isDark ? AppColors.dark : AppColors.white,
-      padding: const EdgeInsets.only(
+      padding: context.responsiveInsets.only(
         top: TSizes.sm,
         bottom: TSizes.sm,
         right: TSizes.sm,
@@ -35,7 +38,7 @@ class CouponFiled extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 80,
+            width: context.horzSize(80),
             child: ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
@@ -47,7 +50,7 @@ class CouponFiled extends StatelessWidget {
                   color: AppColors.grey.withValues(alpha: 0.1),
                 ),
               ),
-              child: const Text('Apply'),
+              child: const ResponsiveText('Apply'),
             ),
           ),
         ],

@@ -100,7 +100,7 @@ class AddressCubit extends Cubit<AddressState> {
     );
   }
 
-  Future<void> updateSelectAddress(AddressEntity address) async {
+  Future<AddressEntity?> updateSelectAddress(AddressEntity address) async {
     final updatedAddress = address.toModel().copyWith(selectedAddress: true);
     final previuslySelected =
         state.selectedAddress?.copyWith(selectedAddress: false);
@@ -122,16 +122,18 @@ class AddressCubit extends Cubit<AddressState> {
     final result = await _addressUsecases.updateAddressUsecase(
       params: (address.id, true),
     );
-    result.fold(
+
+    return await result.fold(
       (failure) {
         emit(state.copyWith(
           status: AddressStatus.failure,
           errorMessage: failure.toString(),
         ));
+        return null;
       },
       (_) async {
         await localDataSource.updateAddress(userId, updatedAddress);
-        // If there was a previously selected address, update it
+
         if (state.addresses.isNotEmpty &&
             previuslySelected != null &&
             previuslySelected.id.isNotEmpty &&
@@ -144,6 +146,8 @@ class AddressCubit extends Cubit<AddressState> {
             params: (previuslySelected.id, false),
           );
         }
+
+        return updatedAddress.toEntity();
       },
     );
   }

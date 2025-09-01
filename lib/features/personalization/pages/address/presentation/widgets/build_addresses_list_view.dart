@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_state.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/add_address_button.dart';
@@ -10,10 +11,15 @@ import 'package:t_store/utils/popups/loaders.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class BuildAddressesListView extends StatelessWidget {
-  const BuildAddressesListView(
-      {super.key, this.showAddButton = false, this.fontSize = 13.5});
+  const BuildAddressesListView({
+    super.key,
+    this.showAddButton = false,
+    this.fontSize = 13.5,
+    this.onAddressSelected,
+  });
   final bool showAddButton;
   final double fontSize;
+  final ValueChanged<AddressEntity>? onAddressSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +63,7 @@ class BuildAddressesListView extends StatelessWidget {
                 AddressListView(
                   addresses: state.addresses,
                   fontSize: fontSize,
+                  onAddressSelected: onAddressSelected,
                 ),
                 if (showAddButton)
                   const Positioned(

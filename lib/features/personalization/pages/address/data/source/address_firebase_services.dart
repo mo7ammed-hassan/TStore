@@ -11,6 +11,8 @@ abstract class AddressFirebaseServices {
   Future<void> deleteAddress({required String addressId});
   Future<void> updateSelectedAddress(
       {required String addressId, required bool isSelected});
+
+  Future<AddressModel?> getSelectedAddress();
 }
 
 class AddressFirebaseServicesImpl extends AddressFirebaseServices {
@@ -89,6 +91,25 @@ class AddressFirebaseServicesImpl extends AddressFirebaseServices {
           .update({'selectedAddress': isSelected});
     } catch (e) {
       return;
+    }
+  }
+
+  @override
+  Future<AddressModel?> getSelectedAddress() async {
+    try {
+      final userId = _user!.uid;
+
+      final addressSnap = await _storage
+          .collection(FirebaseCollections.USER_COLLECTION)
+          .doc(userId)
+          .collection(FirebaseCollections.ADDRESS_COLLECTION)
+          .where('selectedAddress', isEqualTo: true)
+          .limit(1)
+          .get();
+
+      return AddressModel.fromSnapshot(addressSnap.docs.first);
+    } catch (e) {
+      return null;
     }
   }
 }

@@ -7,6 +7,7 @@ import 'package:t_store/features/personalization/pages/address/domain/usecases/a
 import 'package:t_store/features/personalization/pages/address/domain/usecases/address_usecases.dart';
 import 'package:t_store/features/personalization/pages/address/domain/usecases/delete_address_use_case.dart';
 import 'package:t_store/features/personalization/pages/address/domain/usecases/fetch_all_address_use_case.dart';
+import 'package:t_store/features/personalization/pages/address/domain/usecases/get_selected_address_usecase.dart';
 import 'package:t_store/features/personalization/pages/address/domain/usecases/update_address_usecase.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
 
@@ -33,8 +34,12 @@ void registerAddressDependencies(GetIt getIt) {
     () => UpdateAddressUsecase(getIt.get<AddressRepository>()),
   );
 
+  getIt.registerLazySingleton<GetSelectedAddressUsecase>(
+    () => GetSelectedAddressUsecase(getIt.get<AddressRepository>()),
+  );
+
   getIt.registerLazySingleton<AddressUsecases>(
-    () => AddressUsecases(getIt(), getIt(), getIt(), getIt()),
+    () => AddressUsecases(getIt(), getIt(), getIt(), getIt(),getIt()),
   );
 
   getIt.registerFactory<AddressCubit>(
