@@ -14,12 +14,11 @@ class ProductReviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TAppBar(
+      appBar: const TAppBar(
         showBackArrow: true,
-        title: Text(
+        title: 
           'Review & Rating',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
-        ),
+         
       ),
       body: SingleChildScrollView(
         child: Padding(

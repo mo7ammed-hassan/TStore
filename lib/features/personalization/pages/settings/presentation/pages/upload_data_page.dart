@@ -18,12 +18,11 @@ class UploadDataPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => UploadDataCubit(),
       child: Scaffold(
-        appBar: TAppBar(
+        appBar: const TAppBar(
           showBackArrow: true,
-          title: ResponsiveText(
+          title: 
             'Upload Data',
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
+           
         ),
         body: SingleChildScrollView(
           padding: context.responsiveInsets.all(TSizes.spaceBtwItems),

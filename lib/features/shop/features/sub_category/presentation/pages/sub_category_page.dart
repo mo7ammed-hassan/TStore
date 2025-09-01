@@ -10,7 +10,6 @@ import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class SubCategoryPage extends StatelessWidget {
   final CategoryEntity category;
@@ -25,11 +24,7 @@ class SubCategoryPage extends StatelessWidget {
       child: Scaffold(
         appBar: TAppBar(
           showBackArrow: true,
-          title: ResponsiveText(
-            category.name,
-            style:
-                Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
-          ),
+          title: category.name,
         ),
         body: ResponsivePadding.symmetric(
           horizontal: TSizes.spaceBtwItems,
@@ -49,7 +44,6 @@ class SubCategoryPage extends StatelessWidget {
                   child: TRoundedImage(
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height * 0.18,
-                    aplayImageRaduis: true,
                     imageUrl: TImages.defaultProductImage,
                   ),
                 ),

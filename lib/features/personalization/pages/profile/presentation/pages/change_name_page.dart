@@ -8,20 +8,15 @@ class ChangeNamePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       appBar: TAppBar(
         showBackArrow: true,
-        title: Text(
-          'Change Name',
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
+        title: 'Change Name',
       ),
-      body: const Padding(
+      body: Padding(
         padding: EdgeInsets.all(TSizes.spaceBtwItems),
         child: ChangeNameBody(),
       ),
     );
   }
 }
-
-

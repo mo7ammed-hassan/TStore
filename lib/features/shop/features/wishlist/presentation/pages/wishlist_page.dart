@@ -9,7 +9,6 @@ import 'package:t_store/features/navigation_menu/navigation_screen.dart';
 import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/responsive/responsive_helpers.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class WishlistPage extends StatelessWidget {
   const WishlistPage({super.key});
@@ -27,10 +26,7 @@ class WishlistPage extends StatelessWidget {
 
   TAppBar _buildAppBar(BuildContext context) {
     return TAppBar(
-      title: ResponsiveText(
-        'Wishlist',
-       style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
-      ),
+      title: 'Wishlist',
       actions: [
         TCircularIcon(
           icon: Iconsax.add,

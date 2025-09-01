@@ -22,7 +22,7 @@ void main() {
           WidgetsFlutterBinding.ensureInitialized();
       widgetsBinding.addObserver(AppLifecycleObserver());
 
-      debugPrintRebuildDirtyWidgets = true;
+      //debugPrintRebuildDirtyWidgets = true;
 
       // Hive Initialization
       await Hive.initFlutter();

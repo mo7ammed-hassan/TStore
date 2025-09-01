@@ -13,7 +13,6 @@ import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class OrderReviewScreen extends StatelessWidget {
   final List<CartItemEntity> items;
@@ -25,13 +24,9 @@ class OrderReviewScreen extends StatelessWidget {
       create: (_) => getIt<CheckoutCubit>()..loadCheckout(items),
       child: Scaffold(
         bottomNavigationBar: const CheckoutButton(),
-        appBar: TAppBar(
+        appBar: const TAppBar(
           showBackArrow: true,
-          title: ResponsiveText(
-            'Order Review',
-            style:
-                Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
-          ),
+          title: 'Order Review',
         ),
         body: BlocBuilder<CheckoutCubit, CheckoutState>(
           buildWhen: (previous, current) => current != previous,

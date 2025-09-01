@@ -5,13 +5,17 @@ import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:t_store/utils/responsive/responsive_helpers.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Widget? title;
+  final String? title;
   final IconData? leadingIcon;
   final List<Widget>? actions;
   final VoidCallback? leadingOnPressed;
   final bool showBackArrow;
+  final Color? titleColor;
+  final double fontSize;
+
   const TAppBar({
     super.key,
     this.title,
@@ -19,6 +23,8 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions,
     this.leadingOnPressed,
     this.showBackArrow = false,
+    this.titleColor,
+    this.fontSize = 18,
   });
 
   @override
@@ -46,7 +52,15 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
                     icon: Icon(leadingIcon),
                   )
                 : null,
-        title: title,
+        title: (title != null)
+            ? ResponsiveText(
+                title!,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontSize: fontSize, color: titleColor),
+              )
+            : null,
         actions: actions,
       ),
     );

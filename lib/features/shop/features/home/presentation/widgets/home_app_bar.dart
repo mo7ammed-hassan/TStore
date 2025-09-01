@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/common/widgets/products/cart/cart_menu_icon.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/personalization/cubit/user_state.dart';
 import 'package:t_store/features/shop/features/cart/presentation/pages/cart_page.dart';
 import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/device/device_utlity.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class THomeAppBar extends StatelessWidget {
@@ -19,14 +20,17 @@ class THomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TAppBar(
-      title: _buildTitle(context),
-      actions: [
-        TCartCounterIcon(
-          onPressed: () => context.pushPage(const CartPage()),
-          iconColor: AppColors.white,
-        ),
-      ],
+    return Padding(
+      padding: context.responsiveInsets.symmetric(horizontal: TSizes.md),
+      child: AppBar(
+        title: _buildTitle(context),
+        actions: [
+          TCartCounterIcon(
+            onPressed: () => context.pushPage(const CartPage()),
+            iconColor: AppColors.white,
+          ),
+        ],
+      ),
     );
   }
 

@@ -8,7 +8,6 @@ import 'package:t_store/features/personalization/pages/address/presentation/widg
 import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class AddressPage extends StatelessWidget {
   const AddressPage({super.key});
@@ -19,25 +18,20 @@ class AddressPage extends StatelessWidget {
       create: (context) => getIt<AddressCubit>()..fetchAllAddresses(),
       child: Scaffold(
         floatingActionButton: const AddAddressButton(),
-        appBar: _buildAppBar(context),
+        appBar: const TAppBar(
+          showBackArrow: true,
+          title: 'Address',
+        ),
         body: BlocBuilder<AddressCubit, AddressState>(
           builder: (context, state) {
             return ResponsivePadding.all(
               TSizes.spaceBtwItems,
-              child: const BuildAddressesListView(fontSize: 14,),
+              child: const BuildAddressesListView(
+                fontSize: 14,
+              ),
             );
           },
         ),
-      ),
-    );
-  }
-
-  TAppBar _buildAppBar(BuildContext context) {
-    return TAppBar(
-      showBackArrow: true,
-      title: ResponsiveText(
-        'Address',
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
       ),
     );
   }

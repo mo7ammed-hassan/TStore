@@ -65,10 +65,7 @@ class AllProductsPage extends StatelessWidget {
   TAppBar _appBar(BuildContext context) {
     return TAppBar(
       showBackArrow: true,
-      title: ResponsiveText(
-        title,
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
-      ),
+      title: title,
       leadingOnPressed: () {
         AllProductsCubit().close();
       },

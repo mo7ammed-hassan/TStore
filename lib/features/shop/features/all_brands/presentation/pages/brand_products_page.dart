@@ -24,7 +24,10 @@ class BrandProductsPage extends StatelessWidget {
       create: (context) =>
           ProductsByBrandCubit()..fetchProductsByBrand(brandId: brand.id),
       child: Scaffold(
-        appBar: _appBar(context),
+        appBar: const TAppBar(
+          showBackArrow: true,
+          title: 'Brand',
+        ),
         body: SingleChildScrollView(
           child: ResponsivePadding.symmetric(
             horizontal: TSizes.spaceBtwItems,
@@ -70,16 +73,6 @@ class BrandProductsPage extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  TAppBar _appBar(BuildContext context) {
-    return TAppBar(
-      showBackArrow: true,
-      title: Text(
-        'Brand',
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
       ),
     );
   }

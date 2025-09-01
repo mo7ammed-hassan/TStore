@@ -13,7 +13,7 @@ class ReAuthPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => ReAuthUserCubit(),
       child: const Scaffold(
-        appBar: TAppBar(title: Text('Re-Authenticate'), showBackArrow: true),
+        appBar: TAppBar(title: 'Re-Authenticate', showBackArrow: true),
         body: Padding(
           padding: EdgeInsets.all(TSizes.spaceBtwItems),
           child: ReAuthForm(),

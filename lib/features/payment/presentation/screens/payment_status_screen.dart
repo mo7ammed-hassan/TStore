@@ -33,7 +33,7 @@ class PaymentStatusScreen extends StatelessWidget {
     return Scaffold(
       appBar: const TAppBar(
         showBackArrow: false,
-        title: Text(TTexts.paymentStatus),
+        title: TTexts.paymentStatus,
       ),
       body: Padding(
         padding: context.responsiveInsets.symmetric(horizontal: 24.0),
@@ -65,11 +65,13 @@ class PaymentStatusScreen extends StatelessWidget {
               flex: 2,
             ),
             if (paymentSuccess) ...[
-              const PaymentSummaryRow(label: TTexts.paymentMethod, value: 'VISA'),
+              const PaymentSummaryRow(
+                  label: TTexts.paymentMethod, value: 'VISA'),
               ResponsiveGap.vertical(14),
               const PaymentSummaryRow(label: 'Date', value: '26 Oct 2025'),
               ResponsiveGap.vertical(14),
-              const PaymentSummaryRow(label: 'Transaction ID', value: 'FT54JN0'),
+              const PaymentSummaryRow(
+                  label: 'Transaction ID', value: 'FT54JN0'),
               ResponsiveGap.vertical(14),
               PaymentSummary(orderSummary: orderSummary),
             ],

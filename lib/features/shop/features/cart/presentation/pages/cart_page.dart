@@ -7,7 +7,6 @@ import 'package:t_store/features/shop/features/cart/presentation/widgets/cart_ch
 import 'package:t_store/features/shop/features/cart/presentation/widgets/cart_items_section.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -22,12 +21,9 @@ class CartPage extends StatelessWidget {
     });
 
     return Scaffold(
-      appBar: TAppBar(
+      appBar: const TAppBar(
         showBackArrow: true,
-        title: ResponsiveText(
-          'Cart',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
-        ),
+        title: 'Cart',
       ),
       body: ResponsivePadding.symmetric(
         horizontal: TSizes.spaceBtwItems,

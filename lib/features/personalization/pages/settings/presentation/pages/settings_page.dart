@@ -35,14 +35,10 @@ class SettingsPage extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  TAppBar(
-                    title: ResponsiveText(
-                      'Account',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall!
-                          .copyWith(color: AppColors.white, fontSize: 20),
-                    ),
+                  const TAppBar(
+                    title: 'Account',
+                    titleColor: AppColors.white,
+                    fontSize: 20,
                   ),
                   ResponsiveGap.vertical(TSizes.spaceBtwSections),
                   const Flexible(fit: FlexFit.loose, child: UserProfileTile()),

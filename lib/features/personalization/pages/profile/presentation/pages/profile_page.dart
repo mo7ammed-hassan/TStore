@@ -11,7 +11,6 @@ import 'package:t_store/features/personalization/pages/profile/presentation/widg
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class ProfilePage extends StatelessWidget {
   final UserEntity? userData;
@@ -20,11 +19,8 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TAppBar(
-        title: ResponsiveText(
-          'Profile',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
-        ),
+      appBar: const TAppBar(
+        title: 'Profile',
         showBackArrow: true,
       ),
       body: SingleChildScrollView(

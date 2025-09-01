@@ -8,6 +8,7 @@ import 'package:t_store/features/shop/features/home/presentation/widgets/feature
 import 'package:t_store/features/shop/features/home/presentation/widgets/popular_products_section.dart';
 import 'package:t_store/features/shop/features/home/presentation/widgets/home_header_section.dart';
 import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/features/shop/features/home/presentation/widgets/slider/promo_slider.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
@@ -56,6 +57,8 @@ class _HomePageState extends State<HomePage> {
             slivers: [
               // Header (User Name, Search, Categories)
               const SliverToBoxAdapter(child: HomeHeaderSection()),
+
+              const SliverToBoxAdapter(child: TPromoSlider()),
 
               // Featured Section Heading
               SliverToBoxAdapter(

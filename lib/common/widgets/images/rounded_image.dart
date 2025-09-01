@@ -14,7 +14,9 @@ class TRoundedImage extends StatelessWidget {
   final BoxFit fit;
   final EdgeInsetsGeometry? padding;
   final VoidCallback? onTap;
-  final bool aplayImageRaduis;
+  final bool applyImageRadius;
+  final String? fallbackAssetImage;
+  final EdgeInsetsGeometry? margin;
 
   const TRoundedImage({
     super.key,
@@ -26,8 +28,10 @@ class TRoundedImage extends StatelessWidget {
     this.backgroundColor,
     this.fit = BoxFit.contain,
     this.padding,
+    this.margin,
     this.onTap,
-    this.aplayImageRaduis = true,
+    this.applyImageRadius = true,
+    this.fallbackAssetImage = TImages.defaultProductImage,
   });
 
   bool get _isNetworkImage =>
@@ -35,36 +39,42 @@ class TRoundedImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double? finalWidth = width != null ? context.horzSize(width!) : null;
+    final double? finalHeight =
+        height != null ? context.horzSize(height!) : null;
+
+    Widget errorWidget = fallbackAssetImage != null
+        ? Image.network(
+            fallbackAssetImage!,
+            fit: fit,
+            width: finalWidth,
+            height: finalHeight,
+          )
+        : const Icon(Icons.error);
+
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        width: width != null ? context.horzSize(width!) : null,
-        height: height != null ? context.horzSize(height!) : null,
-        padding: padding,
-        decoration: BoxDecoration(
-          border: border,
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(borderRadius),
-        ),
-        child: ClipRRect(
-          borderRadius: aplayImageRaduis
-              ? BorderRadius.circular(borderRadius)
-              : BorderRadius.zero,
+      child: ClipRRect(
+        borderRadius: applyImageRadius
+            ? BorderRadius.circular(borderRadius + 5)
+            : BorderRadius.zero,
+        child: Container(
+          width: finalWidth,
+          height: finalHeight,
+          padding: padding,
+          margin: margin,
+          decoration: BoxDecoration(
+            border: border,
+            color: backgroundColor,
+          ),
           child: _isNetworkImage
               ? CachedNetworkImage(
                   imageUrl: imageUrl,
                   fit: fit,
-                  errorWidget: (context, url, error) => Image.network(
-                    TImages.defaultProductImage,
-                    fit: fit,
-                  ),
+                  errorWidget: (context, url, error) => errorWidget,
                   placeholder: (context, url) => ShimmerWidget(
-                    width: width != null
-                        ? context.horzSize(width!)
-                        : double.infinity,
-                    height: height != null
-                        ? context.horzSize(height!)
-                        : double.infinity,
+                    width: finalWidth,
+                    height: finalHeight,
                     shapeBorder: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(borderRadius),
                     ),
@@ -81,66 +91,3 @@ class TRoundedImage extends StatelessWidget {
     );
   }
 }
-
-// class TRoundedImage extends StatelessWidget {
-//   final String imageUrl;
-//   final double? width, height;
-//   final double borderRadius;
-//   final BoxBorder? border;
-//   final Color? backgroundColor;
-//   final BoxFit fit;
-//   final EdgeInsetsGeometry? padding;
-//   final VoidCallback? onTap;
-//   final bool aplayImageRaduis, isNetworkImage;
-
-//   const TRoundedImage({
-//     super.key,
-//     required this.imageUrl,
-//     this.width,
-//     this.height,
-//     this.borderRadius = TSizes.md,
-//     this.border,
-//     this.backgroundColor,
-//     this.fit = BoxFit.contain,
-//     this.padding,
-//     this.onTap,
-//     this.aplayImageRaduis = true,
-//     this.isNetworkImage = true,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: onTap,
-//       child: Container(
-//         width: width,
-//         height: height,
-//         padding: padding,
-//         decoration: BoxDecoration(
-//           border: border,
-//           color: backgroundColor,
-//           borderRadius: BorderRadius.circular(borderRadius),
-//         ),
-//         child: ClipRRect(
-//           borderRadius: aplayImageRaduis
-//               ? BorderRadius.circular(borderRadius)
-//               : BorderRadius.zero,
-//           child: isNetworkImage
-//               ? CachedNetworkImage(
-//                   imageUrl: imageUrl,
-//                   fit: fit,
-//                   errorWidget: (context, url, error) => Image.network(
-//                         TImages.defaultProductImage,
-//                         fit: fit,
-//                       ))
-//               : Image.asset(
-//                   imageUrl,
-//                   fit: fit,
-//                   errorBuilder: (context, error, stackTrace) =>
-//                       const Icon(Icons.error),
-//                 ),
-//         ),
-//       ),
-//     );
-//   }
-// }

@@ -6,13 +6,18 @@ import 'package:t_store/features/shop/features/home/presentation/widgets/slider/
 import 'package:t_store/features/shop/features/home/presentation/widgets/slider/promo_slider_indicators.dart';
 import 'package:t_store/features/shop/features/home/presentation/widgets/slider/shimmers/banner_placeholder.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TPromoSlider extends StatelessWidget {
   const TPromoSlider({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
+    return ResponsivePadding.symmetric(
+      vertical: TSizes.spaceBtwItems,
+      horizontal: TSizes.spaceBtwItems,
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => PromoSliderCubit()),
@@ -25,26 +30,28 @@ class TPromoSlider extends StatelessWidget {
             }
 
             if (state is BannerFailureState) {
-              return Center(child: Text(state.errorMessage));
+              return Center(child: ResponsiveText(state.errorMessage));
             }
 
             if (state is BannerLoadedState) {
               final banners = state.allBanners;
 
               if (banners.isEmpty) {
-                return const Center(child: Text('No banners found!'));
+                return const Center(child: ResponsiveText('No banners found!'));
               }
 
               return Column(
                 children: [
                   TPromoCarousel(banners: banners),
-                  const SizedBox(height: TSizes.spaceBtwItems),
+                  ResponsiveGap.vertical(TSizes.spaceBtwItems),
                   TPromoSliderIndicators(length: banners.length),
                 ],
               );
             }
 
-            return const Center(child: Text('Unexpected error occurred.'));
+            return const Center(
+              child: ResponsiveText('Unexpected error occurred.'),
+            );
           },
         ),
       ),

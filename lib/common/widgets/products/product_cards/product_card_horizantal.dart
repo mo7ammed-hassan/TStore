@@ -50,7 +50,6 @@ class ProductCardHorizantal extends StatelessWidget {
                     child: TRoundedImage(
                       fit: BoxFit.contain,
                       imageUrl: product.thumbnail,
-                      aplayImageRaduis: true,
                     ),
                   ),
                   _discountText(context),

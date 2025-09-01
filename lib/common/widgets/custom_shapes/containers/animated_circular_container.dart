@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 
 class TAnimatedCircularConatiner extends StatelessWidget {
   final double? width, height, raduis;
@@ -23,9 +25,9 @@ class TAnimatedCircularConatiner extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
-      width: width,
-      height: height,
-      padding: EdgeInsets.all(padding),
+      width: context.horzSize(width!),
+      height: context.horzSize(height!),
+      padding: context.responsiveInsets.all(padding),
       margin: margin,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(raduis!),
