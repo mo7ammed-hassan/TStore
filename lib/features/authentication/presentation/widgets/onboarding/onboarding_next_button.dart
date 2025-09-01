@@ -22,7 +22,7 @@ class OnBoardingNextButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: cubit.nextPage,
         style: ElevatedButton.styleFrom(
-          iconSize: context.horzSize(20),
+          iconSize: context.horzSize(22),
           shape: const CircleBorder(),
           backgroundColor: isDark ? AppColors.primary : Colors.black,
         ),
