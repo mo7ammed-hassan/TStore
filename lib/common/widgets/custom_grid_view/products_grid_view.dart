@@ -19,13 +19,15 @@ class ProductsGridView extends StatelessWidget {
       delegate: SliverChildBuilderDelegate(
         (context, index) {
           final product = products[index];
-          return TVerticalProductCard(product: product);
+          return _AnimatedGridItem(
+            index: index,
+            child: TVerticalProductCard(product: product),
+          );
         },
         childCount: products.length,
       ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        //childAspectRatio: 0.65,
         childAspectRatio: context.horzSize(50) / context.vertSize(86),
         mainAxisSpacing: context.vertSize(TSizes.gridViewSpacing),
         crossAxisSpacing: context.horzSize(TSizes.gridViewSpacing),
@@ -49,11 +51,40 @@ class ProductsGridView extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         final product = products[index];
-        return TVerticalProductCard(product: product);
+        return _AnimatedGridItem(
+          index: index,
+          child: TVerticalProductCard(product: product),
+        );
       },
       itemCount: products.length,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+    );
+  }
+}
+
+class _AnimatedGridItem extends StatelessWidget {
+  final int index;
+  final Widget child;
+
+  const _AnimatedGridItem({required this.index, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0, end: 1),
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeOut,
+      builder: (context, value, child) {
+        return Opacity(
+          opacity: value,
+          child: Transform.translate(
+            offset: Offset(0, 30 * (1 - value)), 
+            child: child,
+          ),
+        );
+      },
+      child: child,
     );
   }
 }

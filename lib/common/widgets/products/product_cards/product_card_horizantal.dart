@@ -49,6 +49,8 @@ class ProductCardHorizantal extends StatelessWidget {
                     width: context.horzSize(110),
                     child: TRoundedImage(
                       fit: BoxFit.contain,
+                      width: double.infinity,
+                      height: double.infinity,
                       imageUrl: product.thumbnail,
                     ),
                   ),

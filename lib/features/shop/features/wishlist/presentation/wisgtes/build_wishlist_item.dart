@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/common/widgets/animated_widget/animated_fade_grid_item.dart';
-import 'package:t_store/common/widgets/animated_widget/animated_grid_layout.dart';
-import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:t_store/common/widgets/custom_grid_view/products_grid_view.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_products_grid_layout.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubits/wishlist_cubit.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubits/wishlist_state.dart';
@@ -27,23 +25,8 @@ class BuildWishlistItems extends StatelessWidget {
             return _buildAnimationWidget(context);
           }
 
-          return AnimatedGridLayout(
-            itemCount: state.wishlist.length,
-            itemBuilder: (context, index) => TVerticalProductCard(
-              product: state.wishlist[index],
-            ),
-            animatedEffect: ({
-              required child,
-              isVisible,
-              onAdd,
-              onRemove,
-            }) {
-              return AnimatedFadeGridItem(
-                isVisible: isVisible!,
-                onRemove: onRemove!,
-                child: child,
-              );
-            },
+          return ProductsGridView(
+            products: state.wishlist,
           );
         }
 
