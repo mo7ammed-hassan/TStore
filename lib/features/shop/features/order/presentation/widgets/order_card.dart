@@ -33,7 +33,7 @@ class OrderCard extends StatelessWidget {
           return result; // true => remove, false => keep
         },
         background: const TRoundedContainer(
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.redAccent,
           child: Icon(Icons.delete, color: Colors.white),
         ),
         child: TRoundedContainer(
