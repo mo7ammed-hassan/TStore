@@ -6,7 +6,7 @@ class FirebaseCollections {
   static const String USER_COLLECTION = 'Users';
   static const String WISHLIST_COLLECTION = 'Wishlist';
   static const String PRODUCTS_COLLECTION = 'Products';
-  static const String ORDERS_COLLECTION = 'Orders';
+  static const String ORDERS_COLLECTION = 'orders';
   static const String PAYMENTS_COLLECTION = 'Payments';
   static const String COUPONS_COLLECTION = 'Coupons';
   static const String NOTIFICATIONS_COLLECTION = 'Notifications';

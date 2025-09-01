@@ -4,14 +4,17 @@ import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
 import 'package:t_store/features/checkout/presentation/widgets/address_section.dart';
 import 'package:t_store/features/checkout/presentation/widgets/payment_section.dart';
 import 'package:t_store/features/checkout/presentation/widgets/pricing_section.dart';
+import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class ChekoutOrderDetial extends StatelessWidget {
-  const ChekoutOrderDetial({super.key, required this.orderSummary});
-  final OrderSummaryModel orderSummary;
+  const ChekoutOrderDetial(
+      {super.key, required this.orderSummary, this.address});
+  final OrderSummaryModel? orderSummary;
+  final AddressEntity? address;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class ChekoutOrderDetial extends StatelessWidget {
           const Divider(),
           const PaymentSection(),
           ResponsiveGap.vertical(TSizes.spaceBtwSections / 1.8),
-          const AddressSection(),
+          AddressSection(addressEntity: address),
         ],
       ),
     );

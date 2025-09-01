@@ -20,9 +20,8 @@ class CartCheckoutButton extends StatelessWidget {
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => OrderReviewScreen(
-              items: items,
-            ),
+            builder: (_) =>
+                OrderReviewScreen(items: items, removeCartItems: true),
           ),
         ),
         child: ResponsiveText(

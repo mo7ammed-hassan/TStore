@@ -1,4 +1,3 @@
-import 'package:t_store/features/personalization/pages/address/data/models/address_model.dart';
 
 class AddressEntity {
   final String id;
@@ -61,23 +60,6 @@ class AddressEntity {
       postalCode: postalCode ?? this.postalCode,
       createdAt: createdAt ?? this.createdAt,
       selectedAddress: selectedAddress ?? this.selectedAddress,
-    );
-  }
-}
-
-extension AddressModelMapper on AddressEntity {
-  AddressModel toModel() {
-    return AddressModel(
-      id: id,
-      name: name,
-      phoneNumber: phoneNumber,
-      street: street,
-      city: city,
-      state: state,
-      country: country,
-      postalCode: postalCode,
-      createdAt: DateTime.now(),
-      selectedAddress: selectedAddress,
     );
   }
 }

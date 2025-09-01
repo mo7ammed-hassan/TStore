@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/features/personalization/pages/address/data/models/address_model.dart';
+import 'package:t_store/features/personalization/pages/address/data/mapper/address_mapper.dart';
 import 'package:t_store/features/personalization/pages/address/data/source/address_local_datasource.dart';
 import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
 import 'package:t_store/features/personalization/pages/address/domain/usecases/address_usecases.dart';

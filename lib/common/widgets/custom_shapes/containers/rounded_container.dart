@@ -12,6 +12,7 @@ class TRoundedContainer extends StatelessWidget {
   final bool showBorder;
   final Widget? child;
   final Color? borderColor;
+  final AlignmentGeometry? alignment;
 
   const TRoundedContainer({
     super.key,
@@ -22,8 +23,9 @@ class TRoundedContainer extends StatelessWidget {
     this.radius = TSizes.cardRadiusLg,
     this.showBorder = false,
     this.child,
-    this.borderColor ,
+    this.borderColor,
     this.padding,
+    this.alignment,
   });
 
   @override
@@ -34,12 +36,14 @@ class TRoundedContainer extends StatelessWidget {
       height: height,
       margin: margin,
       padding: padding,
+      alignment: alignment,
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(radius),
         border: showBorder
             ? Border.all(
-                color: borderColor ?? (isDark ? AppColors.darkGrey : AppColors.grey),
+                color: borderColor ??
+                    (isDark ? AppColors.darkGrey : AppColors.grey),
               )
             : null,
       ),

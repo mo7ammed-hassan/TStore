@@ -1,115 +1,148 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
+import 'package:t_store/features/checkout/presentation/pages/order_review_screen.dart';
+import 'package:t_store/features/shop/features/order/presentation/cuits/order_cubit.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/responsive/responsive_helpers.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class OrderCard extends StatelessWidget {
-  const OrderCard({super.key});
+  const OrderCard({super.key, required this.order});
+  final OrderEntity order;
 
   @override
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
-    return TRoundedContainer(
-      padding: context.responsiveInsets.all(TSizes.md),
-      showBorder: true,
-      backgroundColor: isDark ? AppColors.dark : AppColors.light,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
+    return GestureDetector(
+      onTap: () => context.pushPage(OrderReviewScreen(order: order)),
+      child: Dismissible(
+        key: ValueKey(order.orderId),
+        direction: DismissDirection.startToEnd,
+        onDismissed: (_) {
+          context.read<OrderCubit>().cancelOrder(order.orderId);
+        },
+        background: const TRoundedContainer(
+          backgroundColor: Colors.red,
+          child: Icon(Icons.delete, color: Colors.white),
+        ),
+        child: TRoundedContainer(
+          padding: context.responsiveInsets.all(TSizes.md),
+          showBorder: true,
+          backgroundColor: isDark ? AppColors.dark : AppColors.light,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Iconsax.ship),
-              ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min, // to take only required space
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ResponsiveText(
-                      'Proccessing',
-                      style: Theme.of(context).textTheme.bodyLarge!.apply(
-                            color: AppColors.primary,
-                            fontSizeDelta: 1, // reduce the size
-                          ),
+              Row(
+                children: [
+                  Icon(
+                    Iconsax.ship,
+                    size: context.horzSize(23),
+                  ),
+                  ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
+                  Expanded(
+                    child: Column(
+                      mainAxisSize:
+                          MainAxisSize.min, // to take only required space
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ResponsiveText(
+                          order.orderStatus[0].toUpperCase() +
+                              order.orderStatus.substring(1),
+                          style: Theme.of(context).textTheme.bodyLarge!.apply(
+                                color: AppColors.primary,
+                                fontSizeDelta: 1, // reduce the size
+                              ),
+                        ),
+                        ResponsiveText(
+                          HelperFunctions().formatOrderDate(order.updatedAt!),
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ],
                     ),
-                    ResponsiveText(
-                      '11 Nov 2024',
-                      style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Iconsax.arrow_right_34,
+                      size: context.horzSize(20),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Iconsax.arrow_right_34,
-                  size: context.horzSize(18),
-                ),
+              ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
+              Row(
+                children: [
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Icon(
+                          Iconsax.tag,
+                          size: context.horzSize(23),
+                        ),
+                        ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
+                        Expanded(
+                          child: Column(
+                            mainAxisSize:
+                                MainAxisSize.min, // to take only required space
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ResponsiveText(
+                                'Order',
+                                style: Theme.of(context).textTheme.labelMedium,
+                              ),
+                              ResponsiveText(
+                                '[#${order.orderId.substring(0, 8)}]',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Icon(
+                          Iconsax.calendar,
+                          size: context.horzSize(23),
+                        ),
+                        ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
+                        Expanded(
+                          child: Column(
+                            mainAxisSize:
+                                MainAxisSize.min, // to take only required space
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ResponsiveText(
+                                'Shipping Date',
+                                style: Theme.of(context).textTheme.labelMedium,
+                              ),
+                              ResponsiveText(
+                                //'03 Feb 2024',
+                                HelperFunctions()
+                                    .formatOrderDate(order.createdAt),
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-          ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
-          Row(
-            children: [
-              Expanded(
-                child: Row(
-                  children: [
-                    const Icon(Iconsax.tag),
-                    ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
-                    Expanded(
-                      child: Column(
-                        mainAxisSize:
-                            MainAxisSize.min, // to take only required space
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ResponsiveText(
-                            'Order',
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
-                          ResponsiveText(
-                            '[#256f2]',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Row(
-                  children: [
-                    const Icon(Iconsax.calendar),
-                    ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
-                    Expanded(
-                      child: Column(
-                        mainAxisSize:
-                            MainAxisSize.min, // to take only required space
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ResponsiveText(
-                            'Shipping Date',
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
-                          ResponsiveText(
-                            '03 Feb 2024',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }

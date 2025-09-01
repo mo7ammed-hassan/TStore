@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
-import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
 part 'address_model.g.dart';
 
 @HiveType(typeId: 8)
@@ -125,19 +124,4 @@ class AddressModel {
   }
 }
 
-extension AddressXModel on AddressModel {
-  AddressEntity toEntity() {
-    return AddressEntity(
-      id: id ?? '',
-      name: name,
-      phoneNumber: phoneNumber,
-      street: street,
-      city: city,
-      state: state,
-      country: country,
-      postalCode: postalCode,
-      createdAt: createdAt,
-      selectedAddress: selectedAddress,
-    );
-  }
-}
+

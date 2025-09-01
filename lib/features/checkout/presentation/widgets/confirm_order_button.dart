@@ -9,8 +9,9 @@ import 'package:t_store/utils/responsive/responsive_helpers.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
-class CheckoutButton extends StatelessWidget {
-  const CheckoutButton({super.key});
+class ConfirmOrderButton extends StatelessWidget {
+  const ConfirmOrderButton({super.key, this.removeCartItems = false});
+  final bool removeCartItems;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class CheckoutButton extends StatelessWidget {
               ),
             );
 
-            context.read<CartCubit>().clearAllItems();
+            if (removeCartItems) context.read<CartCubit>().clearAllItems();
           }
         },
         builder: (context, state) {
@@ -58,7 +59,7 @@ class CheckoutButton extends StatelessWidget {
                     ),
                   )
                 : ResponsiveText(
-                    'Confirm Order \$${total?.toStringAsFixed(2)}',
+                    'Confirm Order \$${total?.toStringAsFixed(2) ?? 0}',
                   ),
           );
         },

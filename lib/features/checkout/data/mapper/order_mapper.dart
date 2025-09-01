@@ -1,15 +1,18 @@
 // OrderModel <-> OrderEntity Mapper Extension
+import 'package:t_store/features/checkout/data/mapper/checout_mapper.dart';
 import 'package:t_store/features/checkout/data/models/order_model.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
+import 'package:t_store/features/personalization/pages/address/data/mapper/address_mapper.dart';
 
 extension OrderMapper on OrderModel {
   OrderEntity toEntity() {
     return OrderEntity(
       orderId: orderId ?? '',
       userId: userId ?? '',
-      checkoutModel: checkoutModel,
+      checkoutModel: checkoutModel.toEntity(),
       paymentStatus: paymentStatus,
       orderStatus: orderStatus,
+      shippingAddress: shippingAddress?.toEntity(),
       createdAt: createdAt,
       updatedAt: updatedAt,
     );
@@ -21,7 +24,8 @@ extension OrderEntityMapper on OrderEntity {
     return OrderModel(
       orderId: orderId,
       userId: userId,
-      checkoutModel: checkoutModel,
+      checkoutModel: checkoutModel.toModel(),
+      shippingAddress: shippingAddress?.toModel(),
       paymentStatus: paymentStatus,
       orderStatus: orderStatus,
       createdAt: createdAt,

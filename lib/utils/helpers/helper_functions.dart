@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:t_store/utils/popups/loaders.dart';
@@ -97,6 +98,11 @@ class HelperFunctions {
   static String getFormattedDate(DateTime date,
       {String format = 'dd MMM yyyy'}) {
     return DateFormat(format).format(date);
+  }
+
+  String formatOrderDate(Timestamp timestamp) {
+    final date = timestamp.toDate();
+    return DateFormat('dd MMM yyyy').format(date);
   }
 
   static List<T> removeDuplicates<T>(List<T> list) {

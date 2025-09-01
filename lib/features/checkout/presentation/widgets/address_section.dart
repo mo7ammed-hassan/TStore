@@ -12,7 +12,8 @@ import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class AddressSection extends StatelessWidget {
-  const AddressSection({super.key});
+  const AddressSection({super.key, this.addressEntity});
+  final AddressEntity? addressEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class AddressSection extends StatelessWidget {
           onPressed: () => _showAddressBottomSheet(context),
         ),
         if (address?.id.isNotEmpty == true)
-          AddressDetails(address: address!)
+          AddressDetails(address: addressEntity ?? address!)
         else
           const ResponsiveText('Please Select Address'),
       ],

@@ -7,7 +7,7 @@ import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class PricingSection extends StatelessWidget {
   const PricingSection({super.key, required this.orderSummary});
-  final OrderSummaryModel orderSummary;
+  final OrderSummaryModel? orderSummary;
 
   @override
   Widget build(BuildContext context) {
@@ -15,24 +15,24 @@ class PricingSection extends StatelessWidget {
       children: [
         PaymentSummaryRow(
           label: 'Subtotal',
-          value: '\$${orderSummary.subtotal}',
+          value: '\$${orderSummary?.subtotal}',
         ),
         ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
         PaymentSummaryRow(
           label: 'Shipping Free',
-          value: '-\$${orderSummary.discount}',
+          value: '-\$${orderSummary?.discount}',
         ),
         ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
         PaymentSummaryRow(
           label: 'Tax Free',
-          value: '+\$${orderSummary.shipping}',
+          value: '+\$${orderSummary?.shipping}',
         ),
         ResponsiveGap.vertical(TSizes.spaceBtwItems),
         const CustomDivider(),
         ResponsiveGap.vertical(18.0),
         PaymentSummaryRow(
           label: 'Order Total',
-          value: '\$${orderSummary.total.toStringAsFixed(2)}',
+          value: '\$${orderSummary?.total.toStringAsFixed(2)}',
         ),
       ],
     );

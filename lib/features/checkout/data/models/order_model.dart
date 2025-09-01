@@ -48,6 +48,7 @@ class OrderModel {
       'paymentStatus': paymentStatus,
       'orderStatus': orderStatus,
       'createdAt': createdAt,
+      'updatedAt': updatedAt,
     };
   }
 }

@@ -56,6 +56,7 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
       paymentStatus: PaymentStatus.pendingPayment.name,
       orderStatus: OrderStatus.unCompleted.name,
       createdAt: Timestamp.now(),
+      updatedAt: Timestamp.now(),
     );
 
     final orderData = order.toJson();

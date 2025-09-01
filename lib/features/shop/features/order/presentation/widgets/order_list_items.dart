@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store/features/shop/features/order/presentation/cuits/order_cubit.dart';
+import 'package:t_store/features/shop/features/order/presentation/cuits/order_states.dart';
+import 'package:t_store/features/shop/features/order/presentation/widgets/empty_orders_list.dart';
 import 'package:t_store/features/shop/features/order/presentation/widgets/order_card.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class OrderListItems extends StatelessWidget {
   const OrderListItems({
@@ -10,11 +15,37 @@ class OrderListItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemBuilder: (context, index) => const OrderCard(),
-      separatorBuilder: (context, index) =>
-          ResponsiveGap.vertical(TSizes.spaceBtwItems),
-      itemCount: 6,
+    return BlocBuilder<OrderCubit, OrderStates>(
+      builder: (context, state) {
+        switch (state.status) {
+          case OrderStatus.loading:
+            return const Center(child: CircularProgressIndicator());
+
+          case OrderStatus.success:
+            if (state.orders!.isEmpty) {
+              return const EmptyOrdersList();
+            }
+            if (state.orders != null) {}
+            return ListView.separated(
+              itemBuilder: (context, index) => OrderCard(
+                order: state.orders![index],
+              ),
+              separatorBuilder: (context, index) =>
+                  ResponsiveGap.vertical(TSizes.spaceBtwItems),
+              itemCount: state.orders!.length,
+            );
+          case OrderStatus.failure:
+            return Center(
+              child: ResponsiveText(
+                state.errorMessage ??
+                    'There was an error, please try again later',
+              ),
+            );
+
+          case OrderStatus.initial:
+            return const SizedBox.shrink();
+        }
+      },
     );
   }
 }

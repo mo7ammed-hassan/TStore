@@ -56,6 +56,7 @@ import 'package:t_store/features/shop/features/home/domain/repository/banner_rep
 import 'package:t_store/features/shop/features/home/domain/repository/category_repositoy.dart';
 import 'package:t_store/features/shop/features/home/domain/use_cases/banner_use_case.dart';
 import 'package:t_store/features/shop/features/home/domain/use_cases/category_use_case.dart';
+import 'package:t_store/features/shop/features/order/order_injection.dart';
 import 'package:t_store/features/shop/features/wishlist/data/repositories/wishlist_repository_impl.dart';
 import 'package:t_store/features/shop/features/wishlist/data/source/wishlist_firebase_services.dart';
 import 'package:t_store/features/shop/features/wishlist/domain/repositories/wishlist_repository.dart';
@@ -226,7 +227,10 @@ Future<void> initializeDependencies() async {
   registerAddressDependencies(getIt);
 
   // --Cart--
-  registerCartDependencies((getIt));
+  registerCartDependencies(getIt);
+
+  // -- Orders--
+  registerOrderDependencies(getIt);
 
   // -- Cubits--
   getIt.registerFactory<ProductsCubit>(() => ProductsCubit());
