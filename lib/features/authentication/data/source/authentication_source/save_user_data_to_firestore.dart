@@ -9,9 +9,9 @@ class SaveUserDataToFirestore {
       if (FirebaseAuth.instance.currentUser!.uid.isEmpty) {
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-        final nameParts = userCredential.user!.displayName!.split(" ");
+        final nameParts = userCredential.user!.displayName!.split(' ');
         final userName =
-            generateUsername(userCredential.user!.displayName ?? "");
+            generateUsername(userCredential.user!.displayName ?? '');
 
         final userData = UserCreationModel(
           userID: userCredential.user!.uid,
@@ -30,7 +30,7 @@ class SaveUserDataToFirestore {
       }
     } catch (e) {
       if (kDebugMode) {
-        print("Error saving user data to Firestore: $e");
+        print('Error saving user data to Firestore: $e');
       }
     }
   }
@@ -39,9 +39,9 @@ class SaveUserDataToFirestore {
     List<String> nameParts = fullName.split(' ');
 
     String firstName = nameParts[0].toLowerCase();
-    String lastName = nameParts.length > 1 ? nameParts[1].toLowerCase() : "";
+    String lastName = nameParts.length > 1 ? nameParts[1].toLowerCase() : '';
 
-    String username = "${firstName}_$lastName";
+    String username = '${firstName}_$lastName';
 
     return username;
   }

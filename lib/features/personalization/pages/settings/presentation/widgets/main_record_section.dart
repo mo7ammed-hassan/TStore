@@ -36,7 +36,7 @@ class MainRecordSection extends StatelessWidget {
           );
         }
       },
-      child: Column(
+      child: const Column(
         children: [
           UploadDataCard(
             // onTap: () => context.read<UploadDataCubit>().uploadDummyData(

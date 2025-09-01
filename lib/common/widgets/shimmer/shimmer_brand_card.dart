@@ -23,7 +23,7 @@ class ShimmerBrandCard extends StatelessWidget {
               )
             : null,
       ),
-      child: Row(
+      child: const Row(
         children: [
           Flexible(
             fit: FlexFit.loose,
@@ -33,7 +33,7 @@ class ShimmerBrandCard extends StatelessWidget {
               shapeBorder: CircleBorder(),
             ),
           ),
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
           Flexible(
             fit: FlexFit.loose,
             child: FittedBox(

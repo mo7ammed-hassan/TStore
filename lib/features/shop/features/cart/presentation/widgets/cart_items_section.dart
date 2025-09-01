@@ -84,13 +84,13 @@ class CartItemsSection extends StatelessWidget {
         : Center(
             child: Column(
               children: [
-                Spacer(
+                const Spacer(
                   flex: 1,
                 ),
                 Expanded(child: LottieBuilder.asset(TImages.cartAnimation)),
                 ResponsiveGap.vertical(TSizes.spaceBtwItems * 2),
                 _buildMessage('Oops! your cart is empty, let\'s fill it'),
-                Spacer(
+                const Spacer(
                   flex: 2,
                 ),
               ],

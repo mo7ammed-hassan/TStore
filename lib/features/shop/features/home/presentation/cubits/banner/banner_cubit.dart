@@ -19,7 +19,7 @@ class BannerCubit extends Cubit<BannerState> {
   Future<void> fetchBanners() async {
     if (_hasFetched && allBanners.isNotEmpty) {
       if (kDebugMode) {
-        print("Banners already fetched, no need to fetch again.");
+        print('Banners already fetched, no need to fetch again.');
       }
       return;
     }

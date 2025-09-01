@@ -28,7 +28,7 @@ class AddressRepositoryImpl extends AddressRepository {
     try {
       await addressFirebaseServices.deleteAddress(addressId: addressId);
 
-      return Right(unit);
+      return const Right(unit);
     } on Exception catch (e) {
       return Left(ServerFailure(e.toString()));
     }

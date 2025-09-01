@@ -120,13 +120,13 @@ class ProductDetailPage extends StatelessWidget {
                     const Divider(),
                     ResponsiveGap.vertical(TSizes.spaceBtwItems / 2),
                     OpenContainerWrapper(
-                      nextScreen: ProductReviewPage(),
-                      radius: Radius.circular(0),
+                      nextScreen: const ProductReviewPage(),
+                      radius: const Radius.circular(0),
                       closedElevation: 0,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          TSectionHeading(
+                          const TSectionHeading(
                             title: 'Reviews (175)',
                             showActionButton: false,
                           ),

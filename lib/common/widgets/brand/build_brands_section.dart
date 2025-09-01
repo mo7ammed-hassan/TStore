@@ -26,7 +26,7 @@ class BuildBrandsSection extends StatelessWidget {
               return SliverToBoxAdapter(
                 child: ShimmerBramdsList(
                   itemCount: !feturerand ? 6 : 4,
-                  key: ValueKey('loading brands'),
+                  key: const ValueKey('loading brands'),
                 ),
               );
             }

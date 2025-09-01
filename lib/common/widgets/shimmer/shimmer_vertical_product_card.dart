@@ -48,7 +48,7 @@ class ShimmerVerticalProductCard extends StatelessWidget {
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Row(
             children: [
               Expanded(
@@ -63,7 +63,7 @@ class ShimmerVerticalProductCard extends StatelessWidget {
                 ),
               ),
               ResponsiveGap.horizontal(8),
-              ShimmerWidget(
+              const ShimmerWidget(
                 height: 35,
                 width: 35,
                 shapeBorder: RoundedRectangleBorder(

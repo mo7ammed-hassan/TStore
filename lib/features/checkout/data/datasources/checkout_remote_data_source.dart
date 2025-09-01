@@ -42,7 +42,7 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
         .collection(FirebaseCollections.USER_COLLECTION)
         .doc(userId)
         .collection(FirebaseCollections.ADDRESS_COLLECTION)
-        .where("selectedAddress", isEqualTo: true)
+        .where('selectedAddress', isEqualTo: true)
         .limit(1)
         .get();
 
@@ -68,7 +68,7 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
     final userOrderRef = firebaseInstance
         .collection(FirebaseCollections.USER_COLLECTION)
         .doc(userId)
-        .collection("orders")
+        .collection('orders')
         .doc(orderRef.id);
 
     batch.set(userOrderRef, orderData);
@@ -148,7 +148,7 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
     final userOrderRef = firebaseInstance
         .collection(FirebaseCollections.USER_COLLECTION)
         .doc(userId)
-        .collection("orders")
+        .collection('orders')
         .doc(orderId);
 
     final batch = firebaseInstance.batch();

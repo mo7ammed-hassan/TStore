@@ -12,7 +12,7 @@ class CustomDivider extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 2),
             height: 1.1,
-            color: Color(0xFF5a5e64),
+            color: const Color(0xFF5a5e64),
           ),
         ),
       ),

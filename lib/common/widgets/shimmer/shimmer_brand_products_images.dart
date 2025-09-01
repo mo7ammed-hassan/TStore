@@ -26,7 +26,7 @@ class ShimmerBrandProductsImages extends StatelessWidget {
             padding: context.responsiveInsets.all(2),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
-              child: ShimmerWidget(),
+              child: const ShimmerWidget(),
             ),
           ),
         ),

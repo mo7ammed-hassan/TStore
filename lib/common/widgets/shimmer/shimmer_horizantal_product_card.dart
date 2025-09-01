@@ -45,7 +45,7 @@ class ShimmerHorizantalProductCard extends StatelessWidget {
                   ResponsiveGap.vertical(8),
                   const ShimmerVerifyBrand(),
                   ResponsiveGap.vertical(8),
-                  Spacer(),
+                  const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -63,7 +63,7 @@ class ShimmerHorizantalProductCard extends StatelessWidget {
                       ShimmerWidget(
                         height: context.horzSize(35),
                         width: context.horzSize(35),
-                        shapeBorder: RoundedRectangleBorder(
+                        shapeBorder: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(8),
                             bottomRight: Radius.circular(8),

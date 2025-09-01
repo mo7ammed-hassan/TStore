@@ -74,7 +74,7 @@ class CloseAccountButton extends StatelessWidget {
               child: Padding(
                 padding:
                     context.responsiveInsets.symmetric(horizontal: TSizes.lg),
-                child: Text('Delete'),
+                child: const Text('Delete'),
               ),
             ),
           ],

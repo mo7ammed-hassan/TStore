@@ -21,7 +21,7 @@ class ShimmerBrandShowCase extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ShimmerBrandCard(showBorder: false),
+          const ShimmerBrandCard(showBorder: false),
           ResponsiveGap.vertical(TSizes.spaceBtwItems),
           Row(
             children: List.generate(

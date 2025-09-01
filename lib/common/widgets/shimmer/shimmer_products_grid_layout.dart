@@ -34,7 +34,7 @@ class ShimmerProductsGridLayout extends StatelessWidget {
         crossAxisSpacing: context.horzSize(TSizes.gridViewSpacing),
       ),
       itemBuilder: (context, index) {
-        return ShimmerVerticalProductCard();
+        return const ShimmerVerticalProductCard();
       },
       itemCount: itemCount,
       shrinkWrap: true,

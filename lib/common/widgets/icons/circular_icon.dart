@@ -27,7 +27,7 @@ class TCircularIcon extends StatelessWidget {
     final isDark = HelperFunctions.isDarkMode(context);
     return InkWell(
       onTap: onPressed,
-      customBorder: CircleBorder(),
+      customBorder: const CircleBorder(),
       child: Container(
         width: width != null ? context.horzSize(width!) : null,
         height: height != null ? context.horzSize(height!) : null,

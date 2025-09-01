@@ -155,7 +155,7 @@ class AddressCubit extends Cubit<AddressState> {
     if (index == -1) {
       emit(state.copyWith(
         status: AddressStatus.failure,
-        errorMessage: "Address not found",
+        errorMessage: 'Address not found',
       ));
       return;
     }

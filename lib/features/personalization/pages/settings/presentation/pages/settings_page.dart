@@ -45,7 +45,7 @@ class SettingsPage extends StatelessWidget {
                     ),
                   ),
                   ResponsiveGap.vertical(TSizes.spaceBtwSections),
-                  Flexible(fit: FlexFit.loose, child: const UserProfileTile()),
+                  const Flexible(fit: FlexFit.loose, child: UserProfileTile()),
                   ResponsiveGap.vertical(TSizes.spaceBtwSections),
                 ],
               ),

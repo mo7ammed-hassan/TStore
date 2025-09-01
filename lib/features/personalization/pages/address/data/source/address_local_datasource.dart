@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import '../models/address_model.dart';
+import 'package:t_store/features/personalization/pages/address/data/models/address_model.dart';
 
 abstract class AddressLocalDataSource {
   Future<void> addAddress(String userId, AddressModel address);

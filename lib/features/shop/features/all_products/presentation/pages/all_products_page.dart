@@ -34,7 +34,7 @@ class AllProductsPage extends StatelessWidget {
             child: BlocBuilder<AllProductsCubit, AllProductsState>(
               builder: (context, state) {
                 if (state is AllProductsLoadingState) {
-                  return ShimmerProductsGridLayout();
+                  return const ShimmerProductsGridLayout();
                 }
                 if (state is AllProductsLoadedState) {
                   if (state.products!.isEmpty) {

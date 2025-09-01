@@ -28,7 +28,7 @@ class UserProfileTile extends StatelessWidget {
               ),
             ),
             title: ResponsiveText(
-              "${state.userData.firstName} ${state.userData.lastName}",
+              '${state.userData.firstName} ${state.userData.lastName}',
               style: Theme.of(context)
                   .textTheme
                   .titleLarge!

@@ -8,7 +8,7 @@ import 'package:t_store/features/shop/features/all_products/presentation/cubits/
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
-import 'sortable_dropdown.dart';
+import 'package:t_store/common/widgets/products/sortable/sortable_dropdown.dart';
 
 class TSortableProducts extends StatelessWidget {
   const TSortableProducts({super.key, required this.products});

@@ -31,7 +31,7 @@ class PaymentStatusScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TAppBar(
+      appBar: const TAppBar(
         showBackArrow: false,
         title: Text(TTexts.paymentStatus),
       ),
@@ -39,7 +39,7 @@ class PaymentStatusScreen extends StatelessWidget {
         padding: context.responsiveInsets.symmetric(horizontal: 24.0),
         child: Column(
           children: [
-            Spacer(),
+            const Spacer(),
             Expanded(
               flex: 3,
               child: (animation ? Lottie.asset : Lottie.asset)(
@@ -61,15 +61,15 @@ class PaymentStatusScreen extends StatelessWidget {
               style:
                   Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 13),
             ),
-            Spacer(
+            const Spacer(
               flex: 2,
             ),
             if (paymentSuccess) ...[
-              PaymentSummaryRow(label: TTexts.paymentMethod, value: 'VISA'),
+              const PaymentSummaryRow(label: TTexts.paymentMethod, value: 'VISA'),
               ResponsiveGap.vertical(14),
-              PaymentSummaryRow(label: 'Date', value: '26 Oct 2025'),
+              const PaymentSummaryRow(label: 'Date', value: '26 Oct 2025'),
               ResponsiveGap.vertical(14),
-              PaymentSummaryRow(label: 'Transaction ID', value: 'FT54JN0'),
+              const PaymentSummaryRow(label: 'Transaction ID', value: 'FT54JN0'),
               ResponsiveGap.vertical(14),
               PaymentSummary(orderSummary: orderSummary),
             ],
@@ -80,7 +80,7 @@ class PaymentStatusScreen extends StatelessWidget {
                   minimumSize: const Size(double.infinity, 50),
                 ),
                 onPressed: onTap,
-                child: Text('Back to Home'),
+                child: const Text('Back to Home'),
               ),
             ),
             ResponsiveGap.vertical(10),

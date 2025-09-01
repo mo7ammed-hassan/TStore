@@ -17,7 +17,7 @@ class OrderPage extends StatelessWidget {
           horizontal: TSizes.spaceBtwItems,
           vertical: TSizes.defaultSpace / 2,
         ),
-        child: OrderListItems(),
+        child: const OrderListItems(),
       ),
     );
   }

@@ -4,8 +4,8 @@ import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
-import '../constants/colors.dart';
-import '../helpers/helper_functions.dart';
+import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/helpers/helper_functions.dart';
 
 class Loaders {
   static void hideSnackBar() =>
@@ -149,7 +149,7 @@ class Loaders {
         child: Dialog(
           backgroundColor: Colors.transparent,
           child: Container(
-            padding: EdgeInsets.all(12),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: HelperFunctions.isDarkMode(AppContext.context)
                   ? AppColors.darkerGrey.withValues(alpha: 0.9)
@@ -189,7 +189,7 @@ class AppContext {
 
   static BuildContext get context {
     if (navigatorKey.currentContext == null) {
-      throw Exception("Context is not available yet!");
+      throw Exception('Context is not available yet!');
     }
     return navigatorKey.currentContext!;
   }

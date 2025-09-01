@@ -23,7 +23,7 @@ class BrandsGridView extends StatelessWidget {
 
         return TweenAnimationBuilder<double>(
           tween: Tween(begin: 0.5, end: 1),
-          duration: Duration(milliseconds: 500),
+          duration: const Duration(milliseconds: 500),
           builder: (context, value, child) {
             return Transform.translate(
               offset: Offset(0, 80 * (1 - value)),

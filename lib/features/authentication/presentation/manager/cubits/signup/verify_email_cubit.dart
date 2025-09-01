@@ -49,7 +49,7 @@ class VerifyEmailCubit extends Cubit<VerifyEmailState> {
             if (isVerified) {
               timer.cancel(); // Stop the timer if verified
 
-              emit(VerifiyEmailSuccessState("Email Verified!"));
+              emit(VerifiyEmailSuccessState('Email Verified!'));
             }
           } catch (e) {
             timer.cancel(); // Stop timer on error

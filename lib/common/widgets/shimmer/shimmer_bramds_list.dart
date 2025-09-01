@@ -11,13 +11,13 @@ class ShimmerBramdsList extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       itemCount: itemCount,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisExtent: 80,
         mainAxisSpacing: TSizes.defaultSpace / 2,
         crossAxisSpacing: TSizes.defaultSpace / 2,
       ),
-      itemBuilder: (context, index) => ShimmerBrandCard(),
+      itemBuilder: (context, index) => const ShimmerBrandCard(),
     );
   }
 }

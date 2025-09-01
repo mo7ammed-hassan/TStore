@@ -106,13 +106,13 @@ class PaymentMethodCard extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
-          color: selected ? Colors.transparent : Color(0xFF007df3),
+          color: selected ? Colors.transparent : const Color(0xFF007df3),
           width: selected ? 0 : 4,
         ),
         boxShadow: [
           if (selected)
             BoxShadow(
-              color: Color(0xFF007df3).withValues(alpha: 0.4),
+              color: const Color(0xFF007df3).withValues(alpha: 0.4),
               blurRadius: 0,
               offset: const Offset(0, 0),
             )
@@ -124,7 +124,7 @@ class PaymentMethodCard extends StatelessWidget {
         height: context.vertSize(12),
         decoration: BoxDecoration(
           color: selected
-              ? Color(0xFF007df3).withValues(alpha: 0.9)
+              ? const Color(0xFF007df3).withValues(alpha: 0.9)
               : Colors.transparent,
           shape: BoxShape.circle,
         ),

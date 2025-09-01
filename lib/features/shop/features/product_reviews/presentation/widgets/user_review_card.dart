@@ -23,7 +23,7 @@ class UserReviewCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: context.horzSize(17),
-                  backgroundImage: AssetImage(TImages.userProfileImage1),
+                  backgroundImage: const AssetImage(TImages.userProfileImage1),
                 ),
                 ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
                 ResponsiveText(

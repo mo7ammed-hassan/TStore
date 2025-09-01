@@ -66,7 +66,7 @@ class TAddIcon extends StatelessWidget {
                 return itemQuantity >= 1
                     ? ResponsiveText(
                         itemQuantity.toString(),
-                        style: TextStyle(color: AppColors.white, fontSize: 13),
+                        style: const TextStyle(color: AppColors.white, fontSize: 13),
                       )
                     : Icon(
                         Iconsax.add,

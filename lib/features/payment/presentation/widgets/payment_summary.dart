@@ -17,7 +17,7 @@ class PaymentSummary extends StatelessWidget {
           value: '\$${orderSummary?.subtotal}',
         ),
         ResponsiveGap.vertical(14.0),
-        CustomDivider(),
+        const CustomDivider(),
         ResponsiveGap.vertical(18.0),
         PaymentSummaryRow(
           label: 'Total:',

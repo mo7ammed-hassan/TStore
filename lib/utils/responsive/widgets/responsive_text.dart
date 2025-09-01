@@ -37,7 +37,7 @@ class ResponsiveText extends StatelessWidget {
       maxLines: maxLines,
       overflow: overflow,
       textAlign: textAlign,
-      style: (style ?? TextStyle()).copyWith(
+      style: (style ?? const TextStyle()).copyWith(
         fontSize: getResponsiveFontSize(
           context,
           fontSize: style?.fontSize ?? fontSize,

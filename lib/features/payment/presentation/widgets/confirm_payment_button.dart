@@ -23,7 +23,7 @@ class ConfirmPaymentButton extends StatelessWidget {
             minimumSize: const Size(double.infinity, 50),
           ),
           child: const ResponsiveText(
-            "Confirm Payment",
+            'Confirm Payment',
           ),
         ),
       ),

@@ -51,7 +51,7 @@ class TCircularImage extends StatelessWidget {
                       ShimmerWidget(
                     height: context.horzSize(75),
                     width: context.horzSize(75),
-                    shapeBorder: CircleBorder(),
+                    shapeBorder: const CircleBorder(),
                   ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 )

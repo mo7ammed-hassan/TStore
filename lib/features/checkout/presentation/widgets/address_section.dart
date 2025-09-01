@@ -48,7 +48,7 @@ class AddressSection extends StatelessWidget {
           child: Padding(
             padding: context.responsiveInsets
                 .symmetric(horizontal: TSizes.defaultSpace),
-            child: BuildAddressesListView(
+            child: const BuildAddressesListView(
               showAddButton: true,
             ),
           ),

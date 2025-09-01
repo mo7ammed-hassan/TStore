@@ -22,7 +22,7 @@ class PaymentSummaryRow extends StatelessWidget {
           child: ResponsiveText(
             label,
             style: textTheme.bodySmall?.copyWith(
-              color: isDark ? Colors.grey : Color(0xFF5a5e64),
+              color: isDark ? Colors.grey : const Color(0xFF5a5e64),
               fontSize: 12,
             ),
           ),

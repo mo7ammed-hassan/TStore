@@ -40,10 +40,10 @@ class ShimmerCartItem extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 7),
-                      ShimmerWidget(
+                      const ShimmerWidget(
                         height: 10,
                         width: 10,
-                        margin: const EdgeInsets.only(bottom: 6),
+                        margin: EdgeInsets.only(bottom: 6),
                         shapeBorder: CircleBorder(),
                       ),
                     ],

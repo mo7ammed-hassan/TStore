@@ -21,7 +21,7 @@ class AddNewAddressPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
-          child: AddNewAddressForm(),
+          child: const AddNewAddressForm(),
         ),
       ),
     );

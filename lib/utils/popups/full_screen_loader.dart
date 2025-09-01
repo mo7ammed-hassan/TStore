@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/utils/popups/loaders.dart';
-import '../constants/colors.dart';
-import '../helpers/helper_functions.dart';
-import '../loaders/animation_loader.dart';
+import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/loaders/animation_loader.dart';
 
 /// A utility class for managing a full-screen loading dialog.
 class TFullScreenLoader {

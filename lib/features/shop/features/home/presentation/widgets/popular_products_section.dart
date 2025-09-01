@@ -14,8 +14,8 @@ class PopularProductsSection extends StatelessWidget {
     return BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
         if (state is ProductsLoadingState || state is ProductsInitialState) {
-          return SliverToBoxAdapter(
-            child: const ShimmerProductsGridLayout(),
+          return const SliverToBoxAdapter(
+            child: ShimmerProductsGridLayout(),
           );
         }
 

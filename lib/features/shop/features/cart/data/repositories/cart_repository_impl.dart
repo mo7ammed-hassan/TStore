@@ -32,7 +32,7 @@ class CartRepositoryImpl extends CartRepository {
     try {
       await cartManagementService.addItemToCart(cartItem: item.toModel());
 
-      return Right(unit);
+      return const Right(unit);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
@@ -45,7 +45,7 @@ class CartRepositoryImpl extends CartRepository {
       await cartManagementService.removeItemFromCart(
           cartItemId: item.product.variation.id);
 
-      return Right(unit);
+      return const Right(unit);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
@@ -58,7 +58,7 @@ class CartRepositoryImpl extends CartRepository {
       await cartManagementService.changeItemQuantity(
           itemId: itemId, quantity: quantity);
 
-      return Right(unit);
+      return const Right(unit);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }

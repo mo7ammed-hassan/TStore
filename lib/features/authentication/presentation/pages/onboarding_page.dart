@@ -28,13 +28,13 @@ class OnBoardingPage extends StatelessWidget {
             );
           }
         },
-        child: Scaffold(
+        child: const Scaffold(
           body: Stack(
             children: [
-              const OnboardingPageView(),
-              const OnBoardingSkip(),
-              const OnboardingDotsIndicator(),
-              const OnBoardingNextButton(),
+              OnboardingPageView(),
+              OnBoardingSkip(),
+              OnboardingDotsIndicator(),
+              OnBoardingNextButton(),
             ],
           ),
         ),

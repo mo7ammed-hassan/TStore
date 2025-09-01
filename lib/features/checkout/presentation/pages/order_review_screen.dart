@@ -59,7 +59,7 @@ class OrderReviewScreen extends StatelessWidget {
                     SliverToBoxAdapter(
                       child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
                     ),
-                    SliverToBoxAdapter(child: const CouponFiled()),
+                    const SliverToBoxAdapter(child: CouponFiled()),
                     SliverToBoxAdapter(
                       child: ResponsiveGap.vertical(TSizes.spaceBtwSections),
                     ),

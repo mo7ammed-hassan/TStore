@@ -112,7 +112,7 @@ class CartItemCard extends StatelessWidget {
                 onPressed: () => context
                     .read<CartCubit>()
                     .removeItemFromCart(item: cartItem),
-                icon: Icon(
+                icon: const Icon(
                   Iconsax.trash,
                   color: Colors.redAccent,
                 ),

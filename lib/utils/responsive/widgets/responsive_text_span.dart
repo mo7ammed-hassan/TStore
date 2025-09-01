@@ -31,7 +31,7 @@ class ResponsiveTextSpan extends StatelessWidget {
       textAlign: textAlign,
       text: TextSpan(
         text: text,
-        style: (style ?? TextStyle()).copyWith(
+        style: (style ?? const TextStyle()).copyWith(
           fontSize: getResponsiveFontSize(
             context,
             fontSize: style?.fontSize ?? fontSize,
@@ -51,7 +51,7 @@ class ResponsiveTextSpan extends StatelessWidget {
   TextSpan buildTextSpan(BuildContext context) {
     return TextSpan(
       text: text,
-      style: (style ?? TextStyle()).copyWith(
+      style: (style ?? const TextStyle()).copyWith(
         fontSize: getResponsiveFontSize(
           context,
           fontSize: style?.fontSize ?? fontSize,

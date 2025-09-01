@@ -17,10 +17,10 @@ class PaymentCubit extends Cubit<PaymentState> {
     await Future.delayed(const Duration(milliseconds: 500));
 
     final methods = [
-      const PaymentMethod(id: "1", name: "Credit Card", icon: TImages.visa),
-      const PaymentMethod(id: "2", name: "PayPal", icon: TImages.paypal),
+      const PaymentMethod(id: '1', name: 'Credit Card', icon: TImages.visa),
+      const PaymentMethod(id: '2', name: 'PayPal', icon: TImages.paypal),
       const PaymentMethod(
-          id: "3", name: "Cash on Delivery", icon: TImages.creditCard),
+          id: '3', name: 'Cash on Delivery', icon: TImages.creditCard),
     ];
 
     emit(state.copyWith(methods: methods, loading: false));
