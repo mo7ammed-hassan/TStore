@@ -55,9 +55,12 @@ class ConfirmOrderButton extends StatelessWidget {
                     width: context.horzSize(20),
                     height: context.horzSize(20),
                     child: const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
-                        strokeWidth: 2.5,
+                      child: PopScope(
+                        canPop: false,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2.5,
+                        ),
                       ),
                     ),
                   )
