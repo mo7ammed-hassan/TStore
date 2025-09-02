@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
-import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
+import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_state.dart';
 import 'package:t_store/features/payment/presentation/widgets/confirm_payment_button.dart';
@@ -13,11 +13,12 @@ import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
 
 class PaymentScreen extends StatelessWidget {
-  const PaymentScreen({super.key, required this.orderSummary});
-  final OrderSummaryModel? orderSummary;
+  const PaymentScreen({super.key, required this.order});
+  final OrderEntity? order;
 
   @override
   Widget build(BuildContext context) {
+    final orderSummary = order?.checkoutModel.orderSummary;
     return BlocProvider(
       create: (_) => PaymentCubit()..fetchPaymentMethods(),
       child: Scaffold(
@@ -55,8 +56,10 @@ class PaymentScreen extends StatelessWidget {
                 ),
                 ConfirmPaymentButton(
                   enabled: state.selected != null,
-                  onPressed: () =>
-                      context.read<PaymentCubit>().confirmPayment(context),
+                  onPressed: () {
+                    context.read<PaymentCubit>().confirmPayment(context);
+                    //context.read<OrderCubit>().changeOrderStaus(order!.orderId);
+                  },
                 ),
               ],
             );

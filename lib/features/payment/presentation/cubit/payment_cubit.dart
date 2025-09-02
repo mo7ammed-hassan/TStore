@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/features/navigation_menu/navigation_screen.dart';
 import 'package:t_store/features/payment/data/models/payment_method.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_state.dart'
     show PaymentState;
 import 'package:t_store/features/payment/presentation/screens/payment_status_screen.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
+import 'package:t_store/utils/helpers/navigation.dart';
 
 class PaymentCubit extends Cubit<PaymentState> {
   PaymentCubit() : super(PaymentState());
@@ -32,21 +32,28 @@ class PaymentCubit extends Cubit<PaymentState> {
 
   void confirmPayment(BuildContext context) {
     if (state.selected == null) return;
-    Navigator.pushAndRemoveUntil(
+    Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PaymentStatusScreen(
-          imagePath: TImages.successPyment,
-          animation: true,
-          paymentSuccess: true,
-          onTap: () => Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (_) => const NavigationScreen()),
-            (route) => false,
+        builder: (context) => PopScope(
+          canPop: false,
+          child: PaymentStatusScreen(
+            imagePath: TImages.successPyment,
+            animation: true,
+            paymentSuccess: true,
+            // onTap: () => Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(builder: (_) => const NavigationScreen()),
+            //   (route) => false,
+            // ),
+            onTap: () {
+              context.popPage(context);
+              context.popPage(context);
+              context.popPage(context);
+            },
           ),
         ),
       ),
-      (route) => false,
     );
   }
 }
