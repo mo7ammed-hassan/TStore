@@ -18,10 +18,10 @@ class OrderListItems extends StatelessWidget {
     return BlocBuilder<OrderCubit, OrderStates>(
       builder: (context, state) {
         switch (state.status) {
-          case OrderStatus.loading:
+          case OrderStateStatus.loading:
             return const Center(child: CircularProgressIndicator());
 
-          case OrderStatus.success:
+          case OrderStateStatus.success:
             if (state.orders!.isEmpty) {
               return const EmptyOrdersList();
             }
@@ -34,7 +34,7 @@ class OrderListItems extends StatelessWidget {
                   ResponsiveGap.vertical(TSizes.spaceBtwItems),
               itemCount: state.orders!.length,
             );
-          case OrderStatus.failure:
+          case OrderStateStatus.failure:
             return Center(
               child: ResponsiveText(
                 state.errorMessage ??
@@ -42,7 +42,7 @@ class OrderListItems extends StatelessWidget {
               ),
             );
 
-          case OrderStatus.initial:
+          case OrderStateStatus.initial:
             return const SizedBox.shrink();
         }
       },

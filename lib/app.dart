@@ -7,6 +7,7 @@ import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/utils/helpers/app_focus_handler.dart';
 import 'package:t_store/utils/popups/loaders.dart';
 import 'package:t_store/utils/theme/theme.dart';
+final RouteObserver<ModalRoute<void>> routeObserver = RouteObserver<ModalRoute<void>>();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       ],
       child: AppFocusHandler(
         child: MaterialApp(
+          navigatorObservers: [routeObserver],
           debugShowCheckedModeBanner: false,
           title: 'T-Store',
           themeMode: ThemeMode.system,

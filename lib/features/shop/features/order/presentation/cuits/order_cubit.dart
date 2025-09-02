@@ -9,14 +9,14 @@ class OrderCubit extends Cubit<OrderStates> {
   final OrderUsecases _orderUsecases;
 
   Future<void> fetchOrders() async {
-    emit(state.copyWith(status: OrderStatus.loading));
+    emit(state.copyWith(status: OrderStateStatus.loading));
 
     final result = await _orderUsecases.fetchOrdersUsecase.call();
     result.fold(
       (error) => emit(state.copyWith(
-          status: OrderStatus.failure, errorMessage: error.message)),
+          status: OrderStateStatus.failure, errorMessage: error.message)),
       (orders) {
-        emit(state.copyWith(status: OrderStatus.success, orders: orders));
+        emit(state.copyWith(status: OrderStateStatus.success, orders: orders));
       },
     );
   }
@@ -30,7 +30,7 @@ class OrderCubit extends Cubit<OrderStates> {
 
     emit(
       state.copyWith(
-        status: OrderStatus.success,
+        status: OrderStateStatus.success,
         orders: updatedOrders,
       ),
     );
@@ -41,7 +41,7 @@ class OrderCubit extends Cubit<OrderStates> {
       (error) {
         emit(
           currentState.copyWith(
-            status: OrderStatus.failure,
+            status: OrderStateStatus.failure,
             errorMessage: error.message,
             orders: oldOrders, // rollback
           ),
@@ -49,7 +49,8 @@ class OrderCubit extends Cubit<OrderStates> {
       },
       (_) {
         emit(
-          state.copyWith(status: OrderStatus.success, orders: updatedOrders),
+          state.copyWith(
+              status: OrderStateStatus.success, orders: updatedOrders),
         );
       },
     );
