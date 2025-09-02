@@ -54,6 +54,7 @@ class _HomePageState extends State<HomePage> {
         body: RefreshIndicator(
           onRefresh: _onRefresh,
           child: CustomScrollView(
+            physics: const BouncingScrollPhysics(),
             slivers: [
               // Header (User Name, Search, Categories)
               const SliverToBoxAdapter(child: HomeHeaderSection()),

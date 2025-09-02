@@ -8,7 +8,11 @@ import 'package:t_store/config/service_locator.dart';
 class UploadUserProfileImageCubit extends Cubit<UploadUserProfileImageState> {
   UploadUserProfileImageCubit() : super(UploadUserProfileImageInitialState());
 
+  bool opend = false;
+
   void uploadUserImage() async {
+    if (opend) return;
+    opend = true;
     // Pick image
     final image = await ImagePicker().pickImage(
       source: ImageSource.gallery,
@@ -29,13 +33,16 @@ class UploadUserProfileImageCubit extends Cubit<UploadUserProfileImageState> {
       result.fold(
         (error) {
           emit(UploadUserProfileImageFailureState(error));
+          opend = false;
         },
         (url) {
           emit(UploadUserProfileImageSuccessState(url));
+          opend = false;
         },
       );
     } else {
       emit(NotSelectImageState());
+      opend = false;
     }
   }
 }

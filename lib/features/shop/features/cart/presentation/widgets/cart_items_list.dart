@@ -31,6 +31,7 @@ class CartItemsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      physics: const BouncingScrollPhysics(),
       itemCount: cartItems.length,
       itemBuilder: (_, index) => CartItemCard(
         key: ValueKey(cartItems[index].id),

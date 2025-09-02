@@ -27,6 +27,7 @@ class OrderListItems extends StatelessWidget {
             }
             if (state.orders != null) {}
             return ListView.separated(
+              physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) => OrderCard(
                 order: state.orders![index],
               ),

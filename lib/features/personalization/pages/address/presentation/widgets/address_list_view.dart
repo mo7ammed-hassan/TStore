@@ -24,6 +24,7 @@ class AddressListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      physics: const BouncingScrollPhysics(),
       itemCount: addresses.length,
       itemBuilder: (context, index) {
         final address = addresses[index];

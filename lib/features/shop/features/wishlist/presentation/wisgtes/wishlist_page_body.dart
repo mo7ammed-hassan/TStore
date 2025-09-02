@@ -9,6 +9,7 @@ class WishlistPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Padding(
         padding: context.responsiveInsets.symmetric(
           horizontal: TSizes.spaceBtwItems,

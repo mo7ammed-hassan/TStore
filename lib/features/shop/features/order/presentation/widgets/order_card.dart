@@ -24,7 +24,9 @@ class OrderCard extends StatelessWidget {
     // if not completed go to review : show order detais
     return GestureDetector(
       onTap: () => order.orderStatus == OrderStatus.unCompleted.name
-          ? context.pushPage(OrderReviewScreen(order: order))
+          ? context.pushPage(
+              OrderReviewScreen(order: order),
+            )
           : null,
       child: Dismissible(
         key: ValueKey(order.orderId),

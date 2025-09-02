@@ -4,6 +4,7 @@ import 'package:t_store/common/widgets/custom_grid_view/products_grid_view.dart'
 import 'package:t_store/common/widgets/shimmer/shimmer_products_grid_layout.dart';
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_cubit.dart';
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_state.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class ProductsSection extends StatefulWidget {
   final String categoryId;
@@ -32,13 +33,14 @@ class _ProductsSectionState extends State<ProductsSection> {
         }
 
         if (state is StoreProductError) {
-          return SliverToBoxAdapter(child: Center(child: Text(state.error)));
+          return SliverToBoxAdapter(
+              child: Center(child: ResponsiveText(state.error)));
         }
 
         if (state is StoreProductLoaded) {
           if (state.products.isEmpty) {
             return const SliverToBoxAdapter(
-              child: Center(child: Text('No products found!')),
+              child: Center(child: ResponsiveText('No products found!')),
             );
           }
 
@@ -46,7 +48,7 @@ class _ProductsSectionState extends State<ProductsSection> {
         }
 
         return const SliverToBoxAdapter(
-          child: Center(child: Text('Something went wrong!')),
+          child: Center(child: ResponsiveText('Something went wrong!')),
         );
       },
     );
