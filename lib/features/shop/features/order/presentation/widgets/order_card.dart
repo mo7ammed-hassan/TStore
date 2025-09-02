@@ -41,6 +41,7 @@ class OrderCard extends StatelessWidget {
           child: Icon(Icons.delete, color: Colors.white),
         ),
         child: TRoundedContainer(
+          key: ValueKey(order.orderId),
           padding: context.responsiveInsets.all(TSizes.md),
           showBorder: true,
           backgroundColor: isDark ? AppColors.dark : AppColors.light,
