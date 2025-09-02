@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/features/checkout/domain/entities/checkout_entity.dart';
+import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/checkout/domain/usecases/checkout_usecases.dart';
 import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
 import 'package:t_store/features/personalization/pages/address/domain/usecases/get_selected_address_usecase.dart';
@@ -35,30 +36,29 @@ class CheckoutCubit extends Cubit<CheckoutState> {
     }
   }
 
-  Future<void> createOrderDraft(CheckoutEntity checkoutData) async {
-    if (state.order?.orderId != null &&
-        state.order?.orderStatus == OrderStatus.unCompleted.name) {
-      emit(
-        state.copyWith(
-          createOrderSuccess: true,
-        ),
-      );
+  Future<void> createOrderDraft(CheckoutEntity checkoutData,
+      [OrderEntity? order]) async {
+    if ((state.order?.orderId != null &&
+            state.order?.orderStatus == OrderStatus.unCompleted.name) ||
+        (order != null && order.orderStatus == OrderStatus.unCompleted.name)) {
+      emit(state.copyWith(createOrderSuccess: true));
       return;
     }
 
     emit(state.copyWith(createOrderLoading: true, createOrderSuccess: false));
     try {
-      final order = await checoutUsecases.createOrderDraftUsecase(checkoutData);
+      final newOrder =
+          await checoutUsecases.createOrderDraftUsecase(checkoutData);
 
       emit(
         state.copyWith(
           createOrderLoading: false,
           createOrderSuccess: true,
-          order: order,
+          order: newOrder,
         ),
       );
     } catch (e) {
-      emit(state.copyWith(createOrderLoading: false));
+      emit(state.copyWith(createOrderLoading: false,createOrderError: e.toString(),));
     }
   }
 

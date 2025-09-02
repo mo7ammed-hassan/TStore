@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/checkout/presentation/cubits/checkout_cubit.dart';
 import 'package:t_store/features/checkout/presentation/cubits/checkout_state.dart';
 import 'package:t_store/features/payment/presentation/screens/payment_screen.dart';
@@ -10,8 +11,10 @@ import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class ConfirmOrderButton extends StatelessWidget {
-  const ConfirmOrderButton({super.key, this.removeCartItems = false});
+  const ConfirmOrderButton(
+      {super.key, this.removeCartItems = false, required this.order});
   final bool removeCartItems;
+  final OrderEntity? order;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,7 @@ class ConfirmOrderButton extends StatelessWidget {
                     if (state.checkoutData != null) {
                       context
                           .read<CheckoutCubit>()
-                          .createOrderDraft(state.checkoutData!);
+                          .createOrderDraft(state.checkoutData!, order);
                     }
                   }
                 : null,

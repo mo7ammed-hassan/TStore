@@ -5,6 +5,7 @@ import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/checkout/presentation/pages/order_review_screen.dart';
 import 'package:t_store/features/shop/features/order/presentation/widgets/cancel_order_dialog.dart';
 import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/constants/enums.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
@@ -20,8 +21,11 @@ class OrderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
+    // if not completed go to review : show order detais
     return GestureDetector(
-      onTap: () => context.pushPage(OrderReviewScreen(order: order)),
+      onTap: () => order.orderStatus == OrderStatus.unCompleted.name
+          ? context.pushPage(OrderReviewScreen(order: order))
+          : null,
       child: Dismissible(
         key: ValueKey(order.orderId),
         direction: DismissDirection.startToEnd,
