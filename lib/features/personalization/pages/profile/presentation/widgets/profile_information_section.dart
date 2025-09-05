@@ -16,33 +16,45 @@ class ProfileInformationSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
-        if (state is FetchUserDataLoadedState) {
-          return Column(
+        if (state.status == UserStatus.loading) {
+          return const Column(
             children: [
-              ProfileMenu(
-                title: 'Name',
-                value: '${state.userData.firstName} ${state.userData.lastName}',
-                onPressed: () {
-                  context.pushPage(
-                    const ChangeNamePage(),
-                  );
-                },
-              ),
-              ProfileMenu(
-                title: 'Username',
-                value: state.userData.username,
-                onPressed: () {},
-              ),
+              ShimmerProfileMenu(),
+              ShimmerProfileMenu(),
             ],
           );
         }
-        return const Column(
-          children: [
-            ShimmerProfileMenu(),
-            ShimmerProfileMenu(),
-          ],
-        );
+
+        if (state.status == UserStatus.success) {
+          switch (state.action) {
+            case UserAction.fetch:
+              return _userinfoWidget(state, context);
+            case UserAction.update:
+              return _userinfoWidget(state, context);
+            case UserAction.logout:
+              return _userinfoWidget(state, context);
+          }
+        }
+
+        return const SizedBox.shrink();
       },
+    );
+  }
+
+  Column _userinfoWidget(UserState state, BuildContext context) {
+    return Column(
+      children: [
+        ProfileMenu(
+          title: 'Name',
+          value: '${state.user?.firstName} ${state.user?.lastName}',
+          onPressed: () => context.pushPage(const ChangeNamePage()),
+        ),
+        ProfileMenu(
+          title: 'Username',
+          value: state.user?.username ?? '',
+          onPressed: () {},
+        ),
+      ],
     );
   }
 }

@@ -30,7 +30,6 @@ class TImages {
       'assets/images/animations/110052-paper-plane.json';
   static const String pencilAnimation =
       'assets/images/animations/140429-pencil-drawing.json';
-  static const String successPyment = 'assets/images/animations/success.json';
 
   // --Lottie Animation
   static const String cartAnimation =
@@ -75,6 +74,7 @@ class TImages {
   static const String visa = 'assets/icons/payment_methods/visa.png';
   static const String paystack = 'assets/icons/payment_methods/paystack.png';
   static const String paytm = 'assets/icons/payment_methods/paytm.png';
+  static const String cod = 'assets/icons/payment_methods/cod.png';
   static const String successfulPaymentIcon =
       'assets/icons/payment_methods/successful_payment_icon.png';
 

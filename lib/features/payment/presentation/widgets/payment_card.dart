@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/features/payment/data/models/payment_method.dart';
+import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:t_store/utils/responsive/responsive_helpers.dart';
@@ -8,7 +8,7 @@ import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class PaymentMethodCard extends StatelessWidget {
-  final PaymentMethod method;
+  final PaymentMethodEntity method;
   final bool selected;
   final VoidCallback onTap;
 
@@ -73,7 +73,7 @@ class PaymentMethodCard extends StatelessWidget {
         border: Border.all(color: Colors.grey, width: 1),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Image.asset(method.icon, fit: BoxFit.contain),
+      child: Image.asset(method.logoUrl, fit: BoxFit.contain),
     );
   }
 

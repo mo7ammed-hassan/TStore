@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/features/personalization/pages/profile/presentation/widgets/change_name_form.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class ChangeNameBody extends StatelessWidget {
   const ChangeNameBody({super.key});
@@ -10,11 +12,12 @@ class ChangeNameBody extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        ResponsiveText(
           'Enter your real name for verification purposes. This name will appear on multiple pages.',
+          maxLines: 5,
           style: Theme.of(context).textTheme.labelMedium,
         ),
-        const SizedBox(height: TSizes.spaceBtwSections),
+        ResponsiveGap.vertical(TSizes.spaceBtwSections),
         const ChangeNameForm(),
       ],
     );

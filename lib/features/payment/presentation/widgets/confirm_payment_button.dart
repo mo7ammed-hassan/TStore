@@ -4,12 +4,12 @@ import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class ConfirmPaymentButton extends StatelessWidget {
   final bool enabled;
-  final VoidCallback onPressed;
+  final void Function()? onPressed;
 
   const ConfirmPaymentButton({
     super.key,
     required this.enabled,
-    required this.onPressed,
+    this.onPressed,
   });
 
   @override

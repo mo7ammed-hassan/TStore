@@ -29,7 +29,7 @@ class LoginPage extends StatelessWidget {
             ),
             // Divider
             const TFormDivider(dividerText: TTexts.orSignInWith),
-            ResponsiveGap.vertical(TSizes.spaceBtwSections),
+            ResponsiveGap.vertical(TSizes.spaceBtwSections - 6),
             // Footer
             const TSocialButtons(),
           ],

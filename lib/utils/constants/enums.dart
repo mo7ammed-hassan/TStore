@@ -13,15 +13,3 @@ enum OrderStatus {
 }
 
 enum PaymentStatus { pendingPayment, paidPayment, cashPayment }
-
-enum PaymentMethods {
-  paypal,
-  googlePay,
-  applePay,
-  visa,
-  masterCard,
-  creditCard,
-  paystack,
-  razorPay,
-  paytm
-}

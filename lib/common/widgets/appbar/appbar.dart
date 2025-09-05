@@ -15,6 +15,7 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showBackArrow;
   final Color? titleColor;
   final double fontSize;
+  final bool? centerTitle;
 
   const TAppBar({
     super.key,
@@ -25,6 +26,7 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showBackArrow = false,
     this.titleColor,
     this.fontSize = 18,
+    this.centerTitle,
   });
 
   @override
@@ -34,6 +36,7 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
       padding: context.responsiveInsets.symmetric(horizontal: TSizes.md),
       child: AppBar(
         automaticallyImplyLeading: false,
+        centerTitle: centerTitle,
         leadingWidth: context.horzSize(38),
         leading: showBackArrow
             ? IconButton(

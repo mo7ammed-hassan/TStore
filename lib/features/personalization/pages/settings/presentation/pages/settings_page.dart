@@ -167,13 +167,16 @@ class SettingsPage extends StatelessWidget {
                     width: double.infinity,
                     child: BlocListener<UserCubit, UserState>(
                       listener: (context, state) {
-                        if (state is LogoutLoading) {
+                        if (state.action == UserAction.logout &&
+                            state.status == UserStatus.loading) {
                           Loaders.showLoading(message: 'Logout...');
-                        } else if (state is LogoutState) {
-                          context.popPage(context);
-                          context.removeAll(const LoginPage());
-                        } else if (state is LogoutError) {
-                          context.popPage(context);
+                        } else if (state.action == UserAction.logout &&
+                            state.status == UserStatus.success) {
+                          context.popPage();
+                          context.pushAndClearAll(const LoginPage());
+                        } else if (state.action == UserAction.logout &&
+                            state.status == UserStatus.failure) {
+                          context.popPage();
                           Loaders.errorSnackBar(title: 'logout Failure');
                         }
                       },

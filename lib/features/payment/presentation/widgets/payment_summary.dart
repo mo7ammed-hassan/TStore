@@ -5,7 +5,7 @@ import 'package:t_store/features/payment/presentation/widgets/payment_summary_ro
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 
 class PaymentSummary extends StatelessWidget {
-  const PaymentSummary({super.key, required this.orderSummary});
+  const PaymentSummary({super.key, this.orderSummary});
   final OrderSummaryModel? orderSummary;
 
   @override

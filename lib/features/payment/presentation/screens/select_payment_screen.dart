@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_state.dart';
+import 'package:t_store/features/payment/presentation/screens/credit_card_screen.dart';
 import 'package:t_store/features/payment/presentation/widgets/confirm_payment_button.dart';
 import 'package:t_store/features/payment/presentation/widgets/payment_card.dart';
 import 'package:t_store/features/payment/presentation/widgets/payment_summary.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
+import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
 
-class PaymentScreen extends StatelessWidget {
-  const PaymentScreen({super.key, required this.order});
+class SelectPaymentScreen extends StatelessWidget {
+  const SelectPaymentScreen({super.key, required this.order});
   final OrderEntity? order;
 
   @override
   Widget build(BuildContext context) {
     final orderSummary = order?.checkoutModel.orderSummary;
     return BlocProvider(
-      create: (_) => PaymentCubit()..fetchPaymentMethods(),
+      create: (_) => getIt<PaymentCubit>()..fetchPaymentMethods(),
       child: Scaffold(
         appBar: const TAppBar(
           showBackArrow: true,
@@ -57,7 +60,13 @@ class PaymentScreen extends StatelessWidget {
                 ConfirmPaymentButton(
                   enabled: state.selected != null,
                   onPressed: () {
-                    context.read<PaymentCubit>().confirmPayment(context);
+                    context.pushPage(
+                      BlocProvider.value(
+                        value: context.read<PaymentCubit>(),
+                        child: CreditCardScreen(order: order),
+                      ),
+                    );
+
                     //context.read<OrderCubit>().changeOrderStaus(order!.orderId);
                   },
                 ),

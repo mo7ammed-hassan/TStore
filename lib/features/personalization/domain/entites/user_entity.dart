@@ -7,6 +7,8 @@ class UserEntity {
   final String userPhone;
   final String? profilePicture;
 
+  String get fullName => '$firstName $lastName';
+
   UserEntity({
     required this.userId,
     required this.firstName,
@@ -16,4 +18,24 @@ class UserEntity {
     required this.userPhone,
     required this.profilePicture,
   });
+
+  UserEntity copyWith({
+    String? userId,
+    String? firstName,
+    String? lastName,
+    String? username,
+    String? userEmail,
+    String? userPhone,
+    String? profilePicture,
+  }) {
+    return UserEntity(
+      userId: userId ?? this.userId,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      username: username ?? this.username,
+      userEmail: userEmail ?? this.userEmail,
+      userPhone: userPhone ?? this.userPhone,
+      profilePicture: profilePicture ?? this.profilePicture,
+    );
+  }
 }

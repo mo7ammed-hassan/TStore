@@ -1,59 +1,50 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/features/payment/data/models/payment_method.dart';
-import 'package:t_store/features/payment/presentation/cubit/payment_state.dart'
-    show PaymentState;
-import 'package:t_store/features/payment/presentation/screens/payment_status_screen.dart';
-import 'package:t_store/utils/constants/images_strings.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
+import 'package:t_store/features/payment/domain/entities/payment_details.dart';
+import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
+import 'package:t_store/features/payment/domain/usecases/payment_usecases.dart';
+import 'package:t_store/features/payment/presentation/cubit/payment_state.dart';
 
 class PaymentCubit extends Cubit<PaymentState> {
-  PaymentCubit() : super(PaymentState());
+  PaymentCubit(this._paymentUsecases) : super(PaymentState());
+  final PaymentUsecases _paymentUsecases;
 
   void fetchPaymentMethods() async {
     emit(state.copyWith(loading: true));
 
-    // Mock fetch (replace with API / Firestore)
-    await Future.delayed(const Duration(milliseconds: 500));
-
-    final methods = [
-      const PaymentMethod(id: '1', name: 'Credit Card', icon: TImages.visa),
-      const PaymentMethod(id: '2', name: 'PayPal', icon: TImages.paypal),
-      const PaymentMethod(
-          id: '3', name: 'Cash on Delivery', icon: TImages.creditCard),
-    ];
-
+    final methods = await _paymentUsecases.getPaymnetMethodUsecase.call();
     emit(state.copyWith(methods: methods, loading: false));
   }
 
-  void selectMethod(PaymentMethod method) {
+  void selectMethod(PaymentMethodEntity method) {
     emit(state.copyWith(selected: method));
   }
 
-  void confirmPayment(BuildContext context) {
+  void confirmPayment(PaymentDetails details) async {
+    emit(state.copyWith(paymnetProccessLoading: true));
     if (state.selected == null) return;
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PopScope(
-          canPop: false,
-          child: PaymentStatusScreen(
-            imagePath: TImages.successPyment,
-            animation: true,
-            paymentSuccess: true,
-            // onTap: () => Navigator.pushAndRemoveUntil(
-            //   context,
-            //   MaterialPageRoute(builder: (_) => const NavigationScreen()),
-            //   (route) => false,
-            // ),
-            onTap: () {
-              context.popPage(context);
-              context.popPage(context);
-              context.popPage(context);
-            },
+
+    final result = await _paymentUsecases.payUseCase
+        .pay(method: state.selected!.method, details: details);
+
+    result.fold(
+      (error) {
+        emit(
+          state.copyWith(
+            paymentFaliure: true,
+            successPayment: false,
+            paymnetProccessLoading: false,
           ),
-        ),
-      ),
+        );
+      },
+      (success) {
+        emit(
+          state.copyWith(
+            successPayment: true,
+            paymentFaliure: false,
+            paymnetProccessLoading: false,
+          ),
+        );
+      },
     );
   }
 }

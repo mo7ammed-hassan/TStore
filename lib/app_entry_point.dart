@@ -17,16 +17,16 @@ class AppEntryPoint extends StatelessWidget {
       listener: (context, state) {
         if (state is FirstLaunchState) {
           // In case of first launch, navigate to Onboarding page
-          context.removeAll(const OnBoardingPage());
+          context.pushAndClearAll(const OnBoardingPage());
         } else if (state is AuthenticatedState) {
           // In case of authenticated user, navigate to the main menu
-          context.removeAll(const NavigationScreen());
+          context.pushAndClearAll(const NavigationScreen());
         } else if (state is VerifingEmailState) {
           // In case of email verification needed, navigate to Verify Email page
-          context.removeAll(VerifyEmailPage(email: state.email));
+          context.pushAndClearAll(VerifyEmailPage(email: state.email));
         } else {
           // If no user is authenticated, navigate to Login page
-          context.removeAll(const LoginPage());
+          context.pushAndClearAll(const LoginPage());
         }
       },
       child: const Scaffold(

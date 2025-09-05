@@ -48,7 +48,7 @@ class TLoginForm extends StatelessWidget {
                 ResponsiveGap.vertical(TSizes.spaceBtwInputFields / 2),
                 // Remember Me & Forget Password
                 _rememberMeAndForgetPassword(context),
-                ResponsiveGap.vertical(TSizes.spaceBtwSections),
+                ResponsiveGap.vertical(TSizes.spaceBtwSections - 6),
                 _signIn(context),
                 ResponsiveGap.vertical(TSizes.spaceBtwItems),
                 _createAccount(context),
@@ -135,7 +135,7 @@ class TLoginForm extends StatelessWidget {
             _navigateToMenuPage(context);
           } else if (state is NotVerifiedState) {
             TFullScreenLoader.stopLoading();
-            context.removeAll(VerifyEmailPage(email: state.email));
+            context.pushAndClearAll(VerifyEmailPage(email: state.email));
             Loaders.successSnackBar(
               title: 'Email Not Verified',
               message: 'Please Check your inbox and verify email.',
@@ -172,6 +172,6 @@ class TLoginForm extends StatelessWidget {
 
   void _navigateToMenuPage(BuildContext context) {
     context.read<UserCubit>().fetchUserData(forchFetch: true);
-    context.removeAll(const NavigationScreen());
+    context.pushAndClearAll(const NavigationScreen());
   }
 }

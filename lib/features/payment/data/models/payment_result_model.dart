@@ -1,7 +1,9 @@
 class PaymentResultModel {
-  bool? success;
-  String? transactionId;
-  String? message;
+  final bool? success;
+  final String? transactionId;
+  final String? clientSecret;
+  final String? message;
 
-  PaymentResultModel({this.success, this.transactionId, this.message});
+  const PaymentResultModel(
+      {this.success, this.clientSecret, this.transactionId, this.message});
 }

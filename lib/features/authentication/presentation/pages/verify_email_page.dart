@@ -36,7 +36,7 @@ class VerifyEmailPage extends StatelessWidget {
               icon: const Icon(CupertinoIcons.clear),
               iconSize: context.horzSize(20),
               onPressed: () async {
-                context.removeAll(const LoginPage());
+                context.pushAndClearAll(const LoginPage());
                 await getIt<DeleteAccountUseCase>().call();
               },
             ),
@@ -55,13 +55,13 @@ class VerifyEmailPage extends StatelessWidget {
               //   );
             } else if (state is VerifiyEmailSuccessState) {
               context.read<UserCubit>().fetchUserData(forchFetch: true);
-              context.removeAllSaveStack(
+              context.pushAndKeepStack(
                 SuccessPage(
                   title: TTexts.yourAccountCreatedTitle,
                   subtitle: TTexts.yourAccountCreatedSubTitle,
                   image: TImages.successfullRegisterAnimation,
                   onPressed: () async {
-                    context.removeAll(const NavigationScreen());
+                    context.pushAndClearAll(const NavigationScreen());
                   },
                 ),
               );

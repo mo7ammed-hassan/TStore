@@ -24,6 +24,7 @@ class THomeAppBar extends StatelessWidget {
       padding: context.responsiveInsets.symmetric(horizontal: TSizes.md),
       child: AppBar(
         title: _buildTitle(context),
+        automaticallyImplyLeading: false,
         actions: [
           TCartCounterIcon(
             onPressed: () => context.pushPage(const CartPage()),
@@ -53,17 +54,33 @@ class THomeAppBar extends StatelessWidget {
   Widget _buildUserName(BuildContext context) {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
-        if (state is FetchUserDataLoadedState) {
-          return ResponsiveText(
-            '${state.userData.firstName} ${state.userData.lastName}',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.grey,
-                ),
-          );
+        if (state.status == UserStatus.loading) {
+          return _loadingWidget(context);
         }
-        return _loadingWidget(context);
+
+        if (state.status == UserStatus.success) {
+          switch (state.action) {
+            case UserAction.fetch:
+              return _userNameWidget(state, context);
+            case UserAction.update:
+              return _userNameWidget(state, context);
+            case UserAction.logout:
+              return _userNameWidget(state, context);
+          }
+        }
+
+        return const SizedBox.shrink();
       },
+    );
+  }
+
+  ResponsiveText _userNameWidget(UserState state, BuildContext context) {
+    return ResponsiveText(
+      '${state.user?.firstName} ${state.user?.lastName}',
+      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.w700,
+            color: AppColors.grey,
+          ),
     );
   }
 
@@ -77,17 +94,4 @@ class THomeAppBar extends StatelessWidget {
       ),
     );
   }
-
-  // Widget _buildShimmer() {
-  //   return Padding(
-  //     padding: const EdgeInsets.only(top: 4),
-  //     child: ShimmerWidget(
-  //       height: 16,
-  //       width: 80,
-  //       shapeBorder: RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.circular(10),
-  //       ),
-  //     ),
-  //   );
-  // }
 }

@@ -13,19 +13,21 @@ class CartCheckoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsivePadding.symmetric(
-      horizontal: TSizes.defaultSpace,
-      vertical: TSizes.spaceBtwItems,
-      child: ElevatedButton(
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) =>
-                OrderReviewScreen(items: items, removeCartItems: true),
+    return SafeArea(
+      child: ResponsivePadding.symmetric(
+        horizontal: TSizes.defaultSpace,
+        vertical: TSizes.spaceBtwItems,
+        child: ElevatedButton(
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) =>
+                  OrderReviewScreen(items: items, removeCartItems: true),
+            ),
           ),
-        ),
-        child: ResponsiveText(
-          'Procced to Buy \$${total.toStringAsFixed(2)}',
+          child: ResponsiveText(
+            'Procced to Buy \$${total.toStringAsFixed(2)}',
+          ),
         ),
       ),
     );

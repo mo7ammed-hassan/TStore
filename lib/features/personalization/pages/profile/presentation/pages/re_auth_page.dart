@@ -4,6 +4,7 @@ import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/features/personalization/pages/profile/cuits/re_auth_user_cubit.dart';
 import 'package:t_store/features/personalization/pages/profile/presentation/widgets/re_auth_form.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 
 class ReAuthPage extends StatelessWidget {
   const ReAuthPage({super.key});
@@ -12,11 +13,11 @@ class ReAuthPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => ReAuthUserCubit(),
-      child: const Scaffold(
-        appBar: TAppBar(title: 'Re-Authenticate', showBackArrow: true),
+      child: Scaffold(
+        appBar: const TAppBar(title: 'Re-Authenticate', showBackArrow: true),
         body: Padding(
-          padding: EdgeInsets.all(TSizes.spaceBtwItems),
-          child: ReAuthForm(),
+          padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
+          child: const ReAuthForm(),
         ),
       ),
     );

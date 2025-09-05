@@ -23,7 +23,7 @@ class ResetPasswordPage extends StatelessWidget {
           IconButton(
             iconSize: context.horzSize(20),
             icon: const Icon(CupertinoIcons.clear),
-            onPressed: () => context.removePage(const ResetPasswordPage()),
+            onPressed: () => context.popPage(),
           ),
         ],
       ),
@@ -70,7 +70,7 @@ class ResetPasswordPage extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () => context.removeAll(const LoginPage()),
+        onPressed: () => context.pushAndClearAll(const LoginPage()),
         child: const ResponsiveText(TTexts.done),
       ),
     );
@@ -82,7 +82,7 @@ class ResetPasswordPage extends StatelessWidget {
       child: Builder(builder: (context) {
         return TextButton(
           onPressed: () {
-            context.removePage(const ResetPasswordPage());
+            context.popPage();
           },
           child: ResponsiveText(
             TTexts.resendEmail,

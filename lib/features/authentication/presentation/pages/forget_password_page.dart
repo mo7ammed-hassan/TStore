@@ -28,7 +28,7 @@ class ForgetPasswordPage extends StatelessWidget {
           IconButton(
             iconSize: context.horzSize(20),
             icon: const Icon(CupertinoIcons.clear),
-            onPressed: () => context.removePage(const ForgetPasswordPage()),
+            onPressed: () => context.popPage(),
           ),
         ],
       ),

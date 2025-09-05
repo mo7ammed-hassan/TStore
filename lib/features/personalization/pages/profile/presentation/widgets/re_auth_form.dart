@@ -11,6 +11,8 @@ import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/popups/full_screen_loader.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 import 'package:t_store/utils/validators/validation.dart';
 
 class ReAuthForm extends StatelessWidget {
@@ -28,7 +30,7 @@ class ReAuthForm extends StatelessWidget {
           );
         } else if (state is ReAuthSuccessState) {
           TFullScreenLoader.stopLoading();
-          context.removeAll(const LoginPage());
+          context.pushAndClearAll(const LoginPage());
         } else {
           TFullScreenLoader.stopLoading();
           TFullScreenLoader.openLoadingDialog(
@@ -42,14 +44,14 @@ class ReAuthForm extends StatelessWidget {
         child: Column(
           children: [
             _buildEmailField(cubit),
-            const SizedBox(height: TSizes.spaceBtwInputFields),
+            ResponsiveGap.vertical(TSizes.spaceBtwInputFields),
             _buildPasswordField(cubit),
-            const SizedBox(height: TSizes.spaceBtwSections),
+            ResponsiveGap.vertical(TSizes.spaceBtwSections),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () => cubit.reauthenticate(),
-                child: const Text('Verify'),
+                child: const ResponsiveText('Verify'),
               ),
             ),
           ],

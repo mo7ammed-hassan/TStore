@@ -4,6 +4,8 @@ import 'package:t_store/common/styles/spacing_styles.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class SuccessPage extends StatelessWidget {
   final String image, title, subtitle;
@@ -30,19 +32,19 @@ class SuccessPage extends StatelessWidget {
                 image,
                 width: HelperFunctions.screenWidth() * 0.6,
               ),
-              const SizedBox(height: TSizes.spaceBtwSections),
-              Text(
+              ResponsiveGap.vertical(TSizes.spaceBtwSections),
+              ResponsiveText(
                 title,
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: TSizes.spaceBtwItems),
-              Text(
+              ResponsiveGap.vertical(TSizes.spaceBtwItems),
+              ResponsiveText(
                 subtitle,
                 style: Theme.of(context).textTheme.labelMedium,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              ResponsiveGap.vertical(TSizes.spaceBtwSections),
               _continueButton(context),
             ],
           ),
@@ -56,7 +58,7 @@ class SuccessPage extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onPressed,
-        child: const Text(TTexts.tContinue),
+        child: const ResponsiveText(TTexts.tContinue),
       ),
     );
   }

@@ -45,7 +45,7 @@ class BuildWishlistItems extends StatelessWidget {
       animation: TImages.pencilAnimation,
       showAction: true,
       actionText: 'Let\'s add more',
-      onActionPressed: () => context.removeAll(
+      onActionPressed: () => context.pushAndClearAll(
         const NavigationScreen(),
       ),
     );

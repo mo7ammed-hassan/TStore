@@ -42,7 +42,7 @@ class TSocialButtons extends StatelessWidget {
                 _navigateToMenuPage(context);
               } else if (state is NotVerifiedEmailState) {
                 TFullScreenLoader.stopLoading();
-                context.removeAll(VerifyEmailPage(email: state.email));
+                context.pushAndClearAll(VerifyEmailPage(email: state.email));
                 Loaders.successSnackBar(
                   title: 'Email Not Verified',
                   message: 'Please Check your inbox and verify email.',
@@ -65,6 +65,6 @@ class TSocialButtons extends StatelessWidget {
   }
 
   void _navigateToMenuPage(BuildContext context) {
-    context.removeAll(const NavigationScreen());
+    context.pushAndClearAll(const NavigationScreen());
   }
 }

@@ -181,7 +181,7 @@ class TSignupForm extends StatelessWidget {
   }
 
   void _navigateToVerifyEmail(BuildContext context, email) {
-    context.removeAll(
+    context.pushAndClearAll(
       VerifyEmailPage(email: email),
     );
   }

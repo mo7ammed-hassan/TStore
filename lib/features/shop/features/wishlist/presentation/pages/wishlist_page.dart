@@ -32,7 +32,7 @@ class WishlistPage extends StatelessWidget {
           icon: Iconsax.add,
           size: context.horzSize(28),
           onPressed: () {
-            context.removeAll(const NavigationScreen());
+            context.pushAndClearAll(const NavigationScreen());
           },
         )
       ],

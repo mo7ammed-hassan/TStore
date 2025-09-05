@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:t_store/app.dart';
 import 'package:t_store/bloc_observier.dart';
@@ -22,7 +24,8 @@ void main() {
           WidgetsFlutterBinding.ensureInitialized();
       widgetsBinding.addObserver(AppLifecycleObserver());
 
-      //debugPrintRebuildDirtyWidgets = true;
+      // Load env file
+      await dotenv.load(fileName: '.env');
 
       // Hive Initialization
       await Hive.initFlutter();
@@ -50,6 +53,9 @@ void main() {
 
       // Bloc Observer
       Bloc.observer = MyBlocObserver();
+
+      // Strip
+      Stripe.publishableKey = dotenv.env['PUBLISHABLE_KEY']!;
 
       // Run the app
       runApp(

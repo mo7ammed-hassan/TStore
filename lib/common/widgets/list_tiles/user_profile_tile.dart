@@ -18,46 +18,60 @@ class UserProfileTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
-        if (state is FetchUserDataLoadedState) {
-          return ListTile(
-            leading: FittedBox(
-              child: UserProfileImage(
-                width: 45,
-                height: 45,
-                image: state.userData.profilePicture,
-              ),
-            ),
-            title: ResponsiveText(
-              '${state.userData.firstName} ${state.userData.lastName}',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge!
-                  .copyWith(color: AppColors.white, fontSize: 16),
-              overflow: TextOverflow.ellipsis,
-            ),
-            subtitle: ResponsiveText(
-              state.userData.userEmail,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(color: AppColors.white, fontSize: 13.5),
-              overflow: TextOverflow.ellipsis,
-            ),
-            trailing: IconButton(
-              onPressed: () {
-                context.pushPage(ProfilePage(userData: state.userData));
-              },
-              icon: Icon(
-                Iconsax.edit,
-                size: context.horzSize(22),
-                color: AppColors.white,
-              ),
-            ),
-          );
+        if (state.status == UserStatus.loading) {
+          return const ShimmerListTile();
         }
 
-        return const ShimmerListTile();
+        if (state.status == UserStatus.success) {
+          switch (state.action) {
+            case UserAction.fetch:
+              return _userTile(state, context);
+            case UserAction.update:
+              return _userTile(state, context);
+            case UserAction.logout:
+              return _userTile(state, context);
+          }
+        }
+        return const SizedBox.shrink();
       },
+    );
+  }
+
+  ListTile _userTile(UserState state, BuildContext context) {
+    return ListTile(
+      leading: FittedBox(
+        child: UserProfileImage(
+          width: 45,
+          height: 45,
+          image: state.user?.profilePicture,
+        ),
+      ),
+      title: ResponsiveText(
+        '${state.user?.firstName} ${state.user?.lastName}',
+        style: Theme.of(context)
+            .textTheme
+            .titleLarge!
+            .copyWith(color: AppColors.white, fontSize: 16),
+        overflow: TextOverflow.ellipsis,
+      ),
+      subtitle: ResponsiveText(
+        state.user?.userEmail ?? '',
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(color: AppColors.white, fontSize: 13.5),
+        overflow: TextOverflow.ellipsis,
+      ),
+      trailing: IconButton(
+        onPressed: () {
+          context.pushPage(ProfilePage(userData: state.user));
+        },
+        icon: Icon(
+          Iconsax.edit,
+          size: context.horzSize(22),
+          color: AppColors.white,
+        ),
+      ),
     );
   }
 }

@@ -36,7 +36,7 @@ class AddressListView extends StatelessWidget {
             final newAddress =
                 await context.read<AddressCubit>().updateSelectAddress(address);
 
-            if (context.mounted) context.popPage(context);
+            if (context.mounted) context.popPage();
 
             if (newAddress != null) {
               onAddressSelected?.call(newAddress);

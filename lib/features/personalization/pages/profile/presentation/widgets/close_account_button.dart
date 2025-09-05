@@ -22,7 +22,7 @@ class CloseAccountButton extends StatelessWidget {
           if (state is ReAuthUserState) {
             context.pushPage(const ReAuthPage());
           } else if (state is DeleteUserAccountSuccess) {
-            context.removeAll(const LoginPage());
+            context.pushAndClearAll(const LoginPage());
           }
         },
         child: Builder(

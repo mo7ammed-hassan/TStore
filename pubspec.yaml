@@ -40,6 +40,9 @@ dependencies:
   readmore: ^3.0.0
   shimmer: ^3.0.0
   url_launcher: ^6.3.1
+  flutter_dotenv: ^6.0.0
+  dio: ^5.9.0
+  flutter_credit_card: ^4.1.0
 
 dev_dependencies:
   build_runner: ^2.4.13
@@ -60,6 +63,8 @@ flutter:
     - assets/images/animations/
     - assets/images/on_boarding_images/
     - assets/default/
+    - lib/features/payment/core/images/
+    - .env
 
   fonts:
     - family: Poppins

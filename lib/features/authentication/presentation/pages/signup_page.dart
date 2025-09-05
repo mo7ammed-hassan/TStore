@@ -22,9 +22,7 @@ class SignupPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           leading: GestureDetector(
-            onTap: () {
-              context.removePage(const SignupPage());
-            },
+            onTap: () => context.popPage(),
             child: const Icon(Iconsax.arrow_left),
           ),
         ),

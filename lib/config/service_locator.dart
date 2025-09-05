@@ -14,6 +14,7 @@ import 'package:t_store/features/authentication/domain/use_cases/signin_usecase.
 import 'package:t_store/features/authentication/domain/use_cases/signin_with_google.dart';
 import 'package:t_store/features/authentication/domain/use_cases/signup_usecase.dart';
 import 'package:t_store/features/checkout/checkout_injection.dart';
+import 'package:t_store/features/payment/payment_injection.dart';
 import 'package:t_store/features/personalization/data/repository/upload_data_repository_impl.dart';
 import 'package:t_store/features/personalization/data/repository/user_repository_impl.dart';
 import 'package:t_store/features/personalization/data/source/remote/firebase_storage_services.dart';
@@ -231,6 +232,9 @@ Future<void> initializeDependencies() async {
 
   // -- Orders--
   registerOrderDependencies(getIt);
+
+  // -- Payment --
+  registerPaymentDependencies(getIt);
 
   // -- Cubits--
   getIt.registerFactory<ProductsCubit>(() => ProductsCubit());
