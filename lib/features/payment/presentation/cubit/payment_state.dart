@@ -1,37 +1,46 @@
 import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
+import 'package:t_store/features/payment/domain/entities/payment_result_entity.dart';
+
+enum PaymentStatus { initial, loading, success, failure }
+
+enum PaymentAction { fetch, selectMethod, processPayment }
 
 class PaymentState {
+  final PaymentAction action;
+  final PaymentStatus status;
   final List<PaymentMethodEntity> methods;
-  final PaymentMethodEntity? selected;
-  final bool loading;
-  final bool successPayment;
-  final bool paymentFaliure;
-  final bool paymnetProccessLoading;
+  final PaymentMethodEntity? selectedMethod;
+  final PaymentResultEntity? paymentResult;
+  final String? message;
+  final String? error;
 
   PaymentState({
+    this.action = PaymentAction.fetch,
+    this.status = PaymentStatus.initial,
     this.methods = const [],
-    this.selected,
-    this.loading = false,
-    this.paymnetProccessLoading = false,
-    this.successPayment = false,
-    this.paymentFaliure = false,
+    this.selectedMethod,
+    this.paymentResult,
+    this.message,
+    this.error,
   });
 
   PaymentState copyWith({
+    PaymentAction? action,
+    PaymentStatus? status,
     List<PaymentMethodEntity>? methods,
-    PaymentMethodEntity? selected,
-    bool? loading,
-    bool? paymnetProccessLoading,
-    bool? successPayment,
-    bool? paymentFaliure,
+    PaymentMethodEntity? selectedMethod,
+    PaymentResultEntity? paymentResult,
+    String? message,
+    String? error,
   }) {
     return PaymentState(
+      action: action ?? this.action,
+      status: status ?? this.status,
       methods: methods ?? this.methods,
-      selected: selected ?? this.selected,
-      loading: loading ?? this.loading,
-      paymnetProccessLoading: paymnetProccessLoading ?? this.paymnetProccessLoading,
-      successPayment: successPayment ?? this.successPayment,
-      paymentFaliure: paymentFaliure ?? this.paymentFaliure,
+      selectedMethod: selectedMethod ?? this.selectedMethod,
+      paymentResult: paymentResult ?? this.paymentResult,
+      message: message ?? this.message,
+      error: error ?? this.error,
     );
   }
 }

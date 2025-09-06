@@ -159,7 +159,8 @@ class PayButton extends StatelessWidget {
 
     return BlocConsumer<PaymentCubit, PaymentState>(
       listener: (context, state) {
-        if (state.successPayment) {
+        if (state.action == PaymentAction.processPayment &&
+            state.status == PaymentStatus.success) {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -184,7 +185,8 @@ class PayButton extends StatelessWidget {
               ),
             ),
           );
-        } else if (state.paymentFaliure) {
+        } else if (state.action == PaymentAction.processPayment &&
+            state.status == PaymentStatus.failure) {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -247,7 +249,8 @@ class PayButton extends StatelessWidget {
 
                 context.read<PaymentCubit>().confirmPayment(details);
               },
-              child: state.paymnetProccessLoading
+              child: state.status == PaymentStatus.loading &&
+                      state.action == PaymentAction.processPayment
                   ? SizedBox(
                       width: context.horzSize(20),
                       height: context.horzSize(20),

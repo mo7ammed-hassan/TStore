@@ -9,41 +9,55 @@ class PaymentCubit extends Cubit<PaymentState> {
   final PaymentUsecases _paymentUsecases;
 
   void fetchPaymentMethods() async {
-    emit(state.copyWith(loading: true));
+    emit(state.copyWith(
+      action: PaymentAction.fetch,
+      status: PaymentStatus.loading,
+    ));
 
-    final methods = await _paymentUsecases.getPaymnetMethodUsecase.call();
-    emit(state.copyWith(methods: methods, loading: false));
+    final fetchedMethods =
+        await _paymentUsecases.getPaymnetMethodUsecase.call();
+    emit(state.copyWith(
+      action: PaymentAction.fetch,
+      status: PaymentStatus.success,
+      methods: fetchedMethods,
+    ));
   }
 
   void selectMethod(PaymentMethodEntity method) {
-    emit(state.copyWith(selected: method));
+    emit(state.copyWith(
+      action: PaymentAction.selectMethod,
+      status: PaymentStatus.success,
+      selectedMethod: method,
+    ));
   }
 
   void confirmPayment(PaymentDetails details) async {
-    emit(state.copyWith(paymnetProccessLoading: true));
-    if (state.selected == null) return;
+    if (state.selectedMethod == null) return;
+
+    emit(state.copyWith(
+      action: PaymentAction.processPayment,
+      status: PaymentStatus.loading,
+    ));
 
     final result = await _paymentUsecases.payUseCase
-        .pay(method: state.selected!.method, details: details);
-
+        .pay(method: state.selectedMethod!.method, details: details);
     result.fold(
       (error) {
         emit(
           state.copyWith(
-            paymentFaliure: true,
-            successPayment: false,
-            paymnetProccessLoading: false,
+            action: PaymentAction.processPayment,
+            status: PaymentStatus.failure,
+            error: error.message,
           ),
         );
       },
-      (success) {
-        emit(
-          state.copyWith(
-            successPayment: true,
-            paymentFaliure: false,
-            paymnetProccessLoading: false,
-          ),
-        );
+      (paymentResult) {
+        emit(state.copyWith(
+          action: PaymentAction.processPayment,
+          status: PaymentStatus.success,
+          paymentResult: paymentResult,
+          message: 'Payment successful',
+        ));
       },
     );
   }
