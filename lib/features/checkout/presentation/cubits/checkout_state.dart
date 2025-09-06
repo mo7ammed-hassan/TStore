@@ -13,6 +13,7 @@ class CheckoutState {
   final OrderEntity? order;
   final AddressEntity? address;
   final String createOrderError;
+  final bool loadAddress;
 
   CheckoutState({
     this.status = CheckoutStatus.initial,
@@ -23,6 +24,7 @@ class CheckoutState {
     this.createOrderSuccess = false,
     this.address,
     this.createOrderError = '',
+    this.loadAddress = false,
   });
 
   // CopyWith method for immutability
@@ -35,6 +37,7 @@ class CheckoutState {
     bool? createOrderSuccess,
     AddressEntity? address,
     String? createOrderError,
+    bool? loadAddress,
   }) {
     return CheckoutState(
       status: status ?? this.status,
@@ -45,6 +48,7 @@ class CheckoutState {
       createOrderLoading: createOrderLoading ?? this.createOrderLoading,
       createOrderSuccess: createOrderSuccess ?? this.createOrderSuccess,
       createOrderError: createOrderError ?? this.createOrderError,
+      loadAddress: loadAddress ?? this.loadAddress,
     );
   }
 }

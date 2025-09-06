@@ -58,15 +58,23 @@ class CheckoutCubit extends Cubit<CheckoutState> {
         ),
       );
     } catch (e) {
-      emit(state.copyWith(createOrderLoading: false,createOrderError: e.toString(),));
+      emit(state.copyWith(
+        createOrderLoading: false,
+        createOrderError: e.toString(),
+      ));
     }
   }
 
   Future<void> loadSelectedAddress() async {
-    final addressUsecases = getIt<GetSelectedAddressUsecase>();
-    final selectedAddress = await addressUsecases.call();
+    emit(state.copyWith(loadAddress: true));
 
-    emit(state.copyWith(address: selectedAddress));
+    final addressUsecases = getIt<GetSelectedAddressUsecase>();
+    try {
+      final selectedAddress = await addressUsecases.call();
+      emit(state.copyWith(address: selectedAddress, loadAddress: false));
+    } catch (e) {
+      emit(state.copyWith(loadAddress: false));
+    }
   }
 
   void chengeAdress(AddressEntity address) {

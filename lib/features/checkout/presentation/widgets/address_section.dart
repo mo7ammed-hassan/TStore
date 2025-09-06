@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store/common/widgets/shimmer/shimmer_address_card.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/features/checkout/presentation/cubits/checkout_cubit.dart';
@@ -29,10 +30,11 @@ class AddressSection extends StatelessWidget {
           fontSize: 14.5,
           onPressed: () => _showAddressBottomSheet(context),
         ),
-        if (address?.id.isNotEmpty == true)
-          AddressDetails(address: addressEntity ?? address!)
-        else
-          const ResponsiveText('Please Select Address'),
+        (context.watch<CheckoutCubit>().state.loadAddress == true)
+            ? const ShimmerAddressCard()
+            : address?.id.isNotEmpty == true
+                ? AddressDetails(address: addressEntity ?? address!)
+                : const ResponsiveText('Please Select Address'),
       ],
     );
   }
