@@ -28,8 +28,10 @@ class _ChangeNameFormState extends State<ChangeNameForm> {
   void initState() {
     super.initState();
     userCuit = context.read<UserCubit>();
-    firstNameController = TextEditingController(text: userCuit.user?.firstName);
-    lastNameController = TextEditingController(text: userCuit.user?.lastName);
+    firstNameController =
+        TextEditingController(text: userCuit.state.user?.firstName);
+    lastNameController =
+        TextEditingController(text: userCuit.state.user?.lastName);
   }
 
   @override

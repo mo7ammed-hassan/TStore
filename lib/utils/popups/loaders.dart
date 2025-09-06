@@ -120,7 +120,7 @@ class Loaders {
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium
-                          ?.copyWith(color: Colors.white),
+                          ?.copyWith(color: Colors.white, fontSize: 14),
                     ),
                     if (message.isNotEmpty)
                       ResponsiveText(
@@ -128,7 +128,7 @@ class Loaders {
                         style: Theme.of(context)
                             .textTheme
                             .bodySmall
-                            ?.copyWith(color: Colors.white70),
+                            ?.copyWith(color: Colors.white70, fontSize: 13),
                       ),
                   ],
                 ),

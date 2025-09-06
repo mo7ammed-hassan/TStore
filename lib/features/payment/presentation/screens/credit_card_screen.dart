@@ -155,7 +155,7 @@ class PayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cardCubit = context.read<CreditCardFormCubit>();
-    final user = context.read<UserCubit>().user;
+    final user = context.read<UserCubit>().state.user;
 
     return BlocConsumer<PaymentCubit, PaymentState>(
       listener: (context, state) {

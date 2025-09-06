@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/authentication/domain/use_cases/logout_use_case.dart';
 import 'package:t_store/features/personalization/data/mappers/user_mapper.dart';
 import 'package:t_store/features/personalization/data/models/user_model.dart';
-import 'package:t_store/features/personalization/domain/entites/user_entity.dart';
 import 'package:t_store/features/personalization/domain/use_cases/fetch_user_data_use_case.dart';
 import 'package:t_store/features/personalization/cubit/user_state.dart';
 import 'package:t_store/features/personalization/domain/use_cases/update_user_filed_use_case.dart';
@@ -15,7 +14,6 @@ class UserCubit extends Cubit<UserState> {
   final GlobalKey<FormState> fromKey = GlobalKey<FormState>();
   String previousImage = '';
   bool firstTime = true;
-  UserEntity? user;
 
   Future<void> fetchUserData({bool forchFetch = false}) async {
     if (!firstTime && !forchFetch) return;
@@ -32,7 +30,6 @@ class UserCubit extends Cubit<UserState> {
       },
       (userData) {
         previousImage = userData.profilePicture ?? '';
-        user = userData;
         firstTime = false;
 
         emit(state.copyWith(

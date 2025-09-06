@@ -49,7 +49,8 @@ class TAnimationLoaderWidget extends StatelessWidget {
           ResponsiveGap.vertical(TSizes.defaultSpace),
           ResponsiveText(
             text,
-            style: Theme.of(context).textTheme.bodyLarge,
+            style:
+                Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13.5),
             textAlign: TextAlign.center,
           ),
           ResponsiveGap.vertical(TSizes.defaultSpace),

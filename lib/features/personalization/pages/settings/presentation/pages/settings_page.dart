@@ -41,7 +41,7 @@ class SettingsPage extends StatelessWidget {
                     titleColor: AppColors.white,
                     fontSize: 20,
                   ),
-                  ResponsiveGap.vertical(TSizes.spaceBtwSections),
+                  ResponsiveGap.vertical(TSizes.spaceBtwSections - 10),
                   const Flexible(fit: FlexFit.loose, child: UserProfileTile()),
                   ResponsiveGap.vertical(TSizes.spaceBtwSections),
                 ],
