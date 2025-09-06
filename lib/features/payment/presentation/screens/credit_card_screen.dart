@@ -15,7 +15,6 @@ import 'package:t_store/features/payment/presentation/screens/payment_status_scr
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/shop/features/order/presentation/pages/order_page.dart';
 import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/enums.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:t_store/utils/responsive/responsive_helpers.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
@@ -251,9 +250,7 @@ class PayButton extends StatelessWidget {
                   user: userData,
                 );
 
-                context
-                    .read<PaymentCubit>()
-                    .confirmPayment(details, PaymentStatus.paidPayment);
+                context.read<PaymentCubit>().confirmPayment(details, order!);
               },
               child: state.status == PaymentStateStatus.loading &&
                       state.action == PaymentAction.processPayment

@@ -38,6 +38,8 @@ class OrderListItems extends StatelessWidget {
           case OrderStateStatus.failure:
             return Center(
               child: ResponsiveText(
+                textAlign: TextAlign.center,
+                maxLines: 5,
                 state.errorMessage ??
                     'There was an error, please try again later',
               ),

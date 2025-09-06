@@ -4,10 +4,12 @@ import 'package:t_store/features/payment/domain/entities/payment_result_entity.d
 extension PaymentResultModelX on PaymentResultModel {
   PaymentResultEntity toEntity() {
     return PaymentResultEntity(
-      success: success ?? false,             
-      clientSecret: clientSecret,           
-      transactionId: transactionId,          
-      message: message ?? '',                 
+      success: success ?? false,
+      clientSecret: clientSecret,
+      transactionId: transactionId,
+      paymentIntentId: paymentIntentId,
+      card: card,
+      message: message ?? '',
     );
   }
 }

@@ -101,7 +101,7 @@ class ProductDetailPage extends StatelessWidget {
                     ReadMoreText(
                       product.description ??
                           'This is a Product description. there are more things that can be added to this description',
-                      trimLines: 2,
+                      trimLines: 3,
                       trimMode: TrimMode.Line,
                       trimCollapsedText: ' Show more',
                       trimExpandedText: ' Less',

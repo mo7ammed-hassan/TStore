@@ -8,8 +8,10 @@ class OrderModel {
   final String? userId;
   final AddressModel? shippingAddress;
   final CheckoutModel checkoutModel;
-  final String paymentStatus;
-  final String orderStatus;
+  final String? paymentIntentId;
+  final String? transactionId;
+  final String? paymentStatus;
+  final String? orderStatus;
   final Timestamp createdAt;
   final Timestamp? updatedAt;
 
@@ -18,6 +20,8 @@ class OrderModel {
     this.userId,
     this.shippingAddress,
     required this.checkoutModel,
+    this.paymentIntentId,
+    this.transactionId,
     required this.paymentStatus,
     required this.orderStatus,
     required this.createdAt,
@@ -32,6 +36,8 @@ class OrderModel {
           json['shippingAddress'] as Map<String, dynamic>),
       checkoutModel:
           CheckoutModel.fromJson(json['checkoutModel'] as Map<String, dynamic>),
+      transactionId: json['transactionId'] ?? '',
+      paymentIntentId: json['paymentIntentId'] ?? '',
       paymentStatus: json['paymentStatus'] as String,
       orderStatus: json['orderStatus'] as String,
       createdAt: json['createdAt'] as Timestamp,
@@ -45,10 +51,22 @@ class OrderModel {
       'userId': userId,
       'shippingAddress': shippingAddress?.toJson(),
       'checkoutModel': checkoutModel.toJson(),
+      'transactionId': transactionId,
+      'paymentIntentId': paymentIntentId,
       'paymentStatus': paymentStatus,
       'orderStatus': orderStatus,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
     };
+  }
+
+  Map<String, dynamic> toUpdateMap() {
+    final map = <String, dynamic>{};
+    if (orderStatus != null) map['orderStatus'] = orderStatus;
+    if (paymentStatus != null) map['paymentStatus'] = paymentStatus;
+    if (transactionId != null) map['transactionId'] = transactionId;
+    if (paymentIntentId != null) map['paymentIntentId'] = paymentIntentId;
+    if (updatedAt != null) map['updatedAt'] = updatedAt;
+    return map;
   }
 }

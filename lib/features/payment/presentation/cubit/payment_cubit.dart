@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/payment/domain/entities/payment_details.dart';
 import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
 import 'package:t_store/features/payment/domain/usecases/payment_usecases.dart';
@@ -34,10 +36,7 @@ class PaymentCubit extends Cubit<PaymentState> {
     ));
   }
 
-  void confirmPayment(
-    PaymentDetails details,
-    PaymentStatus paymnetStatus,
-  ) async {
+  void confirmPayment(PaymentDetails details, OrderEntity order) async {
     if (state.selectedMethod == null) return;
 
     emit(state.copyWith(
@@ -58,11 +57,14 @@ class PaymentCubit extends Cubit<PaymentState> {
         );
       },
       (paymentResult) async {
-        await getIt<UpdateOrderStatusUsecase>().call(
-          orderId: details.orderId,
-          orderStatus: OrderStatus.processing,
-          paymentStatus: paymnetStatus,
+        final updatedOrder = order.copyWith(
+          orderStatus: OrderStatus.processing.name,
+          paymentStatus: PaymentStatus.paidPayment.name,
+          transactionId: paymentResult.transactionId,
+          paymentIntentId: paymentResult.paymentIntentId,
+          updatedAt: Timestamp.now(),
         );
+        await getIt<UpdateOrderStatusUsecase>().call(order: updatedOrder);
 
         emit(state.copyWith(
           action: PaymentAction.processPayment,

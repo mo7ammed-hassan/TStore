@@ -53,7 +53,8 @@ class ConfirmOrderButton extends StatelessWidget {
                       }
                     }
                   : null,
-              child: state.createOrderLoading
+              child: state.createOrderLoading ||
+                      (state.status == CheckoutStatus.loading)
                   ? SizedBox(
                       width: context.horzSize(20),
                       height: context.horzSize(20),

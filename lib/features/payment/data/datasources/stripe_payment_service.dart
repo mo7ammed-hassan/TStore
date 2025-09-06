@@ -2,6 +2,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:t_store/features/payment/data/datasources/i_payment_service.dart';
 import 'package:t_store/features/payment/data/models/credit_card_details_model.dart';
+import 'package:t_store/features/payment/data/models/payment_intent_model.dart';
 import 'package:t_store/features/payment/data/models/payment_result_model.dart';
 import 'package:dio/dio.dart';
 import 'package:t_store/features/payment/data/models/payment_use_data.dart';
@@ -38,7 +39,8 @@ class StripePaymentService implements IPaymentService {
     return paymentMethod;
   }
 
-  Future<String> createPaymentIntent({required PaymentDetails details}) async {
+  Future<PaymentIntentModel> createPaymentIntent(
+      {required PaymentDetails details}) async {
     final response = await dio.post(
       ApiConstants.paymentIntents,
       data: {
@@ -53,9 +55,9 @@ class StripePaymentService implements IPaymentService {
       ),
     );
 
-    final clientSecret = response.data['client_secret'];
+    final paymentIntent = PaymentIntentModel.fromJson(response.data);
 
-    return clientSecret;
+    return paymentIntent;
   }
 
   Future<PaymentIntent> confirmPayment({
@@ -74,7 +76,7 @@ class StripePaymentService implements IPaymentService {
   @override
   Future<PaymentResultModel> pay({required PaymentDetails details}) async {
     // 1. Call backend to create
-    final clientSecret = await createPaymentIntent(details: details);
+    final paymentIntent = await createPaymentIntent(details: details);
 
     // 2. Create payment method
     final paymentMethod =
@@ -82,13 +84,14 @@ class StripePaymentService implements IPaymentService {
 
     // 3. Confirm payment with Stripe SDK
     final paymentResult = await confirmPayment(
-      clientSecret: clientSecret,
+      clientSecret: paymentIntent.clientSecret!,
       paymentMethodId: paymentMethod.id,
     );
 
     return PaymentResultModel(
       success: paymentResult.status == PaymentIntentsStatus.Succeeded,
       transactionId: paymentResult.id,
+      paymentIntentId: paymentIntent.id,
       message: paymentResult.status == PaymentIntentsStatus.Succeeded
           ? 'Stripe Payment Successful'
           : 'Stripe Payment Failed',

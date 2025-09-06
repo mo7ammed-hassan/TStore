@@ -5,7 +5,6 @@ import 'package:t_store/features/checkout/data/mapper/order_mapper.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/shop/features/order/data/datasources/order_remote_data_sources.dart';
 import 'package:t_store/features/shop/features/order/domain/repositories/order_repository.dart';
-import 'package:t_store/utils/constants/enums.dart';
 
 class OrderRepositoryImpl implements OrderRepository {
   final String? userId = FirebaseAuth.instance.currentUser?.uid;
@@ -46,17 +45,12 @@ class OrderRepositoryImpl implements OrderRepository {
   }
 
   @override
-  Future<Either<Failure, OrderEntity>> updateOrderStatus({
-    required String orderId,
-    required OrderStatus orderStatus,
-    PaymentStatus? paymentStatus,
-  }) async {
+  Future<Either<Failure, OrderEntity>> updateOrderStatus(
+      {required OrderEntity order}) async {
     try {
       final updatedOrder = await _orderRemoteDataSources.updateOrderStatus(
-        orderId: orderId,
+        order: order.toModel(),
         userId: userId,
-        orderStatus: orderStatus,
-        paymentStatus: paymentStatus,
       );
       return Right(updatedOrder.toEntity());
     } on FirebaseException catch (e) {
