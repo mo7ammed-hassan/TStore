@@ -1,13 +1,13 @@
 import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
 import 'package:t_store/features/payment/domain/entities/payment_result_entity.dart';
 
-enum PaymentStatus { initial, loading, success, failure }
+enum PaymentStateStatus { initial, loading, success, failure }
 
 enum PaymentAction { fetch, selectMethod, processPayment }
 
 class PaymentState {
   final PaymentAction action;
-  final PaymentStatus status;
+  final PaymentStateStatus status;
   final List<PaymentMethodEntity> methods;
   final PaymentMethodEntity? selectedMethod;
   final PaymentResultEntity? paymentResult;
@@ -16,7 +16,7 @@ class PaymentState {
 
   PaymentState({
     this.action = PaymentAction.fetch,
-    this.status = PaymentStatus.initial,
+    this.status = PaymentStateStatus.initial,
     this.methods = const [],
     this.selectedMethod,
     this.paymentResult,
@@ -26,7 +26,7 @@ class PaymentState {
 
   PaymentState copyWith({
     PaymentAction? action,
-    PaymentStatus? status,
+    PaymentStateStatus? status,
     List<PaymentMethodEntity>? methods,
     PaymentMethodEntity? selectedMethod,
     PaymentResultEntity? paymentResult,

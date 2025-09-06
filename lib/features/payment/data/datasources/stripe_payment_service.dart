@@ -88,7 +88,6 @@ class StripePaymentService implements IPaymentService {
 
     return PaymentResultModel(
       success: paymentResult.status == PaymentIntentsStatus.Succeeded,
-      clientSecret: clientSecret,
       transactionId: paymentResult.id,
       message: paymentResult.status == PaymentIntentsStatus.Succeeded
           ? 'Stripe Payment Successful'

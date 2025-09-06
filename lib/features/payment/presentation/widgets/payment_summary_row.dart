@@ -8,8 +8,10 @@ class PaymentSummaryRow extends StatelessWidget {
     super.key,
     required this.label,
     required this.value,
+    this.maxLines,
   });
   final String label, value;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class PaymentSummaryRow extends StatelessWidget {
         ResponsiveGap.vertical(5.0),
         ResponsiveText(
           value,
+          maxLines: maxLines,
           style: textTheme.bodyMedium?.copyWith(
             fontWeight: FontWeight.w600,
             fontSize: 13,

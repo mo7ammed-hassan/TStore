@@ -33,16 +33,16 @@ class SelectPaymentScreen extends StatelessWidget {
         body: BlocBuilder<PaymentCubit, PaymentState>(
           builder: (context, state) {
             if (state.action == PaymentAction.fetch &&
-                state.status == PaymentStatus.loading) {
+                state.status == PaymentStateStatus.loading) {
               return const Center(child: CircularProgressIndicator());
             }
 
-            if (state.status == PaymentStatus.failure &&
+            if (state.status == PaymentStateStatus.failure &&
                 state.action == PaymentAction.fetch) {
               return Center(child: ResponsiveText('Failed: ${state.error}'));
             }
 
-            if (state.status == PaymentStatus.success &&
+            if (state.status == PaymentStateStatus.success &&
                 (state.action == PaymentAction.fetch ||
                     state.action == PaymentAction.selectMethod)) {
               return Column(
@@ -71,7 +71,7 @@ class SelectPaymentScreen extends StatelessWidget {
                   ),
                   ConfirmPaymentButton(
                     enabled: state.selectedMethod != null &&
-                        !(state.status == PaymentStatus.loading &&
+                        !(state.status == PaymentStateStatus.loading &&
                             state.action == PaymentAction.processPayment),
                     onPressed: () {
                       context.pushPage(
@@ -80,8 +80,6 @@ class SelectPaymentScreen extends StatelessWidget {
                           child: CreditCardScreen(order: order),
                         ),
                       );
-
-                      //context.read<OrderCubit>().changeOrderStaus(order!.orderId);
                     },
                   ),
                 ],

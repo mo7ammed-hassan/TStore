@@ -5,6 +5,7 @@ import 'package:t_store/features/shop/features/order/domain/repositories/order_r
 import 'package:t_store/features/shop/features/order/domain/usecases/cancel_order_usecase.dart';
 import 'package:t_store/features/shop/features/order/domain/usecases/fetch_orders_usecase.dart';
 import 'package:t_store/features/shop/features/order/domain/usecases/order_usecases.dart';
+import 'package:t_store/features/shop/features/order/domain/usecases/update_order_status.dart';
 import 'package:t_store/features/shop/features/order/presentation/cuits/order_cubit.dart';
 
 void registerOrderDependencies(GetIt getIt) {
@@ -24,10 +25,15 @@ void registerOrderDependencies(GetIt getIt) {
     () => CancelOrderUsecase(getIt()),
   );
 
+  getIt.registerLazySingleton<UpdateOrderStatusUsecase>(
+    () => UpdateOrderStatusUsecase(getIt()),
+  );
+
   getIt.registerLazySingleton<OrderUsecases>(
     () => OrderUsecases(
       fetchOrdersUsecase: getIt(),
       cancelOrderUsecase: getIt(),
+      updateOrderStatusUsecase: getIt(),
     ),
   );
 

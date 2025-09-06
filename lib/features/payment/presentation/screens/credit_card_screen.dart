@@ -15,6 +15,7 @@ import 'package:t_store/features/payment/presentation/screens/payment_status_scr
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/shop/features/order/presentation/pages/order_page.dart';
 import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/constants/enums.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:t_store/utils/responsive/responsive_helpers.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
@@ -160,13 +161,16 @@ class PayButton extends StatelessWidget {
     return BlocConsumer<PaymentCubit, PaymentState>(
       listener: (context, state) {
         if (state.action == PaymentAction.processPayment &&
-            state.status == PaymentStatus.success) {
+            state.status == PaymentStateStatus.success) {
+          final orderSummary = order?.checkoutModel.orderSummary
+              .copyWith(transactionId: state.paymentResult?.transactionId);
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => PaymentStatusScreen(
-                orderSummary: order?.checkoutModel.orderSummary,
+                orderSummary: orderSummary,
                 onTap: () {
+                  //context.read<OrderCubit>().changeOrderStaus(order!.orderId);
                   Navigator.pop(context);
                   Navigator.pop(context);
                   Navigator.pop(context);
@@ -186,7 +190,7 @@ class PayButton extends StatelessWidget {
             ),
           );
         } else if (state.action == PaymentAction.processPayment &&
-            state.status == PaymentStatus.failure) {
+            state.status == PaymentStateStatus.failure) {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -210,7 +214,7 @@ class PayButton extends StatelessWidget {
                 .symmetric(horizontal: 26, vertical: 16),
             child: ElevatedButton(
               onPressed: () {
-                if (!cardCubit.formKey.currentState!.validate()) return;
+                //if (!cardCubit.formKey.currentState!.validate()) return;
 
                 final data = cardCubit.state.expiryDate.split('/');
                 final expMonth = int.tryParse(data[0]) ?? 0;
@@ -247,9 +251,11 @@ class PayButton extends StatelessWidget {
                   user: userData,
                 );
 
-                context.read<PaymentCubit>().confirmPayment(details);
+                context
+                    .read<PaymentCubit>()
+                    .confirmPayment(details, PaymentStatus.paidPayment);
               },
-              child: state.status == PaymentStatus.loading &&
+              child: state.status == PaymentStateStatus.loading &&
                       state.action == PaymentAction.processPayment
                   ? SizedBox(
                       width: context.horzSize(20),

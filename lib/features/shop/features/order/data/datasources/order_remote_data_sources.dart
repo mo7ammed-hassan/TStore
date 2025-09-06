@@ -1,10 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:t_store/common/core/firebase_collections/collections.dart';
 import 'package:t_store/features/checkout/data/models/order_model.dart';
+import 'package:t_store/utils/constants/enums.dart';
 
 abstract class OrderRemoteDataSources {
   Future<List<OrderModel>> fetchAllOrders({required String? userId});
   Future<void> cancelOrder({required String orderId, required String? userId});
+  Future<OrderModel> updateOrderStatus({
+    required String orderId,
+    required String? userId,
+    required OrderStatus orderStatus,
+    PaymentStatus? paymentStatus,
+  });
 }
 
 class OrderRemoteDataSourcesImpl implements OrderRemoteDataSources {
@@ -41,5 +48,40 @@ class OrderRemoteDataSourcesImpl implements OrderRemoteDataSources {
     batch.delete(ordersRef);
 
     await batch.commit();
+  }
+
+  @override
+  Future<OrderModel> updateOrderStatus({
+    required String orderId,
+    required String? userId,
+    required OrderStatus orderStatus,
+    PaymentStatus? paymentStatus,
+  }) async {
+    final batch = fireaseIns.batch();
+
+    final updateOrderData = {
+      'orderStatus': orderStatus.name,
+      'updatedAt': Timestamp.now(),
+    };
+    if (paymentStatus != null) {
+      updateOrderData['paymentStatus'] = paymentStatus.name;
+    }
+
+    final userOrderRef = fireaseIns
+        .collection(FirebaseCollections.USER_COLLECTION)
+        .doc(userId)
+        .collection(FirebaseCollections.ORDERS_COLLECTION)
+        .doc(orderId);
+    batch.update(userOrderRef, updateOrderData);
+
+    final ordersRef = fireaseIns
+        .collection(FirebaseCollections.ORDERS_COLLECTION)
+        .doc(orderId);
+    batch.update(ordersRef, updateOrderData);
+
+    await batch.commit();
+
+    final snapShot = await userOrderRef.get();
+    return OrderModel.fromJson(snapShot.data()!);
   }
 }

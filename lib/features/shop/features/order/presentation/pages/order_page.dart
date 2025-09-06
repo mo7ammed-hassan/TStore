@@ -29,4 +29,6 @@ class OrderPage extends StatelessWidget {
       ),
     );
   }
+
+  void operator <(OrderCubit other) {}
 }

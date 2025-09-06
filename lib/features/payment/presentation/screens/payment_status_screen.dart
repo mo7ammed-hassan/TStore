@@ -6,6 +6,7 @@ import 'package:t_store/features/payment/core/constants/payment_images.dart';
 import 'package:t_store/features/payment/presentation/widgets/payment_summary.dart';
 import 'package:t_store/features/payment/presentation/widgets/payment_summary_row.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
+import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
@@ -73,12 +74,19 @@ class PaymentStatusScreen extends StatelessWidget {
               ),
               if (paymentSuccess) ...[
                 const PaymentSummaryRow(
-                    label: TTexts.paymentMethod, value: 'VISA'),
+                    label: TTexts.paymentMethod, value: 'CARD'),
                 ResponsiveGap.vertical(14),
-                const PaymentSummaryRow(label: 'Date', value: '26 Oct 2025'),
+                PaymentSummaryRow(
+                  label: 'Date',
+                  value: HelperFunctions.getFormattedDate(
+                    DateTime.now(),
+                  ),
+                ),
                 ResponsiveGap.vertical(14),
-                const PaymentSummaryRow(
-                    label: 'Transaction ID', value: 'FT54JN0'),
+                PaymentSummaryRow(
+                  label: 'Transaction ID',
+                  value: orderSummary?.transactionId?.substring(0, 12) ?? '',
+                ),
                 ResponsiveGap.vertical(14),
                 PaymentSummary(orderSummary: orderSummary),
               ],
