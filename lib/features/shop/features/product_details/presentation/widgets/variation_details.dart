@@ -25,7 +25,7 @@ class VariationDetails extends StatelessWidget {
 
         return TRoundedContainer(
           padding: context.responsiveInsets.all(TSizes.md),
-          backgroundColor: isDark ? AppColors.darkGrey : AppColors.grey,
+          backgroundColor: isDark ? AppColors.darkerGrey : AppColors.grey,
           child: Column(
             children: [
               _buildVariationHeader(context, state),
