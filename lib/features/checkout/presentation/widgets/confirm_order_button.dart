@@ -33,8 +33,9 @@ class ConfirmOrderButton extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      SelectPaymentScreen(order: state.order ?? order),
+                  builder: (context) => SelectPaymentScreen(
+                    order: state.order ?? order,
+                  ),
                 ),
               );
 

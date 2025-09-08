@@ -3,6 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
 import 'package:t_store/features/payment/core/constants/payment_images.dart';
+import 'package:t_store/features/payment/core/enums/payment_entry_point.dart';
 import 'package:t_store/features/payment/presentation/widgets/payment_summary.dart';
 import 'package:t_store/features/payment/presentation/widgets/payment_summary_row.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
@@ -22,6 +23,7 @@ class PaymentStatusScreen extends StatelessWidget {
     this.onTap,
     this.orderSummary,
     this.buttonTitle = 'Show Orders',
+    this.entryPoint,
   });
   final bool animation;
   final String imagePath;
@@ -31,6 +33,7 @@ class PaymentStatusScreen extends StatelessWidget {
   final String buttonTitle;
   final void Function()? onTap;
   final OrderSummaryModel? orderSummary;
+  final PaymentEntryPoint? entryPoint;
 
   @override
   Widget build(BuildContext context) {

@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/payment/core/constants/payment_images.dart';
+import 'package:t_store/features/payment/core/enums/payment_entry_point.dart';
 import 'package:t_store/features/payment/data/models/credit_card_details_model.dart';
 import 'package:t_store/features/payment/data/models/payment_use_data.dart';
 import 'package:t_store/features/payment/domain/entities/payment_details.dart';
@@ -13,6 +15,7 @@ import 'package:t_store/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_state.dart';
 import 'package:t_store/features/payment/presentation/screens/payment_status_screen.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
+import 'package:t_store/features/shop/features/order/presentation/cuits/order_cubit.dart';
 import 'package:t_store/features/shop/features/order/presentation/pages/order_page.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
@@ -22,27 +25,44 @@ import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class CreditCardScreen extends StatelessWidget {
-  const CreditCardScreen({super.key, required this.order});
-  final OrderEntity? order;
+  const CreditCardScreen({super.key, this.entryPoint});
+  final PaymentEntryPoint? entryPoint;
 
   @override
   Widget build(BuildContext context) {
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    final order = args['order'] as OrderEntity;
+    final paymentCubit = args['paymentCubit'] as PaymentCubit;
+
     return Scaffold(
       appBar: const TAppBar(
         title: 'Payment Method',
         showBackArrow: true,
+        nestedNavigator: true,
       ),
       body: BlocProvider(
         create: (context) => CreditCardFormCubit(),
-        child: CreditCardView(order: order),
+        child: CreditCardView(
+          order: order,
+          entryPoint: entryPoint,
+          paymentCubit: paymentCubit,
+        ),
       ),
     );
   }
 }
 
 class CreditCardView extends StatelessWidget {
-  const CreditCardView({super.key, required this.order});
+  const CreditCardView({
+    super.key,
+    required this.order,
+    this.entryPoint,
+    required this.paymentCubit,
+  });
   final OrderEntity? order;
+  final PaymentCubit paymentCubit;
+  final PaymentEntryPoint? entryPoint;
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +126,10 @@ class CreditCardView extends StatelessWidget {
               ),
             ),
           ),
-          PayButton(order: order),
+          BlocProvider.value(
+            value: paymentCubit,
+            child: PayButton(order: order, entryPoint: entryPoint),
+          ),
         ],
       ),
     );
@@ -149,8 +172,9 @@ class _SaveCardCheckbox extends StatelessWidget {
 }
 
 class PayButton extends StatelessWidget {
-  const PayButton({super.key, required this.order});
+  const PayButton({super.key, required this.order, this.entryPoint});
   final OrderEntity? order;
+  final PaymentEntryPoint? entryPoint;
 
   @override
   Widget build(BuildContext context) {
@@ -161,48 +185,16 @@ class PayButton extends StatelessWidget {
       listener: (context, state) {
         if (state.action == PaymentAction.processPayment &&
             state.status == PaymentStateStatus.success) {
+          if (entryPoint == PaymentEntryPoint.orderPage) {
+            context.read<OrderCubit>().changeOrderStaus(order!);
+          }
           final orderSummary = order?.checkoutModel.orderSummary
               .copyWith(transactionId: state.paymentResult?.transactionId);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => PaymentStatusScreen(
-                orderSummary: orderSummary,
-                onTap: () {
-                  //context.read<OrderCubit>().changeOrderStaus(order!.orderId);
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const OrderPage(),
-                    ),
-                  );
-                  // Navigator.of(context).popUntil(
-                  //   (route) =>
-                  //       route is MaterialPageRoute &&
-                  //       route.builder(context) is OrderPage,
-                  // );
-                },
-              ),
-            ),
-          );
+
+          _onPaymentSuccess(context, orderSummary);
         } else if (state.action == PaymentAction.processPayment &&
             state.status == PaymentStateStatus.failure) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => PaymentStatusScreen(
-                title: 'Payment Failed',
-                subTitle: 'Sorry your transaction could not processed',
-                imagePath: PaymentImages.paymentFailed,
-                paymentSuccess: false,
-                buttonTitle: 'Back',
-                onTap: () => Navigator.pop(context),
-              ),
-            ),
-          );
+          _onPaymentErro(context);
         }
       },
       builder: (context, state) {
@@ -213,7 +205,7 @@ class PayButton extends StatelessWidget {
                 .symmetric(horizontal: 26, vertical: 16),
             child: ElevatedButton(
               onPressed: () {
-                //if (!cardCubit.formKey.currentState!.validate()) return;
+                if (!cardCubit.formKey.currentState!.validate()) return;
 
                 final data = cardCubit.state.expiryDate.split('/');
                 final expMonth = int.tryParse(data[0]) ?? 0;
@@ -272,6 +264,47 @@ class PayButton extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  void _onPaymentSuccess(
+    BuildContext context,
+    OrderSummaryModel? orderSummary,
+  ) {
+    Navigator.of(context, rootNavigator: false).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => PaymentStatusScreen(
+          orderSummary: orderSummary,
+          onTap: () {
+            if (entryPoint == PaymentEntryPoint.orderPage) {
+              Navigator.of(context, rootNavigator: true).pop();
+            } else {
+              Navigator.of(context, rootNavigator: true).pop();
+              Navigator.of(context, rootNavigator: true).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const OrderPage(),
+                ),
+              );
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  void _onPaymentErro(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PaymentStatusScreen(
+          title: 'Payment Failed',
+          subTitle: 'Sorry your transaction could not processed',
+          imagePath: PaymentImages.paymentFailed,
+          paymentSuccess: false,
+          buttonTitle: 'Back',
+          onTap: () => Navigator.of(context).pop(),
+        ),
+      ),
     );
   }
 }

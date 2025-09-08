@@ -57,9 +57,11 @@ class OrderCubit extends Cubit<OrderStates> {
     );
   }
 
-  void changeOrderStaus(final String orderId) {
-    final index =
-        state.orders?.indexWhere((element) => element.orderId == orderId);
+  Future<void> changeOrderStaus(OrderEntity thisOrder) async {
+    final List<OrderEntity> oldOrders = List.from(state.orders ?? []);
+
+    final index = state.orders
+        ?.indexWhere((element) => element.orderId == thisOrder.orderId);
     if (index == null || index == -1) return;
 
     final order = state.orders?[index];
@@ -69,5 +71,27 @@ class OrderCubit extends Cubit<OrderStates> {
     updatedOrders[index] = newOrder!;
 
     emit(state.copyWith(orders: updatedOrders));
+
+    final result =
+        await _orderUsecases.updateOrderStatusUsecase.call(order: thisOrder);
+    result.fold(
+      (error) {
+        emit(
+          state.copyWith(
+            status: OrderStateStatus.failure,
+            errorMessage: error.message,
+            orders: oldOrders,
+          ),
+        );
+      },
+      (_) {
+        emit(
+          state.copyWith(
+            status: OrderStateStatus.success,
+            orders: updatedOrders,
+          ),
+        );
+      },
+    );
   }
 }

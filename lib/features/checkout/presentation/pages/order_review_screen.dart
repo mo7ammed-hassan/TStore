@@ -33,8 +33,10 @@ class OrderReviewScreen extends StatelessWidget {
       create: (_) => getIt<CheckoutCubit>()
         ..init(items ?? order?.checkoutModel.items ?? []),
       child: Scaffold(
-        bottomNavigationBar:
-            ConfirmOrderButton(removeCartItems: removeCartItems, order: order),
+        bottomNavigationBar: ConfirmOrderButton(
+          removeCartItems: removeCartItems,
+          order: order,
+        ),
         appBar: const TAppBar(
           showBackArrow: true,
           title: 'Order Review',

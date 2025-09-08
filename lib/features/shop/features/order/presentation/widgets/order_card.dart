@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
-import 'package:t_store/features/checkout/presentation/pages/order_review_screen.dart';
+import 'package:t_store/features/payment/core/enums/payment_entry_point.dart';
+import 'package:t_store/features/payment/presentation/screens/payment_flow_screen.dart';
+import 'package:t_store/features/payment/routes/payment_flow_args.dart';
 import 'package:t_store/features/shop/features/order/presentation/cuits/order_cubit.dart';
 import 'package:t_store/features/shop/features/order/presentation/widgets/cancel_order_dialog.dart';
 import 'package:t_store/utils/constants/colors.dart';
@@ -23,13 +25,19 @@ class OrderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
-    // if not completed go to review : show order detais
+    final orderCubit = context.read<OrderCubit>();
     return GestureDetector(
       onTap: () => order.orderStatus == OrderStatus.unCompleted.name
           ? context.pushPage(
               BlocProvider.value(
-                value: context.read<OrderCubit>(),
-                child: OrderReviewScreen(order: order),
+                value: orderCubit,
+                child: PaymentFlowScreen(
+                  args: PaymentFlowArgs(
+                    order: order,
+                    entryPoint: PaymentEntryPoint.orderPage,
+                  ),
+                  entryPoint: PaymentEntryPoint.orderPage,
+                ),
               ),
             )
           : null,
