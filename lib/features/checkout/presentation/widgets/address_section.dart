@@ -12,9 +12,25 @@ import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
-class AddressSection extends StatelessWidget {
+class AddressSection extends StatefulWidget {
   const AddressSection({super.key, this.addressEntity});
   final AddressEntity? addressEntity;
+
+  @override
+  State<AddressSection> createState() => _AddressSectionState();
+}
+
+class _AddressSectionState extends State<AddressSection> {
+  late CheckoutCubit cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    cubit = context.read<CheckoutCubit>();
+    if (widget.addressEntity != null) {
+      cubit.chengeAdress(widget.addressEntity!);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +49,7 @@ class AddressSection extends StatelessWidget {
         (context.watch<CheckoutCubit>().state.loadAddress == true)
             ? const ShimmerAddressCard()
             : address?.id.isNotEmpty == true
-                ? AddressDetails(address: addressEntity ?? address!)
+                ? AddressDetails(address: address!)
                 : const ResponsiveText('Please Select Address'),
       ],
     );
@@ -58,7 +74,7 @@ class AddressSection extends StatelessWidget {
             child: BuildAddressesListView(
               showAddButton: true,
               onAddressSelected: (address) async {
-               Navigator.of(context, rootNavigator: false).pop();
+                Navigator.of(context, rootNavigator: true).pop();
               },
             ),
           ),

@@ -4,7 +4,6 @@ import 'package:t_store/features/personalization/pages/address/domain/entities/a
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/single_address_card.dart';
 import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/popups/loaders.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
@@ -32,11 +31,14 @@ class AddressListView extends StatelessWidget {
           fontSize: fontSize,
           address: address,
           onTap: () async {
-            Loaders.showSimpleLoading(context);
+            if (context.mounted) Loaders.showSimpleLoading(context);
+
             final newAddress =
                 await context.read<AddressCubit>().updateSelectAddress(address);
 
-            if (context.mounted) context.popPage();
+            if (context.mounted) {
+              Navigator.of(context, rootNavigator: false).pop(address);
+            }
 
             if (newAddress != null) {
               onAddressSelected?.call(newAddress);
