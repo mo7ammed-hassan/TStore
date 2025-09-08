@@ -16,6 +16,7 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? titleColor;
   final double fontSize;
   final bool? centerTitle;
+  final bool nestedNavigator;
 
   const TAppBar({
     super.key,
@@ -27,6 +28,7 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.titleColor,
     this.fontSize = 18,
     this.centerTitle,
+    this.nestedNavigator = false,
   });
 
   @override
@@ -41,7 +43,9 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
         leading: showBackArrow
             ? IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  nestedNavigator
+                      ? Navigator.of(context, rootNavigator: false).pop()
+                      : Navigator.of(context, rootNavigator: true).pop();
                   leadingOnPressed?.call();
                 },
                 icon: Icon(

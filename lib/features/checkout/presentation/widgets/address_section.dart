@@ -58,7 +58,7 @@ class AddressSection extends StatelessWidget {
             child: BuildAddressesListView(
               showAddButton: true,
               onAddressSelected: (address) async {
-                Navigator.pop(context, address);
+               Navigator.of(context, rootNavigator: false).pop();
               },
             ),
           ),

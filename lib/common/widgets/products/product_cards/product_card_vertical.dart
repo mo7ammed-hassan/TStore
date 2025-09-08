@@ -5,7 +5,7 @@ import 'package:t_store/common/widgets/products/product_cards/sections/product_c
 import 'package:t_store/common/widgets/products/product_cards/sections/product_card_header.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/products_cubit.dart';
-import 'package:t_store/features/shop/features/product_details/presentation/pages/product_detail_page.dart';
+import 'package:t_store/features/shop/features/product_details/presentation/pages/product_details_page.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
@@ -26,7 +26,7 @@ class TVerticalProductCard extends StatelessWidget {
           PageRouteBuilder(
             transitionDuration: const Duration(milliseconds: 400),
             pageBuilder: (context, animation, secondaryAnimation) {
-              return ProductDetailPage(product: product);
+              return ProductDetailsPage(product: product);
             },
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
