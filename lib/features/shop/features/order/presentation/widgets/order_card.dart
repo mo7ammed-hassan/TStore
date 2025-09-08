@@ -44,13 +44,17 @@ class OrderCard extends StatelessWidget {
       child: Dismissible(
         key: ValueKey(order.orderId),
         direction: DismissDirection.startToEnd,
-        confirmDismiss: (_) async {
-          final result = await showCancelOrderDialog(
-            context,
-            orderId: order.orderId,
-          );
-          return result; // true => remove, false => keep
-        },
+        confirmDismiss: order.orderStatus != OrderStatus.unCompleted.name
+            ? (_) async {
+                return false;
+              }
+            : (_) async {
+                final result = await showCancelOrderDialog(
+                  context,
+                  orderId: order.orderId,
+                );
+                return result; // true => remove, false => keep
+              },
         background: const TRoundedContainer(
           backgroundColor: Colors.redAccent,
           child: Icon(Icons.delete, color: Colors.white),

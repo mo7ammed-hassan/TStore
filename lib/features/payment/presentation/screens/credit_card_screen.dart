@@ -155,7 +155,9 @@ class _SaveCardCheckbox extends StatelessWidget {
               height: context.horzSize(18),
               decoration: BoxDecoration(
                 color: cubit.state.saveCard ? AppColors.buttonPrimary : null,
-                border: Border.all(color: Colors.grey),
+                border: cubit.state.saveCard
+                    ? null
+                    : Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: cubit.state.saveCard
