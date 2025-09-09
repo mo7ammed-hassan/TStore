@@ -7,7 +7,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:t_store/app/app.dart';
-import 'package:t_store/bloc_observier.dart';
+import 'package:t_store/core/bloc/app_bloc_observer.dart';
 import 'package:t_store/core/hive_boxes/open_boxes.dart';
 import 'package:t_store/app/cubits/launch_app_cubit.dart';
 import 'package:t_store/firebase_options.dart';
@@ -52,7 +52,7 @@ void main() {
       FlutterNativeSplash.remove();
 
       // Bloc Observer
-      Bloc.observer = MyBlocObserver();
+      Bloc.observer = AppBlocObserver();
 
       // Strip
       Stripe.publishableKey = dotenv.env['PUBLISHABLE_KEY']!;
