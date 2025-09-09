@@ -11,9 +11,10 @@ class FeaturedProductSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductsCubit, ProductsState>(
-      builder: (context, state) {
-        if (state is ProductsLoadingState || state is ProductsInitialState) {
+    return BlocSelector<ProductsCubit, ProductsState, ProductsSubsetState>(
+      selector: (state) => state.featured,
+      builder: (context, featuredState) {
+        if (featuredState.isLoading) {
           return SliverPadding(
             padding:
                 const EdgeInsets.symmetric(horizontal: TSizes.spaceBtwItems),
@@ -21,23 +22,18 @@ class FeaturedProductSection extends StatelessWidget {
           );
         }
 
-        if (state is ProductsFailureState) {
-          return _errorSliver(state.featuredProductsError!);
+        if (featuredState.error != null) {
+          return _errorSliver(featuredState.error ?? 'There was an error');
         }
 
-        if (state is ProductsLoadedState) {
-          if (state.featuredProducts.isEmpty) {
-            return _errorSliver('No products found!');
-          }
-
-          return SliverPadding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: TSizes.spaceBtwItems),
-            sliver: ProductsGridView.sliver(context,state.featuredProducts),
-          );
+        if(featuredState.products.isEmpty){
+            return _errorSliver('No product found.');
         }
 
-        return _errorSliver('Something went wrong!');
+        return SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: TSizes.spaceBtwItems),
+          sliver: ProductsGridView.sliver(context, featuredState.products),
+        );
       },
     );
   }

@@ -23,7 +23,7 @@ class ProductEntity {
   final List<ProductAttributeEntity> productAttributes;
   final List<ProductVariationEntity>? productVariations;
 
-  String get productrice {
+  String get productPrice {
     if (productType == ProductType.single.toString()) {
       return (salePrice != null && salePrice! > 0)
           ? salePrice!.toString()
@@ -72,6 +72,10 @@ class ProductEntity {
 
       return maxDiscount.toStringAsFixed(1);
     }
+  }
+
+  String get getPrroductStockStatus {
+    return stock > 0 ? 'In stock' : 'Out stock';
   }
 
   const ProductEntity({

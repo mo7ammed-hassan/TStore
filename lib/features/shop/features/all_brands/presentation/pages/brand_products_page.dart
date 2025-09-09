@@ -31,10 +31,13 @@ class BrandProductsPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: ResponsivePadding.symmetric(
             horizontal: TSizes.spaceBtwItems,
-            vertical: TSizes.defaultSpace,
+            vertical: TSizes.defaultSpace / 2,
             child: Column(
               children: [
-                TBrandCard(brand: brand),
+                TBrandCard(
+                  brand: brand,
+                  onTap: () {},
+                ),
                 ResponsiveGap.vertical(TSizes.spaceBtwSections),
                 const TSectionHeading(
                   title: 'Products',

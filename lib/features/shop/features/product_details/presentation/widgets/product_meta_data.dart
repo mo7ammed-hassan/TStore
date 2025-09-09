@@ -5,8 +5,6 @@ import 'package:t_store/common/widgets/texts/brand_title_with_verified_icon.dart
 import 'package:t_store/common/widgets/texts/product_price.dart';
 import 'package:t_store/common/widgets/texts/product_title_text.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
-import 'package:t_store/features/shop/features/all_products/presentation/cubits/products_cubit.dart';
-import 'package:t_store/config/service_locator.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/enums.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
@@ -24,9 +22,7 @@ class TProductMetaData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
-    final cubit = getIt.get<ProductsCubit>();
-    final salePersentage = cubit.calculateProductDiscount(
-        product.price.toDouble(), product.salePrice!);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -34,7 +30,7 @@ class TProductMetaData extends StatelessWidget {
           children: [
             product.salePrice! > 0
                 ? TDiscountRate(
-                    rate: '$salePersentage%',
+                    rate: '${product.discountPercentage}%',
                   )
                 : const SizedBox(),
             ResponsiveGap.horizontal(TSizes.spaceBtwItems),
@@ -54,7 +50,7 @@ class TProductMetaData extends StatelessWidget {
         if (product.productType == ProductType.single.toString() &&
             product.salePrice! > 0)
           ResponsiveGap.horizontal(TSizes.spaceBtwItems / 2),
-        TProductPriceText(price: cubit.getProductPrice(product), isLarge: true),
+        TProductPriceText(price: product.productPrice, isLarge: true),
         ResponsiveGap.vertical(TSizes.spaceBtwItems / 1.5),
         TProductTitleText(
           title: product.title,
@@ -69,7 +65,7 @@ class TProductMetaData extends StatelessWidget {
               TSizes.spaceBtwItems,
             ),
             ResponsiveText(
-              cubit.getPrroductStockStatus(product.stock),
+              product.getPrroductStockStatus,
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ],

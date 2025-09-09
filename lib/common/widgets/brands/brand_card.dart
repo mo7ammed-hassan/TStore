@@ -14,16 +14,18 @@ import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
 
 class TBrandCard extends StatelessWidget {
-  const TBrandCard({super.key, this.showBorder = true, required this.brand});
+  const TBrandCard(
+      {super.key, this.showBorder = true, required this.brand, this.onTap});
   final bool showBorder;
   final BrandEntity brand;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     final bool isDark = HelperFunctions.isDarkMode(context);
     //final productCount = context.read<ProductsByBrandCubit>().products.length;
     return GestureDetector(
-      onTap: () => context.pushPage(BrandProductsPage(brand: brand)),
+      onTap: onTap ?? () => context.pushPage(BrandProductsPage(brand: brand)),
       child: TRoundedContainer(
         padding: context.responsiveInsets.all(TSizes.sm),
         showBorder: showBorder,

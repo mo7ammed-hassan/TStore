@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/features/shop/features/all_products/domain/usecases/get_all_popular_products_use_case.dart';
-import 'package:t_store/features/shop/features/all_products/domain/usecases/get_fetured_products_use_case.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/products_cubit.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/pages/all_products_page.dart';
 import 'package:t_store/features/shop/features/home/presentation/widgets/featured_product_section.dart';
@@ -71,10 +69,9 @@ class _HomePageState extends State<HomePage> {
                     title: 'Featured Products',
                     onPressed: () {
                       context.pushPage(
-                        AllProductsPage(
+                        const AllProductsPage(
                           title: 'Featured Products',
-                          products: productsCubit.featuredProducts,
-                          future: GetFeturedProductsUseCase().call(params: 10),
+                          isFeatured: true,
                         ),
                       );
                     },
@@ -96,11 +93,9 @@ class _HomePageState extends State<HomePage> {
                     title: 'Popular Products',
                     onPressed: () {
                       context.pushPage(
-                        AllProductsPage(
+                        const AllProductsPage(
                           title: 'Popular Products',
-                          products: productsCubit.allProducts,
-                          future:
-                              GetAllPopularProductsUseCase().call(params: 10),
+                          isPopular: true,
                         ),
                       );
                     },

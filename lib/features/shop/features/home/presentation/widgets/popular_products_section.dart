@@ -11,39 +11,37 @@ class PopularProductsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductsCubit, ProductsState>(
-      builder: (context, state) {
-        if (state is ProductsLoadingState || state is ProductsInitialState) {
-          return const SliverToBoxAdapter(
-            child: ShimmerProductsGridLayout(),
-          );
-        }
-
-        if (state is ProductsFailureState) {
-          return _errorSliver(state.featuredProductsError!);
-        }
-
-        if (state is ProductsLoadedState) {
-          if (state.featuredProducts.isEmpty) {
-            return _errorSliver('No products found!');
-          }
-
+    return BlocSelector<ProductsCubit, ProductsState, ProductsSubsetState>(
+       selector: (state) => state.popular,
+      builder: (context, popularState) {
+        if (popularState.isLoading) {
           return SliverPadding(
             padding:
                 const EdgeInsets.symmetric(horizontal: TSizes.spaceBtwItems),
-            sliver: ProductsGridView.sliver(context,state.featuredProducts),
+            sliver: ShimmerProductsGridLayout.sliver(context),
           );
         }
 
-        return _errorSliver('Something went wrong!');
+        if (popularState.error != null) {
+          return _errorSliver(popularState.error ?? 'There was an error');
+        }
+
+        if (popularState.products.isEmpty) {
+          return _errorSliver('No product found.');
+        }
+
+        return SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: TSizes.spaceBtwItems),
+          sliver: ProductsGridView.sliver(context, popularState.products),
+        );
       },
     );
   }
 
   SliverToBoxAdapter _errorSliver(String errorMessage) {
     return SliverToBoxAdapter(
+      key: const Key('popular_products_error'),
       child: Center(
-        key: const Key('featured_products_error'),
         child: Text(errorMessage),
       ),
     );

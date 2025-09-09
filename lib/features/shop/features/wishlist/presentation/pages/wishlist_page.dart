@@ -3,11 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/common/widgets/icons/circular_icon.dart';
+import 'package:t_store/features/navigation_menu/cubit/navigation_cubit.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubits/wishlist_cubit.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/wisgtes/wishlist_page_body.dart';
-import 'package:t_store/features/navigation_menu/navigation_screen.dart';
 import 'package:t_store/config/service_locator.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/responsive/responsive_helpers.dart';
 
 class WishlistPage extends StatelessWidget {
@@ -30,9 +29,9 @@ class WishlistPage extends StatelessWidget {
       actions: [
         TCircularIcon(
           icon: Iconsax.add,
-          size: context.horzSize(28),
+          size: context.horzSize(22),
           onPressed: () {
-            context.pushAndClearAll(const NavigationScreen());
+            context.read<NavigationCubit>().goHome();
           },
         )
       ],

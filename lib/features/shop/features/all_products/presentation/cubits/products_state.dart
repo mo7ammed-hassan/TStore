@@ -1,75 +1,133 @@
+import 'package:equatable/equatable.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
+// Explicit State Representation || Strongly Typed State
+class ProductsState extends Equatable {
+  final ProductsSubsetState popular;
+  final ProductsSubsetState featured;
 
-abstract class ProductsState {}
+  const ProductsState({required this.popular, required this.featured});
 
-class ProductsInitialState extends ProductsState {}
+  factory ProductsState.initial() => const ProductsState(
+        popular: ProductsSubsetState.initial(),
+        featured: ProductsSubsetState.initial(),
+      );
 
-class ProductsLoadingState extends ProductsState {
-  final bool isLoadingAllProducts;
-  final bool isLoadingFeaturedProducts;
+  ProductsState copyWith({
+    ProductsSubsetState? popular,
+    ProductsSubsetState? featured,
+  }) {
+    return ProductsState(
+      popular: popular ?? this.popular,
+      featured: featured ?? this.featured,
+    );
+  }
 
-  ProductsLoadingState({
-    this.isLoadingAllProducts = false,
-    this.isLoadingFeaturedProducts = false,
+  @override
+  List<Object?> get props => [popular, featured];
+}
+
+class ProductsSubsetState extends Equatable {
+  final List<ProductEntity> products;
+  final bool isLoading;
+  final String? error;
+
+  const ProductsSubsetState({
+    required this.products,
+    required this.isLoading,
+    required this.error,
   });
+
+  const ProductsSubsetState.initial()
+      : products = const [],
+        isLoading = false,
+        error = null;
+
+  ProductsSubsetState copyWith({
+    List<ProductEntity>? products,
+    bool? isLoading,
+    String? error,
+  }) {
+    return ProductsSubsetState(
+      products: products ?? this.products,
+      isLoading: isLoading ?? this.isLoading,
+      error: error,
+    );
+  }
+
+  @override
+  List<Object?> get props => [products, isLoading, error];
 }
 
-// Unified loaded state for all products or featured products
-class ProductsLoadedState extends ProductsState {
-  final List<ProductEntity> allProducts;
-  final List<ProductEntity> featuredProducts;
-
-  ProductsLoadedState(
-    this.allProducts,
-    this.featuredProducts,
-  );
-}
-
-// Unified failure state for both
-class ProductsFailureState extends ProductsState {
-  final String? allProductsError;
-  final String? featuredProductsError;
-
-  ProductsFailureState({
-    this.allProductsError,
-    this.featuredProductsError,
-  });
-}
 
 
+// ------------------------------------------------------------------------------------------------// 
+// import 'package:equatable/equatable.dart';
+// import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 
+// class ProductSubsetState extends Equatable {
+//   final bool loading;
+//   final String? error;
+//   final List<ProductEntity> items;
 
+//   const ProductSubsetState({
+//     this.loading = false,
+//     this.error,
+//     this.items = const [],
+//   });
 
-// old states
+//   ProductSubsetState copyWith({
+//     bool? loading,
+//     String? error,
+//     List<ProductEntity>? items,
+//   }) {
+//     return ProductSubsetState(
+//       loading: loading ?? this.loading,
+//       error: error,
+//       items:
+//           items != null ? List<ProductEntity>.unmodifiable(items) : this.items,
+//     );
+//   }
 
-// abstract class ProductsState {}
-// class ProductsInitialState extends ProductsState{}
-
-// class FeaturedProductsLoadedState extends ProductsState {
-//   final List<ProductEntity> featuredProducts;
-
-//   FeaturedProductsLoadedState(this.featuredProducts);
+//   @override
+//   List<Object?> get props => [loading, error, items];
 // }
 
-// class FeaturedProductsLoadingState extends ProductsState {}
+// enum ProductsCategory { popular, featured }
+// // Map Based => Dynamic State Representation || Dictionary/Map Driven State
+// class ProductsState extends Equatable {
+//   final Map<ProductsCategory, ProductSubsetState> subsets;
 
-// class FeaturedProductsFailureState extends ProductsState {
-//   final String errorMessage;
+//   const ProductsState({
+//     this.subsets = const {
+//       ProductsCategory.popular: ProductSubsetState(),
+//       ProductsCategory.featured: ProductSubsetState(),
+//     },
+//   });
+//   factory ProductsState.initial() => const ProductsState();
 
-//   FeaturedProductsFailureState(this.errorMessage);
-// }
+//   ProductSubsetState getSubset(ProductsCategory category) =>
+//       subsets[category] ?? const ProductSubsetState();
 
-// // state of all products
-// class AllProductsLoadingState extends ProductsState {}
+//   ProductsState copyWith({
+//     Map<ProductsCategory, ProductSubsetState>? subsets,
+//   }) {
+//     return ProductsState(subsets: subsets ?? this.subsets);
+//   }
 
-// class AllProductsLoadedState extends ProductsState {
-//   final List<ProductEntity> allProducts;
+//   ProductsState updateSubset(
+//     ProductsCategory category,
+//     ProductSubsetState Function(ProductSubsetState current) reducer,
+//   ) {
+//     final current = getSubset(category);
+//     final next = reducer(current);
+//     return copyWith(
+//       subsets: {
+//         ...subsets,
+//         category: next,
+//       },
+//     );
+//   }
 
-//   AllProductsLoadedState(this.allProducts);
-// }
-
-// class AllProductsFailureState extends ProductsState {
-//   final String errorMessage;
-
-//   AllProductsFailureState(this.errorMessage);
+//   @override
+//   List<Object?> get props => [subsets];
 // }

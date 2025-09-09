@@ -39,16 +39,12 @@ import 'package:t_store/features/shop/features/all_brands/domain/usecases/get_br
 import 'package:t_store/features/shop/features/all_brands/domain/usecases/get_featured_brands_use_case.dart';
 import 'package:t_store/features/shop/features/all_brands/presentation/cubits/brand_cubit.dart';
 import 'package:t_store/features/shop/features/all_products/data/repository/product_repository_impl.dart';
-import 'package:t_store/features/shop/features/all_products/data/source/product_firebase_services.dart';
+import 'package:t_store/features/shop/features/all_products/data/source/product_remote_data_source.dart.dart';
 import 'package:t_store/features/shop/features/all_products/domain/repository/product_repository.dart';
-import 'package:t_store/features/shop/features/all_products/domain/usecases/get_all_products_by_brand_use_cse.dart';
-import 'package:t_store/features/shop/features/all_products/domain/usecases/get_popular_products_use_case.dart';
-import 'package:t_store/features/shop/features/all_products/domain/usecases/get_fetured_products_use_case.dart';
-import 'package:t_store/features/shop/features/all_products/domain/usecases/get_products_specific_category_use_case.dart';
+import 'package:t_store/features/shop/features/all_products/domain/usecases/get_product_usecase.dart';
+import 'package:t_store/features/shop/features/all_products/presentation/cubits/all_product_cubit.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/products_cubit.dart';
-import 'package:t_store/features/shop/features/cart/cart_injection.dart'
-    show registerCartDependencies;
-
+import 'package:t_store/features/shop/features/cart/cart_injection.dart';
 import 'package:t_store/features/shop/features/home/data/repository/banner_repository_impl.dart';
 import 'package:t_store/features/shop/features/home/data/repository/category_repository_impl.dart';
 import 'package:t_store/features/shop/features/home/data/source/remote/banner_firebase_services.dart';
@@ -77,6 +73,9 @@ Future<void> initializeDependencies() async {
   );
   getIt.registerFactory<UserFirebaseServices>(
     () => UserFirebaseServiceImpl(),
+  );
+  getIt.registerFactory<ProductRemoteDataSource>(
+    () => ProductRemoteDataSourceImpl(),
   );
   getIt.registerSingleton<CategoryFirebaseServices>(
     CategoryFirebaseServicesImpl(),
@@ -108,7 +107,7 @@ Future<void> initializeDependencies() async {
     CategoryRepositoyImpl(),
   );
   getIt.registerSingleton<ProductRepository>(
-    ProductRepositoryImpl(ProductFirebaseServicesImpl()),
+    ProductRepositoryImpl(getIt()),
   );
   getIt.registerSingleton<UploadDataRepository>(
     UploadDataRepositoryImpl(),
@@ -200,18 +199,10 @@ Future<void> initializeDependencies() async {
     BannerUseCase(),
   );
   // --Products
-  getIt.registerSingleton<GetPopularProductsUseCase>(
-    GetPopularProductsUseCase(),
+  getIt.registerSingleton<GetProductsUseCase>(
+    GetProductsUseCase(getIt()),
   );
-  getIt.registerSingleton<GetFeturedProductsUseCase>(
-    GetFeturedProductsUseCase(),
-  );
-  getIt.registerSingleton<GetAllProductsByBrandUseCse>(
-    GetAllProductsByBrandUseCse(),
-  );
-  getIt.registerSingleton<GetProductsSpecificCategoryUseCase>(
-    GetProductsSpecificCategoryUseCase(),
-  );
+  
   // -- wishlist --
   getIt.registerSingleton<AddItemsInWishlistUseCase>(
     AddItemsInWishlistUseCase(),
@@ -238,8 +229,9 @@ Future<void> initializeDependencies() async {
 
   // -- Cubits--
   getIt.registerFactory<ProductsCubit>(() => ProductsCubit());
+  getIt.registerFactory<AllProductsCubit>(() => AllProductsCubit(getIt()));
   getIt.registerFactory<BrandCubit>(() => BrandCubit());
-  getIt.registerLazySingleton<WishlistCubit>(() => WishlistCubit());
+  getIt.registerLazySingleton<WishlistCubit>(() => WishlistCubit(getIt()));
   getIt.registerLazySingleton<FavoriteButtonCubit>(
     () => FavoriteButtonCubit(getIt.get<WishlistCubit>()),
   );

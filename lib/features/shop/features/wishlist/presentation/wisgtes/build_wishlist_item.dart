@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/custom_grid_view/products_grid_view.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_products_grid_layout.dart';
+import 'package:t_store/features/navigation_menu/cubit/navigation_cubit.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubits/wishlist_cubit.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubits/wishlist_state.dart';
-import 'package:t_store/features/navigation_menu/navigation_screen.dart';
 import 'package:t_store/utils/constants/images_strings.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
 import 'package:t_store/utils/loaders/animation_loader.dart';
 
 class BuildWishlistItems extends StatelessWidget {
@@ -45,9 +44,7 @@ class BuildWishlistItems extends StatelessWidget {
       animation: TImages.pencilAnimation,
       showAction: true,
       actionText: 'Let\'s add more',
-      onActionPressed: () => context.pushAndClearAll(
-        const NavigationScreen(),
-      ),
+      onActionPressed: () => context.read<NavigationCubit>().goHome(),
     );
   }
 }

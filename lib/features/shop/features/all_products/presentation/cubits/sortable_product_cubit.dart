@@ -2,24 +2,50 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 
 class SortableProductCubit extends Cubit<List<ProductEntity>> {
-  SortableProductCubit() : super(List<ProductEntity>.empty());
+  SortableProductCubit() : super(const []);
 
   String sortOption = 'Name';
+  String searchQuery = '';
+  List<ProductEntity> originalProducts = [];
+
+  void resetProducts(List<ProductEntity> products) {
+    if (isClosed) return;
+    originalProducts = List.from(products);
+    _applyFilters(); 
+  }
 
   void sortProducts(String sortBy) {
     sortOption = sortBy;
-    switch (sortBy) {
+    _applyFilters();
+  }
+
+  void searchProducts(String query) {
+    searchQuery = query;
+    _applyFilters();
+  }
+
+  void _applyFilters() {
+    if (isClosed) return;
+    List<ProductEntity> filteredList = List.from(originalProducts);
+
+    if (searchQuery.isNotEmpty) {
+      filteredList = filteredList.where((product) {
+        return product.title.toLowerCase().contains(searchQuery.toLowerCase());
+      }).toList();
+    }
+
+    switch (sortOption) {
       case 'Name':
-        state.sort((a, b) => a.title.compareTo(b.title));
+        filteredList.sort((a, b) => a.title.compareTo(b.title));
         break;
       case 'Higher Price':
-        state.sort((a, b) => b.price.compareTo(a.price));
+        filteredList.sort((a, b) => b.price.compareTo(a.price));
         break;
       case 'Lower Price':
-        state.sort((a, b) => a.price.compareTo(b.price));
+        filteredList.sort((a, b) => a.price.compareTo(b.price));
         break;
       case 'Sale':
-        state.sort((a, b) {
+        filteredList.sort((a, b) {
           if (a.salePrice != null && b.salePrice != null) {
             return a.salePrice!.compareTo(b.salePrice!);
           } else {
@@ -28,37 +54,12 @@ class SortableProductCubit extends Cubit<List<ProductEntity>> {
         });
         break;
       case 'Newest':
-        state.sort((a, b) => a.date!.compareTo(b.date!));
+        filteredList.sort((a, b) => b.date!.compareTo(a.date!));
         break;
-
       default:
-        state.sort((a, b) => a.title.compareTo(b.title));
+        filteredList.sort((a, b) => a.title.compareTo(b.title));
     }
 
-    if (isClosed) return;
-
-    emit(List.from(state));
-  }
-
-  void resetProducts(List<ProductEntity> products) {
-    if (isClosed) return;
-    emit(List.from(products));
-  }
-
-  void searchProducts(String query) {
-    if (query.isEmpty) {
-      if (isClosed) return;
-      emit(List.from(state));
-    } else {
-      emit(
-        List.from(
-          state.where(
-            (product) {
-              return product.title.toLowerCase().contains(query.toLowerCase());
-            },
-          ).toList(),
-        ),
-      );
-    }
+    emit(filteredList);
   }
 }

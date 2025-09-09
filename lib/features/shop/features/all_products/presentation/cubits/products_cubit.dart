@@ -1,137 +1,153 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
-import 'package:t_store/features/shop/features/all_products/domain/usecases/get_popular_products_use_case.dart';
-import 'package:t_store/features/shop/features/all_products/domain/usecases/get_fetured_products_use_case.dart';
+import 'package:t_store/features/shop/features/all_products/domain/usecases/get_product_usecase.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/products_state.dart';
 import 'package:t_store/config/service_locator.dart';
-import 'package:t_store/utils/constants/enums.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {
-  ProductsCubit() : super(ProductsInitialState());
-
-  final List<ProductEntity> allProducts = [];
-  final List<ProductEntity> featuredProducts = [];
-
-  bool _hasFetchedPopularProducts = false;
-  bool _hasFetchedFeaturedProducts = false;
+  ProductsCubit() : super(ProductsState.initial());
 
   Future<void> fetchPopularProducts({bool forceRefresh = false}) async {
-    if (!forceRefresh && _hasFetchedPopularProducts && allProducts.isNotEmpty) {
+    if (!forceRefresh &&
+        state.popular.products.isNotEmpty &&
+        state.popular.error == null) {
       return;
     }
 
-    emit(
-      ProductsLoadingState(
-        isLoadingAllProducts: true,
-      ),
-    );
+    emit(state.copyWith(
+      popular: state.popular.copyWith(isLoading: true, error: null),
+    ));
 
-    var result = await getIt<GetPopularProductsUseCase>().call();
-
-    if (isClosed) return;
+    final result =
+        await getIt<GetProductsUseCase>().call(isPopular: true, limit: 4);
 
     result.fold(
       (error) {
-        emit(ProductsFailureState(allProductsError: error));
+        emit(
+          state.copyWith(
+            popular: state.popular
+                .copyWith(isLoading: false, error: error.toString()),
+          ),
+        );
       },
       (products) {
-        allProducts.clear();
-        allProducts.addAll(products);
-
-        emit(ProductsLoadedState(allProducts, featuredProducts));
-        _hasFetchedPopularProducts = true;
+        emit(
+          state.copyWith(
+            popular: state.popular.copyWith(
+              isLoading: false,
+              products: List.unmodifiable(products),
+            ),
+          ),
+        );
       },
     );
   }
 
-  Future<void> fetchFeaturedProducts(
-      {bool forceRefresh = false, int limit = 4}) async {
+  Future<void> fetchFeaturedProducts({bool forceRefresh = false}) async {
     if (!forceRefresh &&
-        _hasFetchedFeaturedProducts &&
-        featuredProducts.isNotEmpty &&
-        featuredProducts.length == limit) {
+        state.featured.products.isNotEmpty &&
+        state.featured.error == null) {
       return;
     }
 
-    emit(
-      ProductsLoadingState(
-        isLoadingFeaturedProducts: true,
-      ),
-    );
+    emit(state.copyWith(
+      featured: state.featured.copyWith(isLoading: true, error: null),
+    ));
 
-    var result = await getIt<GetFeturedProductsUseCase>().call(params: limit);
-
-    if (isClosed) return;
+    final result =
+        await getIt<GetProductsUseCase>().call(isFeatured: true, limit: 4);
 
     result.fold(
       (error) {
-        emit(ProductsFailureState(featuredProductsError: error));
+        emit(
+          state.copyWith(
+            featured: state.featured
+                .copyWith(isLoading: false, error: error.toString()),
+          ),
+        );
       },
       (products) {
-        featuredProducts.clear();
-        featuredProducts.addAll(products);
-
-        emit(ProductsLoadedState(allProducts, featuredProducts));
-        _hasFetchedFeaturedProducts = true;
+        emit(
+          state.copyWith(
+            featured: state.featured.copyWith(
+              isLoading: false,
+              products: List.unmodifiable(products),
+            ),
+          ),
+        );
       },
     );
   }
 
   Future<void> fetchInitialData() async {
-    if (_hasFetchedFeaturedProducts && _hasFetchedPopularProducts) return;
-
     await Future.wait([
-      fetchPopularProducts(forceRefresh: true).catchError((_) {}),
-      fetchFeaturedProducts(forceRefresh: true).catchError((_) {}),
+      fetchPopularProducts(forceRefresh: true),
+      fetchFeaturedProducts(forceRefresh: true),
     ]);
   }
 
-  // This method is used to refresh the products
   Future<void> refreshProducts() async {
-    _hasFetchedFeaturedProducts = false;
-    _hasFetchedPopularProducts = false;
-    allProducts.clear();
-    featuredProducts.clear();
-    await fetchPopularProducts(forceRefresh: true);
-    await fetchFeaturedProducts(forceRefresh: true);
-  }
-
-  String getProductPrice(ProductEntity product) {
-    if (product.productType == ProductType.single.toString()) {
-      double price = (product.salePrice != null && product.salePrice! > 0)
-          ? product.salePrice!
-          : product.price.toDouble();
-      return price.toDouble().toString();
-    }
-
-    double smallestPrice = double.infinity;
-    double largestPrice = 0;
-
-    for (var variation in product.productVariations!) {
-      double priceToConsider =
-          (variation.salePrice > 0.0) ? variation.salePrice : variation.price;
-
-      if (priceToConsider < smallestPrice) {
-        smallestPrice = priceToConsider;
-      }
-      if (priceToConsider > largestPrice) {
-        largestPrice = priceToConsider;
-      }
-    }
-
-    return smallestPrice == largestPrice
-        ? largestPrice.toString()
-        : '$smallestPrice - $largestPrice';
-  }
-
-  String? calculateProductDiscount(double originalPrice, double salePrice) {
-    if (salePrice <= 0.0 || originalPrice <= 0.0) return null;
-
-    double percentage = ((originalPrice - salePrice) / originalPrice) * 100;
-    return percentage.toStringAsFixed(0);
-  }
-
-  String getPrroductStockStatus(int stock) {
-    return stock > 0 ? 'In stock' : 'Out stock';
+    emit(ProductsState.initial());
+    await fetchInitialData();
   }
 }
+
+
+
+
+
+// ------------------------------- 
+// class ProductsCubit extends Cubit<ProductsState> {
+//   ProductsCubit() : super(const ProductsState());
+
+//   Future<void> fetchProducts(ProductsCategory category,
+//       {int? limit, bool forceRefresh = false}) async {
+//     final currentSubset = state.getSubset(category);
+//     if (!forceRefresh &&
+//         currentSubset.items.isNotEmpty &&
+//         currentSubset.error == null) {
+//       return;
+//     }
+
+//     emit(
+//       state.updateSubset(
+//         category,
+//         (current) => current.copyWith(loading: true),
+//       ),
+//     );
+
+//     final result = await _getUsecase(category);
+
+//     result.fold(
+//       (failure) {
+//         emit(state.updateSubset(category,
+//             (s) => s.copyWith(loading: false, error: failure.message)));
+//       },
+//       (products) {
+//         emit(state.updateSubset(
+//             category, (s) => s.copyWith(loading: false, items: products)));
+//       },
+//     );
+//   }
+
+//   Future<Either<dynamic, List<ProductEntity>>> _getUsecase(
+//       ProductsCategory category) async {
+//     switch (category) {
+//       case ProductsCategory.popular:
+//         return await getIt<GetPopularProductsUseCase>().call();
+//       case ProductsCategory.featured:
+//         return await getIt<GetPopularProductsUseCase>().call();
+//     }
+//   }
+
+//   Future<void> fetchInitialData() async {
+//     await Future.wait([
+//       fetchProducts(ProductsCategory.popular),
+//       fetchProducts(ProductsCategory.featured),
+//     ]);
+//   }
+
+//   Future<void> refreshProducts() async {
+//     emit(ProductsState.initial());
+//     await fetchInitialData();
+//   }
+// }

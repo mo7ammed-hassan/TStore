@@ -1,55 +1,32 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
+import 'package:t_store/features/shop/features/all_products/domain/usecases/get_product_usecase.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/all_products_state.dart';
 
 class AllProductsCubit extends Cubit<AllProductsState> {
-  AllProductsCubit() : super(AllProductsInitialState());
+  final GetProductsUseCase getProductsUseCase;
 
-  //AllProductCubit.of(context).someMethod();
-  static AllProductsCubit of(BuildContext context) => BlocProvider.of(context);
+  AllProductsCubit(this.getProductsUseCase) : super(AllProductsInitialState());
 
-  final List<ProductEntity> allProducts = [];
-
-  Future<void> fetchAllProducts({required Future<dynamic> future}) async {
-    if (kDebugMode) {
-      print('fetching all featured products');
-    }
+  Future<void> fetchAllProducts({
+    String? categoryId,
+    String? brandId,
+    bool? isFeatured,
+    bool? isPopular,
+    int limit = 20,
+  }) async {
     emit(AllProductsLoadingState());
 
-    // Fetch all products
-    var result = await future;
-
-    if (isClosed) return;
+    final result = await getProductsUseCase(
+      categoryId: categoryId,
+      brandId: brandId,
+      isFeatured: isFeatured,
+      isPopular: isPopular,
+      limit: limit,
+    );
 
     result.fold(
-      (error) {
-        emit(AllProductsFailureState(error: error));
-      },
-      (products) {
-        for (var product in products) {
-          if (kDebugMode) {
-            print(product.title);
-          }
-        }
-        allProducts.clear();
-        allProducts.addAll(products);
-
-        emit(AllProductsLoadedState(products));
-      },
+      (error) => emit(AllProductsFailureState(error: error.toString())),
+      (products) => emit(AllProductsLoadedState(products)),
     );
-  }
-
-  void clearProducts() {
-    allProducts.clear();
-  }
-
-  @override
-  Future<void> close() {
-    if (kDebugMode) {
-      print('closing all products cubit');
-    }
-    return super.close();
   }
 }

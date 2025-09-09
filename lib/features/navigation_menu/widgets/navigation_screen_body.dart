@@ -6,7 +6,6 @@ import 'package:t_store/features/shop/features/wishlist/presentation/pages/wishl
 
 class NavigationScreenBody extends StatefulWidget {
   const NavigationScreenBody({super.key, required this.currentIndex});
-
   final int currentIndex;
 
   @override
