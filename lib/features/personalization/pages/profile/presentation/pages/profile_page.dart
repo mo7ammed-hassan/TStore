@@ -6,11 +6,11 @@ import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/features/personalization/domain/entites/user_entity.dart';
 import 'package:t_store/features/personalization/pages/profile/presentation/widgets/close_account_button.dart';
 import 'package:t_store/features/personalization/pages/profile/presentation/widgets/personal_information_section.dart';
-import 'package:t_store/features/personalization/pages/profile/presentation/widgets/profile_header.dart';
 import 'package:t_store/features/personalization/pages/profile/presentation/widgets/profile_information_section.dart';
 import 'package:t_store/core/utils/constants/sizes.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/features/personalization/pages/profile/presentation/widgets/user_profile_image.dart';
 
 class ProfilePage extends StatelessWidget {
   final UserEntity? userData;
@@ -27,7 +27,10 @@ class ProfilePage extends StatelessWidget {
         padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
         child: Column(
           children: [
-            const ProfileHeader(),
+            const UserProfileImage(
+              radius: 45,
+              showEditButton: true,
+            ),
             const Divider(),
             ResponsiveGap.vertical(TSizes.spaceBtwItems),
             const TSectionHeading(

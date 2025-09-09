@@ -41,8 +41,11 @@ class UserCubit extends Cubit<UserState> {
     );
   }
 
-  void updateUserFiled(Map<String, dynamic> fields) async {
-    if (!fromKey.currentState!.validate()) return;
+  void updateUserFiled(Map<String, dynamic> fields,
+      {bool skipValidation = false}) async {
+    if (!skipValidation) {
+      if (!fromKey.currentState!.validate()) return;
+    }
     emit(state.copyWith(action: UserAction.update, status: UserStatus.loading));
 
     var result = await getIt<UpdateUserFiledUseCase>().call(params: fields);

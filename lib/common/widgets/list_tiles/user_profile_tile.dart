@@ -39,11 +39,9 @@ class UserProfileTile extends StatelessWidget {
 
   ListTile _userTile(UserState state, BuildContext context) {
     return ListTile(
-      leading: FittedBox(
+      leading: const FittedBox(
         child: UserProfileImage(
-          width: 45,
-          height: 45,
-          image: state.user?.profilePicture,
+          radius: 23,
         ),
       ),
       title: ResponsiveText(
