@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/responsive_helpers.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text_span.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text_span.dart';
 
 class TRatingAndShare extends StatelessWidget {
   const TRatingAndShare({

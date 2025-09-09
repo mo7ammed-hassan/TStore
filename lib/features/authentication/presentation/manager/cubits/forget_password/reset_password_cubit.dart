@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/authentication/domain/use_cases/reset_password_usecase.dart';
 import 'package:t_store/features/authentication/presentation/manager/cubits/forget_password/reset_password_state.dart';
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 
 class ResetPasswordCubit extends Cubit<ResetPasswordState> {
   ResetPasswordCubit() : super(ResetPasswordLoadingState());

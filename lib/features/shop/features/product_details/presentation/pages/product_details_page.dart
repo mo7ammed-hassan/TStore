@@ -18,13 +18,13 @@ import 'package:t_store/features/shop/features/product_details/presentation/widg
 import 'package:t_store/features/shop/features/product_details/presentation/widgets/product_meta_data.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/widgets/product_detail_image_slider.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/widgets/rating_and_share.dart';
-import 'package:t_store/utils/constants/enums.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
-import 'package:t_store/utils/responsive/responsive_helpers.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/constants/enums.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/helpers/navigation.dart';
+import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_padding.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class ProductDetailsPage extends StatelessWidget {
   final ProductEntity product;

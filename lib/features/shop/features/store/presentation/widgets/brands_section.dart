@@ -4,7 +4,7 @@ import 'package:t_store/common/widgets/shimmer/shimmer_brand_show_case.dart';
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_cubit.dart';
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_state.dart';
 import 'package:t_store/features/shop/features/store/presentation/widgets/brand_list_view.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class BrandsSection extends StatelessWidget {
   const BrandsSection({super.key});

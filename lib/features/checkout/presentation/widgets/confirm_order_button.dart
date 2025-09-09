@@ -5,10 +5,10 @@ import 'package:t_store/features/checkout/presentation/cubits/checkout_cubit.dar
 import 'package:t_store/features/checkout/presentation/cubits/checkout_state.dart';
 import 'package:t_store/features/payment/presentation/screens/select_payment_screen.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/responsive_helpers.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class ConfirmOrderButton extends StatelessWidget {
   const ConfirmOrderButton({

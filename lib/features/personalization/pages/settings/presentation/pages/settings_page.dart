@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store/common/list_tiles/settings_menu_tile.dart';
+import 'package:t_store/features/personalization/pages/settings/presentation/widgets/settings_menu_tile.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/primary_header_conatiner.dart';
 import 'package:t_store/common/widgets/list_tiles/user_profile_tile.dart';
@@ -13,13 +13,13 @@ import 'package:t_store/features/personalization/pages/address/presentation/page
 import 'package:t_store/features/personalization/pages/settings/presentation/pages/upload_data_page.dart';
 import 'package:t_store/features/shop/features/cart/presentation/pages/cart_page.dart';
 import 'package:t_store/features/shop/features/order/presentation/pages/order_page.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
-import 'package:t_store/utils/popups/loaders.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/constants/colors.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/helpers/navigation.dart';
+import 'package:t_store/core/utils/popups/loaders.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});

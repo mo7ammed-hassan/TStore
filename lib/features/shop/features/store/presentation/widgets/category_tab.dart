@@ -6,10 +6,10 @@ import 'package:t_store/features/shop/features/home/domain/entites/category_enti
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_cubit.dart';
 import 'package:t_store/features/shop/features/store/presentation/widgets/brands_section.dart';
 import 'package:t_store/features/shop/features/store/presentation/widgets/products_section.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/helpers/navigation.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 
 class TCategoryTab extends StatefulWidget {
   final CategoryEntity category;

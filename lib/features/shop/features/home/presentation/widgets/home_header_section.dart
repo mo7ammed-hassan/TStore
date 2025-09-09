@@ -3,8 +3,8 @@ import 'package:t_store/common/widgets/custom_shapes/containers/primary_header_c
 import 'package:t_store/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:t_store/features/shop/features/home/presentation/widgets/categories/categories_sections.dart';
 import 'package:t_store/features/shop/features/home/presentation/widgets/home_app_bar.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 
 class HomeHeaderSection extends StatelessWidget {
   const HomeHeaderSection({super.key});

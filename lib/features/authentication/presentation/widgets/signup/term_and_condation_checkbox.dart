@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/authentication/presentation/manager/password_and_selection/password_and_selection_cubit.dart';
 import 'package:t_store/features/authentication/presentation/manager/password_and_selection/password_and_selection_state.dart';
 import 'package:t_store/common/widgets/checkbox/custom_checkbox.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/text_strings.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text_span.dart';
+import 'package:t_store/core/utils/constants/colors.dart';
+import 'package:t_store/core/utils/constants/text_strings.dart';
+import 'package:t_store/core/utils/helpers/helper_functions.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text_span.dart';
 
 class TTermAndCondationCheckbox extends StatelessWidget {
   const TTermAndCondationCheckbox({super.key});

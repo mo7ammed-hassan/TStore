@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/payment/domain/entities/payment_details.dart';
 import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
 import 'package:t_store/features/payment/domain/usecases/payment_usecases.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_state.dart';
 import 'package:t_store/features/shop/features/order/domain/usecases/update_order_status.dart';
-import 'package:t_store/utils/constants/enums.dart';
+import 'package:t_store/core/utils/constants/enums.dart';
 
 class PaymentCubit extends Cubit<PaymentState> {
   PaymentCubit(this._paymentUsecases) : super(PaymentState());

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/features/personalization/pages/settings/presentation/widgets/upload_data_card.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 
 class RelationshipsSection extends StatelessWidget {
   const RelationshipsSection({super.key});

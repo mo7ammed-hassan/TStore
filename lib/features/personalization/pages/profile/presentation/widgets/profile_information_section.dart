@@ -5,7 +5,7 @@ import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/personalization/cubit/user_state.dart';
 import 'package:t_store/features/personalization/pages/profile/presentation/pages/change_name_page.dart';
 import 'package:t_store/features/personalization/pages/profile/presentation/widgets/profile_menu.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
+import 'package:t_store/core/utils/helpers/navigation.dart';
 
 class ProfileInformationSection extends StatelessWidget {
   const ProfileInformationSection({

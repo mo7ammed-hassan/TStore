@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:t_store/utils/exceptions/firebase_exceptions.dart';
+import 'package:t_store/core/utils/exceptions/firebase_exceptions.dart';
 
 abstract class BannerFirebaseServices {
   Future<Either<String, List<QueryDocumentSnapshot<Map<String, dynamic>>>>>

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/authentication/presentation/manager/cubits/onboarding/onboarding_cubit.dart';
-import 'package:t_store/utils/constants/text_strings.dart';
-import 'package:t_store/utils/device/device_utlity.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/constants/text_strings.dart';
+import 'package:t_store/core/utils/device/device_utlity.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class OnBoardingSkip extends StatelessWidget {
   const OnBoardingSkip({

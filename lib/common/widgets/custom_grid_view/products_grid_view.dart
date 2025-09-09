@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
 
 class ProductsGridView extends StatelessWidget {
   final List<ProductEntity> products;

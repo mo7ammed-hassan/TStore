@@ -5,11 +5,11 @@ import 'package:t_store/common/widgets/shimmer/shimmer_cart_items_list.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_state.dart';
 import 'package:t_store/features/shop/features/cart/presentation/widgets/cart_items_list.dart';
-import 'package:t_store/utils/constants/images_strings.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/responsive_helpers.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/constants/images_strings.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class CartItemsSection extends StatelessWidget {
   const CartItemsSection({

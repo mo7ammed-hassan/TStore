@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:t_store/common/core/firebase_collections/collections.dart';
+import 'package:t_store/core/firebase_collections/collections.dart';
 import 'package:t_store/features/checkout/data/models/order_model.dart';
 
 abstract class OrderRemoteDataSources {

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widgets/texts/brand_title_text.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/enums.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/responsive_helpers.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/constants/colors.dart';
+import 'package:t_store/core/utils/constants/enums.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 
 class TBrandTitleWithVerifiedIcon extends StatelessWidget {
   final String title;

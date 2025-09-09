@@ -5,13 +5,13 @@ import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/personalization/cubit/user_state.dart';
 import 'package:t_store/features/shop/features/cart/presentation/pages/cart_page.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/constants/text_strings.dart';
-import 'package:t_store/utils/device/device_utlity.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/constants/colors.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/constants/text_strings.dart';
+import 'package:t_store/core/utils/device/device_utlity.dart';
+import 'package:t_store/core/utils/helpers/navigation.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class THomeAppBar extends StatelessWidget {
   const THomeAppBar({

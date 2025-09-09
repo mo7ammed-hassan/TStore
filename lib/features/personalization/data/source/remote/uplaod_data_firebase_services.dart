@@ -5,8 +5,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:t_store/features/personalization/data/models/products/product_upload_model.dart';
 import 'package:t_store/features/personalization/data/source/remote/firebase_storage_services.dart';
-import 'package:t_store/config/service_locator.dart';
-import 'package:t_store/utils/constants/enums.dart';
+import 'package:t_store/core/config/service_locator.dart';
+import 'package:t_store/core/utils/constants/enums.dart';
 
 abstract class UploadDataFirebaseServices {
   Future<void> uploadDummyData(List<dynamic> data, String collection);

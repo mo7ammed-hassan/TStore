@@ -3,7 +3,7 @@ import 'package:t_store/features/shop/features/home/data/models/banner_model.dar
 import 'package:t_store/features/shop/features/home/data/source/remote/banner_firebase_services.dart';
 import 'package:t_store/features/shop/features/home/domain/entites/banner_entity.dart';
 import 'package:t_store/features/shop/features/home/domain/repository/banner_repository.dart';
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 
 class BannerRepositoryImpl extends BannerRepository {
   @override

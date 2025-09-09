@@ -8,7 +8,7 @@ import 'package:t_store/features/shop/features/home/presentation/cubits/category
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_cubit.dart';
 import 'package:t_store/features/shop/features/store/presentation/widgets/store_header.dart';
 import 'package:t_store/features/shop/features/store/presentation/widgets/category_tab.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
+import 'package:t_store/core/utils/helpers/navigation.dart';
 
 class StorePage extends StatelessWidget {
   const StorePage({super.key});

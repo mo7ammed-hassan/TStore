@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/features/checkout/domain/entities/checkout_entity.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/checkout/domain/usecases/checkout_usecases.dart';
@@ -7,7 +7,7 @@ import 'package:t_store/features/personalization/pages/address/domain/entities/a
 import 'package:t_store/features/personalization/pages/address/domain/usecases/get_selected_address_usecase.dart';
 import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:t_store/features/checkout/presentation/cubits/checkout_state.dart';
-import 'package:t_store/utils/constants/enums.dart';
+import 'package:t_store/core/utils/constants/enums.dart';
 
 class CheckoutCubit extends Cubit<CheckoutState> {
   CheckoutCubit(this.checoutUsecases) : super(CheckoutState());

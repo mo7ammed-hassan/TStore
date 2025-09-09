@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/features/shop/features/product_reviews/presentation/widgets/rating_progress_indicator.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class TOverallProductRating extends StatelessWidget {
   const TOverallProductRating({

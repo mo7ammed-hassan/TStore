@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/shop/features/order/domain/usecases/order_usecases.dart';
 import 'package:t_store/features/shop/features/order/presentation/cuits/order_states.dart';
-import 'package:t_store/utils/constants/enums.dart';
+import 'package:t_store/core/utils/constants/enums.dart';
 
 class OrderCubit extends Cubit<OrderStates> {
   OrderCubit(this._orderUsecases) : super(OrderStates());

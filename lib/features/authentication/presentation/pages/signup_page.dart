@@ -5,12 +5,12 @@ import 'package:t_store/common/widgets/login_signup/form_divider.dart';
 import 'package:t_store/common/widgets/login_signup/social_buttons.dart';
 import 'package:t_store/features/authentication/presentation/manager/cubits/signup/signup_cubit.dart';
 import 'package:t_store/features/authentication/presentation/widgets/signup/signup_form.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/constants/text_strings.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/constants/text_strings.dart';
+import 'package:t_store/core/utils/helpers/navigation.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});

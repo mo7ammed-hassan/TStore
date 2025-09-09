@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:t_store/common/core/usecases/use_cases.dart';
-import 'package:t_store/common/models/get_all_products_param_model.dart';
+import 'package:t_store/core/usecases/use_cases.dart';
+import 'package:t_store/core/models/get_all_products_param_model.dart';
 import 'package:t_store/features/shop/features/all_brands/domain/entities/brand_entity.dart';
 import 'package:t_store/features/shop/features/all_brands/domain/repository/brands_repository.dart';
 

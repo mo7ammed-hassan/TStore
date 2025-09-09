@@ -5,10 +5,10 @@ import 'package:t_store/features/shop/features/home/presentation/cubits/home/pro
 import 'package:t_store/features/shop/features/home/presentation/widgets/slider/promo_carousel.dart';
 import 'package:t_store/features/shop/features/home/presentation/widgets/slider/promo_slider_indicators.dart';
 import 'package:t_store/features/shop/features/home/presentation/widgets/slider/shimmers/banner_placeholder.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_padding.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class TPromoSlider extends StatelessWidget {
   const TPromoSlider({super.key});

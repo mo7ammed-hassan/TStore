@@ -3,7 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:t_store/features/personalization/data/models/upload_image_model.dart';
 import 'package:t_store/features/personalization/domain/use_cases/upload_user_image_use_case.dart';
 import 'package:t_store/features/personalization/pages/profile/cuits/upload_user_profile_image_state.dart';
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 
 class UploadUserProfileImageCubit extends Cubit<UploadUserProfileImageState> {
   UploadUserProfileImageCubit() : super(UploadUserProfileImageInitialState());

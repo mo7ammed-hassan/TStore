@@ -5,10 +5,10 @@ import 'package:t_store/features/personalization/pages/address/presentation/cubi
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_state.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/add_address_button.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/address_list_view.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/popups/loaders.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/constants/colors.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/popups/loaders.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class BuildAddressesListView extends StatelessWidget {
   const BuildAddressesListView({

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:t_store/common/core/firebase_collections/collections.dart';
+import 'package:t_store/core/firebase_collections/collections.dart';
 import 'package:t_store/features/checkout/data/models/checkout_model.dart';
 import 'package:t_store/features/checkout/data/models/order_model.dart';
 import 'package:t_store/features/personalization/pages/address/data/models/address_model.dart';
@@ -7,7 +7,7 @@ import 'package:t_store/features/shop/features/all_products/data/models/product_
 import 'package:t_store/features/shop/features/cart/data/mapper/cart_item_mapper.dart';
 import 'package:t_store/features/shop/features/cart/data/models/cart_item_model.dart';
 import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
-import 'package:t_store/utils/constants/enums.dart';
+import 'package:t_store/core/utils/constants/enums.dart';
 
 abstract class CheckoutRemoteDataSource {
   Future<OrderModel> createOrderDraft({

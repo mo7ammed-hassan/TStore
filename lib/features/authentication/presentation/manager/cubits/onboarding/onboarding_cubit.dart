@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:t_store/features/authentication/presentation/widgets/onboarding/onboarding_view.dart';
-import 'package:t_store/utils/constants/images_strings.dart';
-import 'package:t_store/utils/constants/text_strings.dart';
+import 'package:t_store/core/utils/constants/images_strings.dart';
+import 'package:t_store/core/utils/constants/text_strings.dart';
 
 class OnboardingCubit extends Cubit<int> {
   OnboardingCubit() : super(0);

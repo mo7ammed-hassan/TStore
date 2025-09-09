@@ -5,16 +5,16 @@ import 'package:t_store/features/shop/features/all_products/presentation/pages/a
 import 'package:t_store/features/shop/features/home/presentation/widgets/featured_product_section.dart';
 import 'package:t_store/features/shop/features/home/presentation/widgets/popular_products_section.dart';
 import 'package:t_store/features/shop/features/home/presentation/widgets/home_header_section.dart';
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/features/shop/features/home/presentation/widgets/slider/promo_slider.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/constants/images_strings.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
-import 'package:t_store/utils/popups/full_screen_loader.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/constants/images_strings.dart';
+import 'package:t_store/core/utils/helpers/navigation.dart';
+import 'package:t_store/core/utils/popups/full_screen_loader.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_padding.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

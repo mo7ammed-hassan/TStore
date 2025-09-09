@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:t_store/common/core/usecases/use_cases.dart';
+import 'package:t_store/core/usecases/use_cases.dart';
 import 'package:t_store/features/shop/features/home/domain/entites/banner_entity.dart';
 import 'package:t_store/features/shop/features/home/domain/repository/banner_repository.dart';
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 
 class BannerUseCase
     extends UseCases<Either<String, List<BannerEntity>>, dynamic> {

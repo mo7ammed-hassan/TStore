@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:t_store/common/core/errors/failures.dart';
+import 'package:t_store/core/errors/failures.dart';
 import 'package:t_store/features/shop/features/order/domain/repositories/order_repository.dart';
 
 class CancelOrderUsecase {

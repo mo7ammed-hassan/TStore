@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
 
 class ShimmerCartItem extends StatelessWidget {

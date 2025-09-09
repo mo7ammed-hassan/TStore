@@ -4,9 +4,9 @@ import 'package:t_store/features/shop/features/order/presentation/cuits/order_cu
 import 'package:t_store/features/shop/features/order/presentation/cuits/order_states.dart';
 import 'package:t_store/features/shop/features/order/presentation/widgets/empty_orders_list.dart';
 import 'package:t_store/features/shop/features/order/presentation/widgets/order_card.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class OrderListItems extends StatelessWidget {
   const OrderListItems({

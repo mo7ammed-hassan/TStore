@@ -5,8 +5,8 @@ import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cub
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_state.dart';
 import 'package:t_store/features/shop/features/cart/presentation/widgets/cart_checkout_button.dart';
 import 'package:t_store/features/shop/features/cart/presentation/widgets/cart_items_section.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_padding.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:t_store/common/core/usecases/use_cases.dart';
+import 'package:t_store/core/usecases/use_cases.dart';
 import 'package:t_store/features/authentication/domain/repository/authentication_repository.dart';
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 
 class IsVerifiedEmailUseCase extends UseCases<bool, User> {
   @override

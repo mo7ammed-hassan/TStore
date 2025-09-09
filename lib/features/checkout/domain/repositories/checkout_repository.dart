@@ -1,7 +1,7 @@
 import 'package:t_store/features/checkout/domain/entities/checkout_entity.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
-import 'package:t_store/utils/constants/enums.dart';
+import 'package:t_store/core/utils/constants/enums.dart';
 
 abstract class CheckoutRepository {
   Future<OrderEntity> createOrderDraft({

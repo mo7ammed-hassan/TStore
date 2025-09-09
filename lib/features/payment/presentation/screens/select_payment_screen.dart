@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/payment/core/enums/payment_entry_point.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_cubit.dart';
@@ -10,11 +10,11 @@ import 'package:t_store/features/payment/presentation/widgets/confirm_payment_bu
 import 'package:t_store/features/payment/presentation/widgets/payment_card.dart';
 import 'package:t_store/features/payment/presentation/widgets/payment_summary.dart';
 import 'package:t_store/features/payment/routes/payment_routes.dart';
-import 'package:t_store/utils/constants/text_strings.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/constants/text_strings.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_padding.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class SelectPaymentScreen extends StatelessWidget {
   const SelectPaymentScreen({

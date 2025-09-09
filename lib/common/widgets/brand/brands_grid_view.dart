@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/brands/brand_card.dart';
 import 'package:t_store/features/shop/features/all_brands/domain/entities/brand_entity.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
 
 class BrandsGridView extends StatelessWidget {
   const BrandsGridView({super.key, required this.brands});

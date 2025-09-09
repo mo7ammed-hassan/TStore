@@ -8,17 +8,17 @@ import 'package:t_store/features/authentication/presentation/pages/login_page.da
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/personalization/domain/use_cases/delete_account_use_case.dart';
 import 'package:t_store/features/navigation_menu/navigation_screen.dart';
-import 'package:t_store/config/service_locator.dart';
-import 'package:t_store/utils/constants/images_strings.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/constants/text_strings.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
-import 'package:t_store/utils/popups/loaders.dart';
-import 'package:t_store/utils/responsive/responsive_helpers.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/config/service_locator.dart';
+import 'package:t_store/core/utils/constants/images_strings.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/constants/text_strings.dart';
+import 'package:t_store/core/utils/helpers/helper_functions.dart';
+import 'package:t_store/core/utils/helpers/navigation.dart';
+import 'package:t_store/core/utils/popups/loaders.dart';
+import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class VerifyEmailPage extends StatelessWidget {
   const VerifyEmailPage({super.key, this.email});

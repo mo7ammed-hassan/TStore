@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/shop/features/all_brands/presentation/cubits/product_by_brand_state.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/features/shop/features/all_products/domain/usecases/get_product_usecase.dart';
 
 class ProductsByBrandCubit extends Cubit<ProductsByBrandState> {

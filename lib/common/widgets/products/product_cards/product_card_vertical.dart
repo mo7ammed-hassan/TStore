@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/styles/shadows.dart';
+import 'package:t_store/core/styles/shadows.dart';
 import 'package:t_store/common/widgets/products/product_cards/sections/product_card_body.dart';
 import 'package:t_store/common/widgets/products/product_cards/sections/product_card_footer.dart';
 import 'package:t_store/common/widgets/products/product_cards/sections/product_card_header.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/pages/product_details_page.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/constants/colors.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/helpers/helper_functions.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 
 class TVerticalProductCard extends StatelessWidget {
   final ProductEntity product;

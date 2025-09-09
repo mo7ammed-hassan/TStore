@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
-import 'package:t_store/utils/constants/images_strings.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/core/utils/constants/images_strings.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
 
 class TRoundedImage extends StatelessWidget {
   final String imageUrl;

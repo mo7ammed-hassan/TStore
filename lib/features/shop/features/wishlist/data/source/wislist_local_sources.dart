@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:t_store/common/core/hive_boxes/open_boxes.dart';
+import 'package:t_store/core/hive_boxes/open_boxes.dart';
 
 abstract class WishlistLocalSources {
   bool isProductInWishlist(String productId, {required String userId});

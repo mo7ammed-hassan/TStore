@@ -5,16 +5,16 @@ import 'package:iconsax/iconsax.dart';
 import 'package:t_store/features/authentication/presentation/manager/cubits/forget_password/reset_password_cubit.dart';
 import 'package:t_store/features/authentication/presentation/manager/cubits/forget_password/reset_password_state.dart';
 import 'package:t_store/features/authentication/presentation/pages/reset_password_page.dart';
-import 'package:t_store/utils/constants/images_strings.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/constants/text_strings.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
-import 'package:t_store/utils/popups/full_screen_loader.dart';
-import 'package:t_store/utils/popups/loaders.dart';
-import 'package:t_store/utils/responsive/responsive_helpers.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
-import 'package:t_store/utils/validators/validation.dart';
+import 'package:t_store/core/utils/constants/images_strings.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/constants/text_strings.dart';
+import 'package:t_store/core/utils/helpers/navigation.dart';
+import 'package:t_store/core/utils/popups/full_screen_loader.dart';
+import 'package:t_store/core/utils/popups/loaders.dart';
+import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/common/validators/validation.dart';
 
 class ForgetPasswordPage extends StatelessWidget {
   const ForgetPasswordPage({super.key});

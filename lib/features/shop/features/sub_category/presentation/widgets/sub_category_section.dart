@@ -3,10 +3,10 @@ import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/pages/all_products_page.dart';
 import 'package:t_store/features/shop/features/home/domain/entites/category_entity.dart';
 import 'package:t_store/features/shop/features/sub_category/presentation/widgets/build_sub_category_products.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/helpers/navigation.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 
 class SubCategorySection extends StatelessWidget {
   const SubCategorySection({

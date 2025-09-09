@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/texts/read_more_text.dart';
 import 'package:t_store/features/shop/features/product_reviews/presentation/widgets/rating_bar_indicator.dart';
 import 'package:t_store/features/shop/features/product_reviews/presentation/widgets/store_response.dart';
-import 'package:t_store/utils/constants/images_strings.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/responsive_helpers.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/constants/images_strings.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class UserReviewCard extends StatelessWidget {
   const UserReviewCard({super.key});

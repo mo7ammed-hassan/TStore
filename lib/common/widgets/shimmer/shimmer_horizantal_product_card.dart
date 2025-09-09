@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_verify_brand.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/responsive/responsive_helpers.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/constants/colors.dart';
+import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 
 class ShimmerHorizantalProductCard extends StatelessWidget {
   const ShimmerHorizantalProductCard({super.key});

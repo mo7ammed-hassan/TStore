@@ -1,0 +1,225 @@
+import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
+
+import 'package:t_store/core/utils/constants/colors.dart';
+import 'package:t_store/core/utils/helpers/helper_functions.dart';
+
+class Loaders {
+  static void hideSnackBar() =>
+      ScaffoldMessenger.of(AppContext.context).hideCurrentSnackBar();
+
+  static void customToast({required String message, bool isMedium = true}) {
+    ScaffoldMessenger.of(AppContext.context).showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        elevation: 0,
+        duration: const Duration(seconds: 1),
+        backgroundColor: Colors.transparent,
+        content: Container(
+          padding: const EdgeInsets.all(12.0),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: HelperFunctions.isDarkMode(AppContext.context)
+                ? AppColors.darkerGrey.withValues(alpha: 0.9)
+                : AppColors.grey.withValues(alpha: 0.9),
+          ),
+          child: Center(
+            child: Text(
+              message,
+              textAlign: TextAlign.center,
+              style: isMedium
+                  ? Theme.of(AppContext.context).textTheme.bodyMedium
+                  : Theme.of(AppContext.context).textTheme.labelLarge,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  static void successSnackBar({
+    required String title,
+    String message = '',
+    int duration = 3,
+  }) {
+    _showBaseSnackBar(
+      title: title,
+      message: message,
+      backgroundColor: AppColors.primary,
+      icon: Iconsax.check,
+      duration: duration,
+    );
+  }
+
+  static void warningSnackBar({
+    required String title,
+    String message = '',
+    int duration = 3,
+  }) {
+    _showBaseSnackBar(
+      title: title,
+      message: message,
+      backgroundColor: Colors.orange,
+      icon: Iconsax.warning_2,
+      duration: duration,
+    );
+  }
+
+  static void errorSnackBar({
+    required String title,
+    String message = '',
+    int duration = 3,
+  }) {
+    _showBaseSnackBar(
+      title: title,
+      message: message,
+      backgroundColor: Colors.red.shade600,
+      icon: Iconsax.warning_2,
+      duration: duration,
+    );
+  }
+
+  /// private helper method
+  static void _showBaseSnackBar({
+    required String title,
+    required String message,
+    required Color backgroundColor,
+    required IconData icon,
+    required int duration,
+  }) {
+    final context = AppContext.context;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        duration: Duration(seconds: duration),
+        content: Container(
+          padding: context.responsiveInsets.all(12),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: backgroundColor.withValues(alpha: 0.9),
+          ),
+          child: Row(
+            children: [
+              Icon(icon, color: Colors.white),
+              ResponsiveGap.horizontal(12),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ResponsiveText(
+                      title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(color: Colors.white, fontSize: 14),
+                    ),
+                    if (message.isNotEmpty)
+                      ResponsiveText(
+                        message,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(color: Colors.white70, fontSize: 13),
+                      ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  static void showLoading({String? message}) {
+    showDialog(
+      context: AppContext.context,
+      barrierDismissible: false,
+      useSafeArea: true,
+      builder: (_) => PopScope(
+        canPop: false,
+        child: Dialog(
+          backgroundColor: Colors.transparent,
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: HelperFunctions.isDarkMode(AppContext.context)
+                  ? AppColors.darkerGrey.withValues(alpha: 0.9)
+                  : AppColors.grey.withValues(alpha: 0.9),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const CircularProgressIndicator(
+                  color: AppColors.primary,
+                ),
+                if (message != null) ...[
+                  const SizedBox(height: 16),
+                  Text(
+                    message,
+                    style: Theme.of(AppContext.context).textTheme.bodyMedium,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  static void showSimpleLoading(BuildContext contex) {
+    showDialog(
+      context: AppContext.context,
+      barrierDismissible: false,
+      builder: (_) => PopScope(
+        canPop: false,
+        child: Dialog(
+          elevation: 0,
+          shape: const CircleBorder(),
+          child: SizedBox(
+            height: contex.horzSize(50),
+            width: contex.horzSize(50),
+            child: FittedBox(
+              child: Center(
+                child: Padding(
+                  padding: contex.responsiveInsets.all(18.0),
+                  child: const CircularProgressIndicator(
+                    color: AppColors.buttonPrimary,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class AppContext {
+  AppContext._();
+  // Singleton Instance
+  static final AppContext instance = AppContext._();
+
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
+
+  static BuildContext get context {
+    if (navigatorKey.currentContext == null) {
+      throw Exception('Context is not available yet!');
+    }
+    return navigatorKey.currentContext!;
+  }
+}

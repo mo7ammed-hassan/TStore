@@ -3,7 +3,7 @@ import 'package:t_store/features/shop/features/home/data/models/category_model.d
 import 'package:t_store/features/shop/features/home/data/source/remote/category_firebase_services.dart';
 import 'package:t_store/features/shop/features/home/domain/entites/category_entity.dart';
 import 'package:t_store/features/shop/features/home/domain/repository/category_repositoy.dart';
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 
 class CategoryRepositoyImpl extends CategoryRepository {
   @override

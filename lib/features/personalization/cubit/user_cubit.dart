@@ -6,7 +6,7 @@ import 'package:t_store/features/personalization/data/models/user_model.dart';
 import 'package:t_store/features/personalization/domain/use_cases/fetch_user_data_use_case.dart';
 import 'package:t_store/features/personalization/cubit/user_state.dart';
 import 'package:t_store/features/personalization/domain/use_cases/update_user_filed_use_case.dart';
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 
 class UserCubit extends Cubit<UserState> {
   UserCubit() : super(const UserState());

@@ -1,4 +1,4 @@
-import 'package:t_store/utils/constants/images_strings.dart';
+import 'package:t_store/core/utils/constants/images_strings.dart';
 
 class BrandEntity {
   String id;

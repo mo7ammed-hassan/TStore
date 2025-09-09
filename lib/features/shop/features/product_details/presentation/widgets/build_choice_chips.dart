@@ -6,7 +6,7 @@ import 'package:t_store/features/shop/features/all_products/domain/entity/produc
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_variation_entity.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/cubits/images_product_cubit.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/cubits/product_variation_cubit.dart';
-import 'package:t_store/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
 
 class BuildChoiceChips extends StatelessWidget {
   const BuildChoiceChips({

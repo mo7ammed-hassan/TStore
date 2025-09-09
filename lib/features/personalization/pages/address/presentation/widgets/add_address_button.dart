@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/pages/add_new_address_page.dart';
-import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/core/utils/constants/colors.dart';
 
 class AddAddressButton extends StatelessWidget {
   const AddAddressButton({super.key});

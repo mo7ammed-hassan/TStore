@@ -5,10 +5,10 @@ import 'package:t_store/features/personalization/pages/address/data/mapper/addre
 import 'package:t_store/features/personalization/pages/address/data/models/address_model.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_state.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/popups/loaders.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/validators/validation.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/popups/loaders.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/common/validators/validation.dart';
 
 class AddNewAddressForm extends StatefulWidget {
   const AddNewAddressForm({super.key});

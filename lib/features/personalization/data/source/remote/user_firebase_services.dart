@@ -7,11 +7,11 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:t_store/common/core/hive_boxes/open_boxes.dart';
+import 'package:t_store/core/hive_boxes/open_boxes.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubits/favorite_button_cubit.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubits/wishlist_cubit.dart';
-import 'package:t_store/config/service_locator.dart';
-import 'package:t_store/utils/exceptions/firebase_auth_exceptions.dart';
+import 'package:t_store/core/config/service_locator.dart';
+import 'package:t_store/core/utils/exceptions/firebase_auth_exceptions.dart';
 
 abstract class UserFirebaseServices {
   Future<Either<String, Map<String, dynamic>>> fetchUserData();

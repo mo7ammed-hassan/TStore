@@ -4,8 +4,8 @@ import 'package:t_store/features/shop/features/all_products/domain/entity/produc
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/widgets/build_choice_chips.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/widgets/variation_details.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 
 class TProductAttributes extends StatelessWidget {
   final ProductEntity product;

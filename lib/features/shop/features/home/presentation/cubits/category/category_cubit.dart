@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/shop/features/home/domain/entites/category_entity.dart';
 import 'package:t_store/features/shop/features/home/domain/use_cases/category_use_case.dart';
 import 'package:t_store/features/shop/features/home/presentation/cubits/category/category_state.dart';
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 
 class CategoryCubit extends Cubit<CategoryState> {
   // Singleton instance..

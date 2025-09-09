@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:t_store/common/core/errors/failures.dart';
+import 'package:t_store/core/errors/failures.dart';
 import 'package:t_store/features/checkout/data/mapper/order_mapper.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/shop/features/order/data/datasources/order_remote_data_sources.dart';

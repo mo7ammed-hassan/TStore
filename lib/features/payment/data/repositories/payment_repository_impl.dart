@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:t_store/common/core/errors/failures.dart';
+import 'package:t_store/core/errors/failures.dart';
 import 'package:t_store/features/payment/data/datasources/i_payment_service.dart';
 import 'package:t_store/features/payment/data/datasources/payment_remote_datasource.dart';
 import 'package:t_store/features/payment/data/mappers/payment_result_mapper.dart';

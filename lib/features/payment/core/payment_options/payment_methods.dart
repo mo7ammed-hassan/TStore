@@ -1,6 +1,6 @@
 import 'package:t_store/features/payment/core/enums/payment_method.dart';
 import 'package:t_store/features/payment/data/models/payment_method_model.dart';
-import 'package:t_store/utils/constants/images_strings.dart';
+import 'package:t_store/core/utils/constants/images_strings.dart';
 
 class PaymentMethodsList {
   static final methods = [

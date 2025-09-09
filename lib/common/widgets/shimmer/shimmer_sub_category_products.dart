@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_horizantal_product_card.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/responsive_helpers.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 
 class ShimmerSubCategoryProducts extends StatelessWidget {
   const ShimmerSubCategoryProducts({super.key});

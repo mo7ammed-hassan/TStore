@@ -5,10 +5,10 @@ import 'package:t_store/features/checkout/presentation/widgets/address_section.d
 import 'package:t_store/features/checkout/presentation/widgets/payment_section.dart';
 import 'package:t_store/features/checkout/presentation/widgets/pricing_section.dart';
 import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/constants/colors.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 
 class ChekoutOrderDetial extends StatelessWidget {
   const ChekoutOrderDetial(

@@ -3,10 +3,10 @@ import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/features/shop/features/product_reviews/presentation/widgets/overall_product_rating.dart';
 import 'package:t_store/features/shop/features/product_reviews/presentation/widgets/rating_bar_indicator.dart';
 import 'package:t_store/features/shop/features/product_reviews/presentation/widgets/user_review_card.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class ProductReviewPage extends StatelessWidget {
   const ProductReviewPage({super.key});

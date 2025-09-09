@@ -4,7 +4,7 @@ import 'package:t_store/common/widgets/shimmer/category_shimmer.dart';
 import 'package:t_store/features/shop/features/home/presentation/cubits/category/category_cubit.dart';
 import 'package:t_store/features/shop/features/home/presentation/cubits/category/category_state.dart';
 import 'package:t_store/features/shop/features/home/presentation/widgets/categories/categories_list_view.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class THomeCategories extends StatelessWidget {
   const THomeCategories({super.key});

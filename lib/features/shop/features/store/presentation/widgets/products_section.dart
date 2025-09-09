@@ -4,7 +4,7 @@ import 'package:t_store/common/widgets/custom_grid_view/products_grid_view.dart'
 import 'package:t_store/common/widgets/shimmer/shimmer_products_grid_layout.dart';
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_cubit.dart';
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_state.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class ProductsSection extends StatefulWidget {
   final String categoryId;

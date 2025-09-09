@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/core/utils/helpers/helper_functions.dart';
 
 class ShimmerWidget extends StatelessWidget {
   final double? width, height;

@@ -8,9 +8,9 @@ import 'package:t_store/features/personalization/pages/profile/presentation/widg
 import 'package:t_store/features/personalization/pages/profile/presentation/widgets/personal_information_section.dart';
 import 'package:t_store/features/personalization/pages/profile/presentation/widgets/profile_header.dart';
 import 'package:t_store/features/personalization/pages/profile/presentation/widgets/profile_information_section.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 
 class ProfilePage extends StatelessWidget {
   final UserEntity? userData;

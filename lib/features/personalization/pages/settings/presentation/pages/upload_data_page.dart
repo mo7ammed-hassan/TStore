@@ -5,10 +5,10 @@ import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/features/personalization/pages/settings/presentation/cubits/cubit/upload_data_cubit.dart';
 import 'package:t_store/features/personalization/pages/settings/presentation/widgets/main_record_section.dart';
 import 'package:t_store/features/personalization/pages/settings/presentation/widgets/relationships_section.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class UploadDataPage extends StatelessWidget {
   const UploadDataPage({super.key});

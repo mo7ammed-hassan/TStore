@@ -5,12 +5,12 @@ import 'package:t_store/features/authentication/presentation/manager/cubits/sign
 import 'package:t_store/features/authentication/presentation/manager/cubits/signin/signin_with_google_state.dart';
 import 'package:t_store/features/authentication/presentation/pages/verify_email_page.dart';
 import 'package:t_store/features/navigation_menu/navigation_screen.dart';
-import 'package:t_store/utils/constants/images_strings.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/navigation.dart';
-import 'package:t_store/utils/popups/full_screen_loader.dart';
-import 'package:t_store/utils/popups/loaders.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/constants/images_strings.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/helpers/navigation.dart';
+import 'package:t_store/core/utils/popups/full_screen_loader.dart';
+import 'package:t_store/core/utils/popups/loaders.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 
 class TSocialButtons extends StatelessWidget {
   const TSocialButtons({

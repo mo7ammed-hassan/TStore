@@ -5,8 +5,8 @@ import 'package:t_store/common/widgets/shimmer/shimmer_products_grid_layout.dart
 import 'package:t_store/features/navigation_menu/cubit/navigation_cubit.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubits/wishlist_cubit.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubits/wishlist_state.dart';
-import 'package:t_store/utils/constants/images_strings.dart';
-import 'package:t_store/utils/loaders/animation_loader.dart';
+import 'package:t_store/core/utils/constants/images_strings.dart';
+import 'package:t_store/core/utils/loaders/animation_loader.dart';
 
 class BuildWishlistItems extends StatelessWidget {
   const BuildWishlistItems({super.key});

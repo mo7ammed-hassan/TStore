@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_brand_card.dart';
-import 'package:t_store/utils/constants/sizes.dart' show TSizes;
+import 'package:t_store/core/utils/constants/sizes.dart' show TSizes;
 
 class ShimmerBramdsList extends StatelessWidget {
   const ShimmerBramdsList({super.key, this.itemCount = 4});

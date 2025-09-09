@@ -4,7 +4,7 @@ import 'package:t_store/common/widgets/custom_grid_view/products_grid_view.dart'
 import 'package:t_store/common/widgets/shimmer/shimmer_products_grid_layout.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/products_cubit.dart';
 import 'package:t_store/features/shop/features/all_products/presentation/cubits/products_state.dart';
-import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
 
 class PopularProductsSection extends StatelessWidget {
   const PopularProductsSection({super.key});

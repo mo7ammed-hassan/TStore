@@ -1,4 +1,4 @@
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/features/payment/core/enums/payment_method.dart';
 import 'package:t_store/features/payment/data/datasources/i_payment_service.dart';
 

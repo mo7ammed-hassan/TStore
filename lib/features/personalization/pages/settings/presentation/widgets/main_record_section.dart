@@ -5,8 +5,8 @@ import 'package:iconsax/iconsax.dart';
 //import 'package:t_store/common/models/dummy_data.dart';
 import 'package:t_store/features/personalization/pages/settings/presentation/cubits/cubit/upload_data_cubit.dart';
 import 'package:t_store/features/personalization/pages/settings/presentation/widgets/upload_data_card.dart';
-import 'package:t_store/utils/popups/full_screen_loader.dart';
-import 'package:t_store/utils/popups/loaders.dart';
+import 'package:t_store/core/utils/popups/full_screen_loader.dart';
+import 'package:t_store/core/utils/popups/loaders.dart';
 
 class MainRecordSection extends StatelessWidget {
   const MainRecordSection({super.key});

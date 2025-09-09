@@ -1,5 +1,5 @@
 import 'package:t_store/features/checkout/domain/repositories/checkout_repository.dart';
-import 'package:t_store/utils/constants/enums.dart';
+import 'package:t_store/core/utils/constants/enums.dart';
 
 class UpdateOrderPaymentStatusUsecase {
   final CheckoutRepository _checkoutRepository;

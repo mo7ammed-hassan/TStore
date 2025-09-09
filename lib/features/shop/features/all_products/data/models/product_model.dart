@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:t_store/features/shop/features/all_brands/data/models/brand_model.dart';
 import 'package:t_store/features/shop/features/all_products/data/models/product_attribute_model.dart';
 import 'package:t_store/features/shop/features/all_products/data/models/product_variation_model.dart';
-import 'package:t_store/utils/constants/images_strings.dart';
+import 'package:t_store/core/utils/constants/images_strings.dart';
 
 part 'product_model.g.dart';
 

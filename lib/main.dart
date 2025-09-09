@@ -6,14 +6,14 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:t_store/app.dart';
+import 'package:t_store/app/app.dart';
 import 'package:t_store/bloc_observier.dart';
-import 'package:t_store/common/core/hive_boxes/open_boxes.dart';
-import 'package:t_store/common/cubits/launch_app/launch_app_cubit.dart';
+import 'package:t_store/core/hive_boxes/open_boxes.dart';
+import 'package:t_store/app/cubits/launch_app_cubit.dart';
 import 'package:t_store/firebase_options.dart';
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:t_store/utils/helpers/register_adapters.dart';
+import 'package:t_store/core/utils/helpers/register_adapters.dart';
 
 void main() {
   // Run the app inside a Zone to catch uncaught errors

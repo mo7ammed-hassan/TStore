@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:t_store/common/core/errors/failures.dart';
+import 'package:t_store/core/errors/failures.dart';
 import 'package:t_store/features/payment/core/enums/payment_method.dart';
 import 'package:t_store/features/payment/domain/entities/payment_details.dart';
 import 'package:t_store/features/payment/domain/entities/payment_result_entity.dart';

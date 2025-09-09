@@ -5,9 +5,9 @@ import 'package:t_store/features/personalization/pages/address/presentation/cubi
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_state.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/add_address_button.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/build_addresses_list_view.dart';
-import 'package:t_store/config/service_locator.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_padding.dart';
+import 'package:t_store/core/config/service_locator.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_padding.dart';
 
 class AddressPage extends StatelessWidget {
   const AddressPage({super.key});

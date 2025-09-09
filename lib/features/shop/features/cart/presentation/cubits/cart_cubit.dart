@@ -6,7 +6,7 @@ import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_en
 import 'package:t_store/features/shop/features/cart/domain/entities/product_cart_item_entity.dart';
 import 'package:t_store/features/shop/features/cart/domain/usecases/cart_usecases.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_state.dart';
-import 'package:t_store/utils/popups/loaders.dart';
+import 'package:t_store/core/utils/popups/loaders.dart';
 
 class CartCubit extends Cubit<CartState> {
   CartCubit(this._cartUsecases) : super(CartInitialState());

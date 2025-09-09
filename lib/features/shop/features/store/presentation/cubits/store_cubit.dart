@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/common/models/get_all_products_param_model.dart';
+import 'package:t_store/core/models/get_all_products_param_model.dart';
 import 'package:t_store/features/shop/features/all_brands/domain/usecases/get_brands_specific_category.dart';
 import 'package:t_store/features/shop/features/all_products/domain/usecases/get_product_usecase.dart';
 import 'package:t_store/features/shop/features/store/presentation/cubits/store_state.dart';
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 
 class StoreCubit extends Cubit<StoreState> {
   StoreCubit() : super(StoreInitial());

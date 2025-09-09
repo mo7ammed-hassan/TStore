@@ -7,7 +7,7 @@ import 'package:t_store/features/payment/data/models/payment_result_model.dart';
 import 'package:dio/dio.dart';
 import 'package:t_store/features/payment/data/models/payment_use_data.dart';
 import 'package:t_store/features/payment/domain/entities/payment_details.dart';
-import 'package:t_store/utils/constants/api_constants.dart';
+import 'package:t_store/core/utils/constants/api_constants.dart';
 
 class StripePaymentService implements IPaymentService {
   final dio = Dio();

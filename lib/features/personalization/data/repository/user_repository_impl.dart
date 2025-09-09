@@ -5,7 +5,7 @@ import 'package:t_store/features/personalization/data/models/user_model.dart';
 import 'package:t_store/features/personalization/data/source/remote/user_firebase_services.dart';
 import 'package:t_store/features/personalization/domain/entites/user_entity.dart';
 import 'package:t_store/features/personalization/domain/repository/user_repository.dart';
-import 'package:t_store/config/service_locator.dart';
+import 'package:t_store/core/config/service_locator.dart';
 
 class UserRepositoryImpl extends UserRepository {
   @override

@@ -4,9 +4,9 @@ import 'package:t_store/common/widgets/products/product_cards/product_card_horiz
 import 'package:t_store/common/widgets/shimmer/shimmer_sub_category_products.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/sub_category/presentation/cubits/sub_category_cubit.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/constants/sizes.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class BuildSubCategoryProducts extends StatelessWidget {
   const BuildSubCategoryProducts({super.key, required this.subCategoryId});

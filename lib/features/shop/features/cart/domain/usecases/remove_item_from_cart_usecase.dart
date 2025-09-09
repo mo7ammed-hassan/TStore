@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:t_store/common/core/usecases/use_cases.dart';
+import 'package:t_store/core/usecases/use_cases.dart';
 import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:t_store/features/shop/features/cart/domain/repositories/cart_repository.dart';
 

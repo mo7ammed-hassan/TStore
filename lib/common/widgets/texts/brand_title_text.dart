@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/utils/constants/enums.dart';
-import 'package:t_store/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/utils/constants/enums.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class TBrandTitleText extends StatelessWidget {
   const TBrandTitleText({

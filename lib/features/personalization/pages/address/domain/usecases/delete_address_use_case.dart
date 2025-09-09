@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:t_store/common/core/errors/failures.dart';
-import 'package:t_store/common/core/usecases/use_cases.dart';
+import 'package:t_store/core/errors/failures.dart';
+import 'package:t_store/core/usecases/use_cases.dart';
 import 'package:t_store/features/personalization/pages/address/domain/repositories/address_repository.dart';
 
 class DeleteAddressUseCase extends UseCases<Either<Failure, Unit>, String> {

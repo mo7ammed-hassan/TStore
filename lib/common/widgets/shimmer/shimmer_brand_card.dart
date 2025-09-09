@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_verify_brand.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_widget.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:t_store/core/utils/constants/colors.dart';
+import 'package:t_store/core/utils/helpers/helper_functions.dart';
 
 class ShimmerBrandCard extends StatelessWidget {
   const ShimmerBrandCard({super.key, this.showBorder = true, this.borderColor});
