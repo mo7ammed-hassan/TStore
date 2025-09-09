@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/common/cubits/password_and_selection/password_and_selection_state.dart';
+import 'package:t_store/features/authentication/presentation/manager/password_and_selection/password_and_selection_state.dart';
 
 class PasswordAndSelectionCubit extends Cubit<PasswordAndSelectionState> {
   PasswordAndSelectionCubit()

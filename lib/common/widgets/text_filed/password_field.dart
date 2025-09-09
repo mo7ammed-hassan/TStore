@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store/common/cubits/password_and_selection/password_and_selection_cubit.dart';
-import 'package:t_store/common/cubits/password_and_selection/password_and_selection_state.dart';
+import 'package:t_store/features/authentication/presentation/manager/password_and_selection/password_and_selection_cubit.dart';
+import 'package:t_store/features/authentication/presentation/manager/password_and_selection/password_and_selection_state.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/validators/validation.dart';
 

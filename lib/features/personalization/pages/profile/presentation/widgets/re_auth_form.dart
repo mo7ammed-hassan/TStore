@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store/common/cubits/password_and_selection/password_and_selection_cubit.dart';
+import 'package:t_store/features/authentication/presentation/manager/password_and_selection/password_and_selection_cubit.dart';
 import 'package:t_store/common/widgets/text_filed/password_field.dart';
 import 'package:t_store/features/authentication/presentation/pages/login_page.dart';
 import 'package:t_store/features/personalization/pages/profile/cuits/re_auth_user_cubit.dart';
