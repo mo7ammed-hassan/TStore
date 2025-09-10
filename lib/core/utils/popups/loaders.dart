@@ -117,6 +117,7 @@ class Loaders {
                   children: [
                     ResponsiveText(
                       title,
+                      maxLines: 2,
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium
@@ -125,6 +126,7 @@ class Loaders {
                     if (message.isNotEmpty)
                       ResponsiveText(
                         message,
+                        maxLines: 3,
                         style: Theme.of(context)
                             .textTheme
                             .bodySmall

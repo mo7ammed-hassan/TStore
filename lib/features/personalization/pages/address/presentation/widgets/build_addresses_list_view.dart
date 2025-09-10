@@ -90,7 +90,8 @@ class BuildAddressesListView extends StatelessWidget {
   Widget _emptyAddressesMessage() {
     return const Center(
       child: ResponsiveText(
-        'You don\'t have any addresses yet. Add one now! 🤓',
+        'You don\'t have any addresses yet.\nAdd one now! 🤓',
+        maxLines: 5,
         style: TextStyle(fontSize: TSizes.md),
         textAlign: TextAlign.center,
       ),
@@ -101,6 +102,7 @@ class BuildAddressesListView extends StatelessWidget {
     return const Center(
       child: ResponsiveText(
         'There was an error, Please try again later 🫤',
+        maxLines: 5,
         style: TextStyle(fontSize: TSizes.md),
         textAlign: TextAlign.center,
       ),

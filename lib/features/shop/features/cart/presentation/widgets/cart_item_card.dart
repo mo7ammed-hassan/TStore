@@ -42,6 +42,7 @@ class CartItemCard extends StatelessWidget {
               imageUrl: cartItem.product.imageUrl,
               width: 65,
               height: 65,
+              borderRadius: 10,
               padding: context.responsiveInsets.all(TSizes.sm),
               backgroundColor: isDark ? AppColors.darkerGrey : AppColors.light,
             ),

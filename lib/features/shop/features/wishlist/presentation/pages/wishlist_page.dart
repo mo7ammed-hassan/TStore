@@ -16,9 +16,11 @@ class WishlistPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: getIt.get<WishlistCubit>()..fetchWishlist(),
-      child: Scaffold(
-        appBar: _buildAppBar(context),
-        body: const WishlistPageBody(),
+      child: SafeArea(
+        child: Scaffold(
+          appBar: _buildAppBar(context),
+          body: const WishlistPageBody(),
+        ),
       ),
     );
   }

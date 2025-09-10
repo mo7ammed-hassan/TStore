@@ -108,7 +108,7 @@ class _UserProfileImageState extends State<UserProfileImage> {
           if (snapshot.data == false) {
             return CircleAvatar(
               radius: context.horzSize(widget.radius),
-              child: Icon(widget.defaultAvatarIcon, size: errorIconSize),
+              child: Image.asset(TImages.user),
             );
           }
           return CircleAvatar(
@@ -143,40 +143,39 @@ class _UserProfileImageState extends State<UserProfileImage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: widget.showBorder
-            ? Border.all(color: widget.borderColor, width: widget.borderWidth)
-            : null,
-      ),
-      child: BlocBuilder<UserCubit, UserState>(
-        builder: (context, state) {
-          return Column(
-            children: [
-              _buildAvatar(state),
-              if (widget.showEditButton)
-                TextButton(
-                  onPressed: () => _pickImage(),
-                  child: _isUploading
-                      ? SizedBox(
-                          width: widget.editButtonSize,
-                          height: widget.editButtonSize,
-                          child: const CircularProgressIndicator(
-                            strokeWidth: 2,
-                            color: Colors.blue,
-                          ),
-                        )
-                      : const ResponsiveText(
-                          'Change Profile Picture',
-                          fontSize: 11.5,
-                          fontWeight: FontWeight.w600,
+    return BlocBuilder<UserCubit, UserState>(
+      builder: (context, state) {
+        return Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border:
+                    widget.showBorder ? Border.all(color: Colors.grey) : null,
+              ),
+              child: _buildAvatar(state),
+            ),
+            if (widget.showEditButton)
+              TextButton(
+                onPressed: () => _pickImage(),
+                child: _isUploading
+                    ? SizedBox(
+                        width: widget.editButtonSize,
+                        height: widget.editButtonSize,
+                        child: const CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: Colors.blue,
                         ),
-                ),
-            ],
-          );
-        },
-      ),
+                      )
+                    : const ResponsiveText(
+                        'Change Profile Picture',
+                        fontSize: 11.5,
+                        fontWeight: FontWeight.w600,
+                      ),
+              ),
+          ],
+        );
+      },
     );
   }
 }

@@ -46,8 +46,9 @@ class VerifyEmailPage extends StatelessWidget {
           listener: (context, state) {
             if (state is SuccessSendVerifyEmailState) {
               Loaders.successSnackBar(
-                  title: 'Email Sent',
-                  message: 'Please Check your inbox and verify email.');
+                title: 'Email Sent',
+                message: 'Please Check your inbox and verify email.',
+              );
               // } else if (state is VerifyEmailErrorState) {
               //   TLoaders.errorSnackBar(
               //     title: 'Oh Snap!',
