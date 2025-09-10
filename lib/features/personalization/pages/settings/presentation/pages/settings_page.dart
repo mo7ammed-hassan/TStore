@@ -59,7 +59,7 @@ class SettingsPage extends StatelessWidget {
                     showActionButton: false,
                   ),
                   ResponsiveGap.vertical(
-                    TSizes.spaceBtwItems,
+                    TSizes.spaceBtwItems / 2,
                   ),
                   TSettingMenuTile(
                     icon: Iconsax.safe_home,
@@ -125,14 +125,14 @@ class SettingsPage extends StatelessWidget {
                     onTap: () {},
                   ),
                   ResponsiveGap.vertical(
-                    TSizes.spaceBtwSections,
+                    TSizes.spaceBtwSections - 8,
                   ),
                   const TSectionHeading(
                     title: 'General Settings',
                     showActionButton: false,
                   ),
                   ResponsiveGap.vertical(
-                    TSizes.spaceBtwItems,
+                    TSizes.spaceBtwItems / 2,
                   ),
                   TSettingMenuTile(
                     icon: Iconsax.document_upload,
