@@ -16,10 +16,13 @@ class PaymentFlowScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Navigator(
-      initialRoute: PaymentRoutes.orderReviewScreen,
-      onGenerateRoute: (settings) =>
-          PaymentRouter.onGenerateRoute(settings, entryPoint, args),
+    return PopScope(
+      canPop: false,
+      child: Navigator(
+        initialRoute: PaymentRoutes.orderReviewScreen,
+        onGenerateRoute: (settings) =>
+            PaymentRouter.onGenerateRoute(settings, entryPoint, args),
+      ),
     );
   }
 }
