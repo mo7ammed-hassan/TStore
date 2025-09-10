@@ -30,13 +30,16 @@ class SuccessPage extends StatelessWidget {
             children: [
               (animation ? Lottie.asset : Image.asset)(
                 image,
-                width: HelperFunctions.screenWidth() * 0.7,
+                width: HelperFunctions.screenWidth() * 0.8,
               ),
-              ResponsiveGap.vertical(TSizes.spaceBtwSections),
+              // ResponsiveGap.vertical(TSizes.spaceBtwSections),
               ResponsiveText(
                 title,
                 maxLines: 5,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontSize: 17),
                 textAlign: TextAlign.center,
               ),
               ResponsiveGap.vertical(TSizes.spaceBtwItems),
