@@ -4,7 +4,6 @@ import 'package:t_store/features/authentication/presentation/pages/login_page.da
 import 'package:t_store/features/personalization/pages/profile/cuits/delete_user_account_cubit.dart';
 import 'package:t_store/features/personalization/pages/profile/cuits/delete_user_account_state.dart';
 import 'package:t_store/features/personalization/pages/profile/presentation/pages/re_auth_page.dart';
-import 'package:t_store/core/utils/constants/colors.dart';
 import 'package:t_store/core/utils/constants/sizes.dart';
 import 'package:t_store/core/utils/helpers/navigation.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
@@ -66,7 +65,7 @@ class CloseAccountButton extends StatelessWidget {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.warning,
+                backgroundColor: Colors.redAccent,
                 side: BorderSide.none,
               ),
               onPressed: () {

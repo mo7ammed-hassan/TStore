@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store/core/utils/constants/colors.dart';
 import 'package:t_store/features/shop/features/order/presentation/cuits/order_cubit.dart';
 import 'package:t_store/features/shop/features/order/presentation/cuits/order_states.dart';
 import 'package:t_store/features/shop/features/order/presentation/widgets/empty_orders_list.dart';
@@ -19,7 +20,11 @@ class OrderListItems extends StatelessWidget {
       builder: (context, state) {
         switch (state.status) {
           case OrderStateStatus.loading:
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(
+                color: AppColors.primary,
+              ),
+            );
 
           case OrderStateStatus.success:
             if (state.orders!.isEmpty) {
