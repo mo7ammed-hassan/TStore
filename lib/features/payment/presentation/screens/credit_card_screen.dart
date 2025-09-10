@@ -25,10 +25,7 @@ class CreditCardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-    final order = args['order'] as OrderEntity;
-    final paymentCubit = args['paymentCubit'] as PaymentCubit;
+    final order = ModalRoute.of(context)?.settings.arguments as OrderEntity?;
 
     return Scaffold(
       appBar: const TAppBar(
@@ -38,25 +35,15 @@ class CreditCardScreen extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) => CreditCardFormCubit(),
-        child: CreditCardView(
-          order: order,
-          entryPoint: entryPoint,
-          paymentCubit: paymentCubit,
-        ),
+        child: CreditCardView(order: order, entryPoint: entryPoint),
       ),
     );
   }
 }
 
 class CreditCardView extends StatelessWidget {
-  const CreditCardView({
-    super.key,
-    required this.order,
-    this.entryPoint,
-    required this.paymentCubit,
-  });
+  const CreditCardView({super.key, required this.order, this.entryPoint});
   final OrderEntity? order;
-  final PaymentCubit paymentCubit;
   final PaymentEntryPoint? entryPoint;
 
   @override
@@ -121,12 +108,9 @@ class CreditCardView extends StatelessWidget {
               ),
             ),
           ),
-          BlocProvider.value(
-            value: paymentCubit,
-            child: _PayButton(
-              key: const ValueKey('PayWithNewCardButton'),
-              order: order,
-            ),
+          _PayButton(
+            key: const ValueKey('PayWithNewCardButton'),
+            order: order,
           ),
         ],
       ),

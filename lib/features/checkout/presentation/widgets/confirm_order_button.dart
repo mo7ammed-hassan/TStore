@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/checkout/presentation/cubits/checkout_cubit.dart';
 import 'package:t_store/features/checkout/presentation/cubits/checkout_state.dart';
-import 'package:t_store/features/payment/presentation/screens/select_payment_screen.dart';
+import 'package:t_store/features/payment/routes/payment_routes.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
 import 'package:t_store/core/utils/constants/sizes.dart';
 import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
@@ -30,13 +30,9 @@ class ConfirmOrderButton extends StatelessWidget {
         child: BlocConsumer<CheckoutCubit, CheckoutState>(
           listener: (context, state) {
             if (state.createOrderSuccess) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SelectPaymentScreen(
-                    order: state.order ?? order,
-                  ),
-                ),
+              Navigator.of(context).pushNamed(
+                PaymentRoutes.selectPaymentScreen,
+                arguments: state.order ?? order,
               );
 
               if (removeCartItems) context.read<CartCubit>().clearAllItems();

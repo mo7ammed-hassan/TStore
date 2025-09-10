@@ -33,8 +33,8 @@ class PaymentRouter {
       }
       return const HomePage();
     },
-    PaymentRoutes.selectPayment: (context, args) =>
-        SelectPaymentScreen(order: args.order),
+    PaymentRoutes.selectPaymentScreen: (context, args) =>
+        const SelectPaymentScreen(),
     PaymentRoutes.creditCardScreen: (context, args) =>
         CreditCardScreen(entryPoint: args.entryPoint),
     PaymentRoutes.paymentStatusScreen: (context, args) =>
