@@ -6,4 +6,6 @@ class PaymentRoutes {
   static const creditCardScreen = '/creditCardScreen';
   static const paymentStatusScreen = '/paymentStatusScreen';
   static const cardSelectionScreen = '/cardSelectionScreen';
+  static const manageCardsScreen = '/manageCardsScreen';
+
 }

@@ -6,6 +6,7 @@ import 'package:t_store/core/utils/helpers/helper_functions.dart';
 import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/features/payment/presentation/widgets/selection_indicator.dart';
 
 class PaymentMethodCard extends StatelessWidget {
   final PaymentMethodEntity method;
@@ -42,7 +43,7 @@ class PaymentMethodCard extends StatelessWidget {
               _buildLogoBox(context),
               ResponsiveGap.horizontal(16),
               _buildInfoSection(context),
-              _buildSelectionIndicator(context),
+              SelectionIndicator(selected: selected),
             ],
           ),
         ),
@@ -82,41 +83,6 @@ class PaymentMethodCard extends StatelessWidget {
       child: ResponsiveText(
         method.name,
         style: Theme.of(context).textTheme.bodyMedium,
-      ),
-    );
-  }
-
-  Widget _buildSelectionIndicator(BuildContext context) {
-    return AnimatedContainer(
-      duration: _animationDuration,
-      width: context.horzSize(24),
-      height: context.vertSize(24),
-      padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: selected ? Colors.transparent : const Color(0xFF007df3),
-          width: selected ? 0 : 4,
-        ),
-        boxShadow: [
-          if (selected)
-            BoxShadow(
-              color: const Color(0xFF007df3).withValues(alpha: 0.4),
-              blurRadius: 0,
-              offset: const Offset(0, 0),
-            )
-        ],
-      ),
-      child: AnimatedContainer(
-        duration: _animationDuration,
-        width: context.horzSize(12),
-        height: context.vertSize(12),
-        decoration: BoxDecoration(
-          color: selected
-              ? const Color(0xFF007df3).withValues(alpha: 0.9)
-              : Colors.transparent,
-          shape: BoxShape.circle,
-        ),
       ),
     );
   }

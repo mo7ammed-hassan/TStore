@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/features/payment/presentation/screens/manage_cards_screen.dart';
 import 'package:t_store/features/personalization/pages/settings/presentation/widgets/settings_menu_tile.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/primary_header_conatiner.dart';
@@ -104,7 +105,14 @@ class SettingsPage extends StatelessWidget {
                     icon: Iconsax.bank,
                     title: 'Bank Account',
                     subtitle: 'Withdraw money to bank account',
-                    onTap: () {},
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ManageCardsScreen(
+                          nestedNavigator: false,
+                        ),
+                      ),
+                    ),
                   ),
                   TSettingMenuTile(
                     icon: Iconsax.discount_shape,
