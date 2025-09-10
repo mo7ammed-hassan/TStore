@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:t_store/features/checkout/presentation/pages/order_review_screen.dart';
 import 'package:t_store/features/payment/core/enums/payment_entry_point.dart';
+import 'package:t_store/features/payment/presentation/screens/card_selection_screen.dart';
 import 'package:t_store/features/payment/presentation/screens/credit_card_screen.dart';
 import 'package:t_store/features/payment/presentation/screens/payment_status_screen.dart';
 import 'package:t_store/features/payment/presentation/screens/select_payment_screen.dart';
@@ -38,6 +39,8 @@ class PaymentRouter {
         CreditCardScreen(entryPoint: args.entryPoint),
     PaymentRoutes.paymentStatusScreen: (context, args) =>
         const PaymentStatusScreen(),
+    PaymentRoutes.cardSelectionScreen: (context, args) =>
+        const CardSelectionScreen(),
   };
 
   static Route<dynamic> onGenerateRoute(

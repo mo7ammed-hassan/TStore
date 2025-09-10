@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
 import 'package:t_store/core/utils/constants/colors.dart';
 import 'package:t_store/core/utils/helpers/helper_functions.dart';
 import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class PaymentMethodCard extends StatelessWidget {
@@ -40,7 +40,7 @@ class PaymentMethodCard extends StatelessWidget {
           child: Row(
             children: [
               _buildLogoBox(context),
-              const SizedBox(width: 16),
+              ResponsiveGap.horizontal(16),
               _buildInfoSection(context),
               _buildSelectionIndicator(context),
             ],
@@ -79,20 +79,9 @@ class PaymentMethodCard extends StatelessWidget {
 
   Widget _buildInfoSection(BuildContext context) {
     return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ResponsiveText(
-            method.name,
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          ResponsiveGap.vertical(4),
-          ResponsiveText(
-            '**** **** 1234',
-            style: Theme.of(context).textTheme.labelMedium,
-          ),
-        ],
+      child: ResponsiveText(
+        method.name,
+        style: Theme.of(context).textTheme.bodyMedium,
       ),
     );
   }

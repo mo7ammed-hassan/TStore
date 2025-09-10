@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
-class ConfirmPaymentButton extends StatelessWidget {
+class ContinueButton extends StatelessWidget {
   final bool enabled;
   final void Function()? onPressed;
 
-  const ConfirmPaymentButton({
+  const ContinueButton({
     super.key,
     required this.enabled,
     this.onPressed,
@@ -23,7 +23,7 @@ class ConfirmPaymentButton extends StatelessWidget {
             minimumSize: const Size(double.infinity, 50),
           ),
           child: const ResponsiveText(
-            'Confirm Payment',
+            'Continue',
           ),
         ),
       ),

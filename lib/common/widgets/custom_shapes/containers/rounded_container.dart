@@ -38,7 +38,7 @@ class TRoundedContainer extends StatelessWidget {
       padding: padding,
       alignment: alignment,
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: isDark ? AppColors.dark : backgroundColor,
         borderRadius: BorderRadius.circular(radius),
         border: showBorder
             ? Border.all(

@@ -5,4 +5,6 @@ class PaymentRoutes {
   static const selectPayment = '/selectPaymentScreen';
   static const creditCardScreen = '/creditCardScreen';
   static const paymentStatusScreen = '/paymentStatusScreen';
+  static const cardSelectionScreen = '/cardSelectionScreen';
+
 }
