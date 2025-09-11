@@ -16,9 +16,7 @@ class ProductReviewPage extends StatelessWidget {
     return Scaffold(
       appBar: const TAppBar(
         showBackArrow: true,
-        title: 
-          'Review & Rating',
-         
+        title: 'Review & Rating',
       ),
       body: SingleChildScrollView(
         child: Padding(

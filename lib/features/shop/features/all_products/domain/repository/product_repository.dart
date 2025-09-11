@@ -5,7 +5,7 @@ import 'package:t_store/features/shop/features/all_products/domain/entity/produc
 
 abstract class ProductRepository {
   Future<Either<Failure, List<ProductEntity>>> getProducts({
-     bool? isFeatured,
+    bool? isFeatured,
     bool? isPopular,
     String? categoryId,
     String? brandId,

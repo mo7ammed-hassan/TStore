@@ -20,9 +20,7 @@ class UploadDataPage extends StatelessWidget {
       child: Scaffold(
         appBar: const TAppBar(
           showBackArrow: true,
-          title: 
-            'Upload Data',
-           
+          title: 'Upload Data',
         ),
         body: SingleChildScrollView(
           padding: context.responsiveInsets.all(TSizes.spaceBtwItems),

@@ -1,4 +1,3 @@
-
 class ProductAttributeUploadModel {
   String name;
   List<String> values;

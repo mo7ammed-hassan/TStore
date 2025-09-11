@@ -53,7 +53,6 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
             .map((doc) => doc['productId'] as String)
             .toList();
 
-
         if (ids.isEmpty) return [];
         query = query.where(FieldPath.documentId, whereIn: ids);
       }

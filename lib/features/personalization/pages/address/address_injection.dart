@@ -39,7 +39,7 @@ void registerAddressDependencies(GetIt getIt) {
   );
 
   getIt.registerLazySingleton<AddressUsecases>(
-    () => AddressUsecases(getIt(), getIt(), getIt(), getIt(),getIt()),
+    () => AddressUsecases(getIt(), getIt(), getIt(), getIt(), getIt()),
   );
 
   getIt.registerFactory<AddressCubit>(

@@ -39,4 +39,16 @@ class CheckoutEntity {
       total: total,
     );
   }
+
+  factory CheckoutEntity.empty() {
+    return CheckoutEntity(
+      orderId: null,
+      items: const [],
+      subtotal: 0.0,
+      shipping: 0.0,
+      discount: 0.0,
+      total: 0.0,
+      status: OrderStatus.unCompleted,
+    );
+  }
 }

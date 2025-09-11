@@ -6,5 +6,4 @@ class BrandCategoryEntity {
     required this.brandId,
     required this.categoryId,
   });
-  
 }

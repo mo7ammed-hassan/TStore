@@ -29,4 +29,3 @@ class SubCategoryProductsFailure extends SubCategoryState {
 }
 
 class SubCategoryProductsLoading extends SubCategoryState {}
-

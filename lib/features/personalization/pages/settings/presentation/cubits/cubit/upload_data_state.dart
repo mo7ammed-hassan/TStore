@@ -8,7 +8,7 @@ final class UploadDataloading extends UploadDataState {
   final String message;
   final String animation;
 
-  UploadDataloading(this.message,this.animation);
+  UploadDataloading(this.message, this.animation);
 }
 
 final class UploadDataSuccess extends UploadDataState {

@@ -41,9 +41,8 @@ class ResponsiveTextSpan extends StatelessWidget {
           fontWeight: fontWeight ?? style?.fontWeight,
           color: color ?? style?.color,
         ),
-        children: children
-            ?.map((child) => child.buildTextSpan(context))
-            .toList(),
+        children:
+            children?.map((child) => child.buildTextSpan(context)).toList(),
       ),
     );
   }

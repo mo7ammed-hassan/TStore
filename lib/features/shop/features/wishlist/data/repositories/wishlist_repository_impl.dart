@@ -53,7 +53,6 @@ class WishlistRepositoryImpl implements WishlistRepository {
   }
 
   @override
-
   Future<void> removeProductFromWishlist(String productId) {
     try {
       return wishlistFirebaseServices.removeProductFromWishlist(productId);

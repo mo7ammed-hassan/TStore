@@ -23,14 +23,13 @@ class ProductRepositoryImpl implements ProductRepository {
   }) async {
     try {
       final products = await remoteDataSource.getProducts(
-        isFeatured: isFeatured,
-        isPopular: isPopular,
-        categoryId: categoryId,
-        brandId: brandId,
-        productIds: productIds,
-        limit: limit,
-        startAfter: startAfter
-      );
+          isFeatured: isFeatured,
+          isPopular: isPopular,
+          categoryId: categoryId,
+          brandId: brandId,
+          productIds: productIds,
+          limit: limit,
+          startAfter: startAfter);
       final productsList = products.map((e) => e.toEntity()).toList();
       return Right(productsList);
     } catch (e) {

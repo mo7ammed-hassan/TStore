@@ -40,7 +40,10 @@ class BrandsFirebaseServicesImpl implements BrandsFirebaseServices {
   Future<Either<dynamic, List<DocumentSnapshot<Map<String, dynamic>>>>>
       getAllBrands({int limit = 16}) async {
     try {
-      var data = await _firestore.collection(FirebaseCollections.BRANDS_COLLECTION).limit(limit).get();
+      var data = await _firestore
+          .collection(FirebaseCollections.BRANDS_COLLECTION)
+          .limit(limit)
+          .get();
 
       return Right(data.docs);
     } catch (e) {

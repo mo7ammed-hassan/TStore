@@ -1,4 +1,3 @@
-
 import 'package:t_store/features/shop/features/all_brands/data/models/brand_model.dart';
 import 'package:t_store/features/shop/features/all_brands/domain/entities/brand_entity.dart';
 

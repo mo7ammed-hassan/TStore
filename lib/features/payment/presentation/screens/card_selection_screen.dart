@@ -43,7 +43,7 @@ class CardSelectionScreen extends StatelessWidget {
                   .symmetric(horizontal: 12, vertical: 16),
               width: double.infinity,
               child: ResponsiveTextSpan(
-                text: 'Order ID : ',
+                text: 'Order ID: ',
                 style: Theme.of(context).textTheme.bodyLarge,
                 children: [
                   ResponsiveTextSpan(

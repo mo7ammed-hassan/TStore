@@ -1,6 +1,6 @@
 abstract class SignInWithGoogleState {}
 
-class SignInWithGoogleInitialState extends SignInWithGoogleState{}
+class SignInWithGoogleInitialState extends SignInWithGoogleState {}
 
 class SignInWithGoogleLoadingState extends SignInWithGoogleState {}
 
@@ -16,7 +16,7 @@ class SignInWithGoogleFaliureState extends SignInWithGoogleState {
   SignInWithGoogleFaliureState(this.errorMessage);
 }
 
-class NotVerifiedEmailState extends SignInWithGoogleState{
+class NotVerifiedEmailState extends SignInWithGoogleState {
   final String email;
 
   NotVerifiedEmailState(this.email);

@@ -11,7 +11,7 @@ class SortableProductCubit extends Cubit<List<ProductEntity>> {
   void resetProducts(List<ProductEntity> products) {
     if (isClosed) return;
     originalProducts = List.from(products);
-    _applyFilters(); 
+    _applyFilters();
   }
 
   void sortProducts(String sortBy) {

@@ -8,7 +8,7 @@ import 'package:t_store/features/payment/domain/entities/payment_method_entity.d
 import 'package:t_store/features/payment/domain/entities/payment_result_entity.dart';
 import 'package:t_store/features/payment/domain/repositories/payment_repository.dart';
 
-class PaymentRepositoryImpl extends PaymentRepository {
+class PaymentRepositoryImpl implements PaymentRepository {
   final PaymentRemoteDatasource paymentRemoteDatasource;
   PaymentRepositoryImpl(this.paymentRemoteDatasource);
 

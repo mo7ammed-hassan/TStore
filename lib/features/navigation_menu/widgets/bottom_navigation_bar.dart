@@ -22,7 +22,7 @@ class TBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
-    
+
     return NavigationBar(
       height: 65,
       elevation: 0,

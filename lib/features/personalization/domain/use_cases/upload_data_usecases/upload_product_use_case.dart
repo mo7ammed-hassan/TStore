@@ -4,7 +4,8 @@ import 'package:t_store/core/config/service_locator.dart';
 
 class UploadProductUseCase {
   Future call(
-      {required List<ProductUploadModel> data, required String collection}) async {
+      {required List<ProductUploadModel> data,
+      required String collection}) async {
     return await getIt<UploadDataRepository>()
         .uploadProductData(data, collection);
   }

@@ -10,25 +10,25 @@ class AddAddressButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final addressCubit = context.read<AddressCubit>();
-     
+    final addressCubit = context.read<AddressCubit>();
+
     return FloatingActionButton(
-          backgroundColor: AppColors.primary,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BlocProvider.value(
-                  value: addressCubit,
-                  child: const AddNewAddressPage(),
-                ),
-              ),
-            );
-          },
-          child: const Icon(
-            Iconsax.add,
-            color: AppColors.white,
+      backgroundColor: AppColors.primary,
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BlocProvider.value(
+              value: addressCubit,
+              child: const AddNewAddressPage(),
+            ),
           ),
         );
+      },
+      child: const Icon(
+        Iconsax.add,
+        color: AppColors.white,
+      ),
+    );
   }
 }

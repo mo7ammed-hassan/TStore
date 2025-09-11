@@ -6,7 +6,9 @@ import 'package:t_store/core/utils/helpers/helper_functions.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/payment/presentation/widgets/card_item_widget.dart';
+import 'package:t_store/features/payment/routes/payment_routes.dart';
 
 class ManageCardsScreen extends StatelessWidget {
   const ManageCardsScreen({super.key, this.nestedNavigator = true});
@@ -38,7 +40,13 @@ class ManageCardsScreen extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => nestedNavigator
+                      ? Navigator.pushNamed(
+                          context,
+                          PaymentRoutes.creditCardScreen,
+                          arguments: OrderEntity.empty(),
+                        )
+                      : () {},
                   child: const ResponsiveText('Add Bank Card'),
                 ),
               ),

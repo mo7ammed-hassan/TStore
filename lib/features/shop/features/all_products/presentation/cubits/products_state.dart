@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
+
 // Explicit State Representation || Strongly Typed State
 class ProductsState extends Equatable {
   final ProductsSubsetState popular;
@@ -58,9 +59,7 @@ class ProductsSubsetState extends Equatable {
   List<Object?> get props => [products, isLoading, error];
 }
 
-
-
-// ------------------------------------------------------------------------------------------------// 
+// ------------------------------------------------------------------------------------------------//
 // import 'package:equatable/equatable.dart';
 // import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 

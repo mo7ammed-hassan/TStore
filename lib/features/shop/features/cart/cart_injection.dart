@@ -27,7 +27,7 @@ void registerCartDependencies(GetIt getIt) {
       getIt.get<CartLocalStorageServices>(),
     ),
   );
-  
+
   getIt.registerLazySingleton<FetchCartItemsUseCase>(
     () => FetchCartItemsUseCase(getIt.get<CartRepository>()),
   );

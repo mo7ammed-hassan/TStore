@@ -2,7 +2,7 @@
 
 class FirebaseCollections {
   const FirebaseCollections._();
-  
+
   static const String USER_COLLECTION = 'Users';
   static const String WISHLIST_COLLECTION = 'Wishlist';
   static const String PRODUCTS_COLLECTION = 'Products';

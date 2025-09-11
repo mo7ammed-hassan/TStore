@@ -32,7 +32,6 @@ class TProductCartFooter extends StatelessWidget {
             ),
           ),
           ResponsiveGap.horizontal(TSizes.sm),
-          
           TAddIcon(
             product: product,
           ),

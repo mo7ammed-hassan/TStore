@@ -64,8 +64,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1053148190415',
     projectId: 'ecommerceapp-a2faf',
     storageBucket: 'ecommerceapp-a2faf.firebasestorage.app',
-    androidClientId: '1053148190415-0rfsbsmrq00n9us82ro1i44o0u5alsq7.apps.googleusercontent.com',
-    iosClientId: '1053148190415-5e6vgpuu14uguc2ppqj0en7620a2lhre.apps.googleusercontent.com',
+    androidClientId:
+        '1053148190415-0rfsbsmrq00n9us82ro1i44o0u5alsq7.apps.googleusercontent.com',
+    iosClientId:
+        '1053148190415-5e6vgpuu14uguc2ppqj0en7620a2lhre.apps.googleusercontent.com',
     iosBundleId: 'com.example.tStore',
   );
 
@@ -75,8 +77,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1053148190415',
     projectId: 'ecommerceapp-a2faf',
     storageBucket: 'ecommerceapp-a2faf.firebasestorage.app',
-    androidClientId: '1053148190415-0rfsbsmrq00n9us82ro1i44o0u5alsq7.apps.googleusercontent.com',
-    iosClientId: '1053148190415-5e6vgpuu14uguc2ppqj0en7620a2lhre.apps.googleusercontent.com',
+    androidClientId:
+        '1053148190415-0rfsbsmrq00n9us82ro1i44o0u5alsq7.apps.googleusercontent.com',
+    iosClientId:
+        '1053148190415-5e6vgpuu14uguc2ppqj0en7620a2lhre.apps.googleusercontent.com',
     iosBundleId: 'com.example.tStore',
   );
 
@@ -89,5 +93,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'ecommerceapp-a2faf.firebasestorage.app',
     measurementId: 'G-Y9KYF75B4F',
   );
-
 }

@@ -21,7 +21,6 @@ class WishlistCubit extends Cubit<WishlistState> {
       (wishlistItems) async {
         var result = await productsUseCase.call(
           productIds: wishlistItems,
-          
         );
 
         result.fold(

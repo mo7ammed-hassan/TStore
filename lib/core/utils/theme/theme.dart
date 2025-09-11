@@ -19,7 +19,8 @@ class AppTheme {
         scaffoldBackgroundColor: Colors.white,
         textTheme: TTextTheme.lightTextTheme,
         chipTheme: TChipTheme.lightChipTheme,
-        elevatedButtonTheme: TElevetedButtonTheme.lightElevetedButtonTheme(context),
+        elevatedButtonTheme:
+            TElevetedButtonTheme.lightElevetedButtonTheme(context),
         appBarTheme: TAppBarTheme.lightAppBarTheme,
         bottomSheetTheme: TBottomSheetTheme.lightBottomSheetTheme,
         checkboxTheme: TCheckboxTheme.lightCheckBoxTheme,
@@ -35,7 +36,8 @@ class AppTheme {
         scaffoldBackgroundColor: Colors.black,
         textTheme: TTextTheme.darkTextTheme,
         chipTheme: TChipTheme.darkChipTheme,
-        elevatedButtonTheme: TElevetedButtonTheme.darkElevetedButtonTheme(context),
+        elevatedButtonTheme:
+            TElevetedButtonTheme.darkElevetedButtonTheme(context),
         appBarTheme: TAppBarTheme.darkAppBarTheme,
         bottomSheetTheme: TBottomSheetTheme.darkBottomSheetTheme,
         checkboxTheme: TCheckboxTheme.darkCheckBoxTheme,

@@ -23,6 +23,3 @@ extension CartModelMapper on CartItemEntity {
     );
   }
 }
-
-
-

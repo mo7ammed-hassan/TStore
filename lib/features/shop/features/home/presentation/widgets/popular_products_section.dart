@@ -12,7 +12,7 @@ class PopularProductsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocSelector<ProductsCubit, ProductsState, ProductsSubsetState>(
-       selector: (state) => state.popular,
+      selector: (state) => state.popular,
       builder: (context, popularState) {
         if (popularState.isLoading) {
           return SliverPadding(

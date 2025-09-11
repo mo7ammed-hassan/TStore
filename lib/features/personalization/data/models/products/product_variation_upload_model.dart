@@ -1,4 +1,3 @@
-
 class ProductVariationUploadModel {
   String id;
   String? sku;

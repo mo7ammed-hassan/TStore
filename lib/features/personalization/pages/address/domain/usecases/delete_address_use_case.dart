@@ -8,8 +8,7 @@ class DeleteAddressUseCase extends UseCases<Either<Failure, Unit>, String> {
   DeleteAddressUseCase(this.addressRepository);
 
   @override
-  Future<Either<Failure, Unit>> call({String? params}) async{
+  Future<Either<Failure, Unit>> call({String? params}) async {
     return await addressRepository.deleteAddress(addressId: params!);
   }
 }
-

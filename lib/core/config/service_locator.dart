@@ -67,6 +67,7 @@ final getIt = GetIt.instance;
 
 Future<void> initializeDependencies() async {
   // ------Services------
+
   // --Remote
   getIt.registerFactory<AuthenticationFirebaseServices>(
     () => AuthenticationFirebaseServicesImpl(),
@@ -202,7 +203,7 @@ Future<void> initializeDependencies() async {
   getIt.registerSingleton<GetProductsUseCase>(
     GetProductsUseCase(getIt()),
   );
-  
+
   // -- wishlist --
   getIt.registerSingleton<AddItemsInWishlistUseCase>(
     AddItemsInWishlistUseCase(),

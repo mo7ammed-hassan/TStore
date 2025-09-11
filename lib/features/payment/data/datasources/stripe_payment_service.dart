@@ -1,16 +1,17 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:t_store/core/network/api_client.dart';
 import 'package:t_store/features/payment/data/datasources/i_payment_service.dart';
 import 'package:t_store/features/payment/data/models/credit_card_details_model.dart';
 import 'package:t_store/features/payment/data/models/payment_intent_model.dart';
 import 'package:t_store/features/payment/data/models/payment_result_model.dart';
-import 'package:dio/dio.dart';
 import 'package:t_store/features/payment/data/models/payment_use_data.dart';
 import 'package:t_store/features/payment/domain/entities/payment_details.dart';
 import 'package:t_store/core/utils/constants/api_constants.dart';
 
 class StripePaymentService implements IPaymentService {
-  final dio = Dio();
+  final ApiClient dio;
+  StripePaymentService(this.dio);
 
   Future<PaymentMethod> createPaymentMethod(
     CreditCardDetailsModel? cardDetails,
@@ -47,12 +48,10 @@ class StripePaymentService implements IPaymentService {
         'amount': (details.amountMinor * 100).toInt(),
         'currency': details.currency,
       },
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer ${dotenv.env['SECRET_KEY']}',
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      ),
+      headers: {
+        'Authorization': 'Bearer ${dotenv.env['STRIPE_SECRET_KEY']}',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
     );
 
     final paymentIntent = PaymentIntentModel.fromJson(response.data);

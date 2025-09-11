@@ -10,7 +10,7 @@ class PaymentRemoteDatasourceImpl implements PaymentRemoteDatasource {
   @override
   Future<List<PaymentMethodEntity>> getAvailableMethods() async {
     await Future.delayed(const Duration(milliseconds: 300));
-    
+
     final methods = PaymentMethodsList.methods;
     return methods.map((e) => e.toEntity()).toList();
   }

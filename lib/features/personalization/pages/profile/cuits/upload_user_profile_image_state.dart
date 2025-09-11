@@ -1,6 +1,6 @@
 abstract class UploadUserProfileImageState {}
 
-class UploadUserProfileImageInitialState extends UploadUserProfileImageState{}
+class UploadUserProfileImageInitialState extends UploadUserProfileImageState {}
 
 class UploadUserProfileImageSuccessState extends UploadUserProfileImageState {
   final String url;
@@ -15,4 +15,5 @@ class UploadUserProfileImageFailureState extends UploadUserProfileImageState {
 }
 
 class UplaodUserProfileImageLoadingState extends UploadUserProfileImageState {}
+
 class NotSelectImageState extends UploadUserProfileImageState {}

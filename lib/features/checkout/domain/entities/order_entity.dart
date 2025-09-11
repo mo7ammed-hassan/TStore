@@ -53,4 +53,19 @@ class OrderEntity {
       updatedAt: updatedAt ?? this.updatedAt,
     );
   }
+
+  factory OrderEntity.empty() {
+    return OrderEntity(
+      orderId: '',
+      userId: '',
+      checkoutModel: CheckoutEntity.empty(),
+      paymentIntentId: null,
+      transactionId: null,
+      paymentStatus: '',
+      orderStatus: '',
+      createdAt: Timestamp.now(),
+      shippingAddress: AddressEntity.empty(),
+      updatedAt: null,
+    );
+  }
 }

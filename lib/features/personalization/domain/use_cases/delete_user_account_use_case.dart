@@ -6,7 +6,6 @@ import 'package:t_store/core/config/service_locator.dart';
 class DeleteUserAccountUseCase extends UseCases<Either, dynamic> {
   @override
   Future<Either> call({dynamic params}) async {
-    return await getIt<UserRepository>()
-        .deleteUserAccount();
+    return await getIt<UserRepository>().deleteUserAccount();
   }
 }

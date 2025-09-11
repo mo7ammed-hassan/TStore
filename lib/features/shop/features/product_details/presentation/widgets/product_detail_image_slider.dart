@@ -47,7 +47,8 @@ class TProductDetailImageSlider extends StatelessWidget {
           height: MediaQuery.sizeOf(context).height * 0.45,
           child: Center(
             child: Padding(
-              padding: context.responsiveInsets.all(TSizes.productImageRadius * 2),
+              padding:
+                  context.responsiveInsets.all(TSizes.productImageRadius * 2),
               child: GestureDetector(
                 onTap: () => showEnlargedImage(selectedImage, context),
                 child: CachedNetworkImage(

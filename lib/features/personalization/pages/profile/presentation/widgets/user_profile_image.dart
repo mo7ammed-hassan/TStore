@@ -180,7 +180,6 @@ class _UserProfileImageState extends State<UserProfileImage> {
   }
 }
 
-
 // Stack(
 //             clipBehavior: Clip.none,
 //             children: [

@@ -26,8 +26,8 @@ class FeaturedProductSection extends StatelessWidget {
           return _errorSliver(featuredState.error ?? 'There was an error');
         }
 
-        if(featuredState.products.isEmpty){
-            return _errorSliver('No product found.');
+        if (featuredState.products.isEmpty) {
+          return _errorSliver('No product found.');
         }
 
         return SliverPadding(

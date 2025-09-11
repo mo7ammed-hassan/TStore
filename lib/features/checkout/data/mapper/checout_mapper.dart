@@ -7,7 +7,9 @@ extension CheckoutMapper on CheckoutModel {
   CheckoutEntity toEntity({String? orderId}) {
     return CheckoutEntity(
       orderId: orderId,
-      items: items.map((e) => e.toEntity()).toList(), // CartItemModel -> CartItemEntity
+      items: items
+          .map((e) => e.toEntity())
+          .toList(), // CartItemModel -> CartItemEntity
       subtotal: subtotal,
       shipping: shipping,
       discount: discount,
@@ -19,7 +21,9 @@ extension CheckoutMapper on CheckoutModel {
 extension CheckoutEntityMapper on CheckoutEntity {
   CheckoutModel toModel({String currency = 'EGP'}) {
     return CheckoutModel(
-      items: items.map((e) => e.toModel()).toList(), // CartItemEntity -> CartItemModel
+      items: items
+          .map((e) => e.toModel())
+          .toList(), // CartItemEntity -> CartItemModel
       subtotal: subtotal,
       shipping: shipping,
       discount: discount,

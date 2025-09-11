@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:t_store/core/network/api_client.dart';
 import 'package:t_store/features/payment/data/datasources/cash_payment_service.dart';
 import 'package:t_store/features/payment/data/datasources/fawry_payment_service.dart';
 import 'package:t_store/features/payment/data/datasources/i_payment_service.dart';
@@ -19,7 +20,7 @@ void registerPaymentDependencies(GetIt getIt) {
   );
 
   /// --- Payment Services --- ///
-  getIt.registerFactory<IPaymentService>(() => StripePaymentService(),
+  getIt.registerFactory<IPaymentService>(() => StripePaymentService(ApiClient()),
       instanceName: 'stripe');
 
   getIt.registerFactory<IPaymentService>(() => VodafoneCashPaymentService(),
