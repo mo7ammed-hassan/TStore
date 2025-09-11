@@ -75,7 +75,7 @@ class _CardHeader extends StatelessWidget {
               ),
               ResponsiveGap.vertical(8),
               const ResponsiveText(
-                'xxxx xxxx 4512',
+                'xxxxxx4512',
                 fontWeight: FontWeight.w600,
                 color: AppColors.primary,
               ),
@@ -127,7 +127,7 @@ class _PrimaryCardIndicatorState extends State<_PrimaryCardIndicator> {
           child: AnimatedContainer(
             width: context.horzSize(_selected ? 21 : 18.5),
             height: context.horzSize(_selected ? 21 : 18.5),
-            padding: const EdgeInsets.all(6),
+            padding: const EdgeInsets.all(5.5),
             duration: const Duration(milliseconds: 300),
             decoration: ShapeDecoration(
               shape: CircleBorder(
@@ -136,10 +136,10 @@ class _PrimaryCardIndicatorState extends State<_PrimaryCardIndicator> {
               )),
               color: _selected ? AppColors.primary : null,
             ),
-            child: const DecoratedBox(
+            child: DecoratedBox(
               decoration: ShapeDecoration(
-                shape: CircleBorder(),
-                color: Colors.white,
+                shape: const CircleBorder(),
+                color: _selected ? Colors.white : Colors.transparent,
               ),
             ),
           ),
