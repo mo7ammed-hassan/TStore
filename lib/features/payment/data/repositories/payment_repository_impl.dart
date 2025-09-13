@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:t_store/core/errors/failures.dart';
-import 'package:t_store/features/payment/data/datasources/i_payment_service.dart';
+import 'package:t_store/features/payment/data/datasources/i_payment_service_strategy.dart';
 import 'package:t_store/features/payment/data/datasources/payment_remote_datasource.dart';
 import 'package:t_store/features/payment/data/mappers/payment_result_mapper.dart';
 import 'package:t_store/features/payment/domain/entities/payment_details.dart';
@@ -23,7 +23,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
 
   @override
   Future<Either<Failure, PaymentResultEntity>> pay({
-    required IPaymentService service,
+    required IPaymentServiceStrategy service,
     required PaymentDetails details,
   }) async {
     try {

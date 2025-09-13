@@ -5,3 +5,5 @@ enum PaymentMethods {
   payPal,
   cashOnDelivery,
 }
+
+enum CardFlow { newCard, savedCard }

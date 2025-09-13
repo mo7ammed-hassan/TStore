@@ -5,7 +5,8 @@ import 'package:t_store/features/payment/data/datasources/customer_service/i_cus
 import 'package:t_store/features/payment/data/models/customer/customer_model.dart';
 
 class StripeCustomerService implements ICustomerService {
-  final ApiClient dio = ApiClient();
+  final ApiClient dio;
+  StripeCustomerService(this.dio);
 
   @override
   Future<CustomerModel> createCustomer(
@@ -36,7 +37,7 @@ class StripeCustomerService implements ICustomerService {
   }
 
   @override
-  Future<CustomerModel?> getCustomer(String customerId) async {
+  Future<CustomerModel?> getCustomer(String? customerId) async {
     final response = await dio.delete(
       '${ApiConstants.retrieveCustomer}$customerId',
       headers: {

@@ -1,12 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
+/// lazy singleton ///
 class ApiClient {
-  static final ApiClient _instance = ApiClient._internal();
+  static ApiClient? _instance;
   late final Dio dio;
 
-  factory ApiClient() {
-    return _instance;
+  static ApiClient get instance {
+    _instance ??= ApiClient._internal();
+    return _instance!;
   }
 
   ApiClient._internal() {

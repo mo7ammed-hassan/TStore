@@ -158,6 +158,7 @@ class CardSelectionScreen extends StatelessWidget {
                       onPressed: () => Navigator.pushNamed(
                         context,
                         PaymentRoutes.manageCardsScreen,
+                        arguments: order,
                       ),
                       child: const ResponsiveText('Use another card'),
                     ),

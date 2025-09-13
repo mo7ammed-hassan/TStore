@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:t_store/core/utils/constants/colors.dart';
 import 'package:t_store/core/utils/constants/sizes.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
@@ -13,13 +12,15 @@ class TDiscountRate extends StatelessWidget {
   final String rate;
   @override
   Widget build(BuildContext context) {
-    return TRoundedContainer(
+    return Container(
       padding: context.responsiveInsets.symmetric(
         horizontal: TSizes.sm,
         vertical: TSizes.xs,
       ),
-      radius: TSizes.sm,
-      backgroundColor: AppColors.secondary.withValues(alpha: 0.8),
+      decoration: BoxDecoration(
+        color: AppColors.secondary.withValues(alpha: 0.8),
+        borderRadius: BorderRadius.circular(TSizes.sm),
+      ),
       child: ResponsiveText(
         rate,
         style: Theme.of(context).textTheme.labelLarge!.apply(

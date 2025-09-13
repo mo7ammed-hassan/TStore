@@ -17,6 +17,8 @@ class ManageCardsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
+    final order = ModalRoute.of(context)?.settings.arguments as OrderEntity?;
+
     return Scaffold(
       backgroundColor: isDark ? Colors.black : AppColors.light,
       appBar: TAppBar(
@@ -44,7 +46,7 @@ class ManageCardsScreen extends StatelessWidget {
                       ? Navigator.pushNamed(
                           context,
                           PaymentRoutes.creditCardScreen,
-                          arguments: OrderEntity.empty(),
+                          arguments: order,
                         )
                       : () {},
                   child: const ResponsiveText('Add Bank Card'),
