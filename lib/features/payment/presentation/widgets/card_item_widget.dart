@@ -7,13 +7,17 @@ import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dar
 import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_text_span.dart';
+import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
+import 'package:t_store/features/payment/domain/entities/stripe_card_method_entity.dart';
 
 class CardItemWidget extends StatelessWidget {
-  const CardItemWidget({super.key});
+  const CardItemWidget({super.key, required this.paymentMethod});
+  final PaymentMethodEntity paymentMethod;
 
   @override
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
+    final StripeCardMethodEntity method = paymentMethod as StripeCardMethodEntity;
 
     return TRoundedContainer(
       padding: context.responsiveInsets.symmetric(horizontal: 12, vertical: 24),
@@ -21,32 +25,33 @@ class CardItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           /// --- Card Header (Name + Number + Type) ---
-          _CardHeader(isDark: isDark),
+          _CardHeader(isDark: isDark, paymentMethod: method),
 
-          ResponsiveGap.vertical(20),
+          ResponsiveGap.vertical(16),
 
           /// --- Expire Date ---
           ResponsiveTextSpan(
             text: 'Expire Date:',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w500,
-                  fontSize: 13,
+                  fontSize: 12.4,
                 ),
-            children: const [
+            children: [
               ResponsiveTextSpan(
-                text: ' 07/28',
-                fontSize: 13,
-                fontWeight: FontWeight.w700,
+                text:
+                    ' ${method.card?.expMonth}/${method.card?.expYear.toString().substring(2)}',
+                fontSize: 12.4,
+                fontWeight: FontWeight.w600,
               ),
             ],
           ),
 
-          ResponsiveGap.vertical(24),
+          ResponsiveGap.vertical(20),
 
           /// --- Primary Card Indicator ---
           const _PrimaryCardIndicator(),
 
-          ResponsiveGap.vertical(24),
+          ResponsiveGap.vertical(22),
 
           /// --- Actions (Delete / Update) ---
           const _CardActions(),
@@ -57,8 +62,9 @@ class CardItemWidget extends StatelessWidget {
 }
 
 class _CardHeader extends StatelessWidget {
-  const _CardHeader({required this.isDark});
+  const _CardHeader({required this.isDark, required this.paymentMethod});
   final bool isDark;
+  final PaymentMethodEntity<StripeCardMethodEntity> paymentMethod;
 
   @override
   Widget build(BuildContext context) {
@@ -69,13 +75,12 @@ class _CardHeader extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ResponsiveText(
-                'Mohamed Hassan',
-                // Using Theme for consistency
+              ResponsiveText(
+                '${paymentMethod.method.billingDetails?.name}',
               ),
-              ResponsiveGap.vertical(8),
-              const ResponsiveText(
-                'xxxxxx4512',
+              ResponsiveGap.vertical(6),
+              ResponsiveText(
+                'xxxxxx${paymentMethod.method.card?.last4}',
                 fontWeight: FontWeight.w600,
                 color: AppColors.primary,
               ),
@@ -85,19 +90,23 @@ class _CardHeader extends StatelessWidget {
 
         /// Card Type (e.g. VISA, MasterCard)
         Container(
+          width: context.horzSize(110),
+          height: context.horzSize(45),
           decoration: BoxDecoration(
             color: isDark ? AppColors.darkerGrey : AppColors.light,
             borderRadius: BorderRadius.circular(8),
           ),
           padding: context.responsiveInsets.symmetric(
-            vertical: 16,
-            horizontal: 24,
+            vertical: 14,
+            horizontal: 12,
           ),
-          child: const Center(
-            child: ResponsiveText(
-              'VISA',
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
+          child: Center(
+            child: FittedBox(
+              child: ResponsiveText(
+                '${paymentMethod.method.card?.brand}',
+                fontSize: 12.5,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ),
@@ -125,8 +134,8 @@ class _PrimaryCardIndicatorState extends State<_PrimaryCardIndicator> {
             _selected = !_selected;
           }),
           child: AnimatedContainer(
-            width: context.horzSize(_selected ? 21 : 18.5),
-            height: context.horzSize(_selected ? 21 : 18.5),
+            width: context.horzSize(_selected ? 19 : 17.5),
+            height: context.horzSize(_selected ? 19 : 17.5),
             padding: const EdgeInsets.all(5.5),
             duration: const Duration(milliseconds: 300),
             decoration: ShapeDecoration(
@@ -147,7 +156,8 @@ class _PrimaryCardIndicatorState extends State<_PrimaryCardIndicator> {
         const SizedBox(width: 8),
         ResponsiveText(
           'Primary Card',
-          style: Theme.of(context).textTheme.bodyLarge,
+          style:
+              Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13.3),
         ),
       ],
     );

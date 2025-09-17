@@ -6,17 +6,25 @@ import 'package:t_store/features/payment/data/datasources/customer_service/strip
 import 'package:t_store/features/payment/data/datasources/fawry_payment_service.dart';
 import 'package:t_store/features/payment/data/datasources/i_card_flow_strategy.dart';
 import 'package:t_store/features/payment/data/datasources/i_payment_service_strategy.dart';
-import 'package:t_store/features/payment/data/datasources/pay_with_new_card.dart';
+import 'package:t_store/features/payment/data/datasources/payment_method_service/i_payment_method_service.dart';
+import 'package:t_store/features/payment/data/datasources/payment_method_service/stripe_payment_method_service.dart';
 import 'package:t_store/features/payment/data/datasources/payment_remote_datasource.dart';
 import 'package:t_store/features/payment/data/datasources/paypal_payment_service.dart';
+import 'package:t_store/features/payment/data/datasources/stripe_service/stripe_new_card_flow_strategy.dart';
 import 'package:t_store/features/payment/data/datasources/stripe_payment_service.dart';
+import 'package:t_store/features/payment/data/datasources/stripe_service/stripe_saved_card_flow_strategy.dart';
 import 'package:t_store/features/payment/data/datasources/vodafone_cash_payment_service.dart';
+import 'package:t_store/features/payment/data/repositories/payment_method_repository_impl.dart';
 import 'package:t_store/features/payment/data/repositories/payment_repository_impl.dart';
+import 'package:t_store/features/payment/domain/repositories/payment_method_repository.dart';
 import 'package:t_store/features/payment/domain/repositories/payment_repository.dart';
+import 'package:t_store/features/payment/domain/usecases/get_default_payment_method.dart';
 import 'package:t_store/features/payment/domain/usecases/get_payment_methods_usecase.dart';
+import 'package:t_store/features/payment/domain/usecases/get_saved_payment_methods_usecase.dart';
 import 'package:t_store/features/payment/domain/usecases/pay_usecase.dart';
 import 'package:t_store/features/payment/domain/usecases/payment_usecases.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_cubit.dart';
+import 'package:t_store/features/payment/presentation/cubit/payment_methods_cubit.dart';
 
 void registerPaymentDependencies(GetIt getIt) {
   /// --- API ---
@@ -36,7 +44,7 @@ void registerPaymentDependencies(GetIt getIt) {
 
   /// --- Card Flow Services --- ///
   getIt.registerLazySingleton<ICardFlowStrategy>(
-    () => PayWithNewCardStrategy(
+    () => StripeNewCardFlowStrategy(
       ApiClient.instance,
       getIt(instanceName: 'stripeCustomer'),
     ),
@@ -44,7 +52,7 @@ void registerPaymentDependencies(GetIt getIt) {
   );
 
   getIt.registerLazySingleton<ICardFlowStrategy>(
-    () => PayWithNewCardStrategy(
+    () => StripeSavedCardFlowStrategy(
       ApiClient.instance,
       getIt(instanceName: 'stripeCustomer'),
     ),
@@ -52,17 +60,21 @@ void registerPaymentDependencies(GetIt getIt) {
   );
 
   /// --- Payment Method Services --- ///
+  getIt.registerLazySingleton<IPaymentMethodService>(
+    () => StripePaymentMethodService(getIt()),
+  );
+
   /// Card
   getIt.registerFactory<IPaymentServiceStrategy>(
-    () =>
-        StripePaymentServiceStrategy(getIt(instanceName: 'stripeNewCardFlow')),
+    () => StripePaymentService(getIt(instanceName: 'stripeNewCardFlow')),
     instanceName: 'stripeNewCard',
   );
+
   getIt.registerFactory<IPaymentServiceStrategy>(
-    () => StripePaymentServiceStrategy(
-        getIt(instanceName: 'stripeSavedCardFlow')),
+    () => StripePaymentService(getIt(instanceName: 'stripeSavedCardFlow')),
     instanceName: 'stripeSavedCard',
   );
+
   getIt.registerFactory<IPaymentServiceStrategy>(
     () => PayPalPaymentService(),
     instanceName: 'payPal',
@@ -86,6 +98,9 @@ void registerPaymentDependencies(GetIt getIt) {
   getIt.registerLazySingleton<PaymentRepository>(
     () => PaymentRepositoryImpl(getIt()),
   );
+  getIt.registerLazySingleton<PaymentMethodRepository>(
+    () => PaymentMethodRepositoryImpl(getIt()),
+  );
 
   /// --- UseCases --- ///
   getIt.registerLazySingleton<PayUseCase>(
@@ -94,12 +109,23 @@ void registerPaymentDependencies(GetIt getIt) {
   getIt.registerLazySingleton<GetPaymentMethodsUsecase>(
     () => GetPaymentMethodsUsecase(getIt()),
   );
+  getIt.registerLazySingleton<GetDefaultPaymentMethod >(
+    () => GetDefaultPaymentMethod(getIt()),
+  );
   getIt.registerLazySingleton<PaymentUsecases>(
-    () => PaymentUsecases(getIt(), getIt()),
+    () => PaymentUsecases(getIt(), getIt(), getIt()),
+  );
+
+  getIt.registerLazySingleton<GetSavedPaymentMethodsUsecase>(
+    () => GetSavedPaymentMethodsUsecase(getIt()),
   );
 
   /// --- Payment Cubit --- ///
   getIt.registerFactory<PaymentCubit>(
     () => PaymentCubit(getIt()),
+  );
+
+  getIt.registerFactory<PaymentMethodsCubit>(
+    () => PaymentMethodsCubit(getIt()),
   );
 }

@@ -1,18 +1,9 @@
-import 'package:t_store/features/payment/core/enums/payment_method.dart'
-    show PaymentMethods;
-
-class PaymentMethodEntity {
+abstract class PaymentMethodEntity<T> {
   final String id;
-  final String name;
-  final PaymentMethods method;
-  final String logoUrl;
-  final bool isOnline;
+  final String? email;
+  final String? phone;
 
-  PaymentMethodEntity({
-    required this.id,
-    required this.name,
-    required this.logoUrl,
-    required this.isOnline,
-    required this.method,
-  });
+  PaymentMethodEntity({required this.id, this.email, this.phone});
+
+  T get method;
 }

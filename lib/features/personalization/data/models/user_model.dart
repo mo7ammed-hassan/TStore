@@ -6,6 +6,7 @@ class UserModel {
   final String username;
   final String userPhone;
   final String? profilePicture;
+  final String? stripeCustomerId;
 
   String get fullName => firstName + lastName;
 
@@ -17,6 +18,7 @@ class UserModel {
     required this.username,
     required this.userPhone,
     required this.profilePicture,
+    this.stripeCustomerId,
   });
 
   Map<String, dynamic> toMap() {
@@ -28,6 +30,7 @@ class UserModel {
       'email': userEmail,
       'phone': userPhone,
       'profilePicture': profilePicture,
+      'stripeCustomerId': stripeCustomerId,
     };
   }
 
@@ -39,6 +42,9 @@ class UserModel {
       username: map['username'] as String,
       userEmail: map['email'] as String,
       userPhone: map['phone'] as String,
+      stripeCustomerId: map.containsKey('stripeCustomerId')
+          ? map['stripeCustomerId'] as String
+          : null,
       profilePicture:
           map['profilePicture'] != null ? map['profilePicture'] as String : '',
     );

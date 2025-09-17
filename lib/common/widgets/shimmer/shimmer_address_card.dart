@@ -43,7 +43,7 @@ class ShimmerAddressCard extends StatelessWidget {
             ),
             const SizedBox(width: 5),
             ShimmerWidget(
-              height: context.horzSize(10),
+              height: context.horzSize(14),
               width: MediaQuery.sizeOf(context).width * 0.43,
             )
           ],

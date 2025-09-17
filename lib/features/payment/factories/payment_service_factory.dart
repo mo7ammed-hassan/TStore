@@ -5,12 +5,12 @@ import 'package:t_store/features/payment/data/datasources/i_payment_service_stra
 /// Simple Factory Pattern ///
 class PaymentServiceFactory {
   static IPaymentServiceStrategy create(PaymentMethods method,
-      {CardFlow cardFlow = CardFlow.newCard}) {
+      {CardFlow? cardFlow}) {
     switch (method) {
       case PaymentMethods.stripe:
-        return createStripeWithFlow(cardFlow);
+        return createStripeWithFlow(cardFlow!);
       case PaymentMethods.payPal:
-        return createPayPalWithFlow(cardFlow);
+        return createPayPalWithFlow(cardFlow!);
       case PaymentMethods.vodafone:
         return getIt<IPaymentServiceStrategy>(instanceName: 'vodafone');
       case PaymentMethods.fawry:

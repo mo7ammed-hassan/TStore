@@ -8,6 +8,8 @@ class PaymentDetails {
   final Map<String, dynamic>? meta; // optional extra fields per gateway
   final CreditCardDetailsModel? cardDetails;
   final PaymentUserDataModel? user;
+  final String? paymentMethodId;
+  final String? cvc;
 
   const PaymentDetails({
     required this.amountMinor,
@@ -16,11 +18,15 @@ class PaymentDetails {
     this.meta,
     this.cardDetails,
     this.user,
+    this.paymentMethodId,
+    this.cvc,
   });
 
   PaymentDetails copyWith({
     CreditCardDetailsModel? cardDetails,
     PaymentUserDataModel? user,
+    String? paymentMethodId,
+    String? cvc,
   }) {
     return PaymentDetails(
       amountMinor: amountMinor,
@@ -28,6 +34,8 @@ class PaymentDetails {
       orderId: orderId,
       cardDetails: cardDetails ?? this.cardDetails,
       user: user ?? this.user,
+      paymentMethodId: paymentMethodId ?? this.paymentMethodId,
+      cvc: cvc ?? this.cvc,
     );
   }
 }

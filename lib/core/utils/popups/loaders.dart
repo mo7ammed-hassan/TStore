@@ -162,12 +162,13 @@ class Loaders {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                ResponsiveGap.vertical(10),
                 const CircularProgressIndicator(
                   color: AppColors.primary,
                 ),
                 if (message != null) ...[
-                  const SizedBox(height: 16),
-                  Text(
+                  ResponsiveGap.vertical(16),
+                  ResponsiveText(
                     message,
                     style: Theme.of(AppContext.context).textTheme.bodyMedium,
                     textAlign: TextAlign.center,

@@ -1,9 +1,15 @@
 class ApiConstants {
   const ApiConstants._();
-  static const stripeBaseUrl = 'https://api.stripe.com/v1';
-  static const paymentIntents = '$stripeBaseUrl/payment_intents';
-  // -- Customers -- 
-  static const createCustomer = '$stripeBaseUrl/customers';
-  static const deleteCustomer = '$stripeBaseUrl/customers';
-  static const retrieveCustomer = '$stripeBaseUrl/customers/';
+  static const _stripeBaseUrl = 'https://api.stripe.com/v1';
+  static const paymentIntents = '$_stripeBaseUrl/payment_intents';
+  // -- Customers --
+  static const customers = '$_stripeBaseUrl/customers';
+  static const setupIntents = '$_stripeBaseUrl/setup_intents';
+  static const paymentMethods = '$_stripeBaseUrl/payment_methods';
+
+
+  // -- Payment Method --
+  static String getCustomerPaymentMethods({required String customerId}) =>
+    '$_stripeBaseUrl/payment_methods?customer=$customerId&type=card';
+
 }

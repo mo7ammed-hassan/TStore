@@ -4,7 +4,7 @@ import 'package:t_store/features/payment/data/datasources/i_payment_service_stra
 import 'package:t_store/features/payment/data/datasources/payment_remote_datasource.dart';
 import 'package:t_store/features/payment/data/mappers/payment_result_mapper.dart';
 import 'package:t_store/features/payment/domain/entities/payment_details.dart';
-import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
+import 'package:t_store/features/payment/domain/entities/card_method_entity.dart';
 import 'package:t_store/features/payment/domain/entities/payment_result_entity.dart';
 import 'package:t_store/features/payment/domain/repositories/payment_repository.dart';
 
@@ -13,7 +13,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
   PaymentRepositoryImpl(this.paymentRemoteDatasource);
 
   @override
-  Future<List<PaymentMethodEntity>> getAvailableMethods() async {
+  Future<List<CardMethodEntity>> getAvailableMethods() async {
     try {
       return paymentRemoteDatasource.getAvailableMethods();
     } catch (e) {

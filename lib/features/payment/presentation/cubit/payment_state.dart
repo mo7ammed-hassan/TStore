@@ -1,16 +1,18 @@
+import 'package:t_store/features/payment/domain/entities/card_method_entity.dart';
 import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
 import 'package:t_store/features/payment/domain/entities/payment_result_entity.dart';
 
 enum PaymentStateStatus { initial, loading, success, failure }
 
-enum PaymentAction { fetch, selectMethod, processPayment }
+enum PaymentAction { fetch, selectMethod, processPayment, fetchDefaultMethod }
 
 class PaymentState {
   final PaymentAction action;
   final PaymentStateStatus status;
-  final List<PaymentMethodEntity> methods;
-  final PaymentMethodEntity? selectedMethod;
+  final List<CardMethodEntity> methods;
+  final CardMethodEntity? selectedMethod;
   final PaymentResultEntity? paymentResult;
+  final PaymentMethodEntity? defaultMethod;
   final String? message;
   final String? error;
 
@@ -20,6 +22,7 @@ class PaymentState {
     this.methods = const [],
     this.selectedMethod,
     this.paymentResult,
+    this.defaultMethod,
     this.message,
     this.error,
   });
@@ -27,9 +30,10 @@ class PaymentState {
   PaymentState copyWith({
     PaymentAction? action,
     PaymentStateStatus? status,
-    List<PaymentMethodEntity>? methods,
-    PaymentMethodEntity? selectedMethod,
+    List<CardMethodEntity>? methods,
+    CardMethodEntity? selectedMethod,
     PaymentResultEntity? paymentResult,
+    PaymentMethodEntity? defaultMethod,
     String? message,
     String? error,
   }) {
@@ -41,6 +45,7 @@ class PaymentState {
       paymentResult: paymentResult ?? this.paymentResult,
       message: message ?? this.message,
       error: error ?? this.error,
+      defaultMethod: defaultMethod ?? this.defaultMethod,
     );
   }
 }

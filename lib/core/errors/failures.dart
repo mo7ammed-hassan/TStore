@@ -1,12 +1,24 @@
 abstract class Failure {
   final String message;
-  const Failure(this.message);
+  Failure(this.message);
+}
+
+class NetworkFailure extends Failure {
+  NetworkFailure(super.message);
+}
+
+class AuthFailure extends Failure {
+  AuthFailure(super.message);
+}
+
+class ValidationFailure extends Failure {
+  ValidationFailure(super.message);
 }
 
 class ServerFailure extends Failure {
-  const ServerFailure(super.message);
+  ServerFailure(super.message);
 }
 
-class CacheFailure extends Failure {
-  const CacheFailure(super.message);
+class NotFoundFailure extends Failure {
+  NotFoundFailure() : super('Resource not found');
 }

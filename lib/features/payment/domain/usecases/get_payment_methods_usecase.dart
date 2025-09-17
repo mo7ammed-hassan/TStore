@@ -1,4 +1,4 @@
-import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
+import 'package:t_store/features/payment/domain/entities/card_method_entity.dart';
 import 'package:t_store/features/payment/domain/repositories/payment_repository.dart';
 
 class GetPaymentMethodsUsecase {
@@ -6,7 +6,7 @@ class GetPaymentMethodsUsecase {
 
   GetPaymentMethodsUsecase(this.paymentRepository);
 
-  Future<List<PaymentMethodEntity>> call() {
+  Future<List<CardMethodEntity>> call() {
     return paymentRepository.getAvailableMethods();
   }
 }

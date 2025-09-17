@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/core/utils/constants/colors.dart';
 import 'package:t_store/core/utils/constants/sizes.dart';
 import 'package:t_store/core/utils/helpers/helper_functions.dart';
@@ -7,8 +9,11 @@ import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dar
 import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
+import 'package:t_store/features/payment/presentation/cubit/payment_methods_cubit.dart';
+import 'package:t_store/features/payment/presentation/cubit/payment_methods_state.dart';
 import 'package:t_store/features/payment/presentation/widgets/card_item_widget.dart';
 import 'package:t_store/features/payment/routes/payment_routes.dart';
+import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 
 class ManageCardsScreen extends StatelessWidget {
   const ManageCardsScreen({super.key, this.nestedNavigator = true});
@@ -18,42 +23,68 @@ class ManageCardsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
     final order = ModalRoute.of(context)?.settings.arguments as OrderEntity?;
+    final user = context.read<UserCubit>().state.user;
 
-    return Scaffold(
-      backgroundColor: isDark ? Colors.black : AppColors.light,
-      appBar: TAppBar(
-        title: 'Bank Account',
-        showBackArrow: true,
-        nestedNavigator: nestedNavigator,
-      ),
-      body: Padding(
-        padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.separated(
-                itemCount: 1,
-                itemBuilder: (context, index) => const CardItemWidget(),
-                separatorBuilder: (context, index) =>
-                    ResponsiveGap.vertical(16),
-              ),
-            ),
-            SafeArea(
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () => nestedNavigator
-                      ? Navigator.pushNamed(
-                          context,
-                          PaymentRoutes.creditCardScreen,
-                          arguments: order,
-                        )
-                      : () {},
-                  child: const ResponsiveText('Add Bank Card'),
-                ),
-              ),
-            ),
-          ],
+    return BlocProvider(
+      create: (context) => getIt<PaymentMethodsCubit>()
+        ..loadPaymentMethods(user?.stripeCustomerId),
+      child: Scaffold(
+        backgroundColor: isDark ? Colors.black : AppColors.light,
+        appBar: TAppBar(
+          title: 'Bank Account',
+          showBackArrow: true,
+          nestedNavigator: nestedNavigator,
+        ),
+        body: Padding(
+          padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
+          child: BlocBuilder<PaymentMethodsCubit, PaymentMethodsState>(
+            builder: (context, state) {
+              if (state is PaymentMethodsLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.primary,
+                  ),
+                );
+              }
+              if (state is PaymentMethodsLoaded) {
+                return Column(
+                  children: [
+                    Expanded(
+                      child: ListView.separated(
+                        itemCount: state.methods.length,
+                        itemBuilder: (context, index) => CardItemWidget(
+                          paymentMethod: state.methods[index],
+                        ),
+                        separatorBuilder: (context, index) =>
+                            ResponsiveGap.vertical(16),
+                      ),
+                    ),
+                    SafeArea(
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () => nestedNavigator
+                              ? Navigator.pushNamed(
+                                  context,
+                                  PaymentRoutes.creditCardScreen,
+                                  arguments: order,
+                                )
+                              : () {},
+                          child: const ResponsiveText('Add Bank Card'),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              } else if (state is PaymentMethodsError) {
+                return ResponsiveText(
+                  state.message,
+                  maxLines: 10,
+                );
+              }
+              return const SizedBox.shrink();
+            },
+          ),
         ),
       ),
     );

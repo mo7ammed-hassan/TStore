@@ -5,6 +5,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/payment/core/enums/payment_entry_point.dart';
+import 'package:t_store/features/payment/core/enums/payment_method.dart';
 import 'package:t_store/features/payment/data/models/credit_card_details_model.dart';
 import 'package:t_store/features/payment/data/models/payment_use_data.dart';
 import 'package:t_store/features/payment/domain/entities/payment_details.dart';
@@ -162,6 +163,7 @@ class _PayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cardCubit = context.read<CreditCardFormCubit>();
+    final paymentCubit = context.read<PaymentCubit>();
     final user = context.read<UserCubit>().state.user;
 
     return BlocBuilder<PaymentCubit, PaymentState>(
@@ -200,6 +202,7 @@ class _PayButton extends StatelessWidget {
                   email: user?.userEmail,
                   phone: user?.userPhone,
                   address: shippingAddress,
+                  customerId: user?.stripeCustomerId,
                 );
 
                 final details = PaymentDetails(
@@ -210,7 +213,11 @@ class _PayButton extends StatelessWidget {
                   user: userData,
                 );
 
-                context.read<PaymentCubit>().confirmPayment(details, order!);
+                paymentCubit.confirmPayment(
+                  details,
+                  order!,
+                  cardFlow: CardFlow.newCard,
+                );
               },
               child: state.status == PaymentStateStatus.loading &&
                       state.action == PaymentAction.processPayment

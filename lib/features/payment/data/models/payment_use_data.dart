@@ -7,5 +7,11 @@ class PaymentUserDataModel {
   final String? phone;
   final Address? address;
 
-  PaymentUserDataModel( {this.name, this.email, this.phone, this.address, this.customerId});
+  PaymentUserDataModel({
+    this.name,
+    this.email,
+    this.phone,
+    this.address,
+    this.customerId,
+  });
 }

@@ -10,19 +10,36 @@ import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_text_span.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
+import 'package:t_store/features/payment/domain/entities/stripe_card_method_entity.dart';
 import 'package:t_store/features/payment/presentation/widgets/card_text_field.dart';
 import 'package:t_store/features/payment/presentation/widgets/input_card_box.dart';
 import 'package:t_store/features/payment/presentation/widgets/pay_button.dart';
 import 'package:t_store/features/payment/presentation/widgets/payment_summary_row.dart';
 import 'package:t_store/features/payment/routes/payment_routes.dart';
 
-class CardSelectionScreen extends StatelessWidget {
+class CardSelectionScreen extends StatefulWidget {
   const CardSelectionScreen({super.key});
+
+  @override
+  State<CardSelectionScreen> createState() => _CardSelectionScreenState();
+}
+
+class _CardSelectionScreenState extends State<CardSelectionScreen> {
+  final TextEditingController cvcController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    cvcController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
-    final order = ModalRoute.of(context)?.settings.arguments as OrderEntity?;
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    final order = args?['order'] as OrderEntity?;
+    final method = args?['method'] as StripeCardMethodEntity?;
     final orderSummary = order?.checkoutModel.orderSummary;
 
     return Scaffold(
@@ -74,11 +91,11 @@ class CardSelectionScreen extends StatelessWidget {
                         child: InputCardBox(
                           child: Row(
                             children: [
-                              const Expanded(
+                              Expanded(
                                 child: CardTextField(
                                   hint: 'CVV',
                                   maxLength: 4,
-                                  obscureText: true,
+                                  controller: cvcController,
                                 ),
                               ),
                               Container(
@@ -107,28 +124,39 @@ class CardSelectionScreen extends StatelessWidget {
                         child: InputCardBox(
                           child: Row(
                             children: [
-                              Container(
-                                margin:
-                                    context.responsiveInsets.only(right: 12),
-                                decoration: BoxDecoration(
-                                  color: isDark
-                                      ? AppColors.darkerGrey
-                                      : AppColors.light,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                padding: context.responsiveInsets.symmetric(
-                                  vertical: 10,
-                                  horizontal: 12,
-                                ),
-                                child: const ResponsiveText(
-                                  'VISA',
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
+                              Flexible(
+                                fit: FlexFit.loose,
+                                child: Container(
+                                  width: context.horzSize(60),
+                                  height: context.horzSize(35),
+                                  margin:
+                                      context.responsiveInsets.only(right: 8),
+                                  decoration: BoxDecoration(
+                                    color: isDark
+                                        ? AppColors.darkerGrey
+                                        : AppColors.light,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  padding: context.responsiveInsets.symmetric(
+                                    vertical: 4,
+                                    horizontal: 2,
+                                  ),
+                                  child: Center(
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: ResponsiveText(
+                                        '${method?.card?.brand}',
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                              const Expanded(
+                              Flexible(
+                                flex: 2,
                                 child: CardTextField(
-                                  hint: '**** **** **** 4512',
+                                  hint: '**** **** **** ${method?.card?.last4}',
                                   enabled: false,
                                 ),
                               ),
@@ -141,7 +169,11 @@ class CardSelectionScreen extends StatelessWidget {
                   ResponsiveGap.vertical(28),
 
                   // Pay Button
-                  PayButton(order: order!),
+                  PayButton(
+                    order: order!,
+                    paymentMethodId: method?.id,
+                    cvc: cvcController.text,
+                  ),
                   ResponsiveGap.vertical(20),
 
                   // another card Button

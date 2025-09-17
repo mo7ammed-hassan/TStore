@@ -10,6 +10,7 @@ import 'package:t_store/features/payment/presentation/screens/payment_status_scr
 import 'package:t_store/features/payment/routes/payment_flow_args.dart';
 import 'package:t_store/features/payment/routes/payment_router.dart';
 import 'package:t_store/features/payment/routes/payment_routes.dart';
+import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/shop/features/order/presentation/cuits/order_cubit.dart';
 import 'package:t_store/features/shop/features/order/presentation/pages/order_page.dart';
 
@@ -26,8 +27,13 @@ class PaymentFlowScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final order = args.order;
+    final stripeCustomerId =
+        context.read<UserCubit>().state.user?.stripeCustomerId;
+
     return BlocProvider(
-      create: (context) => getIt<PaymentCubit>()..fetchPaymentMethods(),
+      create: (context) => getIt<PaymentCubit>()
+        ..fetchPaymentMethods()
+        ..getDefaultPaymentMethod(customerId: stripeCustomerId),
       child: BlocListener<PaymentCubit, PaymentState>(
         listener: (context, state) {
           if (state.action == PaymentAction.processPayment &&

@@ -10,6 +10,7 @@ extension UserModelExtension on UserModel {
       username: username,
       userEmail: userEmail,
       userPhone: userPhone,
+      stripeCustomerId: stripeCustomerId,
       profilePicture: profilePicture,
     );
   }
@@ -24,6 +25,7 @@ extension UserEntityExtension on UserEntity {
       username: username,
       userEmail: userEmail,
       userPhone: userPhone,
+      stripeCustomerId: stripeCustomerId,
       profilePicture: profilePicture,
     );
   }

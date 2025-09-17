@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
+import 'package:t_store/features/payment/core/enums/payment_method.dart';
 import 'package:t_store/features/payment/data/models/payment_use_data.dart';
 import 'package:t_store/features/payment/domain/entities/payment_details.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_cubit.dart';
@@ -11,8 +11,14 @@ import 'package:t_store/features/payment/presentation/cubit/payment_state.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 
 class PayButton extends StatelessWidget {
-  const PayButton({super.key, required this.order});
+  const PayButton(
+      {super.key,
+      required this.order,
+      this.paymentMethodId,
+      required this.cvc});
   final OrderEntity order;
+  final String? paymentMethodId;
+  final String cvc;
 
   @override
   Widget build(BuildContext context) {
@@ -31,30 +37,21 @@ class PayButton extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              final shippingAddress = Address(
-                city: order.shippingAddress?.city,
-                country: '',
-                line1: order.shippingAddress?.street,
-                line2: '',
-                postalCode: order.shippingAddress?.postalCode,
-                state: order.shippingAddress?.state,
-              );
-
               final userData = PaymentUserDataModel(
-                name: user?.fullName,
-                email: user?.userEmail,
-                phone: user?.userPhone,
-                address: shippingAddress,
+                customerId: user?.stripeCustomerId,
               );
               final details = PaymentDetails(
                 orderId: order.orderId,
                 currency: 'usd',
                 amountMinor: order.checkoutModel.total.toInt(),
-                //cardDetails: cardDetails,
+                paymentMethodId: paymentMethodId,
                 user: userData,
+                cvc: cvc,
               );
 
-              context.read<PaymentCubit>().confirmPayment(details, order);
+              context
+                  .read<PaymentCubit>()
+                  .confirmPayment(details, order, cardFlow: CardFlow.savedCard);
             },
             child: state.status == PaymentStateStatus.loading &&
                     state.action == PaymentAction.processPayment

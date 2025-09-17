@@ -6,6 +6,7 @@ class UserEntity {
   final String userEmail;
   final String userPhone;
   final String? profilePicture;
+  final String? stripeCustomerId;
 
   String get fullName => '$firstName $lastName';
 
@@ -17,6 +18,7 @@ class UserEntity {
     required this.userEmail,
     required this.userPhone,
     required this.profilePicture,
+    this.stripeCustomerId,
   });
 
   UserEntity copyWith({
@@ -27,6 +29,7 @@ class UserEntity {
     String? userEmail,
     String? userPhone,
     String? profilePicture,
+    String? stripeCustomerId,
   }) {
     return UserEntity(
       userId: userId ?? this.userId,
@@ -36,6 +39,7 @@ class UserEntity {
       userEmail: userEmail ?? this.userEmail,
       userPhone: userPhone ?? this.userPhone,
       profilePicture: profilePicture ?? this.profilePicture,
+      stripeCustomerId: stripeCustomerId ?? this.stripeCustomerId,
     );
   }
 }
