@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
+import 'package:t_store/features/payment/core/enums/payment_method.dart';
 import 'package:t_store/features/payment/domain/entities/payment_details.dart';
-import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
+import 'package:t_store/features/payment/domain/entities/card_method_entity.dart';
 import 'package:t_store/features/payment/domain/usecases/payment_usecases.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_state.dart';
 import 'package:t_store/features/shop/features/order/domain/usecases/update_order_status.dart';
@@ -28,7 +29,7 @@ class PaymentCubit extends Cubit<PaymentState> {
     ));
   }
 
-  void selectMethod(PaymentMethodEntity method) {
+  void selectMethod(CardMethodEntity method) {
     emit(state.copyWith(
       action: PaymentAction.selectMethod,
       status: PaymentStateStatus.success,
@@ -36,16 +37,51 @@ class PaymentCubit extends Cubit<PaymentState> {
     ));
   }
 
-  void confirmPayment(PaymentDetails details, OrderEntity order) async {
-    if (state.selectedMethod == null) return;
-
+  void getDefaultPaymentMethod({required String? customerId}) async {
     emit(state.copyWith(
-      action: PaymentAction.processPayment,
+      action: PaymentAction.fetchDefaultMethod,
       status: PaymentStateStatus.loading,
     ));
 
-    final result = await _paymentUsecases.payUseCase
-        .pay(method: state.selectedMethod!.method, details: details);
+    final result = await _paymentUsecases.getDefaultPaymentMethod(customerId);
+
+    result.fold(
+      (error) {
+        emit(
+          state.copyWith(
+            action: PaymentAction.fetchDefaultMethod,
+            status: PaymentStateStatus.failure,
+            error: error.message,
+          ),
+        );
+      },
+      (defaultMethod) {
+        emit(state.copyWith(
+          action: PaymentAction.fetchDefaultMethod,
+          status: PaymentStateStatus.success,
+          defaultMethod: defaultMethod,
+          message: 'Payment successful',
+        ));
+      },
+    );
+  }
+
+  void confirmPayment(PaymentDetails details, OrderEntity order,
+      {CardFlow? cardFlow}) async {
+    if (state.selectedMethod == null) return;
+
+    emit(
+      state.copyWith(
+        action: PaymentAction.processPayment,
+        status: PaymentStateStatus.loading,
+      ),
+    );
+
+    final result = await _paymentUsecases.payUseCase.pay(
+      method: state.selectedMethod!.method,
+      details: details,
+      cardFlow: cardFlow,
+    );
     result.fold(
       (error) {
         emit(
@@ -66,12 +102,14 @@ class PaymentCubit extends Cubit<PaymentState> {
         );
         await getIt<UpdateOrderStatusUsecase>().call(order: updatedOrder);
 
-        emit(state.copyWith(
-          action: PaymentAction.processPayment,
-          status: PaymentStateStatus.success,
-          paymentResult: paymentResult,
-          message: 'Payment successful',
-        ));
+        emit(
+          state.copyWith(
+            action: PaymentAction.processPayment,
+            status: PaymentStateStatus.success,
+            paymentResult: paymentResult,
+            message: 'Payment successful',
+          ),
+        );
       },
     );
   }

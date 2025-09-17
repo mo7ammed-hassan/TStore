@@ -3,9 +3,9 @@ import 'package:t_store/features/payment/data/datasources/i_payment_service_stra
 import 'package:t_store/features/payment/data/models/payment_result_model.dart';
 import 'package:t_store/features/payment/domain/entities/payment_details.dart';
 
-class StripePaymentServiceStrategy implements IPaymentServiceStrategy {
+class StripePaymentService implements IPaymentServiceStrategy {
   final ICardFlowStrategy cardFlow;
-  StripePaymentServiceStrategy(this.cardFlow);
+  StripePaymentService(this.cardFlow);
 
   @override
   Future<PaymentResultModel> pay({required PaymentDetails details}) async {
