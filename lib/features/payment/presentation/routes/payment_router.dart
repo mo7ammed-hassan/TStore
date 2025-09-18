@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:t_store/features/checkout/presentation/pages/order_review_screen.dart';
 import 'package:t_store/features/payment/core/enums/payment_entry_point.dart';
 import 'package:t_store/features/payment/presentation/screens/confim_payment_screen.dart';
-import 'package:t_store/features/payment/presentation/screens/add_card_screen.dart';
+import 'package:t_store/features/payment/presentation/screens/add_payment_method_screen.dart';
 import 'package:t_store/features/payment/presentation/screens/manage_cards_screen.dart';
 import 'package:t_store/features/payment/presentation/screens/payment_status_screen.dart';
 import 'package:t_store/features/payment/presentation/screens/select_payment_screen.dart';
@@ -36,8 +36,8 @@ class PaymentRouter {
     },
     PaymentRoutes.selectPaymentScreen: (context, args) =>
         const SelectPaymentScreen(),
-    PaymentRoutes.addCardScreen: (context, args) =>
-        AddCardScreen(entryPoint: args.entryPoint),
+    PaymentRoutes.addPaymentMethodScreen: (context, args) =>
+        AddPaymentMethodScreen(entryPoint: args.entryPoint),
     PaymentRoutes.paymentStatusScreen: (context, args) =>
         const PaymentStatusScreen(),
     PaymentRoutes.confimPaymentScreen: (context, args) =>

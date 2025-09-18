@@ -22,7 +22,7 @@ class ManageCardsScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: isDark ? Colors.black : AppColors.light,
         appBar: TAppBar(
-          title: 'Bank Account',
+          title: 'Bank Accounts',
           showBackArrow: true,
           nestedNavigator: nestedNavigator,
         ),
@@ -57,7 +57,7 @@ class ManageCardsScreen extends StatelessWidget {
                           onPressed: () => nestedNavigator
                               ? Navigator.pushNamed(
                                   context,
-                                  PaymentRoutes.addCardScreen,
+                                  PaymentRoutes.addPaymentMethodScreen,
                                   arguments: order,
                                 )
                               : () {},

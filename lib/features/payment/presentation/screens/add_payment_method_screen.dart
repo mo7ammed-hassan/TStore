@@ -8,8 +8,8 @@ import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/payment/payment.dart';
 
-class AddCardScreen extends StatelessWidget {
-  const AddCardScreen({super.key, this.entryPoint});
+class AddPaymentMethodScreen extends StatelessWidget {
+  const AddPaymentMethodScreen({super.key, this.entryPoint});
   final PaymentEntryPoint? entryPoint;
 
   @override
@@ -18,7 +18,7 @@ class AddCardScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: const TAppBar(
-        title: 'Payment Method',
+        title: 'Add Payment Method',
         showBackArrow: true,
         nestedNavigator: true,
       ),
@@ -177,9 +177,9 @@ class _PayButton extends StatelessWidget {
                 );
 
                 final shippingAddress = Address(
-                  city: order?.shippingAddress?.city ,
+                  city: order?.shippingAddress?.city,
                   country: '',
-                  line1: order?.shippingAddress?.street ,
+                  line1: order?.shippingAddress?.street,
                   line2: '',
                   postalCode: order?.shippingAddress?.postalCode,
                   state: order?.shippingAddress?.state,

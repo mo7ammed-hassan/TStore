@@ -117,7 +117,7 @@ class SelectPaymentScreen extends StatelessWidget {
     } else {
       Navigator.pushNamed(
         context,
-        PaymentRoutes.addCardScreen,
+        PaymentRoutes.addPaymentMethodScreen,
         arguments: order,
       );
     }
