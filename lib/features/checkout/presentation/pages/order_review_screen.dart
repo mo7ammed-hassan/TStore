@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/common/widgets/appbar/t_appbar.dart';
 import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
@@ -58,6 +58,7 @@ class OrderReviewScreen extends StatelessWidget {
                 return Padding(
                   padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
                   child: CustomScrollView(
+                    physics: const BouncingScrollPhysics(),
                     slivers: [
                       SliverList.separated(
                         itemCount: state.checkoutData?.items.length ?? 0,

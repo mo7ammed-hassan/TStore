@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/common/widgets/appbar/t_appbar.dart';
 import 'package:t_store/common/widgets/icons/circular_icon.dart';
 import 'package:t_store/features/navigation_menu/cubit/navigation_cubit.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubits/wishlist_cubit.dart';

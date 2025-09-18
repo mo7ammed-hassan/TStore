@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/core.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
-import 'package:t_store/features/payment/core/enums/payment_method.dart';
-import 'package:t_store/features/payment/data/models/payment_use_data.dart';
-import 'package:t_store/features/payment/domain/entities/payment_details.dart';
-import 'package:t_store/features/payment/presentation/cubit/payment_cubit.dart';
-import 'package:t_store/features/payment/presentation/cubit/payment_state.dart';
+import 'package:t_store/features/payment/payment.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 
 class PayButton extends StatelessWidget {
-  const PayButton(
-      {super.key,
-      required this.order,
-      this.paymentMethodId,
-      required this.cvc});
+  const PayButton({
+    super.key,
+    required this.order,
+    this.paymentMethodId,
+    required this.cvc,
+  });
   final OrderEntity order;
   final String? paymentMethodId;
   final String cvc;
@@ -37,6 +33,14 @@ class PayButton extends StatelessWidget {
               ),
             ),
             onPressed: () {
+              if (cvc.isEmpty) {
+                Loaders.warningSnackBar(
+                  title: 'CVC',
+                  message: 'Please enter CVC',
+                );
+
+                return;
+              }
               final userData = PaymentUserDataModel(
                 customerId: user?.stripeCustomerId,
               );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/core/core.dart';
 
 class ContinueButton extends StatelessWidget {
   final bool enabled;

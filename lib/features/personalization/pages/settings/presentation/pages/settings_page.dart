@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/features/payment/presentation/screens/manage_cards_screen.dart';
 import 'package:t_store/features/personalization/pages/settings/presentation/widgets/settings_menu_tile.dart';
-import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/common/widgets/appbar/t_appbar.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/primary_header_conatiner.dart';
 import 'package:t_store/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';

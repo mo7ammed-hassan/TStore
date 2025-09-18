@@ -9,9 +9,9 @@ import 'package:t_store/features/payment/data/datasources/i_payment_service_stra
 import 'package:t_store/features/payment/data/datasources/payment_method_service/i_payment_method_service.dart';
 import 'package:t_store/features/payment/data/datasources/payment_method_service/stripe_payment_method_service.dart';
 import 'package:t_store/features/payment/data/datasources/payment_remote_datasource.dart';
-import 'package:t_store/features/payment/data/datasources/paypal_payment_service.dart';
+import 'package:t_store/features/payment/data/datasources/paypal_service/paypal_payment_service.dart';
 import 'package:t_store/features/payment/data/datasources/stripe_service/stripe_new_card_flow_strategy.dart';
-import 'package:t_store/features/payment/data/datasources/stripe_payment_service.dart';
+import 'package:t_store/features/payment/data/datasources/stripe_service/stripe_payment_service.dart';
 import 'package:t_store/features/payment/data/datasources/stripe_service/stripe_saved_card_flow_strategy.dart';
 import 'package:t_store/features/payment/data/datasources/vodafone_cash_payment_service.dart';
 import 'package:t_store/features/payment/data/repositories/payment_method_repository_impl.dart';

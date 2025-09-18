@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/common/widgets/appbar/t_appbar.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/features/personalization/pages/settings/presentation/cubits/cubit/upload_data_cubit.dart';
 import 'package:t_store/features/personalization/pages/settings/presentation/widgets/main_record_section.dart';

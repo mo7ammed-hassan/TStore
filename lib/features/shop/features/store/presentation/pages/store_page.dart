@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/common/widgets/appbar/t_appbar.dart';
 import 'package:t_store/common/widgets/products/cart/cart_menu_icon.dart';
 import 'package:t_store/features/shop/features/all_brands/presentation/pages/all_brands_page.dart';
 import 'package:t_store/features/shop/features/cart/presentation/pages/cart_page.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/common/widgets/appbar/t_appbar.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/features/personalization/domain/entites/user_entity.dart';
 import 'package:t_store/features/personalization/pages/profile/presentation/widgets/close_account_button.dart';

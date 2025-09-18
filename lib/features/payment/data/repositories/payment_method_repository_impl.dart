@@ -1,9 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:t_store/core/errors/failures.dart';
-import 'package:t_store/features/payment/data/datasources/payment_method_service/i_payment_method_service.dart';
-import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
-import 'package:t_store/features/payment/domain/repositories/payment_method_repository.dart';
+import 'package:t_store/features/payment/data/data.dart';
+import 'package:t_store/features/payment/domain/domain.dart';
 
 class PaymentMethodRepositoryImpl implements PaymentMethodRepository {
   final IPaymentMethodService _methodService;

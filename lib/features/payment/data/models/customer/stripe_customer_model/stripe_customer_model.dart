@@ -1,8 +1,7 @@
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:t_store/features/payment/data/models/customer/customer_model.dart';
-
 import 'package:t_store/features/payment/data/models/customer/stripe_customer_model/invoice_settings.dart';
-import 'package:t_store/features/payment/data/models/customer/stripe_customer_model/metadata.dart';
 
 part 'stripe_customer_model.g.dart';
 
@@ -10,7 +9,7 @@ part 'stripe_customer_model.g.dart';
 class StripeCustomerModel {
   final String? id;
   final String? object;
-  final dynamic address;
+  final Address? address;
   final int? balance;
   final int? created;
   final dynamic currency;
@@ -25,7 +24,6 @@ class StripeCustomerModel {
   @JsonKey(name: 'invoice_settings')
   final InvoiceSettings? invoiceSettings;
   final bool? livemode;
-  final Metadata? metadata;
   final String? name;
   @JsonKey(name: 'next_invoice_sequence')
   final int? nextInvoiceSequence;
@@ -53,7 +51,6 @@ class StripeCustomerModel {
     this.invoicePrefix,
     this.invoiceSettings,
     this.livemode,
-    this.metadata,
     this.name,
     this.nextInvoiceSequence,
     this.phone,
@@ -69,7 +66,6 @@ class StripeCustomerModel {
 
   Map<String, dynamic> toJson() => _$StripeCustomerModelToJson(this);
 
-
   CustomerModel toCustomerModel() {
     return CustomerModel(
       id: id,
@@ -77,13 +73,6 @@ class StripeCustomerModel {
       name: name,
       defaultSource: defaultSource,
       defaultPaymentMethod: invoiceSettings?.defaultPaymentMethod,
-      address: address != null
-          ? Address(
-              country: address['country'] ?? '',
-              city: address['city'] ?? '',
-              line1: address['line1'] ?? '',
-            )
-          : null,
     );
   }
 
@@ -93,13 +82,6 @@ class StripeCustomerModel {
       email: model.email,
       name: model.name,
       defaultSource: model.defaultSource,
-      address: model.address != null
-          ? {
-              'country': model.address!.country,
-              'city': model.address!.city,
-              'line1': model.address!.line1,
-            }
-          : null,
       invoiceSettings: model.defaultPaymentMethod != null
           ? InvoiceSettings(
               defaultPaymentMethod: model.defaultPaymentMethod,

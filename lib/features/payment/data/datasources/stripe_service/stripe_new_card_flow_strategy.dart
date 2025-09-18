@@ -7,7 +7,7 @@ import 'package:t_store/features/payment/data/models/credit_card_details_model.d
 import 'package:t_store/features/payment/data/models/customer/customer_model.dart';
 import 'package:t_store/features/payment/data/models/payment_intent_model.dart';
 import 'package:t_store/features/payment/data/models/payment_result_model.dart';
-import 'package:t_store/features/payment/data/models/payment_use_data.dart';
+import 'package:t_store/features/payment/data/models/payment_user_data.dart';
 import 'package:t_store/features/payment/domain/entities/payment_details.dart';
 import 'package:t_store/core/utils/constants/api_constants.dart';
 

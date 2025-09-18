@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/common/widgets/appbar/t_appbar.dart';
+import 'package:t_store/core/core.dart';
 import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
-import 'package:t_store/features/payment/core/constants/payment_images.dart';
-import 'package:t_store/features/payment/core/enums/payment_entry_point.dart';
-import 'package:t_store/features/payment/presentation/widgets/payment_summary.dart';
-import 'package:t_store/features/payment/presentation/widgets/payment_summary_row.dart';
-import 'package:t_store/core/utils/constants/text_strings.dart';
-import 'package:t_store/core/utils/helpers/helper_functions.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/features/payment/payment.dart';
 
 class PaymentStatusScreen extends StatelessWidget {
   const PaymentStatusScreen({

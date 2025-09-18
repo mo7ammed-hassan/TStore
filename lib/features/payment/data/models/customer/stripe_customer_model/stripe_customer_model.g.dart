@@ -10,7 +10,9 @@ StripeCustomerModel _$StripeCustomerModelFromJson(Map<String, dynamic> json) =>
     StripeCustomerModel(
       id: json['id'] as String?,
       object: json['object'] as String?,
-      address: json['address'],
+      address: json['address'] == null
+          ? null
+          : Address.fromJson(json['address'] as Map<String, dynamic>),
       balance: (json['balance'] as num?)?.toInt(),
       created: (json['created'] as num?)?.toInt(),
       currency: json['currency'],
@@ -25,9 +27,6 @@ StripeCustomerModel _$StripeCustomerModelFromJson(Map<String, dynamic> json) =>
           : InvoiceSettings.fromJson(
               json['invoice_settings'] as Map<String, dynamic>),
       livemode: json['livemode'] as bool?,
-      metadata: json['metadata'] == null
-          ? null
-          : Metadata.fromJson(json['metadata'] as Map<String, dynamic>),
       name: json['name'] as String?,
       nextInvoiceSequence: (json['next_invoice_sequence'] as num?)?.toInt(),
       phone: json['phone'],
@@ -54,7 +53,6 @@ Map<String, dynamic> _$StripeCustomerModelToJson(
       'invoice_prefix': instance.invoicePrefix,
       'invoice_settings': instance.invoiceSettings,
       'livemode': instance.livemode,
-      'metadata': instance.metadata,
       'name': instance.name,
       'next_invoice_sequence': instance.nextInvoiceSequence,
       'phone': instance.phone,

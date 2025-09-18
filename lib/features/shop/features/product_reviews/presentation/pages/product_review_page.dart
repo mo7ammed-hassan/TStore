@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/common/widgets/appbar/t_appbar.dart';
 import 'package:t_store/features/shop/features/product_reviews/presentation/widgets/overall_product_rating.dart';
 import 'package:t_store/features/shop/features/product_reviews/presentation/widgets/rating_bar_indicator.dart';
 import 'package:t_store/features/shop/features/product_reviews/presentation/widgets/user_review_card.dart';

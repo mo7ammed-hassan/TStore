@@ -1,10 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:t_store/core/errors/failures.dart';
-import 'package:t_store/features/payment/data/datasources/customer_service/i_customer_service.dart';
-import 'package:t_store/features/payment/data/mappers/customer_mapper.dart';
-import 'package:t_store/features/payment/domain/entities/customer_entity.dart';
-import 'package:t_store/features/payment/domain/repositories/customer_repository.dart';
+import 'package:t_store/features/payment/data/data.dart';
+import 'package:t_store/features/payment/domain/domain.dart';
 // -- Pattern: Adapter Pattern + Repository Pattern.--
 // -- why Adapter => convert data that comming from entity to model
 class CustomerRepositoryImpl implements CustomerRepository {

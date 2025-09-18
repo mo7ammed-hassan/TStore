@@ -6,7 +6,7 @@ import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cub
 import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/core/utils/helpers/app_focus_handler.dart';
 import 'package:t_store/core/utils/popups/loaders.dart';
-import 'package:t_store/core/utils/theme/theme.dart';
+import 'package:t_store/core/utils/theme/app_theme.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:t_store/features/payment/data/models/payment_method/stripe_card_model.dart';
+import 'package:t_store/features/payment/data/models/payment_method/stripe/stripe_card_model.dart';
 import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
 
 class StripeCardMethodEntity

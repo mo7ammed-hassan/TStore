@@ -1,5 +1,5 @@
 import 'package:t_store/features/payment/data/models/credit_card_details_model.dart';
-import 'package:t_store/features/payment/data/models/payment_use_data.dart';
+import 'package:t_store/features/payment/data/models/payment_user_data.dart';
 
 class PaymentDetails {
   final int amountMinor; // amount in minor units (e.g., 10000 = 100.00 EGP)

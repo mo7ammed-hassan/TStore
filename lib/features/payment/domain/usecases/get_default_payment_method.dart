@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:t_store/core/errors/failures.dart';
-import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
-import 'package:t_store/features/payment/domain/repositories/payment_method_repository.dart';
+import 'package:t_store/features/payment/domain/domain.dart';
 
 class GetDefaultPaymentMethod {
   final PaymentMethodRepository _repository;

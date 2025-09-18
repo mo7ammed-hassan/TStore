@@ -2,26 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/common/common.dart';
+import 'package:t_store/core/core.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
-import 'package:t_store/features/payment/core/enums/payment_entry_point.dart';
-import 'package:t_store/features/payment/core/enums/payment_method.dart';
-import 'package:t_store/features/payment/data/models/credit_card_details_model.dart';
-import 'package:t_store/features/payment/data/models/payment_use_data.dart';
-import 'package:t_store/features/payment/domain/entities/payment_details.dart';
-import 'package:t_store/features/payment/presentation/cubit/credit_card_form_cubit.dart';
-import 'package:t_store/features/payment/presentation/cubit/payment_cubit.dart';
-import 'package:t_store/features/payment/presentation/cubit/payment_state.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
-import 'package:t_store/core/utils/constants/colors.dart';
-import 'package:t_store/core/utils/helpers/helper_functions.dart';
-import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
+import 'package:t_store/features/payment/payment.dart';
 
-class CreditCardScreen extends StatelessWidget {
-  const CreditCardScreen({super.key, this.entryPoint});
+class AddCardScreen extends StatelessWidget {
+  const AddCardScreen({super.key, this.entryPoint});
   final PaymentEntryPoint? entryPoint;
 
   @override
@@ -189,9 +177,9 @@ class _PayButton extends StatelessWidget {
                 );
 
                 final shippingAddress = Address(
-                  city: order?.shippingAddress?.city,
+                  city: order?.shippingAddress?.city ,
                   country: '',
-                  line1: order?.shippingAddress?.street,
+                  line1: order?.shippingAddress?.street ,
                   line2: '',
                   postalCode: order?.shippingAddress?.postalCode,
                   state: order?.shippingAddress?.state,

@@ -4,13 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:t_store/features/checkout/presentation/pages/order_review_screen.dart';
 import 'package:t_store/features/payment/core/enums/payment_entry_point.dart';
-import 'package:t_store/features/payment/presentation/screens/card_selection_screen.dart';
-import 'package:t_store/features/payment/presentation/screens/credit_card_screen.dart';
+import 'package:t_store/features/payment/presentation/screens/confim_payment_screen.dart';
+import 'package:t_store/features/payment/presentation/screens/add_card_screen.dart';
 import 'package:t_store/features/payment/presentation/screens/manage_cards_screen.dart';
 import 'package:t_store/features/payment/presentation/screens/payment_status_screen.dart';
 import 'package:t_store/features/payment/presentation/screens/select_payment_screen.dart';
-import 'package:t_store/features/payment/routes/payment_flow_args.dart';
-import 'package:t_store/features/payment/routes/payment_routes.dart';
+import 'package:t_store/features/payment/presentation/routes/payment_flow_args.dart';
+import 'package:t_store/features/payment/presentation/routes/payment_routes.dart';
 import 'package:t_store/features/shop/features/home/presentation/pages/home_page.dart';
 import 'package:t_store/features/shop/features/order/presentation/pages/order_page.dart';
 import 'package:t_store/features/shop/features/product_details/presentation/pages/product_details_page.dart';
@@ -36,12 +36,12 @@ class PaymentRouter {
     },
     PaymentRoutes.selectPaymentScreen: (context, args) =>
         const SelectPaymentScreen(),
-    PaymentRoutes.creditCardScreen: (context, args) =>
-        CreditCardScreen(entryPoint: args.entryPoint),
+    PaymentRoutes.addCardScreen: (context, args) =>
+        AddCardScreen(entryPoint: args.entryPoint),
     PaymentRoutes.paymentStatusScreen: (context, args) =>
         const PaymentStatusScreen(),
-    PaymentRoutes.cardSelectionScreen: (context, args) =>
-        const CardSelectionScreen(),
+    PaymentRoutes.confimPaymentScreen: (context, args) =>
+        const ConfimPaymentScreen(),
     PaymentRoutes.manageCardsScreen: (context, args) =>
         const ManageCardsScreen(),
   };

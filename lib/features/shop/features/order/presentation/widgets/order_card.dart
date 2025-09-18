@@ -5,7 +5,7 @@ import 'package:t_store/common/widgets/custom_shapes/containers/rounded_containe
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/payment/core/enums/payment_entry_point.dart';
 import 'package:t_store/features/payment/presentation/screens/payment_flow_screen.dart';
-import 'package:t_store/features/payment/routes/payment_flow_args.dart';
+import 'package:t_store/features/payment/presentation/routes/payment_flow_args.dart';
 import 'package:t_store/features/shop/features/order/presentation/cuits/order_cubit.dart';
 import 'package:t_store/features/shop/features/order/presentation/widgets/cancel_order_dialog.dart';
 import 'package:t_store/core/utils/constants/colors.dart';

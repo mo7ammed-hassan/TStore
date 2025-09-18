@@ -1,30 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/widgets/appbar/appbar.dart';
-import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:t_store/core/utils/constants/colors.dart';
-import 'package:t_store/core/utils/constants/sizes.dart';
-import 'package:t_store/core/utils/helpers/helper_functions.dart';
-import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_text_span.dart';
+import 'package:t_store/common/common.dart';
+import 'package:t_store/core/core.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
-import 'package:t_store/features/payment/domain/entities/stripe_card_method_entity.dart';
-import 'package:t_store/features/payment/presentation/widgets/card_text_field.dart';
-import 'package:t_store/features/payment/presentation/widgets/input_card_box.dart';
-import 'package:t_store/features/payment/presentation/widgets/pay_button.dart';
-import 'package:t_store/features/payment/presentation/widgets/payment_summary_row.dart';
-import 'package:t_store/features/payment/routes/payment_routes.dart';
+import 'package:t_store/features/payment/payment.dart';
 
-class CardSelectionScreen extends StatefulWidget {
-  const CardSelectionScreen({super.key});
+class ConfimPaymentScreen extends StatefulWidget {
+  const ConfimPaymentScreen({super.key});
 
   @override
-  State<CardSelectionScreen> createState() => _CardSelectionScreenState();
+  State<ConfimPaymentScreen> createState() => _ConfimPaymentScreenState();
 }
 
-class _CardSelectionScreenState extends State<CardSelectionScreen> {
+class _ConfimPaymentScreenState extends State<ConfimPaymentScreen> {
   final TextEditingController cvcController = TextEditingController();
 
   @override
@@ -93,7 +80,7 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
                             children: [
                               Expanded(
                                 child: CardTextField(
-                                  hint: 'CVV',
+                                  hint: 'CVC',
                                   maxLength: 4,
                                   controller: cvcController,
                                 ),

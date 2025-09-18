@@ -1,21 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/common/widgets/appbar/appbar.dart';
-import 'package:t_store/core/utils/constants/colors.dart';
+import 'package:t_store/common/widgets/appbar/t_appbar.dart';
+import 'package:t_store/core/core.dart';
 import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
-import 'package:t_store/features/payment/presentation/cubit/payment_cubit.dart';
-import 'package:t_store/features/payment/presentation/cubit/payment_state.dart';
-import 'package:t_store/features/payment/presentation/widgets/continue_button.dart';
-import 'package:t_store/features/payment/presentation/widgets/payment_card.dart';
-import 'package:t_store/features/payment/presentation/widgets/payment_summary.dart';
-import 'package:t_store/features/payment/routes/payment_routes.dart';
-import 'package:t_store/core/utils/constants/text_strings.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_padding.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
+import 'package:t_store/features/payment/payment.dart';
 
 class SelectPaymentScreen extends StatelessWidget {
   const SelectPaymentScreen({super.key});
@@ -121,13 +111,13 @@ class SelectPaymentScreen extends StatelessWidget {
     if (method != null) {
       Navigator.pushNamed(
         context,
-        PaymentRoutes.cardSelectionScreen,
+        PaymentRoutes.confimPaymentScreen,
         arguments: {'order': order, 'method': method},
       );
     } else {
       Navigator.pushNamed(
         context,
-        PaymentRoutes.creditCardScreen,
+        PaymentRoutes.addCardScreen,
         arguments: order,
       );
     }

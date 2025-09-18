@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:t_store/core/utils/constants/colors.dart';
-import 'package:t_store/core/utils/helpers/helper_functions.dart';
-import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_text_span.dart';
-import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
-import 'package:t_store/features/payment/domain/entities/stripe_card_method_entity.dart';
+import 'package:t_store/core/core.dart';
+import 'package:t_store/features/payment/payment.dart';
 
 class CardItemWidget extends StatelessWidget {
   const CardItemWidget({super.key, required this.paymentMethod});
@@ -17,7 +10,8 @@ class CardItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
-    final StripeCardMethodEntity method = paymentMethod as StripeCardMethodEntity;
+    final StripeCardMethodEntity method =
+        paymentMethod as StripeCardMethodEntity;
 
     return TRoundedContainer(
       padding: context.responsiveInsets.symmetric(horizontal: 12, vertical: 24),
@@ -123,7 +117,7 @@ class _PrimaryCardIndicator extends StatefulWidget {
 }
 
 class _PrimaryCardIndicatorState extends State<_PrimaryCardIndicator> {
-  bool _selected = false;
+  bool _selected = true;
 
   @override
   Widget build(BuildContext context) {

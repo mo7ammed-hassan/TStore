@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/common/widgets/appbar/t_appbar.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_state.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/add_address_button.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/features/payment/core/enums/payment_entry_point.dart';
 import 'package:t_store/features/payment/presentation/screens/payment_flow_screen.dart';
-import 'package:t_store/features/payment/routes/payment_flow_args.dart';
+import 'package:t_store/features/payment/presentation/routes/payment_flow_args.dart';
 import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:t_store/core/utils/constants/sizes.dart';
 import 'package:t_store/core/utils/helpers/navigation.dart';

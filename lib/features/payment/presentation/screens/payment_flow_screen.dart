@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/core/config/service_locator.dart';
+import 'package:t_store/core/core.dart';
 import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
-import 'package:t_store/features/payment/core/constants/payment_images.dart';
-import 'package:t_store/features/payment/core/enums/payment_entry_point.dart';
-import 'package:t_store/features/payment/presentation/cubit/payment_cubit.dart';
-import 'package:t_store/features/payment/presentation/cubit/payment_state.dart';
-import 'package:t_store/features/payment/presentation/screens/payment_status_screen.dart';
-import 'package:t_store/features/payment/routes/payment_flow_args.dart';
-import 'package:t_store/features/payment/routes/payment_router.dart';
-import 'package:t_store/features/payment/routes/payment_routes.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
+import 'package:t_store/features/payment/payment.dart';
 import 'package:t_store/features/shop/features/order/presentation/cuits/order_cubit.dart';
 import 'package:t_store/features/shop/features/order/presentation/pages/order_page.dart';
 

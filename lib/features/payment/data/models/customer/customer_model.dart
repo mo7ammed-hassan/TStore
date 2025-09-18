@@ -1,12 +1,14 @@
 //Pattern: DTO (Data Transfer Object).
+import 'package:flutter_stripe/flutter_stripe.dart';
+
 class CustomerModel {
   final String? id;
   final String? email;
   final String? name;
   final String? phone;
-  final Address? address;
   final String? defaultSource;
   final String? defaultPaymentMethod;
+  final Address? address;
 
   CustomerModel({
     this.id,
@@ -14,8 +16,8 @@ class CustomerModel {
     this.name,
     this.phone,
     this.defaultSource,
-    this.address,
     this.defaultPaymentMethod,
+    this.address,
   });
 
   factory CustomerModel.fromJson(Map<String, dynamic> json) {
@@ -39,16 +41,4 @@ class CustomerModel {
       'default_payment_method': defaultPaymentMethod,
     };
   }
-}
-
-class Address {
-  final String country;
-  final String city;
-  final String line1;
-
-  Address({
-    required this.country,
-    required this.city,
-    required this.line1,
-  });
 }

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store/common/widgets/appbar/appbar.dart';
+import 'package:t_store/common/widgets/appbar/t_appbar.dart';
 import 'package:t_store/common/widgets/curved_edges/curved_edges_widgets.dart';
 import 'package:t_store/common/widgets/favorite_button/favorite_button.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';

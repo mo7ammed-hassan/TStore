@@ -1,9 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:t_store/core/network/api_client.dart';
 import 'package:t_store/core/utils/constants/api_constants.dart';
-import 'package:t_store/features/payment/data/datasources/customer_service/i_customer_service.dart';
-import 'package:t_store/features/payment/data/models/customer/customer_model.dart';
-import 'package:t_store/features/payment/data/models/customer/stripe_customer_model/stripe_customer_model.dart';
+import 'package:t_store/features/payment/payment.dart';
 
 // -- Layer: Infrastructure / Data Source Implementation. --
 // -- Strategy Pattern & Open–Closed Principle (OCP) --

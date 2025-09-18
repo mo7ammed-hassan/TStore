@@ -6,7 +6,7 @@ import 'package:t_store/common/widgets/animation_containers/open_container_wrapp
 import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/features/payment/core/enums/payment_entry_point.dart';
 import 'package:t_store/features/payment/presentation/screens/payment_flow_screen.dart';
-import 'package:t_store/features/payment/routes/payment_flow_args.dart';
+import 'package:t_store/features/payment/presentation/routes/payment_flow_args.dart';
 import 'package:t_store/features/shop/features/all_products/data/mapper/product_mapper.dart';
 import 'package:t_store/features/shop/features/all_products/domain/entity/product_entity.dart';
 import 'package:t_store/features/shop/features/cart/data/mapper/product_cart_item_mapper.dart';

@@ -3,8 +3,8 @@ class PaymentRoutes {
 
   static const orderReviewScreen = '/orderReviewScreen';
   static const selectPaymentScreen = '/selectPaymentScreen';
-  static const creditCardScreen = '/creditCardScreen';
+  static const addCardScreen = '/addCardScreen';
   static const paymentStatusScreen = '/paymentStatusScreen';
-  static const cardSelectionScreen = '/cardSelectionScreen';
+  static const confimPaymentScreen = '/confimPaymentScreen';
   static const manageCardsScreen = '/manageCardsScreen';
 }
