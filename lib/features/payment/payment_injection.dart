@@ -18,6 +18,7 @@ import 'package:t_store/features/payment/data/repositories/payment_method_reposi
 import 'package:t_store/features/payment/data/repositories/payment_repository_impl.dart';
 import 'package:t_store/features/payment/domain/repositories/payment_method_repository.dart';
 import 'package:t_store/features/payment/domain/repositories/payment_repository.dart';
+import 'package:t_store/features/payment/domain/usecases/delete_customer_usecase.dart';
 import 'package:t_store/features/payment/domain/usecases/get_default_payment_method.dart';
 import 'package:t_store/features/payment/domain/usecases/get_payment_methods_usecase.dart';
 import 'package:t_store/features/payment/domain/usecases/get_saved_payment_methods_usecase.dart';
@@ -118,6 +119,10 @@ void registerPaymentDependencies(GetIt getIt) {
 
   getIt.registerLazySingleton<GetSavedPaymentMethodsUsecase>(
     () => GetSavedPaymentMethodsUsecase(getIt()),
+  );
+
+  getIt.registerFactory<DeleteCustomerUsecase>(
+    () => DeleteCustomerUsecase(getIt()),
   );
 
   /// --- Payment Cubit --- ///

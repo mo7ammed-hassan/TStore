@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:t_store/features/authentication/presentation/manager/password_and_selection/password_and_selection_cubit.dart';
 import 'package:t_store/common/widgets/text_filed/password_field.dart';
 import 'package:t_store/features/authentication/presentation/pages/login_page.dart';
+import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/personalization/pages/profile/cuits/re_auth_user_cubit.dart';
 import 'package:t_store/features/personalization/pages/profile/cuits/re_auth_user_state.dart';
 import 'package:t_store/core/utils/constants/images_strings.dart';
@@ -21,6 +22,7 @@ class ReAuthForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ReAuthUserCubit>();
+    final customerId = context.read<UserCubit>().state.user?.stripeCustomerId;
     return BlocListener<ReAuthUserCubit, ReAuthUserState>(
       listener: (context, state) {
         if (state is ReAuthLoadingState) {
@@ -50,7 +52,7 @@ class ReAuthForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => cubit.reauthenticate(),
+                onPressed: () => cubit.reauthenticate(customerId: customerId!),
                 child: const ResponsiveText('Verify'),
               ),
             ),

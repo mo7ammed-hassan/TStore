@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:t_store/core/errors/failures.dart';
 import 'package:t_store/features/payment/data/data.dart';
 import 'package:t_store/features/payment/domain/domain.dart';
+
 // -- Pattern: Adapter Pattern + Repository Pattern.--
 // -- why Adapter => convert data that comming from entity to model
 class CustomerRepositoryImpl implements CustomerRepository {
@@ -46,6 +47,19 @@ class CustomerRepositoryImpl implements CustomerRepository {
       );
 
       return Right(customerData.toEntity());
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteCustomer(String customerId) async {
+    try {
+      await (_customerService as StripeCustomerService)
+          .deleteCustomer(customerId);
+      return const Right(null);
+    } on DioException catch (e) {
+      return Left(NetworkFailure(e.message ?? 'There was an error.'));
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
