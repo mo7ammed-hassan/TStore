@@ -1,17 +1,17 @@
-import 'package:t_store/features/payment/data/models/credit_card_details_model.dart';
-import 'package:t_store/features/payment/data/models/payment_user_data.dart';
+import 'package:t_store/features/payment/domain/entities/card_details_entity.dart';
+import 'package:t_store/features/payment/domain/entities/payment_user_data_entity.dart';
 
-class PaymentDetails {
+class PaymentDetailsEntity {
   final int amountMinor; // amount in minor units (e.g., 10000 = 100.00 EGP)
   final String currency; // e.g., EGP
   final String orderId;
   final Map<String, dynamic>? meta; // optional extra fields per gateway
-  final CreditCardDetailsModel? cardDetails;
-  final PaymentUserDataModel? user;
+  final CardDetailsEntity? cardDetails;
+  final PaymentUserDataEntity? user;
   final String? paymentMethodId;
   final String? cvc;
 
-  const PaymentDetails({
+  const PaymentDetailsEntity({
     required this.amountMinor,
     required this.currency,
     required this.orderId,
@@ -22,13 +22,13 @@ class PaymentDetails {
     this.cvc,
   });
 
-  PaymentDetails copyWith({
-    CreditCardDetailsModel? cardDetails,
-    PaymentUserDataModel? user,
+  PaymentDetailsEntity copyWith({
+    CardDetailsEntity? cardDetails,
+    PaymentUserDataEntity? user,
     String? paymentMethodId,
     String? cvc,
   }) {
-    return PaymentDetails(
+    return PaymentDetailsEntity(
       amountMinor: amountMinor,
       currency: currency,
       orderId: orderId,

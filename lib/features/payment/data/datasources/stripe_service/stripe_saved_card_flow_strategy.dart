@@ -1,11 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:t_store/core/network/api_client.dart';
-import 'package:t_store/features/payment/data/datasources/customer_service/i_customer_service.dart';
-import 'package:t_store/features/payment/data/datasources/i_card_flow_strategy.dart';
-import 'package:t_store/features/payment/data/models/payment_intent_model.dart';
-import 'package:t_store/features/payment/data/models/payment_result_model.dart';
-import 'package:t_store/features/payment/domain/entities/payment_details.dart';
+import 'package:t_store/features/payment/data/data.dart';
 import 'package:t_store/core/utils/constants/api_constants.dart';
 
 class StripeSavedCardFlowStrategy implements ICardFlowStrategy {
@@ -14,7 +10,7 @@ class StripeSavedCardFlowStrategy implements ICardFlowStrategy {
   StripeSavedCardFlowStrategy(this.dio, this.customerService);
 
   Future<PaymentIntentModel> createPaymentIntent(
-      {required PaymentDetails details}) async {
+      {required PaymentDetailsModel details}) async {
     final response = await dio.post(
       ApiConstants.paymentIntents,
       data: {
@@ -51,7 +47,7 @@ class StripeSavedCardFlowStrategy implements ICardFlowStrategy {
 
   @override
   Future<PaymentResultModel> payWithCard({
-    required PaymentDetails details,
+    required PaymentDetailsModel details,
   }) async {
     final paymentIntent = await createPaymentIntent(details: details);
 

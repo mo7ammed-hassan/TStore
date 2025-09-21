@@ -5,6 +5,8 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:t_store/common/common.dart';
 import 'package:t_store/core/core.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
+import 'package:t_store/features/payment/domain/entities/card_details_entity.dart';
+import 'package:t_store/features/payment/domain/entities/payment_user_data_entity.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/payment/payment.dart';
 
@@ -169,11 +171,11 @@ class _PayButton extends StatelessWidget {
                 final expMonth = int.tryParse(data[0]) ?? 0;
                 final expYear = int.tryParse(data[1]) ?? 0;
 
-                final cardDetails = CreditCardDetailsModel(
+                final cardDetails = CardDetailsEntity(
                   cardNumber: cardCubit.state.cardNumber,
                   expMonth: expMonth,
                   expYear: expYear,
-                  cvvCode: cardCubit.state.cvvCode,
+                  cvcCode: cardCubit.state.cvvCode,
                 );
 
                 final shippingAddress = Address(
@@ -185,7 +187,7 @@ class _PayButton extends StatelessWidget {
                   state: order?.shippingAddress?.state,
                 );
 
-                final userData = PaymentUserDataModel(
+                final userData = PaymentUserDataEntity(
                   name: user?.fullName,
                   email: user?.userEmail,
                   phone: user?.userPhone,
@@ -193,7 +195,7 @@ class _PayButton extends StatelessWidget {
                   customerId: user?.stripeCustomerId,
                 );
 
-                final details = PaymentDetails(
+                final details = PaymentDetailsEntity(
                   orderId: order!.orderId,
                   currency: 'usd',
                   amountMinor: order!.checkoutModel.total.toInt(),

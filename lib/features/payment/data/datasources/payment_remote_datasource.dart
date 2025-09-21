@@ -1,5 +1,5 @@
 import 'package:t_store/features/payment/core/payment_options/payment_methods.dart';
-import 'package:t_store/features/payment/data/models/card_mthod_model.dart';
+import 'package:t_store/features/payment/data/models/payment_service_model.dart';
 import 'package:t_store/features/payment/domain/entities/card_method_entity.dart';
 
 abstract class PaymentRemoteDatasource {

@@ -16,6 +16,7 @@ class SelectPaymentScreen extends StatelessWidget {
     final orderSummary = order?.checkoutModel.orderSummary;
     final stripeCustomerId =
         context.read<UserCubit>().state.user?.stripeCustomerId;
+        
     return Scaffold(
       appBar: const TAppBar(
         showBackArrow: true,
@@ -111,7 +112,7 @@ class SelectPaymentScreen extends StatelessWidget {
     if (method != null) {
       Navigator.pushNamed(
         context,
-        PaymentRoutes.confimPaymentScreen,
+        PaymentRoutes.confirmPaymentScreen,
         arguments: {'order': order, 'method': method},
       );
     } else {

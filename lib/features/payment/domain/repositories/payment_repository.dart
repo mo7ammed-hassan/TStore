@@ -7,6 +7,6 @@ abstract class PaymentRepository {
   Future<List<CardMethodEntity>> getAvailableMethods();
   Future<Either<Failure, PaymentResultEntity>> pay({
     required IPaymentServiceStrategy service,
-    required PaymentDetails details,
+    required PaymentDetailsEntity details,
   });
 }

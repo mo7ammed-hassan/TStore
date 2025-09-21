@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:t_store/core/errors/failures.dart';
-import 'package:t_store/features/payment/domain/entities/customer_entity.dart';
+import 'package:t_store/features/payment/domain/entities/customer/customer_entity.dart';
 // -- Pattern: Repository Pattern & Dependency Inversion Principle (DIP): --
 abstract class CustomerRepository {
   Future<Either<Failure, CustomerEntity>> createCustomer(CustomerEntity customer);

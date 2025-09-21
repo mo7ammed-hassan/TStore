@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/core/core.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
+import 'package:t_store/features/payment/domain/entities/payment_user_data_entity.dart';
 import 'package:t_store/features/payment/payment.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 
@@ -10,11 +11,11 @@ class PayButton extends StatelessWidget {
     super.key,
     required this.order,
     this.paymentMethodId,
-    required this.cvc,
+    required this.validateCVC,
   });
   final OrderEntity order;
   final String? paymentMethodId;
-  final String cvc;
+  final String? Function()? validateCVC;
 
   @override
   Widget build(BuildContext context) {
@@ -33,18 +34,16 @@ class PayButton extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              if (cvc.isEmpty) {
-                Loaders.warningSnackBar(
-                  title: 'CVC',
-                  message: 'Please enter CVC',
-                );
-
+              final cvc = validateCVC?.call();
+              if (cvc == null) {
                 return;
               }
-              final userData = PaymentUserDataModel(
+
+              final userData = PaymentUserDataEntity(
                 customerId: user?.stripeCustomerId,
               );
-              final details = PaymentDetails(
+              
+              final details = PaymentDetailsEntity(
                 orderId: order.orderId,
                 currency: 'usd',
                 amountMinor: order.checkoutModel.total.toInt(),

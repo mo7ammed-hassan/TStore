@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/payment/core/enums/payment_method.dart';
-import 'package:t_store/features/payment/domain/entities/payment_details.dart';
+import 'package:t_store/features/payment/domain/entities/payment_details_entity.dart';
 import 'package:t_store/features/payment/domain/entities/card_method_entity.dart';
 import 'package:t_store/features/payment/domain/usecases/payment_usecases.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_state.dart';
@@ -66,7 +66,7 @@ class PaymentCubit extends Cubit<PaymentState> {
     );
   }
 
-  void confirmPayment(PaymentDetails details, OrderEntity order,
+  void confirmPayment(PaymentDetailsEntity details, OrderEntity order,
       {CardFlow? cardFlow}) async {
     if (state.selectedMethod == null) return;
 

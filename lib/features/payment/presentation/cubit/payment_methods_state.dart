@@ -1,4 +1,4 @@
-import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
+import 'package:t_store/features/payment/domain/entities/payment_method/payment_method_entity.dart';
 
 abstract class PaymentMethodsState {}
 

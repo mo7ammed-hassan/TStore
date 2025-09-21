@@ -1,5 +1,5 @@
 import 'package:t_store/features/payment/data/models/customer/customer_model.dart';
-import 'package:t_store/features/payment/domain/entities/customer_entity.dart';
+import 'package:t_store/features/payment/domain/entities/customer/customer_entity.dart';
 
 extension CustomerEntityMapper on CustomerEntity {
   CustomerModel toModel() {

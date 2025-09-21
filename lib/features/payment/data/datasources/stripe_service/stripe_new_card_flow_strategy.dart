@@ -3,12 +3,12 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:t_store/core/network/api_client.dart';
 import 'package:t_store/features/payment/data/datasources/customer_service/i_customer_service.dart';
 import 'package:t_store/features/payment/data/datasources/i_card_flow_strategy.dart';
-import 'package:t_store/features/payment/data/models/credit_card_details_model.dart';
+import 'package:t_store/features/payment/data/models/card_details_model.dart';
 import 'package:t_store/features/payment/data/models/customer/customer_model.dart';
-import 'package:t_store/features/payment/data/models/payment_intent_model.dart';
+import 'package:t_store/features/payment/data/models/payment_details_model.dart';
+import 'package:t_store/features/payment/data/models/stripe/payment_intent_model.dart';
 import 'package:t_store/features/payment/data/models/payment_result_model.dart';
 import 'package:t_store/features/payment/data/models/payment_user_data.dart';
-import 'package:t_store/features/payment/domain/entities/payment_details.dart';
 import 'package:t_store/core/utils/constants/api_constants.dart';
 
 class StripeNewCardFlowStrategy implements ICardFlowStrategy {
@@ -30,7 +30,7 @@ class StripeNewCardFlowStrategy implements ICardFlowStrategy {
   }
 
   Future<PaymentMethod> createPaymentMethod(
-    CreditCardDetailsModel? cardDetails,
+    CardDetailsModel? cardDetails,
     PaymentUserDataModel? user,
   ) async {
     // update card details depend on user card (Custom UI)
@@ -38,7 +38,7 @@ class StripeNewCardFlowStrategy implements ICardFlowStrategy {
       number: cardDetails?.cardNumber,
       expirationMonth: cardDetails?.expMonth,
       expirationYear: cardDetails?.expYear,
-      cvc: cardDetails?.cvvCode,
+      cvc: cardDetails?.cvcCode,
     ));
 
     final paymentMethod = await Stripe.instance.createPaymentMethod(
@@ -86,7 +86,7 @@ class StripeNewCardFlowStrategy implements ICardFlowStrategy {
   }
 
   Future<PaymentIntentModel> createPaymentIntent({
-    required PaymentDetails details,
+    required PaymentDetailsModel details,
     String? customerId,
   }) async {
     final response = await dio.post(
@@ -123,7 +123,7 @@ class StripeNewCardFlowStrategy implements ICardFlowStrategy {
 
   @override
   Future<PaymentResultModel> payWithCard(
-      {required PaymentDetails details}) async {
+      {required PaymentDetailsModel details}) async {
     // 1. get customerId
     final customerId = await getOrCreateCustomer(
       customer: CustomerModel(

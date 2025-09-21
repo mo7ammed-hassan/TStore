@@ -4,7 +4,7 @@ import 'package:t_store/core/utils/constants/api_constants.dart';
 import 'package:t_store/features/payment/data/datasources/payment_method_service/i_payment_method_service.dart';
 import 'package:t_store/features/payment/data/models/payment_method/payment_method_model.dart';
 import 'package:t_store/features/payment/data/models/payment_method/stripe/stripe_card_method_model.dart';
-import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
+import 'package:t_store/features/payment/domain/entities/payment_method/payment_method_entity.dart';
 
 class StripePaymentMethodService implements IPaymentMethodService {
   final ApiClient apiClient;

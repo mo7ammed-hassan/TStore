@@ -1,10 +1,8 @@
-import 'package:t_store/features/payment/data/datasources/i_payment_service_strategy.dart';
-import 'package:t_store/features/payment/data/models/payment_result_model.dart';
-import 'package:t_store/features/payment/domain/entities/payment_details.dart';
+import 'package:t_store/features/payment/data/data.dart';
 
 class FawryPaymentService implements IPaymentServiceStrategy {
   @override
-  Future<PaymentResultModel> pay({required PaymentDetails details}) async {
+  Future<PaymentResultModel> pay({required PaymentDetailsModel details}) async {
     return const PaymentResultModel(success: true, transactionId: 'fw_789');
   }
 }

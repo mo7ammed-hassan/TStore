@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:t_store/core/errors/failures.dart';
-import 'package:t_store/features/payment/domain/entities/payment_method_entity.dart';
+import 'package:t_store/features/payment/domain/entities/payment_method/payment_method_entity.dart';
 
 abstract class PaymentMethodRepository {
   Future<Either<Failure, PaymentMethodEntity>> addPaymentMethod(
