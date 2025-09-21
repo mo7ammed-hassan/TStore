@@ -39,4 +39,11 @@ class ReAuthUserCubit extends Cubit<ReAuthUserState> {
 
   //validation
   bool isValidEmail() => formKey.currentState?.validate() ?? true;
+
+  @override
+  Future<void> close() {
+    emailController.dispose();
+    passwordController.dispose();
+    return super.close();
+  }
 }

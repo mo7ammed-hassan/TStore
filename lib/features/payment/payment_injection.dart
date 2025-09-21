@@ -14,8 +14,10 @@ import 'package:t_store/features/payment/data/datasources/stripe_service/stripe_
 import 'package:t_store/features/payment/data/datasources/stripe_service/stripe_payment_service.dart';
 import 'package:t_store/features/payment/data/datasources/stripe_service/stripe_saved_card_flow_strategy.dart';
 import 'package:t_store/features/payment/data/datasources/vodafone_cash_payment_service.dart';
+import 'package:t_store/features/payment/data/repositories/customer_repository_impl.dart';
 import 'package:t_store/features/payment/data/repositories/payment_method_repository_impl.dart';
 import 'package:t_store/features/payment/data/repositories/payment_repository_impl.dart';
+import 'package:t_store/features/payment/domain/repositories/customer_repository.dart';
 import 'package:t_store/features/payment/domain/repositories/payment_method_repository.dart';
 import 'package:t_store/features/payment/domain/repositories/payment_repository.dart';
 import 'package:t_store/features/payment/domain/usecases/delete_customer_usecase.dart';
@@ -101,6 +103,10 @@ void registerPaymentDependencies(GetIt getIt) {
   );
   getIt.registerLazySingleton<PaymentMethodRepository>(
     () => PaymentMethodRepositoryImpl(getIt()),
+  );
+
+  getIt.registerLazySingleton<CustomerRepository>(
+    () => CustomerRepositoryImpl(getIt()),
   );
 
   /// --- UseCases --- ///

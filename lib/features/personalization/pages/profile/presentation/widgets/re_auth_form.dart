@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/core/core.dart';
 import 'package:t_store/features/authentication/presentation/manager/password_and_selection/password_and_selection_cubit.dart';
 import 'package:t_store/common/widgets/text_filed/password_field.dart';
 import 'package:t_store/features/authentication/presentation/pages/login_page.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/personalization/pages/profile/cuits/re_auth_user_cubit.dart';
 import 'package:t_store/features/personalization/pages/profile/cuits/re_auth_user_state.dart';
-import 'package:t_store/core/utils/constants/images_strings.dart';
-import 'package:t_store/core/utils/constants/sizes.dart';
-import 'package:t_store/core/utils/constants/text_strings.dart';
-import 'package:t_store/core/utils/helpers/navigation.dart';
-import 'package:t_store/core/utils/popups/full_screen_loader.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 import 'package:t_store/common/validators/validation.dart';
 
 class ReAuthForm extends StatelessWidget {
@@ -35,9 +29,9 @@ class ReAuthForm extends StatelessWidget {
           context.pushAndClearAll(const LoginPage());
         } else {
           TFullScreenLoader.stopLoading();
-          TFullScreenLoader.openLoadingDialog(
-            'Email or Password is incorrect, Please, try again.',
-            TImages.docerAnimation,
+          Loaders.errorSnackBar(
+            title: 'Authentication Failed',
+            message: 'Email or Password is incorrect, Please, try again.',
           );
         }
       },
