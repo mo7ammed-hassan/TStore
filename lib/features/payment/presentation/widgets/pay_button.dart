@@ -42,7 +42,7 @@ class PayButton extends StatelessWidget {
               final userData = PaymentUserDataEntity(
                 customerId: user?.stripeCustomerId,
               );
-              
+
               final details = PaymentDetailsEntity(
                 orderId: order.orderId,
                 currency: 'usd',
@@ -66,7 +66,7 @@ class PayButton extends StatelessWidget {
                         canPop: false,
                         child: CircularProgressIndicator(
                           color: Colors.white,
-                          strokeWidth: 2.5,
+                          strokeWidth: 2.2,
                         ),
                       ),
                     ),

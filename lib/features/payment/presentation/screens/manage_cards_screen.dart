@@ -28,16 +28,18 @@ class ManageCardsScreen extends StatelessWidget {
         ),
         body: Padding(
           padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
-          child: BlocBuilder<PaymentMethodsCubit, PaymentMethodsState>(
+          child: BlocBuilder<PaymentMethodsCubit, PaymentMethodState>(
             builder: (context, state) {
-              if (state is PaymentMethodsLoading) {
+              if (state.action == PaymentMethodAction.fetch &&
+                  state.status == PaymentMethodStateStatus.loading) {
                 return const Center(
                   child: CircularProgressIndicator(
                     color: AppColors.primary,
                   ),
                 );
               }
-              if (state is PaymentMethodsLoaded) {
+              if (state.action == PaymentMethodAction.fetch &&
+                  state.status == PaymentMethodStateStatus.success) {
                 return Column(
                   children: [
                     Expanded(
@@ -67,9 +69,10 @@ class ManageCardsScreen extends StatelessWidget {
                     ),
                   ],
                 );
-              } else if (state is PaymentMethodsError) {
+              } else if (state.action == PaymentMethodAction.fetch &&
+                  state.status == PaymentMethodStateStatus.failure) {
                 return ResponsiveText(
-                  state.message,
+                  state.message ?? 'Something went wrong',
                   maxLines: 10,
                 );
               }

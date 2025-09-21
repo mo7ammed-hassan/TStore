@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/core/core.dart';
 import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
-import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/payment/payment.dart';
 import 'package:t_store/features/shop/features/order/presentation/cuits/order_cubit.dart';
 import 'package:t_store/features/shop/features/order/presentation/pages/order_page.dart';
@@ -20,13 +19,9 @@ class PaymentFlowScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final order = args.order;
-    final stripeCustomerId =
-        context.read<UserCubit>().state.user?.stripeCustomerId;
 
     return BlocProvider(
-      create: (context) => getIt<PaymentCubit>()
-        ..fetchPaymentMethods()
-        ..getDefaultPaymentMethod(customerId: stripeCustomerId),
+      create: (context) => getIt<PaymentCubit>()..fetchServiceMethods(),
       child: BlocListener<PaymentCubit, PaymentState>(
         listener: (context, state) {
           if (state.action == PaymentAction.processPayment &&

@@ -209,6 +209,12 @@ class Loaders {
       ),
     );
   }
+
+  static void hideLoading() {
+    if (Navigator.of(AppContext.context).canPop()) {
+      Navigator.of(AppContext.context, rootNavigator: true).pop();
+    }
+  }
 }
 
 class AppContext {

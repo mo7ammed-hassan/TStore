@@ -14,11 +14,13 @@ class PaymentCubit extends Cubit<PaymentState> {
   PaymentCubit(this._paymentUsecases) : super(PaymentState());
   final PaymentUsecases _paymentUsecases;
 
-  void fetchPaymentMethods() async {
-    emit(state.copyWith(
-      action: PaymentAction.fetch,
-      status: PaymentStateStatus.loading,
-    ));
+  void fetchServiceMethods() async {
+    emit(
+      state.copyWith(
+        action: PaymentAction.fetch,
+        status: PaymentStateStatus.loading,
+      ),
+    );
 
     final fetchedMethods =
         await _paymentUsecases.getPaymnetMethodUsecase.call();
@@ -30,39 +32,12 @@ class PaymentCubit extends Cubit<PaymentState> {
   }
 
   void selectMethod(CardMethodEntity method) {
-    emit(state.copyWith(
-      action: PaymentAction.selectMethod,
-      status: PaymentStateStatus.success,
-      selectedMethod: method,
-    ));
-  }
-
-  void getDefaultPaymentMethod({required String? customerId}) async {
-    emit(state.copyWith(
-      action: PaymentAction.fetchDefaultMethod,
-      status: PaymentStateStatus.loading,
-    ));
-
-    final result = await _paymentUsecases.getDefaultPaymentMethod(customerId);
-
-    result.fold(
-      (error) {
-        emit(
-          state.copyWith(
-            action: PaymentAction.fetchDefaultMethod,
-            status: PaymentStateStatus.failure,
-            error: error.message,
-          ),
-        );
-      },
-      (defaultMethod) {
-        emit(state.copyWith(
-          action: PaymentAction.fetchDefaultMethod,
-          status: PaymentStateStatus.success,
-          defaultMethod: defaultMethod,
-          message: 'Payment successful',
-        ));
-      },
+    emit(
+      state.copyWith(
+        action: PaymentAction.selectMethod,
+        status: PaymentStateStatus.success,
+        selectedMethod: method,
+      ),
     );
   }
 

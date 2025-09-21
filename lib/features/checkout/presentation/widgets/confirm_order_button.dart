@@ -60,7 +60,7 @@ class ConfirmOrderButton extends StatelessWidget {
                           canPop: false,
                           child: CircularProgressIndicator(
                             color: Colors.white,
-                            strokeWidth: 2.5,
+                            strokeWidth: 2.2,
                           ),
                         ),
                       ),

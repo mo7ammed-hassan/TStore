@@ -109,11 +109,11 @@ void registerPaymentDependencies(GetIt getIt) {
   getIt.registerLazySingleton<GetPaymentMethodsUsecase>(
     () => GetPaymentMethodsUsecase(getIt()),
   );
-  getIt.registerLazySingleton<GetDefaultPaymentMethod >(
+  getIt.registerLazySingleton<GetDefaultPaymentMethod>(
     () => GetDefaultPaymentMethod(getIt()),
   );
   getIt.registerLazySingleton<PaymentUsecases>(
-    () => PaymentUsecases(getIt(), getIt(), getIt()),
+    () => PaymentUsecases(getIt(), getIt()),
   );
 
   getIt.registerLazySingleton<GetSavedPaymentMethodsUsecase>(
@@ -126,6 +126,6 @@ void registerPaymentDependencies(GetIt getIt) {
   );
 
   getIt.registerFactory<PaymentMethodsCubit>(
-    () => PaymentMethodsCubit(getIt()),
+    () => PaymentMethodsCubit(getIt(), getIt()),
   );
 }

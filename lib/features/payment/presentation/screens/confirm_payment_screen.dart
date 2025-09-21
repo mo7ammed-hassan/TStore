@@ -57,17 +57,17 @@ class ConfirmPaymentScreen extends StatelessWidget {
                     value: '\$${orderSummary?.total}',
                   ),
                   ResponsiveGap.vertical(20),
-                  
+    
                   const Divider(),
                   ResponsiveGap.vertical(20),
-
+    
                   // Payment Form
                   PaymentForm(
                     order: order,
                     method: method,
                   ),
                   ResponsiveGap.vertical(20),
-
+    
                   // another card Button
                   SizedBox(
                     width: double.infinity,

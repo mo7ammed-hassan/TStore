@@ -16,21 +16,32 @@ class SelectPaymentScreen extends StatelessWidget {
     final orderSummary = order?.checkoutModel.orderSummary;
     final stripeCustomerId =
         context.read<UserCubit>().state.user?.stripeCustomerId;
-        
-    return Scaffold(
-      appBar: const TAppBar(
-        showBackArrow: true,
-        nestedNavigator: true,
-        title: TTexts.paymentDetails,
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: _buildPaymentMethodsList(context),
+
+    return BlocProvider(
+      create: (context) => getIt<PaymentMethodsCubit>(),
+      child: BlocListener<PaymentMethodsCubit, PaymentMethodState>(
+        listener: (context, state) {
+          if (state.action == PaymentMethodAction.fetchDefaultMethod &&
+              state.status == PaymentMethodStateStatus.success) {
+            _handleContinueButtonLisnter(context, order, stripeCustomerId);
+          }
+        },
+        child: Scaffold(
+          appBar: const TAppBar(
+            showBackArrow: true,
+            nestedNavigator: true,
+            title: TTexts.paymentDetails,
           ),
-          _buildOrderSummary(orderSummary),
-          _buildContinueButton(context, order, stripeCustomerId),
-        ],
+          body: Column(
+            children: [
+              Expanded(
+                child: _buildPaymentMethodsList(context),
+              ),
+              _buildOrderSummary(orderSummary),
+              _buildContinueButton(context, order, stripeCustomerId),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -88,25 +99,47 @@ class SelectPaymentScreen extends StatelessWidget {
   }
 
   Widget _buildContinueButton(
-      BuildContext context, OrderEntity? order, String? stripeCustomerId) {
+    BuildContext context,
+    OrderEntity? order,
+    String? stripeCustomerId,
+  ) {
     return BlocBuilder<PaymentCubit, PaymentState>(
       builder: (context, state) {
+        final selectedMethod = state.selectedMethod;
         final isButtonEnabled = state.selectedMethod != null &&
             !(state.status == PaymentStateStatus.loading &&
                 state.action == PaymentAction.processPayment);
 
-        return ContinueButton(
-          enabled: isButtonEnabled,
-          onPressed: () =>
-              _handleContinueButtonPress(context, order, stripeCustomerId),
+        return BlocBuilder<PaymentMethodsCubit, PaymentMethodState>(
+          builder: (context, methodsState) {
+            final isLoading =
+                methodsState.action == PaymentMethodAction.fetchDefaultMethod &&
+                    methodsState.status == PaymentMethodStateStatus.loading;
+
+            return ContinueButton(
+              loading: isLoading,
+              enabled: isButtonEnabled,
+              onPressed: () {
+                if (selectedMethod != null) {
+                  context.read<PaymentMethodsCubit>().getDefaultPaymentMethod(
+                        customerId: stripeCustomerId,
+                        method: selectedMethod,
+                      );
+                }
+              },
+            );
+          },
         );
       },
     );
   }
 
-  void _handleContinueButtonPress(
-      BuildContext context, OrderEntity? order, String? stripeCustomerId) {
-    final paymentCubit = context.read<PaymentCubit>();
+  void _handleContinueButtonLisnter(
+    BuildContext context,
+    OrderEntity? order,
+    String? stripeCustomerId,
+  ) {
+    final paymentCubit = context.read<PaymentMethodsCubit>();
     final method = paymentCubit.state.defaultMethod;
 
     if (method != null) {
