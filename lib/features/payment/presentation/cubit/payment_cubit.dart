@@ -43,7 +43,6 @@ class PaymentCubit extends Cubit<PaymentState> {
 
   void confirmPayment(PaymentDetailsEntity details, OrderEntity order,
       {CardFlow? cardFlow}) async {
-    print('Save card: ${details.saveCard}');
     if (state.selectedMethod == null) return;
 
     emit(

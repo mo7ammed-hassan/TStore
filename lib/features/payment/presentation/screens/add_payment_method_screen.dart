@@ -94,9 +94,9 @@ class CreditCardView extends StatelessWidget {
                     autovalidateMode: AutovalidateMode.onUnfocus,
                     onCreditCardModelChange: cubit.onCreditCardModelChange,
                   ),
-                  ResponsiveGap.vertical(16),
+                  ResponsiveGap.vertical(18),
                   Padding(
-                    padding: const EdgeInsets.only(left: 14),
+                    padding: const EdgeInsets.only(left: 20),
                     child: Column(
                       children: [
                         const OptionCheckbox(
