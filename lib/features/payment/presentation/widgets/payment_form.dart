@@ -74,7 +74,7 @@ class _PaymentFormState extends State<PaymentForm> {
                       child: Container(
                         width: context.horzSize(60),
                         height: context.horzSize(35),
-                        margin: context.responsiveInsets.only(right: 8),
+                        //margin: context.responsiveInsets.only(right: 8),
                         decoration: BoxDecoration(
                           color:
                               isDark ? AppColors.darkerGrey : AppColors.light,
@@ -82,7 +82,7 @@ class _PaymentFormState extends State<PaymentForm> {
                         ),
                         padding: context.responsiveInsets.symmetric(
                           vertical: 4,
-                          horizontal: 2,
+                          horizontal: 6,
                         ),
                         child: Center(
                           child: FittedBox(
@@ -96,10 +96,11 @@ class _PaymentFormState extends State<PaymentForm> {
                         ),
                       ),
                     ),
-                    Flexible(
+                    ResponsiveGap.horizontal(10),
+                    Expanded(
                       flex: 2,
                       child: CardTextField(
-                        hint: '**** **** **** ${method?.card?.last4}',
+                        hint: '*** *** *** ${method?.card?.last4}',
                         enabled: false,
                       ),
                     ),

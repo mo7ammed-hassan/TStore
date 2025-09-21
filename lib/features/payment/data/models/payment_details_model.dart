@@ -10,6 +10,7 @@ class PaymentDetailsModel {
   final PaymentUserDataModel? user;
   final String? paymentMethodId;
   final String? cvc;
+  final bool saveCard;
 
   const PaymentDetailsModel({
     required this.amountMinor,
@@ -20,5 +21,6 @@ class PaymentDetailsModel {
     this.user,
     this.paymentMethodId,
     this.cvc,
+    this.saveCard = false,
   });
 }

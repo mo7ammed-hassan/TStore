@@ -10,6 +10,7 @@ class PaymentDetailsEntity {
   final PaymentUserDataEntity? user;
   final String? paymentMethodId;
   final String? cvc;
+  final bool saveCard;
 
   const PaymentDetailsEntity({
     required this.amountMinor,
@@ -20,6 +21,7 @@ class PaymentDetailsEntity {
     this.user,
     this.paymentMethodId,
     this.cvc,
+    this.saveCard = false,
   });
 
   PaymentDetailsEntity copyWith({
@@ -27,6 +29,7 @@ class PaymentDetailsEntity {
     PaymentUserDataEntity? user,
     String? paymentMethodId,
     String? cvc,
+    bool? saveCard,
   }) {
     return PaymentDetailsEntity(
       amountMinor: amountMinor,
@@ -36,6 +39,7 @@ class PaymentDetailsEntity {
       user: user ?? this.user,
       paymentMethodId: paymentMethodId ?? this.paymentMethodId,
       cvc: cvc ?? this.cvc,
+      saveCard: saveCard ?? this.saveCard,
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:t_store/core/core.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/payment/domain/entities/card_details_entity.dart';
 import 'package:t_store/features/payment/domain/entities/payment_user_data_entity.dart';
+import 'package:t_store/features/payment/presentation/widgets/option_payment_checkbox.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/payment/payment.dart';
 
@@ -93,8 +94,26 @@ class CreditCardView extends StatelessWidget {
                     autovalidateMode: AutovalidateMode.onUnfocus,
                     onCreditCardModelChange: cubit.onCreditCardModelChange,
                   ),
-                  ResponsiveGap.vertical(20),
-                  const _SaveCardCheckbox(),
+                  ResponsiveGap.vertical(16),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 14),
+                    child: Column(
+                      children: [
+                        const OptionCheckbox(
+                          title: 'Billing is same as shipping information',
+                          value: true,
+                        ),
+                        ResponsiveGap.vertical(8),
+                        OptionCheckbox(
+                          title: 'Save Payment details for future purchases',
+                          value: context.select(
+                            (CreditCardFormCubit cubit) => cubit.state.saveCard,
+                          ),
+                          onChanged: (val) => cubit.toggleSaveCard(),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -104,43 +123,6 @@ class CreditCardView extends StatelessWidget {
             order: order,
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _SaveCardCheckbox extends StatelessWidget {
-  const _SaveCardCheckbox();
-
-  @override
-  Widget build(BuildContext context) {
-    final cubit = context.watch<CreditCardFormCubit>();
-
-    return Padding(
-      padding: context.responsiveInsets.only(left: 18),
-      child: GestureDetector(
-        onTap: cubit.toggleSaveCard,
-        child: Row(
-          children: [
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              width: context.horzSize(18),
-              height: context.horzSize(18),
-              decoration: BoxDecoration(
-                color: cubit.state.saveCard ? AppColors.buttonPrimary : null,
-                border: cubit.state.saveCard
-                    ? null
-                    : Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: cubit.state.saveCard
-                  ? const Icon(Icons.check, size: 14, color: Colors.white)
-                  : null,
-            ),
-            const SizedBox(width: 8),
-            const ResponsiveText('Save card', fontSize: 13),
-          ],
-        ),
       ),
     );
   }
@@ -162,7 +144,7 @@ class _PayButton extends StatelessWidget {
           width: double.infinity,
           child: Padding(
             padding: context.responsiveInsets
-                .symmetric(horizontal: 26, vertical: 16),
+                .symmetric(horizontal: 24, vertical: 16),
             child: ElevatedButton(
               onPressed: () {
                 if (!cardCubit.formKey.currentState!.validate()) return;
@@ -201,6 +183,7 @@ class _PayButton extends StatelessWidget {
                   amountMinor: order!.checkoutModel.total.toInt(),
                   cardDetails: cardDetails,
                   user: userData,
+                  saveCard: cardCubit.state.saveCard,
                 );
 
                 paymentCubit.confirmPayment(

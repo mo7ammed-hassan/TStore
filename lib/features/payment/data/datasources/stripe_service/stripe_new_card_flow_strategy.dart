@@ -89,15 +89,19 @@ class StripeNewCardFlowStrategy implements ICardFlowStrategy {
     required PaymentDetailsModel details,
     String? customerId,
   }) async {
+    final data = {
+      'amount': (details.amountMinor * 100).toInt(),
+      'currency': details.currency,
+      'customer': customerId,
+    };
+
+    if (details.saveCard) {
+      data['setup_future_usage'] =
+          'off_session'; // to save payment method to future payment
+    }
     final response = await dio.post(
       ApiConstants.paymentIntents,
-      data: {
-        'amount': (details.amountMinor * 100).toInt(),
-        'currency': details.currency,
-        'customer': customerId,
-        'setup_future_usage':
-            'off_session', // to save payment method to future payment
-      },
+      data: data,
       headers: {
         'Authorization': 'Bearer ${dotenv.env['STRIPE_SECRET_KEY']}',
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -143,10 +147,12 @@ class StripeNewCardFlowStrategy implements ICardFlowStrategy {
         await createPaymentMethod(details.cardDetails, details.user);
 
     // 4. attach + make default
-    await attachAndSetDefaultPaymentMethod(
-      customerId: customerId!,
-      paymentMethodId: paymentMethod.id,
-    );
+    if (details.saveCard) {
+      await attachAndSetDefaultPaymentMethod(
+        customerId: customerId!,
+        paymentMethodId: paymentMethod.id,
+      );
+    }
 
     // 5. Confirm payment with Stripe SDK
     final paymentResult = await confirmPayment(
