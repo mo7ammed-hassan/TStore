@@ -20,7 +20,6 @@ class PayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.read<UserCubit>().state.user;
-    print('card type: ${paymentMethod?.cardType}');
 
     return SizedBox(
       width: double.infinity,

@@ -56,9 +56,6 @@ class StripeSavedCardFlowStrategy implements ICardFlowStrategy {
       paymentMethodId: details.paymentMethod!.id,
       cvc: details.cvc!,
     );
-    print('----------------');
-    print('card type: ${details.paymentMethod?.cardType}');
-    print('----------------');
 
     return PaymentResultModel(
       success: paymentResult.status == PaymentIntentsStatus.Succeeded,
