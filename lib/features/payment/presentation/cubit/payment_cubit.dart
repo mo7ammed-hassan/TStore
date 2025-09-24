@@ -41,7 +41,7 @@ class PaymentCubit extends Cubit<PaymentState> {
     );
   }
 
-  void confirmPayment(
+  Future<void> confirmPayment(
     PaymentDetailsEntity details,
     OrderEntity order, {
     CardFlow? cardFlow,

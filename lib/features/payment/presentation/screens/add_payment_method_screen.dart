@@ -146,7 +146,7 @@ class _PayButton extends StatelessWidget {
             padding: context.responsiveInsets
                 .symmetric(horizontal: 24, vertical: 16),
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (!cardCubit.formKey.currentState!.validate()) return;
 
                 final data = cardCubit.state.expiryDate.split('/');
@@ -186,13 +186,17 @@ class _PayButton extends StatelessWidget {
                   saveCard: cardCubit.state.saveCard,
                 );
 
-                paymentCubit.confirmPayment(
+                await paymentCubit
+                    .confirmPayment(
                   details,
                   order!,
                   cardFlow: CardFlow.newCard,
-                );
-
-                context.read<UserCubit>().fetchUserData(forchFetch: true);
+                )
+                    .then((value) {
+                  if (context.mounted) {
+                    context.read<UserCubit>().fetchUserData(forchFetch: true);
+                  }
+                });
               },
               child: const ResponsiveText('Pay'),
             ),

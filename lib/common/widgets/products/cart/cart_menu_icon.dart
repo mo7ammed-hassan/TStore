@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/core/utils/responsive/responsive.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_state.dart';
 import 'package:t_store/core/utils/constants/colors.dart';
@@ -30,8 +31,8 @@ class TCartCounterIcon extends StatelessWidget {
         Positioned(
           right: 0,
           child: Container(
-            width: 18,
-            height: 18,
+            width: context.horzSize(17),
+            height: context.horzSize(17),
             decoration: BoxDecoration(
               color: AppColors.black.withValues(alpha: 0.8),
               borderRadius: BorderRadius.circular(100),
@@ -39,7 +40,7 @@ class TCartCounterIcon extends StatelessWidget {
             child: Center(
               child: BlocBuilder<CartCubit, CartState>(
                 builder: (context, state) {
-                  return Text(
+                  return ResponsiveText(
                     context.read<CartCubit>().getCartLength().toString(),
                     style: Theme.of(context).textTheme.bodySmall!.apply(
                           color: AppColors.white,

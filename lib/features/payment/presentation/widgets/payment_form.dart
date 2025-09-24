@@ -73,7 +73,7 @@ class _PaymentFormState extends State<PaymentForm> {
                       flex: 3,
                       child: Container(
                         width: context.horzSize(65),
-                        height: context.horzSize(35),
+                        height: context.vertSize(40),
                         //margin: context.responsiveInsets.only(right: 8),
                         decoration: BoxDecoration(
                           color:
@@ -102,7 +102,7 @@ class _PaymentFormState extends State<PaymentForm> {
                     Expanded(
                       flex: 4,
                       child: CardTextField(
-                        hint: 'xxxxxxx${method?.card?.last4}',
+                        hint: 'xxxxxxxxx${method?.card?.last4}',
                         enabled: false,
                       ),
                     ),

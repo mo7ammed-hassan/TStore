@@ -19,6 +19,7 @@ class ConfirmOrderButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
       child: Padding(
         padding: context.responsiveInsets.symmetric(
           horizontal: TSizes.defaultSpace,

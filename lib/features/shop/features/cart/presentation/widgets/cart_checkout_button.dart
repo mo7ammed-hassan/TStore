@@ -20,6 +20,7 @@ class CartCheckoutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
       child: ResponsivePadding.symmetric(
         horizontal: TSizes.defaultSpace,
         vertical: TSizes.spaceBtwItems,
