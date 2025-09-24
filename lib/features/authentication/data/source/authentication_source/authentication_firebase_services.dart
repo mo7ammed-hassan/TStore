@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:t_store/core/hive_boxes/open_boxes.dart';
+import 'package:t_store/core/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:t_store/features/authentication/data/models/user_creation_model.dart';
 import 'package:t_store/features/authentication/data/models/user_signin_model.dart';
 import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubits/favorite_button_cubit.dart';
@@ -41,8 +41,10 @@ class AuthenticationFirebaseServicesImpl
       await _user.signOut();
 
       return const Right('Success Logout');
+    } on TFirebaseAuthException catch (e) {
+      return Left(TFirebaseAuthException(e.code).message);
     } catch (e) {
-      return const Left('There was an error, please try again');
+      return Left(e.toString());
     }
   }
 
@@ -57,8 +59,10 @@ class AuthenticationFirebaseServicesImpl
         message = 'No user found for that email.';
       }
       return Left(message);
+    } on TFirebaseAuthException catch (e) {
+      return Left(TFirebaseAuthException(e.code).message);
     } catch (e) {
-      return const Left('There was an error, please try again');
+      return Left(e.toString());
     }
   }
 
@@ -89,16 +93,10 @@ class AuthenticationFirebaseServicesImpl
       return const Right(
         'Your Account has been created! Verify email to continue',
       );
-    } on FirebaseAuthException catch (e) {
-      String message = '';
-      if (e.code == 'weak-password') {
-        message = 'The password provided is too weak.';
-      } else if (e.code == 'email-already-in-use') {
-        message = 'The account already exists for that email.';
-      }
-      return Left(message);
+    } on TFirebaseAuthException catch (e) {
+      return Left(TFirebaseAuthException(e.code).message);
     } catch (e) {
-      return const Left('There was an error, please try again');
+      return Left(e.toString());
     }
   }
 
@@ -116,17 +114,10 @@ class AuthenticationFirebaseServicesImpl
           .openUserWishlistBox(userID: userCredential.user!.uid);
 
       return Right(userCredential.user);
-    } on FirebaseAuthException catch (e) {
-      String message = '';
-      if (e.code == 'user-not-found') {
-        message = 'No user found for that email.';
-      } else if (e.code == 'wrong-password') {
-        message = 'Wrong password provided for that user.';
-      }
-
-      return Left(message);
+    } on TFirebaseAuthException catch (e) {
+      return Left(TFirebaseAuthException(e.code).message);
     } catch (e) {
-      return const Left('There was an error, please try again');
+      return Left(e.toString());
     }
   }
 
@@ -139,8 +130,10 @@ class AuthenticationFirebaseServicesImpl
       }
 
       return const Right('Email verification sent successfully');
+    } on TFirebaseAuthException catch (e) {
+      return Left(TFirebaseAuthException(e.code).message);
     } catch (e) {
-      return const Left('There was an error, please try again');
+      return Left(e.toString());
     }
   }
 
@@ -152,21 +145,7 @@ class AuthenticationFirebaseServicesImpl
         return user.emailVerified;
       }
       return false;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        if (kDebugMode) {
-          print('User not found: ${e.message}');
-        }
-      } else {
-        if (kDebugMode) {
-          print('FirebaseAuthException: ${e.message}');
-        }
-      }
-      return false;
     } catch (e) {
-      if (kDebugMode) {
-        print('Unexpected error: $e');
-      }
       return false;
     }
   }
@@ -204,8 +183,10 @@ class AuthenticationFirebaseServicesImpl
           GoogleAuthProvider(),
         ),
       );
+    } on TFirebaseAuthException catch (e) {
+      return Left(TFirebaseAuthException(e.code).message);
     } catch (e) {
-      return const Left('Google sign-in failed');
+      return Left(e.toString());
     }
   }
 }

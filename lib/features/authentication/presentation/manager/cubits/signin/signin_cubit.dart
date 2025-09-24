@@ -54,8 +54,11 @@ class SignInCubit extends Cubit<SignInState> {
     // Call SignIn use case
     var userResult = await getIt<SignInUsecase>().call(params: user);
 
-    userResult.fold((errorMessage) => emit(SignInErrorState(errorMessage)),
-        (user) async {
+    userResult.fold((errorMessage) {
+      emit(
+        SignInErrorState(errorMessage),
+      );
+    }, (user) async {
       if (!await getIt<IsVerifiedEmailUseCase>().call(params: user)) {
         emit(NotVerifiedState(user.email));
       } else {

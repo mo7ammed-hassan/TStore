@@ -45,6 +45,8 @@ class UserFirebaseServiceImpl implements UserFirebaseServices {
       } else {
         return const Left('User not found');
       }
+    } on TFirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
     } catch (e) {
       return Left('Error fetching user data: $e');
     }
@@ -83,6 +85,9 @@ class UserFirebaseServiceImpl implements UserFirebaseServices {
   Future<Either> deleteAccount() async {
     try {
       final userId = _auth.currentUser!.uid;
+
+      _deleteSubcollection(userId, 'orders');
+      _deleteSubcollection(userId, 'Address');
 
       await _store.collection('Users').doc(userId).delete();
 
@@ -145,6 +150,17 @@ class UserFirebaseServiceImpl implements UserFirebaseServices {
       return Left('Error uploading image: $e');
     } catch (e) {
       return Left('Error uploading image: $e');
+    }
+  }
+
+  Future<void> _deleteSubcollection(String userId, String subcollection) async {
+    final subcollectionRef =
+        _store.collection('Users').doc(userId).collection(subcollection);
+
+    final snapshots = await subcollectionRef.get();
+
+    for (var doc in snapshots.docs) {
+      await doc.reference.delete();
     }
   }
 }

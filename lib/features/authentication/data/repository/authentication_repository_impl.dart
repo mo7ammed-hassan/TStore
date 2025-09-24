@@ -8,7 +8,7 @@ import 'package:t_store/core/config/service_locator.dart';
 
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
   @override
-  Future<Either> resetPassword({required String email}) async {
+  Future<Either<String, dynamic>> resetPassword({required String email}) async {
     var returnedData = await getIt<AuthenticationFirebaseServices>()
         .resetPassword(email: email);
     return returnedData.fold(
@@ -22,7 +22,8 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }
 
   @override
-  Future<Either> signIn(UserSigninModel userSigninModel) async {
+  Future<Either<String, dynamic>> signIn(
+      UserSigninModel userSigninModel) async {
     var returnedData =
         await getIt<AuthenticationFirebaseServices>().signin(userSigninModel);
 
@@ -37,7 +38,8 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }
 
   @override
-  Future<Either> signup(UserCreationModel userCreationModel) async {
+  Future<Either<String, dynamic>> signup(
+      UserCreationModel userCreationModel) async {
     var returnedData =
         await getIt<AuthenticationFirebaseServices>().signup(userCreationModel);
 
@@ -52,7 +54,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }
 
   @override
-  Future<Either> sendEmailVerification() async {
+  Future<Either<String, dynamic>> sendEmailVerification() async {
     var returnedData =
         await getIt<AuthenticationFirebaseServices>().sendEmailVerification();
 
@@ -72,7 +74,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }
 
   @override
-  Future<Either> logout() async {
+  Future<Either<String, dynamic>> logout() async {
     var result = await getIt<AuthenticationFirebaseServices>().logout();
     return result.fold(
       (errorMessage) {

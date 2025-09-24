@@ -4,11 +4,11 @@ import 'package:t_store/features/authentication/data/models/user_creation_model.
 import 'package:t_store/features/authentication/data/models/user_signin_model.dart';
 
 abstract class AuthenticationRepository {
-  Future<Either> signup(UserCreationModel userCreationModel);
-  Future<Either> signIn(UserSigninModel userSigninModel);
-  Future<Either> logout();
-  Future<Either> resetPassword({required String email});
-  Future<Either> sendEmailVerification();
+  Future<Either<String, dynamic>> signup(UserCreationModel userCreationModel);
+  Future<Either<String, dynamic>> signIn(UserSigninModel userSigninModel);
+  Future<Either<String, dynamic>> logout();
+  Future<Either<String, dynamic>> resetPassword({required String email});
+  Future<Either<String, dynamic>> sendEmailVerification();
   Future<bool> isVerifiedEmail(User? user);
   Future<Either<String, UserCredential>> signInWithGoogle();
 }

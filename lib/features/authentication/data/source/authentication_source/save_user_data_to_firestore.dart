@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
+import 'package:t_store/core/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:t_store/features/authentication/data/models/user_creation_model.dart';
 
 class SaveUserDataToFirestore {
@@ -28,10 +28,8 @@ class SaveUserDataToFirestore {
             .doc(userCredential.user!.uid)
             .set(userData.toMap());
       }
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error saving user data to Firestore: $e');
-      }
+    } on TFirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
     }
   }
 
