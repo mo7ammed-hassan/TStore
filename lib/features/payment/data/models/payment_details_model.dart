@@ -1,5 +1,4 @@
-import 'package:t_store/features/payment/data/models/card_details_model.dart';
-import 'package:t_store/features/payment/data/models/payment_user_data.dart';
+import 'package:t_store/features/payment/data/data.dart';
 
 class PaymentDetailsModel {
   final int amountMinor; // amount in minor units (e.g., 10000 = 100.00 EGP)
@@ -8,7 +7,7 @@ class PaymentDetailsModel {
   final Map<String, dynamic>? meta; // optional extra fields per gateway
   final CardDetailsModel? cardDetails;
   final PaymentUserDataModel? user;
-  final String? paymentMethodId;
+  final PaymentMethodModel? paymentMethod;
   final String? cvc;
   final bool saveCard;
 
@@ -19,7 +18,7 @@ class PaymentDetailsModel {
     this.meta,
     this.cardDetails,
     this.user,
-    this.paymentMethodId,
+    this.paymentMethod,
     this.cvc,
     this.saveCard = false,
   });

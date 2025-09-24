@@ -6,5 +6,5 @@ abstract class CustomerRepository {
   Future<Either<Failure, CustomerEntity>> createCustomer(CustomerEntity customer);
   Future<Either<Failure, CustomerEntity>> getCustomer(String customerId);
   Future<Either<Failure, CustomerEntity>> updateCustomer(CustomerEntity customer);
-  Future<Either<Failure, void>> deleteCustomer(String customerId);
+  Future<Either<Failure, void>> deleteCustomer(String? customerId);
 }

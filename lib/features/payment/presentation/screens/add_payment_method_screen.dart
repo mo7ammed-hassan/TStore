@@ -191,23 +191,10 @@ class _PayButton extends StatelessWidget {
                   order!,
                   cardFlow: CardFlow.newCard,
                 );
+
+                context.read<UserCubit>().fetchUserData(forchFetch: true);
               },
-              child: state.status == PaymentStateStatus.loading &&
-                      state.action == PaymentAction.processPayment
-                  ? SizedBox(
-                      width: context.horzSize(20),
-                      height: context.horzSize(20),
-                      child: const Center(
-                        child: PopScope(
-                          canPop: false,
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 2.5,
-                          ),
-                        ),
-                      ),
-                    )
-                  : const ResponsiveText('Pay'),
+              child: const ResponsiveText('Pay'),
             ),
           ),
         );

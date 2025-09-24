@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store/core/utils/loaders/loading_dialog.dart';
 import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/widgets/single_address_card.dart';
 import 'package:t_store/core/utils/constants/sizes.dart';
-import 'package:t_store/core/utils/popups/loaders.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
@@ -18,7 +18,7 @@ class AddressListView extends StatelessWidget {
   });
   final List<AddressEntity> addresses;
   final double fontSize;
-  final ValueChanged<AddressEntity>? onAddressSelected;
+  final ValueChanged<AddressEntity?>? onAddressSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class AddressListView extends StatelessWidget {
           fontSize: fontSize,
           address: address,
           onTap: () async {
-            if (context.mounted) Loaders.showSimpleLoading(context);
+            if (context.mounted) LoadingDialog.show(context);
 
             final newAddress =
                 await context.read<AddressCubit>().updateSelectAddress(address);
@@ -61,8 +61,8 @@ class AddressListView extends StatelessWidget {
     required BuildContext context,
     required AddressCubit addressCubit,
     required String addressId,
-  }) {
-    showModalBottomSheet(
+  }) async {
+    await showModalBottomSheet<AddressEntity?>(
       context: context,
       builder: (BuildContext context) {
         return Padding(
@@ -91,8 +91,10 @@ class AddressListView extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pop();
                         addressCubit.deleteAddress(addressId);
+                        Navigator.of(context).pop();
+                        Navigator.of(context, rootNavigator: false)
+                            .pop(addressCubit.state.selectedAddress);
                       },
                       child: const ResponsiveText(
                         'Delete ❌',

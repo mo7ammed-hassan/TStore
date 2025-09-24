@@ -1,9 +1,11 @@
+import 'package:t_store/features/payment/data/mappers/mappers.dart';
 import 'package:t_store/features/payment/data/models/payment_user_data.dart';
 import 'package:t_store/features/payment/domain/entities/payment_details_entity.dart';
 import 'package:t_store/features/payment/domain/entities/card_details_entity.dart';
 import 'package:t_store/features/payment/domain/entities/payment_user_data_entity.dart';
 import 'package:t_store/features/payment/data/models/payment_details_model.dart';
 import 'package:t_store/features/payment/data/models/card_details_model.dart';
+
 /// ---------------- CardDetails ----------------
 extension CardDetailsMapper on CardDetailsEntity {
   CardDetailsModel toModel() {
@@ -26,7 +28,6 @@ extension CardDetailsModelMapper on CardDetailsModel {
     );
   }
 }
-
 
 /// ---------------- PaymentUserData ----------------
 extension PaymentUserDataMapper on PaymentUserDataEntity {
@@ -63,8 +64,9 @@ extension PaymentDetailsMapper on PaymentDetailsEntity {
       meta: meta,
       cardDetails: cardDetails?.toModel(),
       user: user?.toModel(),
-      paymentMethodId: paymentMethodId,
+      paymentMethod: paymentMethod?.toModel(),
       cvc: cvc,
+      saveCard: saveCard,
     );
   }
 }
@@ -78,11 +80,9 @@ extension PaymentDetailsModelMapper on PaymentDetailsModel {
       meta: meta,
       cardDetails: cardDetails?.toEntity(),
       user: user?.toEntity(),
-      paymentMethodId: paymentMethodId,
+      paymentMethod: paymentMethod?.toEntity(),
       cvc: cvc,
+      saveCard: saveCard,
     );
   }
 }
-
-
-

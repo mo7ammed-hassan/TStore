@@ -14,7 +14,7 @@ class ReAuthUserCubit extends Cubit<ReAuthUserState> {
   final TextEditingController passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  void reauthenticate({required String customerId}) async {
+  void reauthenticate({required String? customerId}) async {
     if (!isValidEmail()) return;
 
     emit(ReAuthLoadingState());

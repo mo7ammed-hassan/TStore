@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/core/utils/loaders/loading_dialog.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 import 'package:t_store/features/personalization/pages/address/data/mapper/address_mapper.dart';
 import 'package:t_store/features/personalization/pages/address/data/models/address_model.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
@@ -155,12 +157,13 @@ class _AddNewAddressFormState extends State<AddNewAddressForm> {
           BlocListener<AddressCubit, AddressState>(
             listener: (context, state) {
               if (state.status == AddressStatus.loading) {
-                Loaders.showLoading(message: 'Adding your address...');
+                LoadingDialog.show(context, message: 'Adding your address...');
               }
 
               if (state.status == AddressStatus.addedSuccess) {
+                LoadingDialog.hide(context);
                 Navigator.pop(context);
-                Navigator.pop(context);
+                Navigator.pop(context, state.selectedAddress);
                 Loaders.customToast(
                   message: 'Address added successfully 🥳',
                 );
@@ -193,7 +196,7 @@ class _AddNewAddressFormState extends State<AddNewAddressForm> {
 
                   await addressCubit.addAddress(address.toEntity());
                 },
-                child: const Text('Save'),
+                child: const ResponsiveText('Save'),
               ),
             ),
           ),

@@ -77,7 +77,7 @@ class CheckoutCubit extends Cubit<CheckoutState> {
     }
   }
 
-  void chengeAdress(AddressEntity address) {
+  void chengeAdress(AddressEntity? address) {
     if (state.address != address) {
       emit(state.copyWith(address: address));
     }

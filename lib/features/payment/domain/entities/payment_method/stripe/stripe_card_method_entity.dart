@@ -13,6 +13,7 @@ class StripeCardMethodEntity
     required super.id,
     super.email,
     super.phone,
+    super.type,
     required this.card,
     required this.customer,
     required this.object,
@@ -23,8 +24,12 @@ class StripeCardMethodEntity
   StripeCardMethodEntity get method => StripeCardMethodEntity(
         id: id,
         card: card,
+        type: type,
         customer: customer,
         object: object,
         billingDetails: billingDetails,
       );
+      
+        @override
+        String get cardType => card?.brand ?? 'Card';
 }

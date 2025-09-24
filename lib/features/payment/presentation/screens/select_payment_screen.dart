@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/appbar/t_appbar.dart';
 import 'package:t_store/core/core.dart';
-import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
+import 'package:t_store/features/checkout/domain/entities/order_summary_entity.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/payment/payment.dart';
 
@@ -90,7 +90,7 @@ class SelectPaymentScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildOrderSummary(OrderSummaryModel? orderSummary) {
+  Widget _buildOrderSummary(OrderSummaryEntity? orderSummary) {
     return ResponsivePadding.symmetric(
       horizontal: 16,
       vertical: 8,

@@ -69,10 +69,10 @@ class _PaymentFormState extends State<PaymentForm> {
               child: InputCardBox(
                 child: Row(
                   children: [
-                    Flexible(
-                      fit: FlexFit.loose,
+                    Expanded(
+                      flex: 3,
                       child: Container(
-                        width: context.horzSize(60),
+                        width: context.horzSize(65),
                         height: context.horzSize(35),
                         //margin: context.responsiveInsets.only(right: 8),
                         decoration: BoxDecoration(
@@ -97,10 +97,12 @@ class _PaymentFormState extends State<PaymentForm> {
                       ),
                     ),
                     ResponsiveGap.horizontal(10),
+                    // Card Number
+                    const Spacer(),
                     Expanded(
-                      flex: 2,
+                      flex: 4,
                       child: CardTextField(
-                        hint: '*** *** *** ${method?.card?.last4}',
+                        hint: 'xxxxxxx${method?.card?.last4}',
                         enabled: false,
                       ),
                     ),
@@ -115,7 +117,7 @@ class _PaymentFormState extends State<PaymentForm> {
         // Pay Button
         PayButton(
           order: widget.order!,
-          paymentMethodId: method?.id,
+          paymentMethod: method,
           validateCVC: () {
             if (cvcController.text.isEmpty) {
               Loaders.warningSnackBar(

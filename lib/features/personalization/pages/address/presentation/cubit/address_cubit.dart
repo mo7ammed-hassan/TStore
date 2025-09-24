@@ -101,6 +101,10 @@ class AddressCubit extends Cubit<AddressState> {
   }
 
   Future<AddressEntity?> updateSelectAddress(AddressEntity address) async {
+    if (state.selectedAddress?.id == address.id) {
+      return state.selectedAddress;
+    }
+
     final updatedAddress = address.toModel().copyWith(selectedAddress: true);
     final previuslySelected =
         state.selectedAddress?.copyWith(selectedAddress: false);

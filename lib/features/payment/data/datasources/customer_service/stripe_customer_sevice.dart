@@ -28,7 +28,8 @@ class StripeCustomerService implements ICustomerService {
     return customer;
   }
 
-  Future<void> deleteCustomer(String customerId) async {
+  Future<void> deleteCustomer(String? customerId) async {
+    if (customerId == null) return;
     await dio.delete(
       '${ApiConstants.customers}/$customerId',
       headers: {

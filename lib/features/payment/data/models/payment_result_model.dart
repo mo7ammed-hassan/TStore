@@ -1,3 +1,5 @@
+import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
+
 class PaymentResultModel {
   final bool? success;
   final String? transactionId;
@@ -5,6 +7,7 @@ class PaymentResultModel {
   final String? paymentIntentId;
   final String? card;
   final String? message;
+  final OrderSummaryModel? orderSummary;
 
   const PaymentResultModel({
     this.success,
@@ -13,5 +16,6 @@ class PaymentResultModel {
     this.paymentIntentId,
     this.message,
     this.card,
+    this.orderSummary,
   });
 }

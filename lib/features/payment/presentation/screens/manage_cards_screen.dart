@@ -40,6 +40,12 @@ class ManageCardsScreen extends StatelessWidget {
               }
               if (state.action == PaymentMethodAction.fetch &&
                   state.status == PaymentMethodStateStatus.success) {
+                if (state.methods.isEmpty) {
+                  return EmptyWidget(
+                    nestedNavigator: nestedNavigator,
+                    order: order,
+                  );
+                }
                 return Column(
                   children: [
                     Expanded(
@@ -71,15 +77,56 @@ class ManageCardsScreen extends StatelessWidget {
                 );
               } else if (state.action == PaymentMethodAction.fetch &&
                   state.status == PaymentMethodStateStatus.failure) {
-                return ResponsiveText(
-                  state.message ?? 'Something went wrong',
-                  maxLines: 10,
+                return Center(
+                  child: ResponsiveText(
+                    state.message ?? 'Something went wrong',
+                    maxLines: 10,
+                  ),
                 );
               }
               return const SizedBox.shrink();
             },
           ),
         ),
+      ),
+    );
+  }
+}
+
+class EmptyWidget extends StatelessWidget {
+  const EmptyWidget({
+    super.key,
+    required this.nestedNavigator,
+    required this.order,
+  });
+
+  final bool nestedNavigator;
+  final OrderEntity? order;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const ResponsiveText(
+            'No bank cards added yet.',
+          ),
+          ResponsiveGap.vertical(20),
+          SizedBox(
+            width: context.horzSize(150),
+            child: ElevatedButton(
+              onPressed: () => nestedNavigator
+                  ? Navigator.pushNamed(
+                      context,
+                      PaymentRoutes.addPaymentMethodScreen,
+                      arguments: order,
+                    )
+                  : () {},
+              child: const ResponsiveText('Add Bank Card'),
+            ),
+          ),
+        ],
       ),
     );
   }

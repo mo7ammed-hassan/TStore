@@ -26,9 +26,12 @@ class PaymentMethodRepositoryImpl implements PaymentMethodRepository {
 
   @override
   Future<Either<Failure, List<PaymentMethodEntity>>> getPaymentMethods(
-    String customerId,
+    String? customerId,
   ) async {
     try {
+      if (customerId == null || customerId.isEmpty) {
+        return const Right([]);
+      }
       final result = await _methodService.getPaymentMethods(customerId);
 
       final methods = result.map((e) => e.toEntity()).toList();

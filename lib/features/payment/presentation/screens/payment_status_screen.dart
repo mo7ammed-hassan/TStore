@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:t_store/common/widgets/appbar/t_appbar.dart';
 import 'package:t_store/core/core.dart';
-import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
 import 'package:t_store/features/payment/payment.dart';
 
 class PaymentStatusScreen extends StatelessWidget {
@@ -14,7 +13,7 @@ class PaymentStatusScreen extends StatelessWidget {
     this.subTitle = 'There are many variations',
     this.title = 'Payment In Progress',
     this.onTap,
-    this.orderSummary,
+    this.paymentResult,
     this.buttonTitle = 'Show Orders',
     this.entryPoint,
   });
@@ -25,7 +24,7 @@ class PaymentStatusScreen extends StatelessWidget {
   final String title;
   final String buttonTitle;
   final void Function()? onTap;
-  final OrderSummaryModel? orderSummary;
+  final PaymentResultEntity? paymentResult;
   final PaymentEntryPoint? entryPoint;
 
   @override
@@ -69,8 +68,10 @@ class PaymentStatusScreen extends StatelessWidget {
                 flex: 2,
               ),
               if (paymentSuccess) ...[
-                const PaymentSummaryRow(
-                    label: TTexts.paymentMethod, value: 'CARD'),
+                PaymentSummaryRow(
+                  label: TTexts.paymentMethod,
+                  value: '${paymentResult?.card}',
+                ),
                 ResponsiveGap.vertical(14),
                 PaymentSummaryRow(
                   label: 'Date',
@@ -81,10 +82,10 @@ class PaymentStatusScreen extends StatelessWidget {
                 ResponsiveGap.vertical(14),
                 PaymentSummaryRow(
                   label: 'Transaction ID',
-                  value: orderSummary?.transactionId?.substring(0, 12) ?? '',
+                  value: paymentResult?.transactionId?.substring(0, 12) ?? '',
                 ),
                 ResponsiveGap.vertical(14),
-                PaymentSummary(orderSummary: orderSummary),
+                PaymentSummary(orderSummary: paymentResult?.orderSummary),
               ],
               ResponsiveGap.vertical(24),
               SafeArea(

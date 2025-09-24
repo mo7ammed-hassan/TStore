@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
+import 'package:t_store/core/config/service_locator.dart';
+import 'package:t_store/features/checkout/domain/entities/order_summary_entity.dart';
 import 'package:t_store/features/checkout/presentation/widgets/address_section.dart';
 import 'package:t_store/features/checkout/presentation/widgets/payment_section.dart';
 import 'package:t_store/features/checkout/presentation/widgets/pricing_section.dart';
@@ -9,11 +11,12 @@ import 'package:t_store/core/utils/constants/colors.dart';
 import 'package:t_store/core/utils/constants/sizes.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
+import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
 
 class ChekoutOrderDetial extends StatelessWidget {
   const ChekoutOrderDetial(
       {super.key, required this.orderSummary, this.address});
-  final OrderSummaryModel? orderSummary;
+  final OrderSummaryEntity? orderSummary;
   final AddressEntity? address;
 
   @override
@@ -30,7 +33,10 @@ class ChekoutOrderDetial extends StatelessWidget {
           const Divider(),
           const PaymentSection(),
           ResponsiveGap.vertical(TSizes.spaceBtwSections / 1.8),
-          AddressSection(addressEntity: address),
+          BlocProvider(
+              create: (context) => getIt<AddressCubit>()..fetchAllAddresses(),
+            child: AddressSection(addressEntity: address),
+          ),
         ],
       ),
     );

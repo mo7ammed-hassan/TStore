@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
@@ -136,74 +135,6 @@ class Loaders {
                 ),
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  static void showLoading({String? message}) {
-    showDialog(
-      context: AppContext.context,
-      barrierDismissible: false,
-      useSafeArea: true,
-      builder: (_) => PopScope(
-        canPop: false,
-        child: Dialog(
-          backgroundColor: Colors.transparent,
-          child: Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: HelperFunctions.isDarkMode(AppContext.context)
-                  ? AppColors.darkerGrey.withValues(alpha: 0.9)
-                  : AppColors.grey.withValues(alpha: 0.9),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ResponsiveGap.vertical(10),
-                const CircularProgressIndicator(
-                  color: AppColors.primary,
-                ),
-                if (message != null) ...[
-                  ResponsiveGap.vertical(16),
-                  ResponsiveText(
-                    message,
-                    style: Theme.of(AppContext.context).textTheme.bodyMedium,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  static void showSimpleLoading(BuildContext contex) {
-    showDialog(
-      context: AppContext.context,
-      barrierDismissible: false,
-      builder: (_) => PopScope(
-        canPop: false,
-        child: Dialog(
-          elevation: 0,
-          shape: const CircleBorder(),
-          child: SizedBox(
-            height: contex.horzSize(50),
-            width: contex.horzSize(50),
-            child: FittedBox(
-              child: Center(
-                child: Padding(
-                  padding: contex.responsiveInsets.all(18.0),
-                  child: const CircularProgressIndicator(
-                    color: AppColors.buttonPrimary,
-                  ),
-                ),
-              ),
-            ),
           ),
         ),
       ),

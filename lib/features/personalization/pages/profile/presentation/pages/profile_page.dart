@@ -23,6 +23,7 @@ class ProfilePage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             const UserProfileImage(

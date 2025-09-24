@@ -10,16 +10,17 @@ class PayButton extends StatelessWidget {
   const PayButton({
     super.key,
     required this.order,
-    this.paymentMethodId,
+    this.paymentMethod,
     required this.validateCVC,
   });
   final OrderEntity order;
-  final String? paymentMethodId;
+  final PaymentMethodEntity? paymentMethod;
   final String? Function()? validateCVC;
 
   @override
   Widget build(BuildContext context) {
     final user = context.read<UserCubit>().state.user;
+    print('card type: ${paymentMethod?.cardType}');
 
     return SizedBox(
       width: double.infinity,
@@ -47,7 +48,7 @@ class PayButton extends StatelessWidget {
                 orderId: order.orderId,
                 currency: 'usd',
                 amountMinor: order.checkoutModel.total.toInt(),
-                paymentMethodId: paymentMethodId,
+                paymentMethod: paymentMethod,
                 user: userData,
                 cvc: cvc,
               );
@@ -56,22 +57,7 @@ class PayButton extends StatelessWidget {
                   .read<PaymentCubit>()
                   .confirmPayment(details, order, cardFlow: CardFlow.savedCard);
             },
-            child: state.status == PaymentStateStatus.loading &&
-                    state.action == PaymentAction.processPayment
-                ? SizedBox(
-                    width: context.horzSize(20),
-                    height: context.horzSize(20),
-                    child: const Center(
-                      child: PopScope(
-                        canPop: false,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2.2,
-                        ),
-                      ),
-                    ),
-                  )
-                : const ResponsiveText('Pay'),
+            child: const ResponsiveText('Pay'),
           );
         },
       ),

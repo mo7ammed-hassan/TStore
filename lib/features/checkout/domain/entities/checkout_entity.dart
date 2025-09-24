@@ -1,4 +1,4 @@
-import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
+import 'package:t_store/features/checkout/domain/entities/order_summary_entity.dart';
 import 'package:t_store/features/shop/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:t_store/core/utils/constants/enums.dart';
 
@@ -12,7 +12,7 @@ class CheckoutEntity {
   final double total;
   final OrderStatus? status;
 
-  OrderSummaryModel get orderSummary => OrderSummaryModel(
+  OrderSummaryEntity get orderSummary => OrderSummaryEntity(
         subtotal: subtotal,
         discount: discount,
         shipping: shipping,
@@ -37,18 +37,6 @@ class CheckoutEntity {
       shipping: shipping,
       discount: discount,
       total: total,
-    );
-  }
-
-  factory CheckoutEntity.empty() {
-    return CheckoutEntity(
-      orderId: null,
-      items: const [],
-      subtotal: 0.0,
-      shipping: 0.0,
-      discount: 0.0,
-      total: 0.0,
-      status: OrderStatus.unCompleted,
     );
   }
 }

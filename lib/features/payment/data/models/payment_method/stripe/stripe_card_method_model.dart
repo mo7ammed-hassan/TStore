@@ -44,4 +44,7 @@ class StripeCardMethodModel extends PaymentMethodModel<StripeCardMethodEntity> {
       billingDetails: billingDetails,
     );
   }
+
+  @override
+  String get cardType => card?.brand ?? 'Card';
 }

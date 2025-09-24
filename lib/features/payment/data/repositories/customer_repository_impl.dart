@@ -53,7 +53,7 @@ class CustomerRepositoryImpl implements CustomerRepository {
   }
 
   @override
-  Future<Either<Failure, void>> deleteCustomer(String customerId) async {
+  Future<Either<Failure, void>> deleteCustomer(String? customerId) async {
     try {
       await (_customerService as StripeCustomerService)
           .deleteCustomer(customerId);

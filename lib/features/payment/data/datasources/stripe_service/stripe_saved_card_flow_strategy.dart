@@ -53,14 +53,18 @@ class StripeSavedCardFlowStrategy implements ICardFlowStrategy {
 
     final paymentResult = await confirmPayment(
       clientSecret: paymentIntent.clientSecret!,
-      paymentMethodId: details.paymentMethodId!,
+      paymentMethodId: details.paymentMethod!.id,
       cvc: details.cvc!,
     );
+    print('----------------');
+    print('card type: ${details.paymentMethod?.cardType}');
+    print('----------------');
 
     return PaymentResultModel(
       success: paymentResult.status == PaymentIntentsStatus.Succeeded,
       transactionId: paymentResult.id,
       paymentIntentId: paymentIntent.id,
+      card: details.paymentMethod?.cardType,
       message: paymentResult.status == PaymentIntentsStatus.Succeeded
           ? 'Stripe Payment Successful'
           : 'Stripe Payment Failed',

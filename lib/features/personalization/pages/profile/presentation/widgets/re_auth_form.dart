@@ -46,7 +46,7 @@ class ReAuthForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => cubit.reauthenticate(customerId: customerId!),
+                onPressed: () => cubit.reauthenticate(customerId: customerId),
                 child: const ResponsiveText('Verify'),
               ),
             ),

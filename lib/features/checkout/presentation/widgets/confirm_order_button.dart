@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store/core/core.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/checkout/presentation/cubits/checkout_cubit.dart';
 import 'package:t_store/features/checkout/presentation/cubits/checkout_state.dart';
 import 'package:t_store/features/payment/presentation/routes/payment_routes.dart';
 import 'package:t_store/features/shop/features/cart/presentation/cubits/cart_cubit.dart';
-import 'package:t_store/core/utils/constants/sizes.dart';
-import 'package:t_store/core/utils/responsive/responsive_helpers.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_edge_insets.dart';
-import 'package:t_store/core/utils/responsive/widgets/responsive_text.dart';
 
 class ConfirmOrderButton extends StatelessWidget {
   const ConfirmOrderButton({
@@ -43,6 +40,14 @@ class ConfirmOrderButton extends StatelessWidget {
             return ElevatedButton(
               onPressed: total != 0
                   ? () {
+                      if (state.address?.id.isEmpty ?? true) {
+                        Loaders.warningSnackBar(
+                          title: 'No Shipping Address',
+                          message:
+                              'Please add a shipping address before confirming the order.',
+                        );
+                        return;
+                      }
                       if (state.checkoutData != null) {
                         context
                             .read<CheckoutCubit>()

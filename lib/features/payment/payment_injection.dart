@@ -106,7 +106,7 @@ void registerPaymentDependencies(GetIt getIt) {
   );
 
   getIt.registerLazySingleton<CustomerRepository>(
-    () => CustomerRepositoryImpl(getIt()),
+    () => CustomerRepositoryImpl(getIt(instanceName: 'stripeCustomer')),
   );
 
   /// --- UseCases --- ///

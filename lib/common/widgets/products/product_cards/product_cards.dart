@@ -1,3 +1,3 @@
 export 'product_card_horizantal.dart';
-export 'product_card_vertical.dart';
+export 'vertical_product_card.dart';
 export 'sections/sections.dart';

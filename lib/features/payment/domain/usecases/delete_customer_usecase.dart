@@ -7,6 +7,6 @@ class DeleteCustomerUsecase {
   DeleteCustomerUsecase(this._repository);
 
   Future<Either<Failure, void>> call(String? customerId) {
-    return _repository.deleteCustomer(customerId!);
+    return _repository.deleteCustomer(customerId);
   }
 }

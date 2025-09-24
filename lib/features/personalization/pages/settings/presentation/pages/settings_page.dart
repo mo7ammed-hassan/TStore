@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/core/utils/loaders/loading_dialog.dart';
 import 'package:t_store/features/payment/presentation/screens/manage_cards_screen.dart';
 import 'package:t_store/features/personalization/pages/settings/presentation/widgets/settings_menu_tile.dart';
 import 'package:t_store/common/widgets/appbar/t_appbar.dart';
@@ -29,7 +30,6 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             // --Header
@@ -177,14 +177,14 @@ class SettingsPage extends StatelessWidget {
                       listener: (context, state) {
                         if (state.action == UserAction.logout &&
                             state.status == UserStatus.loading) {
-                          Loaders.showLoading(message: 'Logout...');
+                          LoadingDialog.show(context, message: 'Logout...');
                         } else if (state.action == UserAction.logout &&
                             state.status == UserStatus.success) {
-                          context.popPage();
+                          LoadingDialog.hide(context);
                           context.pushAndClearAll(const LoginPage());
                         } else if (state.action == UserAction.logout &&
                             state.status == UserStatus.failure) {
-                          context.popPage();
+                          LoadingDialog.hide(context);
                           Loaders.errorSnackBar(title: 'logout Failure');
                         }
                       },

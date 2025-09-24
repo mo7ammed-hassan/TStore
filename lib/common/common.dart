@@ -55,7 +55,7 @@ export 'widgets/products/cart/cart.dart';
 export 'widgets/products/cart/cart_menu_icon.dart';
 export 'widgets/products/cart/product_quantity_button.dart';
 export 'widgets/products/product_cards/product_card_horizantal.dart';
-export 'widgets/products/product_cards/product_card_vertical.dart';
+export 'widgets/products/product_cards/vertical_product_card.dart';
 export 'widgets/products/product_cards/product_cards.dart';
 export 'widgets/products/product_cards/sections/discount_rate.dart';
 export 'widgets/products/product_cards/sections/product_card_body.dart';

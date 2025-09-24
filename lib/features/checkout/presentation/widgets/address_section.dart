@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/shimmer/shimmer_address_card.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
-import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/features/checkout/presentation/cubits/checkout_cubit.dart';
 import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
@@ -44,19 +43,24 @@ class _AddressSectionState extends State<AddressSection> {
           showActionButton: true,
           buttonTitle: 'Change',
           fontSize: 14.5,
-          onPressed: () => _showAddressBottomSheet(context),
+          onPressed: () =>
+              _showAddressBottomSheet(context, context.read<AddressCubit>()),
         ),
         (context.watch<CheckoutCubit>().state.loadAddress == true)
             ? const ShimmerAddressCard()
             : address?.id.isNotEmpty == true
                 ? AddressDetails(address: address!)
-                : const ResponsiveText('Please Select Address'),
+                : const ResponsiveText(
+                    'Please Select Address',
+                    fontSize: 13.5,
+                  ),
       ],
     );
   }
 
-  Future _showAddressBottomSheet(BuildContext context) async {
-    final selectedAddress = await showModalBottomSheet<AddressEntity>(
+  Future _showAddressBottomSheet(
+      BuildContext context, AddressCubit addressCubit) async {
+    final selectedAddress = await showModalBottomSheet<AddressEntity?>(
       sheetAnimationStyle: const AnimationStyle(
         duration: Duration(milliseconds: 300),
         reverseDuration: Duration(milliseconds: 300),
@@ -66,8 +70,8 @@ class _AddressSectionState extends State<AddressSection> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (_) {
-        return BlocProvider(
-          create: (context) => getIt<AddressCubit>()..fetchAllAddresses(),
+        return BlocProvider.value(
+          value: addressCubit,
           child: Padding(
             padding: context.responsiveInsets
                 .symmetric(horizontal: TSizes.defaultSpace),
@@ -82,7 +86,7 @@ class _AddressSectionState extends State<AddressSection> {
       },
     );
 
-    if (selectedAddress != null && context.mounted) {
+    if (context.mounted) {
       context.read<CheckoutCubit>().chengeAdress(selectedAddress);
     }
   }

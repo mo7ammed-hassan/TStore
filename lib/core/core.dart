@@ -42,7 +42,6 @@ export 'utils/helpers/password_helper.dart';
 export 'utils/helpers/pricing_calculator.dart';
 export 'utils/helpers/register_adapters.dart';
 export 'utils/loaders/animation_loader.dart';
-export 'utils/loaders/circular_loader.dart';
 export 'utils/loaders/loaders.dart';
 export 'utils/local_storage/local_storage.dart';
 export 'utils/local_storage/storage_utility.dart';

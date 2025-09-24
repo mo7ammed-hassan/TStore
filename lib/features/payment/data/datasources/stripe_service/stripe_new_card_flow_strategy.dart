@@ -1,5 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/core/network/api_client.dart';
 import 'package:t_store/features/payment/data/datasources/customer_service/i_customer_service.dart';
 import 'package:t_store/features/payment/data/datasources/i_card_flow_strategy.dart';
@@ -10,6 +11,7 @@ import 'package:t_store/features/payment/data/models/stripe/payment_intent_model
 import 'package:t_store/features/payment/data/models/payment_result_model.dart';
 import 'package:t_store/features/payment/data/models/payment_user_data.dart';
 import 'package:t_store/core/utils/constants/api_constants.dart';
+import 'package:t_store/features/personalization/domain/use_cases/update_user_filed_use_case.dart';
 
 class StripeNewCardFlowStrategy implements ICardFlowStrategy {
   final ApiClient dio;
@@ -22,6 +24,12 @@ class StripeNewCardFlowStrategy implements ICardFlowStrategy {
     if (customer?.id == null) {
       final newCustomer =
           await customerService.createCustomer(customerData: customer!);
+      // store it in db
+      await getIt<UpdateUserFiledUseCase>().call(
+        params: {
+          'stripeCustomerId': newCustomer.id,
+        },
+      );
       return newCustomer.id;
     }
 
@@ -164,6 +172,7 @@ class StripeNewCardFlowStrategy implements ICardFlowStrategy {
       success: paymentResult.status == PaymentIntentsStatus.Succeeded,
       transactionId: paymentResult.id,
       paymentIntentId: paymentIntent.id,
+      card: paymentMethod.card.brand,
       message: paymentResult.status == PaymentIntentsStatus.Succeeded
           ? 'Stripe Payment Successful'
           : 'Stripe Payment Failed',

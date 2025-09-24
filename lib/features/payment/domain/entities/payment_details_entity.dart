@@ -1,4 +1,5 @@
 import 'package:t_store/features/payment/domain/entities/card_details_entity.dart';
+import 'package:t_store/features/payment/domain/entities/payment_method/payment_method_entity.dart';
 import 'package:t_store/features/payment/domain/entities/payment_user_data_entity.dart';
 
 class PaymentDetailsEntity {
@@ -8,7 +9,7 @@ class PaymentDetailsEntity {
   final Map<String, dynamic>? meta; // optional extra fields per gateway
   final CardDetailsEntity? cardDetails;
   final PaymentUserDataEntity? user;
-  final String? paymentMethodId;
+  final PaymentMethodEntity? paymentMethod;
   final String? cvc;
   final bool saveCard;
 
@@ -19,7 +20,7 @@ class PaymentDetailsEntity {
     this.meta,
     this.cardDetails,
     this.user,
-    this.paymentMethodId,
+    this.paymentMethod,
     this.cvc,
     this.saveCard = false,
   });
@@ -27,7 +28,7 @@ class PaymentDetailsEntity {
   PaymentDetailsEntity copyWith({
     CardDetailsEntity? cardDetails,
     PaymentUserDataEntity? user,
-    String? paymentMethodId,
+    PaymentMethodEntity? paymentMethod,
     String? cvc,
     bool? saveCard,
   }) {
@@ -37,7 +38,7 @@ class PaymentDetailsEntity {
       orderId: orderId,
       cardDetails: cardDetails ?? this.cardDetails,
       user: user ?? this.user,
-      paymentMethodId: paymentMethodId ?? this.paymentMethodId,
+      paymentMethod: paymentMethod ?? this.paymentMethod,
       cvc: cvc ?? this.cvc,
       saveCard: saveCard ?? this.saveCard,
     );

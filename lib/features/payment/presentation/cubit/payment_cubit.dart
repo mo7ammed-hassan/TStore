@@ -41,8 +41,11 @@ class PaymentCubit extends Cubit<PaymentState> {
     );
   }
 
-  void confirmPayment(PaymentDetailsEntity details, OrderEntity order,
-      {CardFlow? cardFlow}) async {
+  void confirmPayment(
+    PaymentDetailsEntity details,
+    OrderEntity order, {
+    CardFlow? cardFlow,
+  }) async {
     if (state.selectedMethod == null) return;
 
     emit(
@@ -77,11 +80,16 @@ class PaymentCubit extends Cubit<PaymentState> {
         );
         await getIt<UpdateOrderStatusUsecase>().call(order: updatedOrder);
 
+        final paymentResultWithSummary = paymentResult.copyWith(
+          orderSummary: updatedOrder.checkoutModel.orderSummary,
+          card: details.paymentMethod?.cardType,
+        );
+
         emit(
           state.copyWith(
             action: PaymentAction.processPayment,
             status: PaymentStateStatus.success,
-            paymentResult: paymentResult,
+            paymentResult: paymentResultWithSummary,
             message: 'Payment successful',
           ),
         );

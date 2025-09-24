@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store/core/utils/responsive/widgets/responsive_gap.dart';
 import 'package:t_store/features/personalization/pages/address/domain/entities/address_entity.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_cubit.dart';
 import 'package:t_store/features/personalization/pages/address/presentation/cubit/address_state.dart';
@@ -19,7 +20,7 @@ class BuildAddressesListView extends StatelessWidget {
   });
   final bool showAddButton;
   final double fontSize;
-  final ValueChanged<AddressEntity>? onAddressSelected;
+  final ValueChanged<AddressEntity?>? onAddressSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -41,23 +42,6 @@ class BuildAddressesListView extends StatelessWidget {
 
           case AddressStatus.success:
           case AddressStatus.addedSuccess:
-            if (state.addresses.isEmpty) {
-              return showAddButton
-                  ? Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Spacer(),
-                        _emptyAddressesMessage(),
-                        const Spacer(flex: 2),
-                        const Align(
-                          alignment: Alignment.bottomRight,
-                          child: AddAddressButton(),
-                        ),
-                        const Spacer(),
-                      ],
-                    )
-                  : _emptyAddressesMessage();
-            }
             return Stack(
               children: [
                 AddressListView(
@@ -78,7 +62,23 @@ class BuildAddressesListView extends StatelessWidget {
             return _errorMessage();
 
           case AddressStatus.empty:
-            return _emptyAddressesMessage();
+            return showAddButton
+                ? SafeArea(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Spacer(flex: 2),
+                        _emptyAddressesMessage(),
+                        const Spacer(flex: 2),
+                        const Align(
+                          alignment: Alignment.bottomRight,
+                          child: AddAddressButton(),
+                        ),
+                        ResponsiveGap.vertical(30),
+                      ],
+                    ),
+                  )
+                : _emptyAddressesMessage();
 
           case AddressStatus.initial:
             return const SizedBox.shrink();
