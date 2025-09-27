@@ -1,14 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store/core/utils/popups/loaders.dart';
 import 'package:t_store/features/payment/domain/entities/card_method_entity.dart';
-import 'package:t_store/features/payment/domain/usecases/get_default_payment_method.dart';
-import 'package:t_store/features/payment/domain/usecases/get_saved_payment_methods_usecase.dart';
+import 'package:t_store/features/payment/domain/entities/payment_method/payment_method_entity.dart';
+import 'package:t_store/features/payment/domain/usecases/payment_method_usecases.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_methods_state.dart';
 
 class PaymentMethodsCubit extends Cubit<PaymentMethodState> {
-  final GetSavedPaymentMethodsUsecase _getPaymentMethods;
-  final GetDefaultPaymentMethod _defaultMethodUsecase;
+  final PaymentMethodUsecases _paymentMethodUsecases;
 
-  PaymentMethodsCubit(this._getPaymentMethods, this._defaultMethodUsecase)
+  PaymentMethodsCubit(this._paymentMethodUsecases)
       : super(PaymentMethodState());
 
   Future<void> loadPaymentMethods(String? customerId) async {
@@ -19,7 +19,8 @@ class PaymentMethodsCubit extends Cubit<PaymentMethodState> {
       ),
     );
 
-    final result = await _getPaymentMethods(customerId ?? '');
+    final result =
+        await _paymentMethodUsecases.getPaymentMethods.call(customerId ?? '');
 
     result.fold(
       (failure) => emit(
@@ -32,6 +33,8 @@ class PaymentMethodsCubit extends Cubit<PaymentMethodState> {
         state.copyWith(
           action: PaymentMethodAction.fetch,
           status: PaymentMethodStateStatus.success,
+          defaultMethod:
+              methods.firstWhere((element) => element.defaultMethod == true),
           methods: methods,
         ),
       ),
@@ -47,7 +50,8 @@ class PaymentMethodsCubit extends Cubit<PaymentMethodState> {
       ),
     );
 
-    final result = await _defaultMethodUsecase.call(customerId);
+    final result =
+        await _paymentMethodUsecases.defaultMethodUsecase.call(customerId);
 
     result.fold(
       (error) {
@@ -67,6 +71,55 @@ class PaymentMethodsCubit extends Cubit<PaymentMethodState> {
             defaultMethod: defaultMethod,
             message: 'Payment Loaded Successfully',
           ),
+        );
+      },
+    );
+  }
+
+  void updateDefaultMethod(
+    PaymentMethodEntity method,
+    String? customerId,
+  ) async {
+    if (customerId == null || state.defaultMethod?.id == method.id) return;
+
+    emit(
+      state.copyWith(
+        action: PaymentMethodAction.updateDefaultMethod,
+        status: PaymentMethodStateStatus.loading,
+      ),
+    );
+
+    final result = await _paymentMethodUsecases.updateDefaultMethodUsecase
+        .call(customerId: customerId, methodId: method.id);
+
+    result.fold(
+      (error) {
+        emit(
+          state.copyWith(
+            action: PaymentMethodAction.updateDefaultMethod,
+            status: PaymentMethodStateStatus.failure,
+            error: error.message,
+          ),
+        );
+        Loaders.errorSnackBar(
+          duration: 1,
+          title: 'Update Default Method',
+          message: state.error ?? '',
+        );
+      },
+      (defaultMethod) {
+        emit(
+          state.copyWith(
+            action: PaymentMethodAction.updateDefaultMethod,
+            status: PaymentMethodStateStatus.success,
+            defaultMethod: defaultMethod,
+            message: 'Default method updated successfully',
+          ),
+        );
+        Loaders.successSnackBar(
+          duration: 1,
+          title: 'Update Default Method',
+          message: state.message ?? '',
         );
       },
     );

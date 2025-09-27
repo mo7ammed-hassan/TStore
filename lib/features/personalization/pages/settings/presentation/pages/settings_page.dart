@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/core/utils/loaders/loading_dialog.dart';
+import 'package:t_store/features/payment/presentation/cubit/payment_methods_cubit.dart';
 import 'package:t_store/features/payment/presentation/screens/manage_cards_screen.dart';
 import 'package:t_store/features/personalization/pages/settings/presentation/widgets/settings_menu_tile.dart';
 import 'package:t_store/common/widgets/appbar/t_appbar.dart';
@@ -28,6 +30,8 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<UserCubit>().state.user;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -108,8 +112,12 @@ class SettingsPage extends StatelessWidget {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ManageCardsScreen(
-                          nestedNavigator: false,
+                        builder: (context) => BlocProvider(
+                          create: (context) => getIt<PaymentMethodsCubit>()
+                            ..loadPaymentMethods(user?.stripeCustomerId),
+                          child: const ManageCardsScreen(
+                            nestedNavigator: false,
+                          ),
                         ),
                       ),
                     ),

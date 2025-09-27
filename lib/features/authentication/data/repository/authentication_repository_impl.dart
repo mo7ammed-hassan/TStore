@@ -5,6 +5,7 @@ import 'package:t_store/features/authentication/data/models/user_signin_model.da
 import 'package:t_store/features/authentication/data/source/authentication_source/authentication_firebase_services.dart';
 import 'package:t_store/features/authentication/domain/repository/authentication_repository.dart';
 import 'package:t_store/core/config/service_locator.dart';
+import 'package:t_store/features/payment/core/storage/payment_storage.dart';
 
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
   @override
@@ -80,7 +81,8 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       (errorMessage) {
         return Left(errorMessage);
       },
-      (successMessage) {
+      (successMessage) async {
+        await PaymentStorage.instance.clear();
         return Right(successMessage);
       },
     );

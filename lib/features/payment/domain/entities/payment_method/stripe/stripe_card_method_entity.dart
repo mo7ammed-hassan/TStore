@@ -11,6 +11,7 @@ class StripeCardMethodEntity
 
   StripeCardMethodEntity({
     required super.id,
+    super.defaultMethod,
     super.email,
     super.phone,
     super.type,
@@ -23,13 +24,26 @@ class StripeCardMethodEntity
   @override
   StripeCardMethodEntity get method => StripeCardMethodEntity(
         id: id,
+        defaultMethod: defaultMethod,
         card: card,
         type: type,
         customer: customer,
         object: object,
         billingDetails: billingDetails,
       );
-      
-        @override
-        String get cardType => card?.brand ?? 'Card';
+
+  @override
+  String get cardType => card?.brand ?? 'Card';
+
+  @override
+  StripeCardMethodEntity copyWith({required bool? defaultMethod}) {
+    return StripeCardMethodEntity(
+      id: id,
+      defaultMethod: defaultMethod ?? this.defaultMethod,
+      card: card,
+      customer: customer,
+      object: object,
+      billingDetails: billingDetails,
+    );
+  }
 }

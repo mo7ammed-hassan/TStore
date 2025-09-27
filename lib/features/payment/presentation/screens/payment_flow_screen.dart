@@ -4,6 +4,7 @@ import 'package:t_store/core/core.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/checkout/domain/entities/order_summary_entity.dart';
 import 'package:t_store/features/payment/payment.dart';
+import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 import 'package:t_store/features/shop/features/order/presentation/cuits/order_cubit.dart';
 import 'package:t_store/features/shop/features/order/presentation/pages/order_page.dart';
 
@@ -20,8 +21,17 @@ class PaymentFlowScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final order = args.order;
-    return BlocProvider(
-      create: (context) => getIt<PaymentCubit>()..fetchServiceMethods(),
+    final user = context.read<UserCubit>().state.user;
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<PaymentCubit>()..fetchServiceMethods(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<PaymentMethodsCubit>()..loadPaymentMethods(user?.stripeCustomerId),
+        ),
+      ],
       child: _handlePaymentListener(order),
     );
   }

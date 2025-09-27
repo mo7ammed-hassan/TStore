@@ -24,19 +24,26 @@ extension PaymentMethodEntityMapper on PaymentMethodEntity {
 }
 
 /// Private implementation of Entity for mapping
-class _PaymentMethodEntityImpl extends PaymentMethodEntity<void> {
+class _PaymentMethodEntityImpl
+    extends PaymentMethodEntity<PaymentMethodEntity> {
   _PaymentMethodEntityImpl({
     required super.id,
+    super.defaultMethod,
     super.email,
     super.phone,
     super.type,
   });
 
   @override
-  void get method {}
+  PaymentMethodEntity get method => _PaymentMethodEntityImpl(id: id);
 
   @override
   String get cardType => type ?? 'Card';
+
+  @override
+  PaymentMethodEntity copyWith({required bool defaultMethod}) {
+    return _PaymentMethodEntityImpl(id: id, defaultMethod: defaultMethod);
+  }
 }
 
 /// Private implementation of Model for mapping

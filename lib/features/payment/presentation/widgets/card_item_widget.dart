@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:t_store/core/core.dart';
 import 'package:t_store/features/payment/payment.dart';
+import 'package:t_store/features/personalization/cubit/user_cubit.dart';
 
 class CardItemWidget extends StatelessWidget {
   const CardItemWidget({super.key, required this.paymentMethod});
@@ -12,6 +14,7 @@ class CardItemWidget extends StatelessWidget {
     final isDark = HelperFunctions.isDarkMode(context);
     final StripeCardMethodEntity method =
         paymentMethod as StripeCardMethodEntity;
+    final customerId = context.read<UserCubit>().state.user?.stripeCustomerId;
 
     return TRoundedContainer(
       padding: context.responsiveInsets.symmetric(horizontal: 12, vertical: 24),
@@ -43,7 +46,7 @@ class CardItemWidget extends StatelessWidget {
           ResponsiveGap.vertical(20),
 
           /// --- Primary Card Indicator ---
-          const _PrimaryCardIndicator(),
+          _PrimaryCardIndicator(method, customerId),
 
           ResponsiveGap.vertical(22),
 
@@ -109,51 +112,69 @@ class _CardHeader extends StatelessWidget {
   }
 }
 
-class _PrimaryCardIndicator extends StatefulWidget {
-  const _PrimaryCardIndicator();
-
-  @override
-  State<_PrimaryCardIndicator> createState() => _PrimaryCardIndicatorState();
-}
-
-class _PrimaryCardIndicatorState extends State<_PrimaryCardIndicator> {
-  bool _selected = true;
+class _PrimaryCardIndicator extends StatelessWidget {
+  const _PrimaryCardIndicator(this.method, this.customerId);
+  final PaymentMethodEntity method;
+  final String? customerId;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        GestureDetector(
-          onTap: () => setState(() {
-            _selected = !_selected;
-          }),
-          child: AnimatedContainer(
-            width: context.horzSize(_selected ? 19 : 17.5),
-            height: context.horzSize(_selected ? 19 : 17.5),
-            padding: const EdgeInsets.all(5.5),
-            duration: const Duration(milliseconds: 300),
-            decoration: ShapeDecoration(
-              shape: CircleBorder(
-                  side: BorderSide(
-                color: _selected ? Colors.transparent : Colors.grey,
-              )),
-              color: _selected ? AppColors.primary : null,
-            ),
-            child: DecoratedBox(
-              decoration: ShapeDecoration(
-                shape: const CircleBorder(),
-                color: _selected ? Colors.white : Colors.transparent,
+    return BlocConsumer<PaymentMethodsCubit, PaymentMethodState>(
+      listenWhen: (previous, current) =>
+          current.action == PaymentMethodAction.updateDefaultMethod,
+      listener: (context, state) {
+        if (state.action == PaymentMethodAction.updateDefaultMethod &&
+            state.status == PaymentMethodStateStatus.loading) {
+          LoadingDialog.show(context);
+        } else if (state.action == PaymentMethodAction.updateDefaultMethod &&
+            state.status == PaymentMethodStateStatus.success) {
+          LoadingDialog.hide(context);
+        } else if (state.action == PaymentMethodAction.updateDefaultMethod &&
+            state.status == PaymentMethodStateStatus.failure) {
+          LoadingDialog.hide(context);
+        }
+      },
+      buildWhen: (previous, current) =>
+          current.action == PaymentMethodAction.updateDefaultMethod,
+      builder: (context, state) {
+        bool defaultMethod = state.defaultMethod?.id == method.id;
+        return Row(
+          children: [
+            GestureDetector(
+              onTap: () => context
+                  .read<PaymentMethodsCubit>()
+                  .updateDefaultMethod(method, customerId),
+              child: AnimatedContainer(
+                width: context.horzSize(defaultMethod ? 19 : 17.5),
+                height: context.horzSize(defaultMethod ? 19 : 17.5),
+                padding: context.responsiveInsets.all(4.5),
+                duration: const Duration(milliseconds: 300),
+                decoration: ShapeDecoration(
+                  shape: CircleBorder(
+                      side: BorderSide(
+                    color: defaultMethod ? Colors.transparent : Colors.grey,
+                  )),
+                  color: defaultMethod ? AppColors.primary : null,
+                ),
+                child: DecoratedBox(
+                  decoration: ShapeDecoration(
+                    shape: const CircleBorder(),
+                    color: defaultMethod ? Colors.white : Colors.transparent,
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-        const SizedBox(width: 8),
-        ResponsiveText(
-          'Primary Card',
-          style:
-              Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13.3),
-        ),
-      ],
+            const SizedBox(width: 8),
+            ResponsiveText(
+              'Primary Card',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(fontSize: 13.3),
+            ),
+          ],
+        );
+      },
     );
   }
 }

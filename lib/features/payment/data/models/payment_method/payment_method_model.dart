@@ -6,7 +6,12 @@ abstract class PaymentMethodModel<T extends PaymentMethodEntity> {
   final String? phone;
   final String? type;
 
-  PaymentMethodModel({required this.id, this.email, this.phone, this.type});
+  PaymentMethodModel({
+    required this.id,
+    this.email,
+    this.phone,
+    this.type,
+  });
 
   Map<String, dynamic> toJson();
 

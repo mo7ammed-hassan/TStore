@@ -9,7 +9,13 @@ abstract class PaymentMethodRepository {
   );
 
   Future<Either<Failure, PaymentMethodEntity>> updatePaymentMethod(
-      PaymentMethodEntity method);
+    PaymentMethodEntity method,
+  );
+
+  Future<Either<Failure, PaymentMethodEntity>> updateDefaultPaymentMethod(
+    String? customerId,
+    String? methodId,
+  );
 
   Future<Either<Failure, void>> deletePaymentMethod(
     String customerId,

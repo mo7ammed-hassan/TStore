@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/core/core.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/payment/payment.dart';
@@ -31,86 +32,94 @@ class _PaymentFormState extends State<PaymentForm> {
     final method = widget.method as StripeCardMethodEntity?;
     return Column(
       children: [
-        Row(
-          children: [
-            // CVC Box
-            Expanded(
-              child: InputCardBox(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: CardTextField(
-                        hint: 'CVC',
-                        maxLength: 4,
-                        controller: cvcController,
-                      ),
+        BlocBuilder<PaymentMethodsCubit, PaymentMethodState>(
+          builder: (context, state) {
+            final defaultMethod =
+                state.defaultMethod as StripeCardMethodEntity?;
+            return Row(
+              children: [
+                // CVC Box
+                Expanded(
+                  child: InputCardBox(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: CardTextField(
+                            hint: 'CVC',
+                            maxLength: 4,
+                            controller: cvcController,
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(2),
+                          width: context.horzSize(16),
+                          height: context.horzSize(16),
+                          decoration: ShapeDecoration(
+                            color:
+                                isDark ? AppColors.darkerGrey : AppColors.light,
+                            shape: const CircleBorder(),
+                          ),
+                          child: const FittedBox(
+                            child: Icon(Icons.question_mark),
+                          ),
+                        ),
+                      ],
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(2),
-                      width: context.horzSize(16),
-                      height: context.horzSize(16),
-                      decoration: ShapeDecoration(
-                        color: isDark ? AppColors.darkerGrey : AppColors.light,
-                        shape: const CircleBorder(),
-                      ),
-                      child: const FittedBox(
-                        child: Icon(Icons.question_mark),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-            ResponsiveGap.horizontal(10),
+                ResponsiveGap.horizontal(10),
 
-            // Card Info Box
-            Expanded(
-              flex: 2,
-              child: InputCardBox(
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        width: context.horzSize(65),
-                        height: context.vertSize(40),
-                        //margin: context.responsiveInsets.only(right: 8),
-                        decoration: BoxDecoration(
-                          color:
-                              isDark ? AppColors.darkerGrey : AppColors.light,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        padding: context.responsiveInsets.symmetric(
-                          vertical: 4,
-                          horizontal: 6,
-                        ),
-                        child: Center(
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: ResponsiveText(
-                              '${method?.card?.brand}',
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
+                // Card Info Box
+                Expanded(
+                  flex: 2,
+                  child: InputCardBox(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: Container(
+                            width: context.horzSize(65),
+                            height: context.vertSize(40),
+                            //margin: context.responsiveInsets.only(right: 8),
+                            decoration: BoxDecoration(
+                              color: isDark
+                                  ? AppColors.darkerGrey
+                                  : AppColors.light,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: context.responsiveInsets.symmetric(
+                              vertical: 4,
+                              horizontal: 6,
+                            ),
+                            child: Center(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: ResponsiveText(
+                                  '${defaultMethod?.card?.brand}',
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                        ResponsiveGap.horizontal(10),
+                        // Card Number
+                        const Spacer(),
+                        Expanded(
+                          flex: 4,
+                          child: CardTextField(
+                            hint: 'xxxxxxx${defaultMethod?.card?.last4}',
+                            enabled: false,
+                          ),
+                        ),
+                      ],
                     ),
-                    ResponsiveGap.horizontal(10),
-                    // Card Number
-                    const Spacer(),
-                    Expanded(
-                      flex: 4,
-                      child: CardTextField(
-                        hint: 'xxxxxxxxx${method?.card?.last4}',
-                        enabled: false,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ],
+              ],
+            );
+          },
         ),
         ResponsiveGap.vertical(28),
 

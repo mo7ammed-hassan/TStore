@@ -193,8 +193,10 @@ class _PayButton extends StatelessWidget {
                   cardFlow: CardFlow.newCard,
                 )
                     .then((value) {
-                  if (context.mounted) {
-                    context.read<UserCubit>().fetchUserData(forchFetch: true);
+                  if (user?.stripeCustomerId == null) {
+                    if (context.mounted) {
+                      context.read<UserCubit>().fetchUserData(forchFetch: true);
+                    }
                   }
                 });
               },

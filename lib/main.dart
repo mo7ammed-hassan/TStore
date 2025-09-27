@@ -10,6 +10,7 @@ import 'package:t_store/app/app.dart';
 import 'package:t_store/core/bloc/app_bloc_observer.dart';
 import 'package:t_store/core/hive_boxes/open_boxes.dart';
 import 'package:t_store/app/cubits/launch_app_cubit.dart';
+import 'package:t_store/features/payment/core/storage/payment_storage.dart';
 import 'package:t_store/firebase_options.dart';
 import 'package:t_store/core/config/service_locator.dart';
 import 'package:get_storage/get_storage.dart';
@@ -41,6 +42,9 @@ void main() {
 
       // GetX Local Storage Initialization
       await GetStorage.init();
+
+      // Payment Storage Initialization
+      await PaymentStorage.init();
 
       // Service Locator Initialization
       await initializeDependencies();

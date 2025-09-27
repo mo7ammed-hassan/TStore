@@ -2,6 +2,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/core/network/api_client.dart';
+import 'package:t_store/features/payment/core/storage/payment_storage.dart';
 import 'package:t_store/features/payment/data/datasources/customer_service/i_customer_service.dart';
 import 'package:t_store/features/payment/data/datasources/i_card_flow_strategy.dart';
 import 'package:t_store/features/payment/data/models/card_details_model.dart';
@@ -16,6 +17,7 @@ import 'package:t_store/features/personalization/domain/use_cases/update_user_fi
 class StripeNewCardFlowStrategy implements ICardFlowStrategy {
   final ApiClient dio;
   final ICustomerService customerService;
+  final PaymentStorage _paymentStorage = PaymentStorage.instance;
   StripeNewCardFlowStrategy(this.dio, this.customerService);
 
   Future<String?> getOrCreateCustomer({
@@ -91,6 +93,9 @@ class StripeNewCardFlowStrategy implements ICardFlowStrategy {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     );
+
+    // 3. Cache the default payment method ID
+    await _paymentStorage.saveDefaultMethodId(paymentMethodId);
   }
 
   Future<PaymentIntentModel> createPaymentIntent({

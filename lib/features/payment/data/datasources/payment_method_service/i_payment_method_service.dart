@@ -10,4 +10,6 @@ abstract class IPaymentMethodService {
   Future<void> deletePaymentMethod(String customerId, String methodId);
 
   Future<PaymentMethodModel?> getDefaultPaymentMethod(String? customerId);
+
+  Future<PaymentMethodModel> updateDefaultPaymentMethod(String? customerId, String? methodId);
 }

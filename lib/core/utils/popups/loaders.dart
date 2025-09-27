@@ -20,9 +20,9 @@ class Loaders {
         backgroundColor: Colors.transparent,
         content: Container(
           padding: const EdgeInsets.all(12.0),
-          margin: const EdgeInsets.symmetric(horizontal: 30),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(20),
             color: HelperFunctions.isDarkMode(AppContext.context)
                 ? AppColors.darkerGrey.withValues(alpha: 0.9)
                 : AppColors.grey.withValues(alpha: 0.9),
@@ -44,7 +44,7 @@ class Loaders {
   static void successSnackBar({
     required String title,
     String message = '',
-    int duration = 3,
+    int duration = 2,
   }) {
     _showBaseSnackBar(
       title: title,
@@ -58,7 +58,7 @@ class Loaders {
   static void warningSnackBar({
     required String title,
     String message = '',
-    int duration = 3,
+    int duration = 2,
   }) {
     _showBaseSnackBar(
       title: title,
@@ -72,7 +72,7 @@ class Loaders {
   static void errorSnackBar({
     required String title,
     String message = '',
-    int duration = 3,
+    int duration = 2,
   }) {
     _showBaseSnackBar(
       title: title,
@@ -125,11 +125,11 @@ class Loaders {
                     if (message.isNotEmpty)
                       ResponsiveText(
                         message,
-                        maxLines: 3,
+                        maxLines: 2,
                         style: Theme.of(context)
                             .textTheme
                             .bodySmall
-                            ?.copyWith(color: Colors.white70, fontSize: 13),
+                            ?.copyWith(color: Colors.white70, fontSize: 12),
                       ),
                   ],
                 ),

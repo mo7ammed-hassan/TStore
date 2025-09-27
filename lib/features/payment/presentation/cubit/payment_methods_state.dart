@@ -4,7 +4,13 @@ import 'package:t_store/features/payment/domain/entities/payment_result_entity.d
 
 enum PaymentMethodStateStatus { initial, loading, success, failure }
 
-enum PaymentMethodAction { fetch, selectMethod, processPayment, fetchDefaultMethod }
+enum PaymentMethodAction {
+  fetch,
+  selectMethod,
+  processPayment,
+  fetchDefaultMethod,
+  updateDefaultMethod
+}
 
 class PaymentMethodState {
   final PaymentMethodAction action;
@@ -15,6 +21,7 @@ class PaymentMethodState {
   final PaymentMethodEntity? defaultMethod;
   final String? message;
   final String? error;
+  final String? updatedMethodId;
 
   PaymentMethodState({
     this.action = PaymentMethodAction.fetch,
@@ -25,6 +32,7 @@ class PaymentMethodState {
     this.defaultMethod,
     this.message,
     this.error,
+    this.updatedMethodId,
   });
 
   PaymentMethodState copyWith({
@@ -34,6 +42,7 @@ class PaymentMethodState {
     CardMethodEntity? selectedMethod,
     PaymentResultEntity? paymentResult,
     PaymentMethodEntity? defaultMethod,
+    String? updatedMethodId,
     String? message,
     String? error,
   }) {
@@ -46,6 +55,7 @@ class PaymentMethodState {
       message: message ?? this.message,
       error: error ?? this.error,
       defaultMethod: defaultMethod ?? this.defaultMethod,
+      updatedMethodId: updatedMethodId ?? this.updatedMethodId,
     );
   }
 }
