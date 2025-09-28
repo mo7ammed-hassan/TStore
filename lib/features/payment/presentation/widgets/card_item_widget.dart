@@ -119,21 +119,7 @@ class _PrimaryCardIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PaymentMethodCubit, PaymentMethodState>(
-      listenWhen: (previous, current) =>
-          current.action == PaymentMethodAction.updateDefaultMethod,
-      listener: (context, state) {
-        if (state.action == PaymentMethodAction.updateDefaultMethod &&
-            state.status == PaymentMethodStateStatus.loading) {
-          LoadingDialog.show(context);
-        } else if (state.action == PaymentMethodAction.updateDefaultMethod &&
-            state.status == PaymentMethodStateStatus.success) {
-          LoadingDialog.hide(context);
-        } else if (state.action == PaymentMethodAction.updateDefaultMethod &&
-            state.status == PaymentMethodStateStatus.failure) {
-          LoadingDialog.hide(context);
-        }
-      },
+    return BlocBuilder<PaymentMethodCubit, PaymentMethodState>(
       buildWhen: (previous, current) =>
           current.action == PaymentMethodAction.updateDefaultMethod,
       builder: (context, state) {

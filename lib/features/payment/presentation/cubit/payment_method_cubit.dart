@@ -34,7 +34,10 @@ class PaymentMethodCubit extends Cubit<PaymentMethodState> {
           action: PaymentMethodAction.fetch,
           status: PaymentMethodStateStatus.success,
           defaultMethod: methods.isNotEmpty
-              ? methods.firstWhere((element) => element.defaultMethod == true)
+              ? methods.firstWhere(
+                  (element) => element.defaultMethod == true,
+                  orElse: () => methods.first,
+                )
               : null,
           methods: methods,
         ),

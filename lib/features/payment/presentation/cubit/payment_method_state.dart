@@ -9,7 +9,7 @@ enum PaymentMethodAction {
   selectMethod,
   processPayment,
   fetchDefaultMethod,
-  updateDefaultMethod
+ updateDefaultMethod
 }
 
 class PaymentMethodState {
