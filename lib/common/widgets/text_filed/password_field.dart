@@ -5,7 +5,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:t_store/features/authentication/presentation/manager/password_and_selection/password_and_selection_cubit.dart';
 import 'package:t_store/features/authentication/presentation/manager/password_and_selection/password_and_selection_state.dart';
 import 'package:t_store/core/utils/constants/text_strings.dart';
-import 'package:t_store/common/validators/validation.dart';
 
 class PasswordField extends StatelessWidget {
   const PasswordField({
@@ -20,7 +19,6 @@ class PasswordField extends StatelessWidget {
         return TextFormField(
           obscureText: state.isPasswordHidden,
           controller: controller,
-          validator: (value) => TValidator.validatePassword(value),
           textInputAction: TextInputAction.done,
           autofillHints: const [AutofillHints.password],
           onEditingComplete: () => TextInput.finishAutofillContext(),
