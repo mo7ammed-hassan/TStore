@@ -1,6 +1,7 @@
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:t_store/features/payment/data/models/payment_method/payment_method_model.dart';
 import 'package:t_store/features/payment/data/models/payment_method/stripe/stripe_card_model.dart';
+import 'package:t_store/features/payment/domain/entities/payment_method/payment_method_entity.dart';
 import 'package:t_store/features/payment/domain/entities/payment_method/stripe/stripe_card_method_entity.dart';
 
 class StripeCardMethodModel extends PaymentMethodModel<StripeCardMethodEntity> {
@@ -47,4 +48,15 @@ class StripeCardMethodModel extends PaymentMethodModel<StripeCardMethodEntity> {
 
   @override
   String get cardType => card?.brand ?? 'Card';
+
+  static PaymentMethodModel<PaymentMethodEntity> fromPaymentMethod(
+    PaymentMethod paymentMethod,
+  ) {
+    return StripeCardMethodModel(
+      id: paymentMethod.id,
+      billingDetails: paymentMethod.billingDetails,
+      card: StripeCardModel.fromCard(paymentMethod.card),
+      customer: paymentMethod.customerId,
+    );
+  }
 }

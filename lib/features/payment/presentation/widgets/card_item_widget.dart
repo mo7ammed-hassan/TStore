@@ -51,7 +51,7 @@ class CardItemWidget extends StatelessWidget {
           ResponsiveGap.vertical(22),
 
           /// --- Actions (Delete / Update) ---
-          const _CardActions(),
+          _CardActions(customerId!, method.id),
         ],
       ),
     );
@@ -119,7 +119,7 @@ class _PrimaryCardIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PaymentMethodsCubit, PaymentMethodState>(
+    return BlocConsumer<PaymentMethodCubit, PaymentMethodState>(
       listenWhen: (previous, current) =>
           current.action == PaymentMethodAction.updateDefaultMethod,
       listener: (context, state) {
@@ -142,7 +142,7 @@ class _PrimaryCardIndicator extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () => context
-                  .read<PaymentMethodsCubit>()
+                  .read<PaymentMethodCubit>()
                   .updateDefaultMethod(method, customerId),
               child: AnimatedContainer(
                 width: context.horzSize(defaultMethod ? 19 : 17.5),
@@ -180,7 +180,8 @@ class _PrimaryCardIndicator extends StatelessWidget {
 }
 
 class _CardActions extends StatelessWidget {
-  const _CardActions();
+  const _CardActions(this.customerId, this.methodId);
+  final String customerId, methodId;
 
   @override
   Widget build(BuildContext context) {
@@ -189,7 +190,11 @@ class _CardActions extends StatelessWidget {
         /// Delete
         Expanded(
           child: OutlinedButton(
-            onPressed: () {},
+            onPressed: () =>
+                context.read<PaymentMethodCubit>().deletePaymentMethod(
+                      customerId: customerId,
+                      methodId: methodId,
+                    ),
             style: OutlinedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),

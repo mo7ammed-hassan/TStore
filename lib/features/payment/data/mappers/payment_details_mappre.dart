@@ -2,9 +2,9 @@ import 'package:t_store/features/payment/data/mappers/mappers.dart';
 import 'package:t_store/features/payment/data/models/payment_user_data.dart';
 import 'package:t_store/features/payment/domain/entities/payment_details_entity.dart';
 import 'package:t_store/features/payment/domain/entities/card_details_entity.dart';
-import 'package:t_store/features/payment/domain/entities/payment_user_data_entity.dart';
 import 'package:t_store/features/payment/data/models/payment_details_model.dart';
 import 'package:t_store/features/payment/data/models/card_details_model.dart';
+import 'package:t_store/features/payment/domain/entities/payment_user_data_entity.dart';
 
 /// ---------------- CardDetails ----------------
 extension CardDetailsMapper on CardDetailsEntity {
@@ -13,7 +13,8 @@ extension CardDetailsMapper on CardDetailsEntity {
       cardNumber: cardNumber,
       expMonth: expMonth,
       expYear: expYear,
-      cvcCode: cvcCode,
+      cvcCode: cvcCode!,
+      userData: userData?.toModel(),
     );
   }
 }
@@ -24,7 +25,8 @@ extension CardDetailsModelMapper on CardDetailsModel {
       cardNumber: cardNumber ?? '',
       expMonth: expMonth ?? 0,
       expYear: expYear ?? 0,
-      cvcCode: cvcCode ?? '',
+      cvcCode: cvcCode,
+      userData: userData?.toEntity(),
     );
   }
 }
@@ -63,9 +65,7 @@ extension PaymentDetailsMapper on PaymentDetailsEntity {
       orderId: orderId,
       meta: meta,
       cardDetails: cardDetails?.toModel(),
-      user: user?.toModel(),
       paymentMethod: paymentMethod?.toModel(),
-      cvc: cvc,
       saveCard: saveCard,
     );
   }
@@ -79,9 +79,7 @@ extension PaymentDetailsModelMapper on PaymentDetailsModel {
       orderId: orderId,
       meta: meta,
       cardDetails: cardDetails?.toEntity(),
-      user: user?.toEntity(),
       paymentMethod: paymentMethod?.toEntity(),
-      cvc: cvc,
       saveCard: saveCard,
     );
   }

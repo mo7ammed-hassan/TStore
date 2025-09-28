@@ -18,8 +18,8 @@ class SelectPaymentScreen extends StatelessWidget {
         context.read<UserCubit>().state.user?.stripeCustomerId;
 
     return BlocProvider(
-      create: (context) => getIt<PaymentMethodsCubit>(),
-      child: BlocListener<PaymentMethodsCubit, PaymentMethodState>(
+      create: (context) => getIt<PaymentMethodCubit>(),
+      child: BlocListener<PaymentMethodCubit, PaymentMethodState>(
         listener: (context, state) {
           if (state.action == PaymentMethodAction.fetchDefaultMethod &&
               state.status == PaymentMethodStateStatus.success) {
@@ -110,7 +110,7 @@ class SelectPaymentScreen extends StatelessWidget {
             !(state.status == PaymentStateStatus.loading &&
                 state.action == PaymentAction.processPayment);
 
-        return BlocBuilder<PaymentMethodsCubit, PaymentMethodState>(
+        return BlocBuilder<PaymentMethodCubit, PaymentMethodState>(
           builder: (context, methodsState) {
             final isLoading =
                 methodsState.action == PaymentMethodAction.fetchDefaultMethod &&
@@ -121,7 +121,7 @@ class SelectPaymentScreen extends StatelessWidget {
               enabled: isButtonEnabled,
               onPressed: () {
                 if (selectedMethod != null) {
-                  context.read<PaymentMethodsCubit>().getDefaultPaymentMethod(
+                  context.read<PaymentMethodCubit>().getDefaultPaymentMethod(
                         customerId: stripeCustomerId,
                         method: selectedMethod,
                       );
@@ -139,7 +139,7 @@ class SelectPaymentScreen extends StatelessWidget {
     OrderEntity? order,
     String? stripeCustomerId,
   ) {
-    final paymentCubit = context.read<PaymentMethodsCubit>();
+    final paymentCubit = context.read<PaymentMethodCubit>();
     final method = paymentCubit.state.defaultMethod;
 
     if (method != null) {

@@ -21,7 +21,9 @@ import 'package:t_store/features/payment/data/repositories/payment_repository_im
 import 'package:t_store/features/payment/domain/repositories/customer_repository.dart';
 import 'package:t_store/features/payment/domain/repositories/payment_method_repository.dart';
 import 'package:t_store/features/payment/domain/repositories/payment_repository.dart';
+import 'package:t_store/features/payment/domain/usecases/add_payment_method_usecase.dart';
 import 'package:t_store/features/payment/domain/usecases/delete_customer_usecase.dart';
+import 'package:t_store/features/payment/domain/usecases/delete_payment_method_usecase.dart';
 import 'package:t_store/features/payment/domain/usecases/get_default_payment_method.dart';
 import 'package:t_store/features/payment/domain/usecases/get_payment_methods_usecase.dart';
 import 'package:t_store/features/payment/domain/usecases/get_saved_payment_methods_usecase.dart';
@@ -30,7 +32,7 @@ import 'package:t_store/features/payment/domain/usecases/payment_method_usecases
 import 'package:t_store/features/payment/domain/usecases/payment_usecases.dart';
 import 'package:t_store/features/payment/domain/usecases/update_default_method_usecase.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_cubit.dart';
-import 'package:t_store/features/payment/presentation/cubit/payment_methods_cubit.dart';
+import 'package:t_store/features/payment/presentation/cubit/payment_method_cubit.dart';
 
 void registerPaymentDependencies(GetIt getIt) {
   /// --- API ---
@@ -67,7 +69,8 @@ void registerPaymentDependencies(GetIt getIt) {
 
   /// --- Payment Method Services --- ///
   getIt.registerLazySingleton<IPaymentMethodService>(
-    () => StripePaymentMethodService(getIt(), PaymentStorage.instance),
+    () => StripePaymentMethodService(getIt(), PaymentStorage.instance,
+        getIt(instanceName: 'stripeCustomer')),
   );
 
   /// Card
@@ -128,9 +131,15 @@ void registerPaymentDependencies(GetIt getIt) {
   getIt.registerLazySingleton<UpdateDefaultPaymentMethodUsecase>(
     () => UpdateDefaultPaymentMethodUsecase(getIt()),
   );
+  getIt.registerLazySingleton<AddPaymentMethodUsecase>(
+    () => AddPaymentMethodUsecase(getIt()),
+  );
+  getIt.registerLazySingleton<DeletePaymentMethodUsecase>(
+    () => DeletePaymentMethodUsecase(getIt()),
+  );
 
   getIt.registerLazySingleton<PaymentMethodUsecases>(
-    () => PaymentMethodUsecases(getIt(), getIt(), getIt()),
+    () => PaymentMethodUsecases(getIt(), getIt(), getIt(), getIt(), getIt()),
   );
   getIt.registerLazySingleton<PaymentUsecases>(
     () => PaymentUsecases(getIt(), getIt()),
@@ -145,7 +154,7 @@ void registerPaymentDependencies(GetIt getIt) {
     () => PaymentCubit(getIt()),
   );
 
-  getIt.registerFactory<PaymentMethodsCubit>(
-    () => PaymentMethodsCubit(getIt()),
+  getIt.registerFactory<PaymentMethodCubit>(
+    () => PaymentMethodCubit(getIt()),
   );
 }

@@ -1,13 +1,17 @@
+import 'package:t_store/features/payment/domain/entities/payment_user_data_entity.dart';
+
 class CardDetailsEntity {
-  final String cardNumber;
-  final int expMonth;
-  final int expYear;
-  final String cvcCode;
+  final String? cardNumber;
+  final int? expMonth;
+  final int? expYear;
+  final String? cvcCode;
+  final PaymentUserDataEntity? userData;
 
   CardDetailsEntity({
-    required this.cardNumber,
-    required this.expMonth,
-    required this.expYear,
-    required this.cvcCode,
+    this.cardNumber,
+    this.expMonth,
+    this.expYear,
+    this.cvcCode,
+    this.userData,
   });
 }

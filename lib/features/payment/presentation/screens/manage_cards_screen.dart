@@ -23,7 +23,7 @@ class ManageCardsScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
-        child: BlocBuilder<PaymentMethodsCubit, PaymentMethodState>(
+        child: BlocBuilder<PaymentMethodCubit, PaymentMethodState>(
           builder: (context, state) {
             if (state.action == PaymentMethodAction.fetch &&
                 state.status == PaymentMethodStateStatus.loading) {
@@ -56,6 +56,7 @@ class ManageCardsScreen extends StatelessWidget {
                     ),
                   ),
                   SafeArea(
+                    top: false,
                     child: SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -65,7 +66,20 @@ class ManageCardsScreen extends StatelessWidget {
                                 PaymentRoutes.addPaymentMethodScreen,
                                 arguments: order,
                               )
-                            : () {},
+                            : context.pushPage(
+                                MultiBlocProvider(
+                                  providers: [
+                                    BlocProvider(
+                                      create: (context) =>
+                                          getIt<PaymentCubit>(),
+                                    ),
+                                    BlocProvider.value(
+                                      value: context.read<PaymentMethodCubit>(),
+                                    ),
+                                  ],
+                                  child: const AddPaymentMethodScreen(),
+                                ),
+                              ),
                         child: const ResponsiveText('Add Bank Card'),
                       ),
                     ),
@@ -118,7 +132,19 @@ class EmptyWidget extends StatelessWidget {
                       PaymentRoutes.addPaymentMethodScreen,
                       arguments: order,
                     )
-                  : () {},
+                  : context.pushPage(
+                      MultiBlocProvider(
+                        providers: [
+                          BlocProvider(
+                            create: (context) => getIt<PaymentCubit>(),
+                          ),
+                          BlocProvider.value(
+                            value: context.read<PaymentMethodCubit>(),
+                          ),
+                        ],
+                        child: const AddPaymentMethodScreen(),
+                      ),
+                    ),
               child: const ResponsiveText('Add Bank Card'),
             ),
           ),

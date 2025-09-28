@@ -32,7 +32,7 @@ class _PaymentFormState extends State<PaymentForm> {
     final method = widget.method as StripeCardMethodEntity?;
     return Column(
       children: [
-        BlocBuilder<PaymentMethodsCubit, PaymentMethodState>(
+        BlocBuilder<PaymentMethodCubit, PaymentMethodState>(
           builder: (context, state) {
             final defaultMethod =
                 state.defaultMethod as StripeCardMethodEntity?;

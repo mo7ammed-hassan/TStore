@@ -1,3 +1,5 @@
+import 'package:flutter_stripe/flutter_stripe.dart';
+
 class StripeCardModel {
   final String? brand;
   final String? country;
@@ -45,5 +47,18 @@ class StripeCardModel {
       'preferred_network': preferredNetwork,
       'available_networks': availableNetworks,
     };
+  }
+
+  static StripeCardModel? fromCard(Card card) {
+    return StripeCardModel(
+      brand: card.brand,
+      country: card.country,
+      expYear: card.expYear,
+      expMonth: card.expMonth,
+      funding: card.funding,
+      last4: card.last4,
+      preferredNetwork: card.preferredNetwork,
+      availableNetworks: card.availableNetworks,
+    );
   }
 }

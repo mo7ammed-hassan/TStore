@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/core/core.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
+import 'package:t_store/features/payment/core/dialogs/confirm_payment_dialog.dart';
+import 'package:t_store/features/payment/domain/entities/card_details_entity.dart';
 import 'package:t_store/features/payment/domain/entities/payment_user_data_entity.dart';
 import 'package:t_store/features/payment/payment.dart';
 import 'package:t_store/features/personalization/cubit/user_cubit.dart';
@@ -33,14 +35,21 @@ class PayButton extends StatelessWidget {
                 ),
               ),
             ),
-            onPressed: () {
+            onPressed: () async {
               final cvc = validateCVC?.call();
-              if (cvc == null) {
-                return;
-              }
+              if (cvc == null) return;
+
+              final confirm =
+                  await ConfirmPaymentDialog.confirmDialog(context, order);
+              if (confirm != true) return;
 
               final userData = PaymentUserDataEntity(
                 customerId: user?.stripeCustomerId,
+              );
+
+              final cardDetails = CardDetailsEntity(
+                userData: userData,
+                cvcCode: cvc,
               );
 
               final details = PaymentDetailsEntity(
@@ -48,13 +57,13 @@ class PayButton extends StatelessWidget {
                 currency: 'usd',
                 amountMinor: order.checkoutModel.total.toInt(),
                 paymentMethod: paymentMethod,
-                user: userData,
-                cvc: cvc,
+                cardDetails: cardDetails,
               );
 
-              context
-                  .read<PaymentCubit>()
-                  .confirmPayment(details, order, cardFlow: CardFlow.savedCard);
+              if (context.mounted) {
+                context.read<PaymentCubit>().confirmPayment(details, order,
+                    cardFlow: CardFlow.savedCard);
+              }
             },
             child: const ResponsiveText('Pay'),
           );

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/core/utils/loaders/loading_dialog.dart';
-import 'package:t_store/features/payment/presentation/cubit/payment_methods_cubit.dart';
+import 'package:t_store/features/payment/presentation/cubit/payment_method_cubit.dart';
 import 'package:t_store/features/payment/presentation/screens/manage_cards_screen.dart';
 import 'package:t_store/features/personalization/pages/settings/presentation/widgets/settings_menu_tile.dart';
 import 'package:t_store/common/widgets/appbar/t_appbar.dart';
@@ -113,7 +113,7 @@ class SettingsPage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => BlocProvider(
-                          create: (context) => getIt<PaymentMethodsCubit>()
+                          create: (context) => getIt<PaymentMethodCubit>()
                             ..loadPaymentMethods(user?.stripeCustomerId),
                           child: const ManageCardsScreen(
                             nestedNavigator: false,

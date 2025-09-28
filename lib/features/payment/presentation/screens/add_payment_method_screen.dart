@@ -5,6 +5,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:t_store/common/common.dart';
 import 'package:t_store/core/core.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
+import 'package:t_store/features/payment/core/dialogs/confirm_payment_dialog.dart';
 import 'package:t_store/features/payment/domain/entities/card_details_entity.dart';
 import 'package:t_store/features/payment/domain/entities/payment_user_data_entity.dart';
 import 'package:t_store/features/payment/presentation/widgets/option_payment_checkbox.dart';
@@ -106,10 +107,15 @@ class CreditCardView extends StatelessWidget {
                         ResponsiveGap.vertical(8),
                         OptionCheckbox(
                           title: 'Save Payment details for future purchases',
-                          value: context.select(
-                            (CreditCardFormCubit cubit) => cubit.state.saveCard,
-                          ),
-                          onChanged: (val) => cubit.toggleSaveCard(),
+                          value: order != null
+                              ? context.select(
+                                  (CreditCardFormCubit cubit) =>
+                                      cubit.state.saveCard,
+                                )
+                              : true,
+                          onChanged: order != null
+                              ? (val) => cubit.toggleSaveCard()
+                              : null,
                         ),
                       ],
                     ),
@@ -136,6 +142,7 @@ class _PayButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final cardCubit = context.read<CreditCardFormCubit>();
     final paymentCubit = context.read<PaymentCubit>();
+    final paymentMethodCubit = context.read<PaymentMethodCubit>();
     final user = context.read<UserCubit>().state.user;
 
     return BlocBuilder<PaymentCubit, PaymentState>(
@@ -153,13 +160,6 @@ class _PayButton extends StatelessWidget {
                 final expMonth = int.tryParse(data[0]) ?? 0;
                 final expYear = int.tryParse(data[1]) ?? 0;
 
-                final cardDetails = CardDetailsEntity(
-                  cardNumber: cardCubit.state.cardNumber,
-                  expMonth: expMonth,
-                  expYear: expYear,
-                  cvcCode: cardCubit.state.cvvCode,
-                );
-
                 final shippingAddress = Address(
                   city: order?.shippingAddress?.city,
                   country: '',
@@ -170,37 +170,70 @@ class _PayButton extends StatelessWidget {
                 );
 
                 final userData = PaymentUserDataEntity(
-                  name: user?.fullName,
+                  name: cardCubit.state.cardHolderName,
                   email: user?.userEmail,
                   phone: user?.userPhone,
                   address: shippingAddress,
                   customerId: user?.stripeCustomerId,
                 );
 
-                final details = PaymentDetailsEntity(
-                  orderId: order!.orderId,
-                  currency: 'usd',
-                  amountMinor: order!.checkoutModel.total.toInt(),
-                  cardDetails: cardDetails,
-                  user: userData,
-                  saveCard: cardCubit.state.saveCard,
+                final cardDetails = CardDetailsEntity(
+                  cardNumber: cardCubit.state.cardNumber,
+                  expMonth: expMonth,
+                  expYear: expYear,
+                  cvcCode: cardCubit.state.cvvCode,
+                  userData: userData,
                 );
 
-                await paymentCubit
-                    .confirmPayment(
-                  details,
-                  order!,
-                  cardFlow: CardFlow.newCard,
-                )
-                    .then((value) {
-                  if (user?.stripeCustomerId == null) {
-                    if (context.mounted) {
-                      context.read<UserCubit>().fetchUserData(forchFetch: true);
+                if (order != null) {
+                  final confirm =
+                      await ConfirmPaymentDialog.confirmDialog(context, order);
+                  if (confirm != true) return;
+
+                  final details = PaymentDetailsEntity(
+                    orderId: order!.orderId,
+                    currency: 'usd',
+                    amountMinor: order!.checkoutModel.total.toInt(),
+                    cardDetails: cardDetails,
+                    saveCard: cardCubit.state.saveCard,
+                  );
+
+                  await paymentCubit
+                      .confirmPayment(
+                    details,
+                    order!,
+                    cardFlow: CardFlow.newCard,
+                  )
+                      .then((value) {
+                    if (user?.stripeCustomerId == null) {
+                      if (context.mounted) {
+                        context
+                            .read<UserCubit>()
+                            .fetchUserData(forchFetch: true);
+                      }
                     }
-                  }
-                });
+                  });
+                } else {
+                  await paymentMethodCubit
+                      .addPaymentMethod(cardDetails)
+                      .then((value) {
+                    if (user?.stripeCustomerId == null) {
+                      if (context.mounted) {
+                        context
+                            .read<UserCubit>()
+                            .fetchUserData(forchFetch: true);
+                      }
+                    }
+                  }).then(
+                    (value) {
+                      if (context.mounted) {
+                        Navigator.pop(context);
+                      }
+                    },
+                  );
+                }
               },
-              child: const ResponsiveText('Pay'),
+              child: ResponsiveText(order == null ? 'Add' : 'Pay'),
             ),
           ),
         );

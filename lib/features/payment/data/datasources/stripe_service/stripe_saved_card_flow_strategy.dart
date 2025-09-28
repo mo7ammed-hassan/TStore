@@ -16,7 +16,7 @@ class StripeSavedCardFlowStrategy implements ICardFlowStrategy {
       data: {
         'amount': (details.amountMinor * 100).toInt(),
         'currency': details.currency,
-        'customer': details.user?.customerId,
+        'customer': details.cardDetails?.userData?.customerId,
       },
       headers: {
         'Authorization': 'Bearer ${dotenv.env['STRIPE_SECRET_KEY']}',
@@ -50,11 +50,10 @@ class StripeSavedCardFlowStrategy implements ICardFlowStrategy {
     required PaymentDetailsModel details,
   }) async {
     final paymentIntent = await createPaymentIntent(details: details);
-
     final paymentResult = await confirmPayment(
       clientSecret: paymentIntent.clientSecret!,
       paymentMethodId: details.paymentMethod!.id,
-      cvc: details.cvc!,
+      cvc: details.cardDetails!.cvcCode,
     );
 
     return PaymentResultModel(

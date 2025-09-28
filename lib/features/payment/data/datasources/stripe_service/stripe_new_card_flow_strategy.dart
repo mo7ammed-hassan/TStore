@@ -144,10 +144,10 @@ class StripeNewCardFlowStrategy implements ICardFlowStrategy {
     // 1. get customerId
     final customerId = await getOrCreateCustomer(
       customer: CustomerModel(
-        id: details.user?.customerId,
-        name: details.user?.name,
-        email: details.user?.email,
-        phone: details.user?.phone,
+        id: details.cardDetails?.userData?.customerId,
+        name: details.cardDetails?.userData?.name,
+        email: details.cardDetails?.userData?.email,
+        phone: details.cardDetails?.userData?.phone,
       ),
     );
 
@@ -156,8 +156,10 @@ class StripeNewCardFlowStrategy implements ICardFlowStrategy {
         await createPaymentIntent(details: details, customerId: customerId);
 
     // 3. Create payment method
-    final paymentMethod =
-        await createPaymentMethod(details.cardDetails, details.user);
+    final paymentMethod = await createPaymentMethod(
+      details.cardDetails,
+      details.cardDetails?.userData,
+    );
 
     // 4. attach + make default
     if (details.saveCard) {

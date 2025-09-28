@@ -6,9 +6,7 @@ class PaymentDetailsModel {
   final String orderId;
   final Map<String, dynamic>? meta; // optional extra fields per gateway
   final CardDetailsModel? cardDetails;
-  final PaymentUserDataModel? user;
   final PaymentMethodModel? paymentMethod;
-  final String? cvc;
   final bool saveCard;
 
   const PaymentDetailsModel({
@@ -17,9 +15,7 @@ class PaymentDetailsModel {
     required this.orderId,
     this.meta,
     this.cardDetails,
-    this.user,
     this.paymentMethod,
-    this.cvc,
     this.saveCard = false,
   });
 }

@@ -29,7 +29,8 @@ class PaymentFlowScreen extends StatelessWidget {
           create: (context) => getIt<PaymentCubit>()..fetchServiceMethods(),
         ),
         BlocProvider(
-          create: (context) => getIt<PaymentMethodsCubit>()..loadPaymentMethods(user?.stripeCustomerId),
+          create: (context) => getIt<PaymentMethodCubit>()
+            ..loadPaymentMethods(user?.stripeCustomerId),
         ),
       ],
       child: _handlePaymentListener(order),
