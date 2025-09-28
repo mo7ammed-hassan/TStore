@@ -121,10 +121,9 @@ class SelectPaymentScreen extends StatelessWidget {
               enabled: isButtonEnabled,
               onPressed: () {
                 if (selectedMethod != null) {
-                  context.read<PaymentMethodCubit>().getDefaultPaymentMethod(
-                        customerId: stripeCustomerId,
-                        method: selectedMethod,
-                      );
+                  context
+                      .read<PaymentMethodCubit>()
+                      .getDefaultPaymentMethod(customerId: stripeCustomerId);
                 }
               },
             );

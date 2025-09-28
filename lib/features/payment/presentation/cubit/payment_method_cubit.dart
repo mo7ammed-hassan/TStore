@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store/core/utils/popups/loaders.dart';
 import 'package:t_store/features/payment/domain/entities/card_details_entity.dart';
-import 'package:t_store/features/payment/domain/entities/card_method_entity.dart';
 import 'package:t_store/features/payment/domain/entities/payment_method/payment_method_entity.dart';
 import 'package:t_store/features/payment/domain/usecases/payment_method_usecases.dart';
 import 'package:t_store/features/payment/presentation/cubit/payment_method_state.dart';
@@ -43,8 +42,7 @@ class PaymentMethodCubit extends Cubit<PaymentMethodState> {
     });
   }
 
-  Future<void> getDefaultPaymentMethod(
-      {required String? customerId, required CardMethodEntity method}) async {
+  Future<void> getDefaultPaymentMethod({required String? customerId}) async {
     emit(
       state.copyWith(
         action: PaymentMethodAction.fetchDefaultMethod,
@@ -154,7 +152,8 @@ class PaymentMethodCubit extends Cubit<PaymentMethodState> {
         );
       },
       (defaultMethod) {
-        final methods = state.methods..add(defaultMethod);
+        final methods = List<PaymentMethodEntity>.from(state.methods)
+          ..add(defaultMethod);
         emit(
           state.copyWith(
             action: PaymentMethodAction.updateDefaultMethod,
@@ -196,26 +195,28 @@ class PaymentMethodCubit extends Cubit<PaymentMethodState> {
         );
         Loaders.errorSnackBar(
           duration: 1,
-          title: 'delete Method',
+          title: 'Delete Method',
           message: state.error ?? '',
         );
       },
       (_) {
-        final index =
-            state.methods.indexWhere((element) => element.id == methodId);
-        state.methods.removeAt(index);
+        final updatedMethods = List<PaymentMethodEntity>.from(state.methods)
+          ..removeWhere((element) => element.id == methodId);
 
         emit(
           state.copyWith(
             action: PaymentMethodAction.updateDefaultMethod,
             status: PaymentMethodStateStatus.success,
-            methods: [...state.methods],
-            message: 'method deleted successfully',
+            methods: updatedMethods,
+            defaultMethod: state.defaultMethod?.id == methodId
+                ? null
+                : state.defaultMethod,
+            message: 'Method deleted successfully',
           ),
         );
         Loaders.successSnackBar(
           duration: 1,
-          title: 'delete Method',
+          title: 'Delete Method',
           message: state.message ?? '',
         );
       },
