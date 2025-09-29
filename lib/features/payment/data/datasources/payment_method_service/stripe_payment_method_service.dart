@@ -83,11 +83,6 @@ class StripePaymentMethodService implements IPaymentMethodService {
   }
 
   @override
-  Future<PaymentMethodModel> updatePaymentMethod(PaymentMethodModel method) {
-    throw UnimplementedError();
-  }
-
-  @override
   Future<PaymentMethodModel<PaymentMethodEntity>?> getDefaultPaymentMethod(
     String? customerId, {
     Duration cacheDuration = const Duration(minutes: 10),

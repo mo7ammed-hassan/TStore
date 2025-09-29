@@ -171,45 +171,23 @@ class _CardActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        /// Delete
-        Expanded(
-          child: OutlinedButton(
-            onPressed: () =>
-                context.read<PaymentMethodCubit>().deletePaymentMethod(
-                      customerId: customerId,
-                      methodId: methodId,
-                    ),
-            style: OutlinedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
+    return SizedBox(
+      width: double.infinity,
+      child: OutlinedButton(
+        onPressed: () => context.read<PaymentMethodCubit>().deletePaymentMethod(
+              customerId: customerId,
+              methodId: methodId,
             ),
-            child: const ResponsiveText(
-              'Delete Card',
-              fontSize: 13,
-            ),
+        style: OutlinedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
           ),
         ),
-        ResponsiveGap.horizontal(14),
-
-        /// Update Expiry
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            child: const ResponsiveText(
-              'Update Expire Date',
-              fontSize: 13,
-            ),
-          ),
+        child: const ResponsiveText(
+          'Delete Card',
+          fontSize: 13,
         ),
-      ],
+      ),
     );
   }
 }

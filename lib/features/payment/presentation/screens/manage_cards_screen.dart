@@ -15,7 +15,7 @@ class ManageCardsScreen extends StatelessWidget {
     final order = ModalRoute.of(context)?.settings.arguments as OrderEntity?;
 
     return BlocListener<PaymentMethodCubit, PaymentMethodState>(
-       listenWhen: (previous, current) =>
+      listenWhen: (previous, current) =>
           current.action == PaymentMethodAction.updateDefaultMethod,
       listener: (context, state) {
         if (state.action == PaymentMethodAction.updateDefaultMethod &&
@@ -23,9 +23,6 @@ class ManageCardsScreen extends StatelessWidget {
           LoadingDialog.show(context);
         } else if (state.action == PaymentMethodAction.updateDefaultMethod &&
             state.status == PaymentMethodStateStatus.success) {
-          LoadingDialog.hide(context);
-        } else if (state.action == PaymentMethodAction.updateDefaultMethod &&
-            state.status == PaymentMethodStateStatus.failure) {
           LoadingDialog.hide(context);
         }
       },
