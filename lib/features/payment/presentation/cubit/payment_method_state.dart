@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:t_store/features/payment/domain/entities/card_method_entity.dart';
 import 'package:t_store/features/payment/domain/entities/payment_method/payment_method_entity.dart';
 import 'package:t_store/features/payment/domain/entities/payment_result_entity.dart';
@@ -12,7 +13,7 @@ enum PaymentMethodAction {
   updateDefaultMethod
 }
 
-class PaymentMethodState {
+class PaymentMethodState extends Equatable {
   final PaymentMethodAction action;
   final PaymentMethodStateStatus status;
   final List<PaymentMethodEntity> methods;
@@ -23,7 +24,7 @@ class PaymentMethodState {
   final String? error;
   final String? updatedMethodId;
 
-  PaymentMethodState({
+  const PaymentMethodState({
     this.action = PaymentMethodAction.fetch,
     this.status = PaymentMethodStateStatus.initial,
     this.methods = const [],
@@ -58,4 +59,17 @@ class PaymentMethodState {
       updatedMethodId: updatedMethodId ?? this.updatedMethodId,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        action,
+        status,
+        methods,
+        selectedMethod,
+        paymentResult,
+        defaultMethod,
+        message,
+        error,
+        updatedMethodId,
+      ];
 }

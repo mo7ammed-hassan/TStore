@@ -8,7 +8,8 @@ import 'package:t_store/features/payment/presentation/cubit/payment_method_state
 class PaymentMethodCubit extends Cubit<PaymentMethodState> {
   final PaymentMethodUsecases _paymentMethodUsecases;
 
-  PaymentMethodCubit(this._paymentMethodUsecases) : super(PaymentMethodState());
+  PaymentMethodCubit(this._paymentMethodUsecases)
+      : super(const PaymentMethodState());
 
   Future<void> loadPaymentMethods(String? customerId) async {
     emit(

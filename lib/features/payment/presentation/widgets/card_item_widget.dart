@@ -119,48 +119,46 @@ class _PrimaryCardIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PaymentMethodCubit, PaymentMethodState>(
-      buildWhen: (previous, current) =>
-          previous.defaultMethod?.id != current.defaultMethod?.id,
-      builder: (context, state) {
-        bool defaultMethod = state.defaultMethod?.id == method.id;
-        return Row(
-          children: [
-            GestureDetector(
+    return Row(
+      children: [
+        BlocSelector<PaymentMethodCubit, PaymentMethodState, String?>(
+          selector: (state) => state.defaultMethod?.id,
+          builder: (context, defaultMethodId) {
+            final isDefault = defaultMethodId == method.id;
+
+            return GestureDetector(
               onTap: () => context
                   .read<PaymentMethodCubit>()
                   .updateDefaultMethod(method, customerId),
               child: AnimatedContainer(
-                width: context.horzSize(defaultMethod ? 19 : 17.5),
-                height: context.horzSize(defaultMethod ? 19 : 17.5),
+                width: context.horzSize(isDefault ? 19 : 17.5),
+                height: context.horzSize(isDefault ? 19 : 17.5),
                 padding: context.responsiveInsets.all(4.5),
                 duration: const Duration(milliseconds: 300),
                 decoration: ShapeDecoration(
                   shape: CircleBorder(
                       side: BorderSide(
-                    color: defaultMethod ? Colors.transparent : Colors.grey,
+                    color: isDefault ? Colors.transparent : Colors.grey,
                   )),
-                  color: defaultMethod ? AppColors.primary : null,
+                  color: isDefault ? AppColors.primary : null,
                 ),
                 child: DecoratedBox(
                   decoration: ShapeDecoration(
                     shape: const CircleBorder(),
-                    color: defaultMethod ? Colors.white : Colors.transparent,
+                    color: isDefault ? Colors.white : Colors.transparent,
                   ),
                 ),
               ),
-            ),
-            const SizedBox(width: 8),
-            ResponsiveText(
-              'Primary Card',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge
-                  ?.copyWith(fontSize: 13.3),
-            ),
-          ],
-        );
-      },
+            );
+          },
+        ),
+        const SizedBox(width: 8),
+        ResponsiveText(
+          'Primary Card',
+          style:
+              Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13.3),
+        ),
+      ],
     );
   }
 }
