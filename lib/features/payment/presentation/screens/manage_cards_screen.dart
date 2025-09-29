@@ -4,10 +4,11 @@ import 'package:t_store/common/common.dart';
 import 'package:t_store/core/core.dart';
 import 'package:t_store/features/checkout/domain/entities/order_entity.dart';
 import 'package:t_store/features/payment/payment.dart';
+import 'package:t_store/features/payment/presentation/widgets/empty_manage_card_view.dart';
+import 'package:t_store/features/payment/presentation/widgets/payment_methods_list_view.dart';
 
 class ManageCardsScreen extends StatelessWidget {
-  const ManageCardsScreen({super.key, this.nestedNavigator = true});
-  final bool nestedNavigator;
+  const ManageCardsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,138 +32,44 @@ class ManageCardsScreen extends StatelessWidget {
         appBar: TAppBar(
           title: 'Bank Accounts',
           showBackArrow: true,
-          nestedNavigator: nestedNavigator,
+          nestedNavigator: order != null,
         ),
         body: Padding(
           padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
           child: BlocBuilder<PaymentMethodCubit, PaymentMethodState>(
+            buildWhen: (previous, current) =>
+                current.methods != previous.methods,
             builder: (context, state) {
-              if (state.action == PaymentMethodAction.fetch &&
-                  state.status == PaymentMethodStateStatus.loading) {
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.primary,
-                  ),
-                );
-              }
-              if (state.action == PaymentMethodAction.fetch &&
-                      state.status == PaymentMethodStateStatus.success ||
-                  state.action == PaymentMethodAction.updateDefaultMethod) {
-                if (state.methods.isEmpty) {
-                  return EmptyWidget(
-                    nestedNavigator: nestedNavigator,
+              switch (state.status) {
+                case PaymentMethodStateStatus.loading:
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.primary,
+                    ),
+                  );
+
+                case PaymentMethodStateStatus.success:
+                  if (state.methods.isEmpty) {
+                    return EmptyManageCardView(order: order);
+                  }
+                  return PaymentMethodsListView(
+                    methods: state.methods,
                     order: order,
                   );
-                }
-                return Column(
-                  children: [
-                    Expanded(
-                      child: ListView.separated(
-                        itemCount: state.methods.length,
-                        itemBuilder: (context, index) => CardItemWidget(
-                          key: ValueKey(state.methods[index].id),
-                          paymentMethod: state.methods[index],
-                        ),
-                        separatorBuilder: (context, index) =>
-                            ResponsiveGap.vertical(16),
-                      ),
+                case PaymentMethodStateStatus.failure:
+                  return Center(
+                    child: ResponsiveText(
+                      state.message ?? 'Something went wrong',
+                      maxLines: 10,
                     ),
-                    SafeArea(
-                      top: false,
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () => nestedNavigator
-                              ? Navigator.pushNamed(
-                                  context,
-                                  PaymentRoutes.addPaymentMethodScreen,
-                                  arguments: order,
-                                )
-                              : context.pushPage(
-                                  MultiBlocProvider(
-                                    providers: [
-                                      BlocProvider(
-                                        create: (context) =>
-                                            getIt<PaymentCubit>(),
-                                      ),
-                                      BlocProvider.value(
-                                        value:
-                                            context.read<PaymentMethodCubit>(),
-                                      ),
-                                    ],
-                                    child: const AddPaymentMethodScreen(),
-                                  ),
-                                ),
-                          child: const ResponsiveText('Add Bank Card'),
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              } else if (state.action == PaymentMethodAction.fetch &&
-                  state.status == PaymentMethodStateStatus.failure) {
-                return Center(
-                  child: ResponsiveText(
-                    state.message ?? 'Something went wrong',
-                    maxLines: 10,
-                  ),
-                );
+                  );
+
+                default:
+                  return const SizedBox.shrink();
               }
-              return const SizedBox.shrink();
             },
           ),
         ),
-      ),
-    );
-  }
-}
-
-class EmptyWidget extends StatelessWidget {
-  const EmptyWidget({
-    super.key,
-    required this.nestedNavigator,
-    required this.order,
-  });
-
-  final bool nestedNavigator;
-  final OrderEntity? order;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const ResponsiveText(
-            'No bank cards added yet.',
-          ),
-          ResponsiveGap.vertical(20),
-          SizedBox(
-            width: context.horzSize(150),
-            child: ElevatedButton(
-              onPressed: () => nestedNavigator
-                  ? Navigator.pushNamed(
-                      context,
-                      PaymentRoutes.addPaymentMethodScreen,
-                      arguments: order,
-                    )
-                  : context.pushPage(
-                      MultiBlocProvider(
-                        providers: [
-                          BlocProvider(
-                            create: (context) => getIt<PaymentCubit>(),
-                          ),
-                          BlocProvider.value(
-                            value: context.read<PaymentMethodCubit>(),
-                          ),
-                        ],
-                        child: const AddPaymentMethodScreen(),
-                      ),
-                    ),
-              child: const ResponsiveText('Add Bank Card'),
-            ),
-          ),
-        ],
       ),
     );
   }

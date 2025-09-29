@@ -121,7 +121,7 @@ class _PrimaryCardIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PaymentMethodCubit, PaymentMethodState>(
       buildWhen: (previous, current) =>
-          current.action == PaymentMethodAction.updateDefaultMethod,
+          previous.defaultMethod?.id != current.defaultMethod?.id,
       builder: (context, state) {
         bool defaultMethod = state.defaultMethod?.id == method.id;
         return Row(

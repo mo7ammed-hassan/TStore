@@ -106,7 +106,7 @@ class PaymentMethodCubit extends Cubit<PaymentMethodState> {
         );
         Loaders.errorSnackBar(
           duration: 1,
-          title: 'Update Default Method',
+          title: 'Error',
           message: state.error ?? '',
         );
       },
@@ -150,7 +150,7 @@ class PaymentMethodCubit extends Cubit<PaymentMethodState> {
         );
         Loaders.errorSnackBar(
           duration: 1,
-          title: 'Add Method',
+          title: 'Error',
           message: state.error ?? '',
         );
       },
@@ -198,7 +198,7 @@ class PaymentMethodCubit extends Cubit<PaymentMethodState> {
         );
         Loaders.errorSnackBar(
           duration: 1,
-          title: 'Delete Method',
+          title: 'Error',
           message: state.error ?? '',
         );
       },

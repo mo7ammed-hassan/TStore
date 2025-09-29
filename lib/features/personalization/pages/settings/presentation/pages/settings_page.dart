@@ -115,9 +115,7 @@ class SettingsPage extends StatelessWidget {
                         builder: (context) => BlocProvider(
                           create: (context) => getIt<PaymentMethodCubit>()
                             ..loadPaymentMethods(user?.stripeCustomerId),
-                          child: const ManageCardsScreen(
-                            nestedNavigator: false,
-                          ),
+                          child: const ManageCardsScreen(),
                         ),
                       ),
                     ),
