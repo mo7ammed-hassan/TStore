@@ -5,7 +5,7 @@ class StripePaymentService implements IPaymentServiceStrategy {
   StripePaymentService(this.cardFlow);
 
   @override
-  Future<PaymentResultModel> pay({required PaymentDetailsModel details}) async {
+  Future<PaymentResultModel> pay({required PaymentDetailsModel? details}) async {
     return cardFlow.payWithCard(details: details);
   }
 }

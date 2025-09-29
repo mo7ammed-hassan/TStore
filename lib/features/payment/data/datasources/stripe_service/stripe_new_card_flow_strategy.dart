@@ -2,6 +2,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:t_store/core/config/service_locator.dart';
 import 'package:t_store/core/network/api_client.dart';
+import 'package:t_store/core/utils/utils.dart';
 import 'package:t_store/features/payment/core/storage/payment_storage.dart';
 import 'package:t_store/features/payment/data/datasources/customer_service/i_customer_service.dart';
 import 'package:t_store/features/payment/data/datasources/i_card_flow_strategy.dart';
@@ -11,7 +12,6 @@ import 'package:t_store/features/payment/data/models/payment_details_model.dart'
 import 'package:t_store/features/payment/data/models/stripe/payment_intent_model.dart';
 import 'package:t_store/features/payment/data/models/payment_result_model.dart';
 import 'package:t_store/features/payment/data/models/payment_user_data.dart';
-import 'package:t_store/core/utils/constants/api_constants.dart';
 import 'package:t_store/features/personalization/domain/use_cases/update_user_filed_use_case.dart';
 
 class StripeNewCardFlowStrategy implements ICardFlowStrategy {
@@ -99,11 +99,11 @@ class StripeNewCardFlowStrategy implements ICardFlowStrategy {
   }
 
   Future<PaymentIntentModel> createPaymentIntent({
-    required PaymentDetailsModel details,
+    required PaymentDetailsModel? details,
     String? customerId,
   }) async {
     final data = {
-      'amount': (details.amountMinor * 100).toInt(),
+      'amount': (details!.amountMinor * 100).toInt(),
       'currency': details.currency,
       'customer': customerId,
     };
@@ -140,14 +140,14 @@ class StripeNewCardFlowStrategy implements ICardFlowStrategy {
 
   @override
   Future<PaymentResultModel> payWithCard(
-      {required PaymentDetailsModel details}) async {
+      {required PaymentDetailsModel? details}) async {
     // 1. get customerId
     final customerId = await getOrCreateCustomer(
       customer: CustomerModel(
-        id: details.cardDetails?.userData?.customerId,
-        name: details.cardDetails?.userData?.name,
-        email: details.cardDetails?.userData?.email,
-        phone: details.cardDetails?.userData?.phone,
+        id: details?.cardDetails?.userData?.customerId,
+        name: details?.cardDetails?.userData?.name,
+        email: details?.cardDetails?.userData?.email,
+        phone: details?.cardDetails?.userData?.phone,
       ),
     );
 
@@ -157,12 +157,12 @@ class StripeNewCardFlowStrategy implements ICardFlowStrategy {
 
     // 3. Create payment method
     final paymentMethod = await createPaymentMethod(
-      details.cardDetails,
-      details.cardDetails?.userData,
+      details?.cardDetails,
+      details?.cardDetails?.userData,
     );
 
     // 4. attach + make default
-    if (details.saveCard) {
+    if (details?.saveCard == true) {
       await attachAndSetDefaultPaymentMethod(
         customerId: customerId!,
         paymentMethodId: paymentMethod.id,
@@ -180,6 +180,9 @@ class StripeNewCardFlowStrategy implements ICardFlowStrategy {
       transactionId: paymentResult.id,
       paymentIntentId: paymentIntent.id,
       card: paymentMethod.card.brand,
+      paymentStatus: paymentResult.status == PaymentIntentsStatus.Succeeded
+          ? PaymentStatus.paidPayment
+          : null,
       message: paymentResult.status == PaymentIntentsStatus.Succeeded
           ? 'Stripe Payment Successful'
           : 'Stripe Payment Failed',

@@ -200,8 +200,8 @@ class _PayButton extends StatelessWidget {
 
                   await paymentCubit
                       .confirmPayment(
-                    details,
-                    order!,
+                    details: details,
+                    order: order!,
                     cardFlow: CardFlow.newCard,
                   )
                       .then((value) {

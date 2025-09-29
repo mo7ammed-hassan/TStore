@@ -61,8 +61,11 @@ class PayButton extends StatelessWidget {
               );
 
               if (context.mounted) {
-                context.read<PaymentCubit>().confirmPayment(details, order,
-                    cardFlow: CardFlow.savedCard);
+                context.read<PaymentCubit>().confirmPayment(
+                      details: details,
+                      order: order,
+                      cardFlow: CardFlow.savedCard,
+                    );
               }
             },
             child: const ResponsiveText('Pay'),

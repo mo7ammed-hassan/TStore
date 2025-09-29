@@ -1,6 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:t_store/core/network/api_client.dart';
+import 'package:t_store/core/utils/constants/enums.dart';
 import 'package:t_store/features/payment/data/data.dart';
 import 'package:t_store/core/utils/constants/api_constants.dart';
 
@@ -10,11 +11,11 @@ class StripeSavedCardFlowStrategy implements ICardFlowStrategy {
   StripeSavedCardFlowStrategy(this.dio, this.customerService);
 
   Future<PaymentIntentModel> createPaymentIntent(
-      {required PaymentDetailsModel details}) async {
+      {required PaymentDetailsModel? details}) async {
     final response = await dio.post(
       ApiConstants.paymentIntents,
       data: {
-        'amount': (details.amountMinor * 100).toInt(),
+        'amount': (details!.amountMinor * 100).toInt(),
         'currency': details.currency,
         'customer': details.cardDetails?.userData?.customerId,
       },
@@ -47,12 +48,12 @@ class StripeSavedCardFlowStrategy implements ICardFlowStrategy {
 
   @override
   Future<PaymentResultModel> payWithCard({
-    required PaymentDetailsModel details,
+    required PaymentDetailsModel? details,
   }) async {
     final paymentIntent = await createPaymentIntent(details: details);
     final paymentResult = await confirmPayment(
       clientSecret: paymentIntent.clientSecret!,
-      paymentMethodId: details.paymentMethod!.id,
+      paymentMethodId: details!.paymentMethod!.id,
       cvc: details.cardDetails!.cvcCode,
     );
 
@@ -61,6 +62,9 @@ class StripeSavedCardFlowStrategy implements ICardFlowStrategy {
       transactionId: paymentResult.id,
       paymentIntentId: paymentIntent.id,
       card: details.paymentMethod?.cardType,
+      paymentStatus: paymentResult.status == PaymentIntentsStatus.Succeeded
+          ? PaymentStatus.paidPayment
+          : null,
       message: paymentResult.status == PaymentIntentsStatus.Succeeded
           ? 'Stripe Payment Successful'
           : 'Stripe Payment Failed',

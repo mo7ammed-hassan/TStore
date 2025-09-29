@@ -9,7 +9,7 @@ class PayUseCase {
 
   Future<Either<Failure, PaymentResultEntity>> pay({
     required PaymentMethods method,
-    required PaymentDetailsEntity details,
+    required PaymentDetailsEntity? details,
     CardFlow? cardFlow = CardFlow.savedCard,
   }) {
     final service = PaymentServiceFactory.create(method, cardFlow: cardFlow);

@@ -41,9 +41,9 @@ class PaymentCubit extends Cubit<PaymentState> {
     );
   }
 
-  Future<void> confirmPayment(
-    PaymentDetailsEntity details,
-    OrderEntity order, {
+  Future<void> confirmPayment({
+    required OrderEntity order,
+    PaymentDetailsEntity? details,
     CardFlow? cardFlow,
   }) async {
     if (state.selectedMethod == null) return;
@@ -73,7 +73,7 @@ class PaymentCubit extends Cubit<PaymentState> {
       (paymentResult) async {
         final updatedOrder = order.copyWith(
           orderStatus: OrderStatus.processing.name,
-          paymentStatus: PaymentStatus.paidPayment.name,
+          paymentStatus: paymentResult.paymentStatus?.name,
           transactionId: paymentResult.transactionId,
           paymentIntentId: paymentResult.paymentIntentId,
           updatedAt: Timestamp.now(),
@@ -82,7 +82,7 @@ class PaymentCubit extends Cubit<PaymentState> {
 
         final paymentResultWithSummary = paymentResult.copyWith(
           orderSummary: updatedOrder.checkoutModel.orderSummary,
-          card: details.paymentMethod?.cardType,
+          card: details?.paymentMethod?.cardType,
         );
 
         emit(

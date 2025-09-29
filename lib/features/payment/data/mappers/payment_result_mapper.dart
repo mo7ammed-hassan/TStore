@@ -10,6 +10,8 @@ extension PaymentResultModelX on PaymentResultModel {
       paymentIntentId: paymentIntentId,
       card: card,
       message: message ?? '',
+      paymentStatus: paymentStatus,
+      //orderSummary: orderSummary.toEntity(),
     );
   }
 }

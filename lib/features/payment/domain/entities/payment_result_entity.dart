@@ -1,3 +1,4 @@
+import 'package:t_store/core/utils/constants/enums.dart';
 import 'package:t_store/features/checkout/domain/entities/order_summary_entity.dart';
 
 class PaymentResultEntity {
@@ -8,6 +9,7 @@ class PaymentResultEntity {
   final String? card;
   final String message;
   final OrderSummaryEntity? orderSummary;
+  final PaymentStatus? paymentStatus;
 
   PaymentResultEntity({
     required this.success,
@@ -17,6 +19,7 @@ class PaymentResultEntity {
     this.card,
     required this.message,
     this.orderSummary,
+    this.paymentStatus,
   });
 
   // copyWith method to create a copy of the entity with modified fields
@@ -28,6 +31,7 @@ class PaymentResultEntity {
     String? card,
     String? message,
     OrderSummaryEntity? orderSummary,
+    PaymentStatus? paymentStatus,
   }) {
     return PaymentResultEntity(
       success: success ?? this.success,
@@ -37,6 +41,7 @@ class PaymentResultEntity {
       card: card ?? this.card,
       message: message ?? this.message,
       orderSummary: orderSummary ?? this.orderSummary,
+      paymentStatus: paymentStatus ?? this.paymentStatus,
     );
   }
 }

@@ -79,11 +79,14 @@ class PaymentStatusScreen extends StatelessWidget {
                     DateTime.now(),
                   ),
                 ),
-                ResponsiveGap.vertical(14),
-                PaymentSummaryRow(
-                  label: 'Transaction ID',
-                  value: paymentResult?.transactionId?.substring(0, 12) ?? '',
-                ),
+                if (paymentResult?.paymentStatus !=
+                    PaymentStatus.cashPayment) ...[
+                  ResponsiveGap.vertical(14),
+                  PaymentSummaryRow(
+                    label: 'Transaction ID',
+                    value: paymentResult?.transactionId?.substring(0, 12) ?? '',
+                  ),
+                ],
                 ResponsiveGap.vertical(14),
                 PaymentSummary(orderSummary: paymentResult?.orderSummary),
               ],

@@ -20,10 +20,10 @@ class PaymentRepositoryImpl implements PaymentRepository {
   @override
   Future<Either<Failure, PaymentResultEntity>> pay({
     required IPaymentServiceStrategy service,
-    required PaymentDetailsEntity details,
+    required PaymentDetailsEntity? details,
   }) async {
     try {
-      final result = await service.pay(details: details.toModel());
+      final result = await service.pay(details: details?.toModel());
       return Right(result.toEntity());
     } catch (e) {
       return Left(ServerFailure(e.toString()));

@@ -1,3 +1,4 @@
+import 'package:t_store/core/utils/constants/enums.dart';
 import 'package:t_store/features/checkout/data/models/order_summary_model.dart';
 
 class PaymentResultModel {
@@ -8,6 +9,7 @@ class PaymentResultModel {
   final String? card;
   final String? message;
   final OrderSummaryModel? orderSummary;
+  final PaymentStatus? paymentStatus;
 
   const PaymentResultModel({
     this.success,
@@ -17,5 +19,6 @@ class PaymentResultModel {
     this.message,
     this.card,
     this.orderSummary,
+    this.paymentStatus,
   });
 }
