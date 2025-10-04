@@ -1,11 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:t_store/core/hive_boxes/open_boxes.dart';
+import 'package:t_store/core/utils/storage/app_storage.dart';
+import 'package:t_store/core/utils/storage/secure_storage.dart';
 import 'package:t_store/features/authentication/data/repository/authentication_repository_impl.dart';
-import 'package:t_store/features/authentication/data/repository/onboarding_repository_impl.dart';
 import 'package:t_store/features/authentication/data/source/authentication_source/authentication_firebase_services.dart';
 import 'package:t_store/features/authentication/domain/repository/authentication_repository.dart';
-import 'package:t_store/features/authentication/domain/repository/onboarding_repository.dart';
-import 'package:t_store/features/authentication/domain/use_cases/is_first_launch_use_case.dart';
 import 'package:t_store/features/authentication/domain/use_cases/is_verified_email_use_case.dart';
 import 'package:t_store/features/authentication/domain/use_cases/logout_use_case.dart';
 import 'package:t_store/features/authentication/domain/use_cases/reset_password_usecase.dart';
@@ -66,8 +65,11 @@ import 'package:t_store/features/shop/features/wishlist/presentation/pages/cubit
 final getIt = GetIt.instance;
 
 Future<void> initializeDependencies() async {
+  // ------Storage------
+  getIt.registerLazySingleton<SecureStorage>(() => SecureStorage());
+  getIt.registerLazySingleton<AppStorage>(() => AppStorage());
+  
   // ------Services------
-
   // --Remote
   getIt.registerFactory<AuthenticationFirebaseServices>(
     () => AuthenticationFirebaseServicesImpl(),
@@ -95,9 +97,6 @@ Future<void> initializeDependencies() async {
   );
 
   // ------Repositories------
-  getIt.registerSingleton<OnboardingRepository>(
-    OnboardingRepositoryImpl(),
-  );
   getIt.registerFactory<AuthenticationRepository>(
     () => AuthenticationRepositoryImpl(),
   );
@@ -123,9 +122,6 @@ Future<void> initializeDependencies() async {
   );
 
   // ------Usecases------
-  getIt.registerLazySingleton<IsFirstLaunchUseCase>(
-    () => IsFirstLaunchUseCase(),
-  );
   getIt.registerFactory<SignupUsecase>(
     () => SignupUsecase(),
   );

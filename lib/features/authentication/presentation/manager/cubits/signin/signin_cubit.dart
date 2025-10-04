@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:t_store/core/utils/storage/secure_storage.dart';
 import 'package:t_store/features/authentication/data/models/user_signin_model.dart';
 import 'package:t_store/features/authentication/domain/use_cases/is_verified_email_use_case.dart';
 import 'package:t_store/features/authentication/domain/use_cases/signin_usecase.dart';
@@ -18,7 +18,7 @@ class SignInCubit extends Cubit<SignInState> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   // Storage
-  final _storage = GetStorage();
+  final _storage = getIt.get<SecureStorage>();
 
   // validation
   bool validateForm() {
@@ -26,9 +26,11 @@ class SignInCubit extends Cubit<SignInState> {
   }
 
   // show email and password that is storage in get storage
-  void getStorageEmailAndPassword() {
-    emailController.text = _storage.read('REMEMBER_ME_EMAIL') ?? '';
-    passwordController.text = _storage.read('REMEMBER_ME_PASSWORD') ?? '';
+  void getStorageEmailAndPassword() async {
+    emailController.text =
+        await _storage.readKey(key: 'REMEMBER_ME_EMAIL') ?? '';
+    passwordController.text =
+        await _storage.readKey(key: 'REMEMBER_ME_PASSWORD') ?? '';
   }
 
   void signIn(bool isRememberMe) async {
@@ -38,11 +40,17 @@ class SignInCubit extends Cubit<SignInState> {
     emit(SignInLoadingState());
 
     if (isRememberMe) {
-      _storage.write('REMEMBER_ME_EMAIL', emailController.text.trim());
-      _storage.write('REMEMBER_ME_PASSWORD', passwordController.text.trim());
+      _storage.saveKey(
+        key: 'REMEMBER_ME_EMAIL',
+        value: emailController.text.trim(),
+      );
+      _storage.saveKey(
+        key: 'REMEMBER_ME_PASSWORD',
+        value: passwordController.text.trim(),
+      );
     } else {
-      _storage.remove('REMEMBER_ME_EMAIL');
-      _storage.remove('REMEMBER_ME_PASSWORD');
+      _storage.deleteKey(key: 'REMEMBER_ME_EMAIL');
+      _storage.deleteKey(key: 'REMEMBER_ME_PASSWORD');
     }
 
     // Construct user creation model

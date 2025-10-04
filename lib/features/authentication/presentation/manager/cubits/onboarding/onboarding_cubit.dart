@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:t_store/core/config/service_locator.dart';
+import 'package:t_store/core/utils/storage/app_storage.dart';
 import 'package:t_store/features/authentication/presentation/widgets/onboarding/onboarding_view.dart';
 import 'package:t_store/core/utils/constants/images_strings.dart';
 import 'package:t_store/core/utils/constants/text_strings.dart';
@@ -11,7 +12,7 @@ class OnboardingCubit extends Cubit<int> {
   final PageController pageController = PageController();
   static const _animationDuration = Duration(milliseconds: 300);
 
-  final storage = GetStorage();
+  final _storage = getIt<AppStorage>();
 
   List<Widget> onboardingPages = const [
     OnBoardingView(
@@ -45,7 +46,7 @@ class OnboardingCubit extends Cubit<int> {
     _isManualScroll = false;
     if (isLastPage) {
       emit(totalPages);
-      storage.write('isFirstLaunch', false);
+      await _storage.setBool('isFirstLaunch', false);
       return;
     }
     final nextPageIndex = state + 1;

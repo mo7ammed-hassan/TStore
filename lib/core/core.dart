@@ -43,8 +43,6 @@ export 'utils/helpers/pricing_calculator.dart';
 export 'utils/helpers/register_adapters.dart';
 export 'utils/loaders/animation_loader.dart';
 export 'utils/loaders/loaders.dart';
-export 'utils/local_storage/local_storage.dart';
-export 'utils/local_storage/storage_utility.dart';
 export 'utils/logging/logger.dart';
 export 'utils/logging/logging.dart';
 export 'utils/popups/full_screen_loader.dart';

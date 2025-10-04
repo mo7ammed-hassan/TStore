@@ -9,11 +9,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:t_store/app/app.dart';
 import 'package:t_store/core/bloc/app_bloc_observer.dart';
 import 'package:t_store/core/hive_boxes/open_boxes.dart';
-import 'package:t_store/app/cubits/launch_app_cubit.dart';
+import 'package:t_store/core/utils/storage/app_storage.dart';
 import 'package:t_store/features/payment/core/storage/payment_storage.dart';
 import 'package:t_store/firebase_options.dart';
 import 'package:t_store/core/config/service_locator.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:t_store/core/utils/helpers/register_adapters.dart';
 
 void main() {
@@ -40,14 +39,14 @@ void main() {
         options: DefaultFirebaseOptions.currentPlatform,
       );
 
-      // GetX Local Storage Initialization
-      await GetStorage.init();
-
       // Payment Storage Initialization
       await PaymentStorage.init();
 
       // Service Locator Initialization
       await initializeDependencies();
+
+      // Initialize Shared Preferences & Storage
+      await getIt.get<AppStorage>().init();
 
       // Open Hive Boxes
       await OpenBoxes().initializeUserBox();
@@ -62,12 +61,7 @@ void main() {
       Stripe.publishableKey = dotenv.env['PUBLISHABLE_KEY']!;
 
       // Run the app
-      runApp(
-        BlocProvider(
-          create: (context) => LaunchAppCubit()..launchApp(),
-          child: const MyApp(),
-        ),
-      );
+      runApp(const MyApp());
     },
     (error, stackTrace) {
       // Catch and log uncaught errors
