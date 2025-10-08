@@ -7,7 +7,7 @@ class GetSavedPaymentMethodsUsecase {
   final PaymentMethodRepository _repository;
   GetSavedPaymentMethodsUsecase(this._repository);
 
-  Future<Either<Failure, List<PaymentMethodEntity>>> call(String customerId) {
+  Future<Either<Failure, List<PaymentMethodEntity>>> call(String? customerId) {
     return _repository.getPaymentMethods(customerId);
   }
 }

@@ -20,13 +20,14 @@ class PaymentMethodCubit extends Cubit<PaymentMethodState> {
     );
 
     final result =
-        await _paymentMethodUsecases.getPaymentMethods.call(customerId ?? '');
+        await _paymentMethodUsecases.getPaymentMethods.call(customerId);
 
     result.fold((failure) {
       emit(
         state.copyWith(
           action: PaymentMethodAction.fetch,
           status: PaymentMethodStateStatus.failure,
+          error: failure.message,
         ),
       );
     }, (methods) {

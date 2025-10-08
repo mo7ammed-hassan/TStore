@@ -24,7 +24,7 @@ abstract class PaymentMethodRepository {
   );
 
   Future<Either<Failure, List<PaymentMethodEntity>>> getPaymentMethods(
-    String customerId,
+    String? customerId,
   );
 
   Future<Either<Failure, PaymentMethodEntity?>> getDefaultPaymentMethods(

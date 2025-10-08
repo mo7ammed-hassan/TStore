@@ -9,7 +9,7 @@ class ApiConstants {
 
 
   // -- Payment Method --
-  static String getCustomerPaymentMethods({required String customerId}) =>
+  static String getCustomerPaymentMethods({required String? customerId}) =>
     '$_stripeBaseUrl/payment_methods?customer=$customerId&type=card';
 
 }

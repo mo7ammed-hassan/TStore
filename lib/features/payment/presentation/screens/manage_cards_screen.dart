@@ -38,7 +38,7 @@ class ManageCardsScreen extends StatelessWidget {
           padding: context.responsiveInsets.all(TSizes.spaceBtwItems),
           child: BlocBuilder<PaymentMethodCubit, PaymentMethodState>(
             buildWhen: (previous, current) =>
-                current.methods != previous.methods,
+                current.methods != previous.methods || current.error != null,
             builder: (context, state) {
               switch (state.status) {
                 case PaymentMethodStateStatus.loading:

@@ -67,7 +67,7 @@ class StripePaymentMethodService implements IPaymentMethodService {
   }
 
   @override
-  Future<List<PaymentMethodModel>> getPaymentMethods(String customerId) async {
+  Future<List<PaymentMethodModel>> getPaymentMethods(String? customerId) async {
     final response = await apiClient.get(
       ApiConstants.getCustomerPaymentMethods(customerId: customerId),
       headers: {
