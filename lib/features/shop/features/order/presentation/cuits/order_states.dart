@@ -9,7 +9,7 @@ class OrderStates {
 
   OrderStates({
     this.status = OrderStateStatus.initial,
-    this.orders,
+    this.orders = const [],
     this.errorMessage,
   });
 

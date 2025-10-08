@@ -55,9 +55,12 @@ class OrderCard extends StatelessWidget {
                 );
                 return result; // true => remove, false => keep
               },
-        background: const TRoundedContainer(
-          backgroundColor: Colors.redAccent,
-          child: Icon(Icons.delete, color: Colors.white),
+        background: Container(
+          decoration: BoxDecoration(
+            color: Colors.redAccent,
+            borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
+          ),
+          child: const Icon(Icons.delete, color: Colors.white),
         ),
         child: TRoundedContainer(
           key: ValueKey(order.orderId),

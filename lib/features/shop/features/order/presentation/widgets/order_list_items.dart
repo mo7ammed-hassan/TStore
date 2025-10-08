@@ -18,6 +18,8 @@ class OrderListItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OrderCubit, OrderStates>(
       builder: (context, state) {
+        final orders = state.orders!;
+
         switch (state.status) {
           case OrderStateStatus.loading:
             return const Center(
@@ -27,18 +29,15 @@ class OrderListItems extends StatelessWidget {
             );
 
           case OrderStateStatus.success:
-            if (state.orders!.isEmpty) {
-              return const EmptyOrdersList();
-            }
-            if (state.orders != null) {}
+            if (orders.isEmpty) return const EmptyOrdersList();
             return ListView.separated(
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) => OrderCard(
-                order: state.orders![index],
+                order: orders[index],
               ),
               separatorBuilder: (context, index) =>
                   ResponsiveGap.vertical(TSizes.spaceBtwItems),
-              itemCount: state.orders!.length,
+              itemCount: orders.length,
             );
           case OrderStateStatus.failure:
             return Center(
@@ -50,7 +49,7 @@ class OrderListItems extends StatelessWidget {
               ),
             );
 
-          case OrderStateStatus.initial:
+          default:
             return const SizedBox.shrink();
         }
       },
