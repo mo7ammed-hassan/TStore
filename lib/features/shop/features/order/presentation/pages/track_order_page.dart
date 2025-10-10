@@ -45,8 +45,7 @@ class TrackOrderPage extends StatelessWidget {
                           .symmetric(horizontal: TSizes.spaceBtwItems),
                       child: OrderDetailsRow(
                         label: 'Order#:',
-                        maxLines: 3,
-                        value: orderData.orderId.substring(0, 8),
+                        value: orderData.orderId.substring(0, 10),
                       ),
                     ),
                     ResponsiveGap.vertical(10),

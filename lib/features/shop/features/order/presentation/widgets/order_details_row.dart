@@ -24,6 +24,7 @@ class OrderDetailsRow extends StatelessWidget {
           style: textTheme.bodySmall?.copyWith(
             color: isDark ? Colors.grey : const Color(0xFF5a5e64),
             fontSize: 14,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
         ResponsiveGap.horizontal(8.0),
@@ -34,6 +35,7 @@ class OrderDetailsRow extends StatelessWidget {
             style: textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.w600,
               fontSize: 13.3,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ),
