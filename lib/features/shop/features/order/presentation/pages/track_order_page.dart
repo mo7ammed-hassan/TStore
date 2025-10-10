@@ -117,6 +117,7 @@ class TrackOrderPage extends StatelessWidget {
                       ),
                     ),
                     const Divider(),
+                    ResponsiveGap.vertical(TSizes.spaceBtwItems),
 
                     // -- track order section
                     const ExpandableTrackOrderSection(),

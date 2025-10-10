@@ -31,27 +31,27 @@ class _ExpandableTrackOrderSectionState
     final isDark = HelperFunctions.isDarkMode(context);
 
     return Padding(
-      padding: const EdgeInsets.only(left: TSizes.spaceBtwItems),
+      padding: const EdgeInsets.symmetric(horizontal: TSizes.spaceBtwItems),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: ResponsiveText(
-                  'Track Order',
-                  style: textTheme.bodySmall?.copyWith(
-                    color: isDark ? Colors.grey : const Color(0xFF5a5e64),
-                    fontSize: 14.2,
+          GestureDetector(
+            onTap: _toggleExpansion,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: ResponsiveText(
+                    'Track Order',
+                    style: textTheme.bodySmall?.copyWith(
+                      color: isDark ? Colors.grey : const Color(0xFF5a5e64),
+                      fontSize: 14.2,
+                    ),
                   ),
                 ),
-              ),
-              ValueListenableBuilder<bool>(
-                  valueListenable: _isExpanded,
-                  builder: (context, isExpanded, _) {
-                    return IconButton(
-                      onPressed: _toggleExpansion,
-                      icon: AnimatedRotation(
+                ValueListenableBuilder<bool>(
+                    valueListenable: _isExpanded,
+                    builder: (context, isExpanded, _) {
+                      return AnimatedRotation(
                         turns: isExpanded ? 1 : 0,
                         duration: const Duration(milliseconds: 400),
                         curve: Curves.easeInOut,
@@ -62,10 +62,10 @@ class _ExpandableTrackOrderSectionState
                               : Iconsax.arrow_down_1,
                           key: ValueKey<bool>(isExpanded),
                         ),
-                      ),
-                    );
-                  }),
-            ],
+                      );
+                    }),
+              ],
+            ),
           ),
           AnimatedSize(
             duration: const Duration(milliseconds: 450),
