@@ -16,9 +16,7 @@ class _ExpandableTrackOrderSectionState
     extends State<ExpandableTrackOrderSection> {
   final ValueNotifier<bool> _isExpanded = ValueNotifier(false);
   void _toggleExpansion() {
-    setState(() {
-      _isExpanded.value = !_isExpanded.value;
-    });
+    _isExpanded.value = !_isExpanded.value;
   }
 
   @override
@@ -69,25 +67,25 @@ class _ExpandableTrackOrderSectionState
                   }),
             ],
           ),
-          ValueListenableBuilder<bool>(
-            valueListenable: _isExpanded,
-            builder: (context, isExpanded, _) {
-              return AnimatedSize(
-                duration: const Duration(milliseconds: 450),
-                curve: Curves.easeInOut,
-                alignment: Alignment.center,
-                clipBehavior: Clip.antiAlias,
-                reverseDuration: const Duration(milliseconds: 250),
-                child: isExpanded
+          AnimatedSize(
+            duration: const Duration(milliseconds: 450),
+            curve: Curves.easeInOut,
+            alignment: Alignment.center,
+            clipBehavior: Clip.antiAlias,
+            reverseDuration: const Duration(milliseconds: 250),
+            child: ValueListenableBuilder<bool>(
+              valueListenable: _isExpanded,
+              builder: (context, isExpanded, _) {
+                return isExpanded
                     ? Column(
                         children: [
                           ResponsiveGap.vertical(TSizes.spaceBtwItems),
                           for (int i = 0; i < 10; i++) const Text('Opened'),
                         ],
                       )
-                    : const SizedBox.shrink(),
-              );
-            },
+                    : const SizedBox.shrink();
+              },
+            ),
           ),
         ],
       ),
