@@ -14,11 +14,17 @@ class ExpandableTrackOrderSection extends StatefulWidget {
 
 class _ExpandableTrackOrderSectionState
     extends State<ExpandableTrackOrderSection> {
-  bool _isExpanded = false;
+  final ValueNotifier<bool> _isExpanded = ValueNotifier(false);
   void _toggleExpansion() {
     setState(() {
-      _isExpanded = !_isExpanded;
+      _isExpanded.value = !_isExpanded.value;
     });
+  }
+
+  @override
+  void dispose() {
+    _isExpanded.dispose();
+    super.dispose();
   }
 
   @override
@@ -42,73 +48,47 @@ class _ExpandableTrackOrderSectionState
                   ),
                 ),
               ),
-              IconButton(
-                onPressed: _toggleExpansion,
-                icon: AnimatedRotation(
-                  turns: _isExpanded ? 1 : 0,
-                  duration: const Duration(milliseconds: 400),
-                  curve: Curves.easeInOut,
-                  child: Icon(
-                    size: context.horzSize(21),
-                    _isExpanded ? Iconsax.arrow_up_2 : Iconsax.arrow_down_1,
-                    key: ValueKey<bool>(_isExpanded),
-                  ),
-                ),
-              ),
+              ValueListenableBuilder<bool>(
+                  valueListenable: _isExpanded,
+                  builder: (context, isExpanded, _) {
+                    return IconButton(
+                      onPressed: _toggleExpansion,
+                      icon: AnimatedRotation(
+                        turns: isExpanded ? 1 : 0,
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.easeInOut,
+                        child: Icon(
+                          size: context.horzSize(21),
+                          isExpanded
+                              ? Iconsax.arrow_up_2
+                              : Iconsax.arrow_down_1,
+                          key: ValueKey<bool>(isExpanded),
+                        ),
+                      ),
+                    );
+                  }),
             ],
           ),
-          AnimatedSize(
-            duration: const Duration(milliseconds: 450),
-            curve: Curves.easeInOut,
-            alignment: Alignment.center,
-            clipBehavior: Clip.antiAlias,
-            reverseDuration: const Duration(milliseconds: 250),
-            child: _isExpanded
-                ? Column(
-                    children: [
-                      ResponsiveGap.vertical(TSizes.spaceBtwItems),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                      const Text('Opend'),
-                    ],
-                  )
-                : const SizedBox.shrink(),
-          )
+          ValueListenableBuilder<bool>(
+            valueListenable: _isExpanded,
+            builder: (context, isExpanded, _) {
+              return AnimatedSize(
+                duration: const Duration(milliseconds: 450),
+                curve: Curves.easeInOut,
+                alignment: Alignment.center,
+                clipBehavior: Clip.antiAlias,
+                reverseDuration: const Duration(milliseconds: 250),
+                child: isExpanded
+                    ? Column(
+                        children: [
+                          ResponsiveGap.vertical(TSizes.spaceBtwItems),
+                          for (int i = 0; i < 10; i++) const Text('Opened'),
+                        ],
+                      )
+                    : const SizedBox.shrink(),
+              );
+            },
+          ),
         ],
       ),
     );
