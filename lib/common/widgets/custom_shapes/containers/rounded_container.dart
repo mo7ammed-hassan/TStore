@@ -13,6 +13,7 @@ class TRoundedContainer extends StatelessWidget {
   final Widget? child;
   final Color? borderColor;
   final AlignmentGeometry? alignment;
+  final List<BoxShadow>? boxShadow;
 
   const TRoundedContainer({
     super.key,
@@ -26,6 +27,7 @@ class TRoundedContainer extends StatelessWidget {
     this.borderColor,
     this.padding,
     this.alignment,
+    this.boxShadow,
   });
 
   @override
@@ -46,6 +48,7 @@ class TRoundedContainer extends StatelessWidget {
                     (isDark ? AppColors.darkGrey : AppColors.grey),
               )
             : null,
+        boxShadow: boxShadow,
       ),
       child: child,
     );

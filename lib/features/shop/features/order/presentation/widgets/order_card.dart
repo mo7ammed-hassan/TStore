@@ -7,6 +7,7 @@ import 'package:t_store/features/payment/core/enums/payment_entry_point.dart';
 import 'package:t_store/features/payment/presentation/screens/payment_flow_screen.dart';
 import 'package:t_store/features/payment/presentation/routes/payment_flow_args.dart';
 import 'package:t_store/features/shop/features/order/presentation/cuits/order_cubit.dart';
+import 'package:t_store/features/shop/features/order/presentation/pages/track_order_page.dart';
 import 'package:t_store/features/shop/features/order/presentation/widgets/cancel_order_dialog.dart';
 import 'package:t_store/core/utils/constants/colors.dart';
 import 'package:t_store/core/utils/constants/enums.dart';
@@ -40,7 +41,7 @@ class OrderCard extends StatelessWidget {
                 ),
               ),
             )
-          : null,
+          : context.pushPage(TrackOrderPage(orderData: order)),
       child: Dismissible(
         key: ValueKey(order.orderId),
         direction: DismissDirection.startToEnd,

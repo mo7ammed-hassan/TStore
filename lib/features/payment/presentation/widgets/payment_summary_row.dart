@@ -27,7 +27,7 @@ class PaymentSummaryRow extends StatelessWidget {
             ),
           ),
         ),
-        ResponsiveGap.vertical(5.0),
+        ResponsiveGap.horizontal(5.0),
         ResponsiveText(
           value,
           maxLines: maxLines,

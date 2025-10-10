@@ -10,6 +10,8 @@ class AddressEntity {
   final DateTime? createdAt;
   bool selectedAddress;
 
+  String get fullAddress => '$state, $city, $postalCode, $country';
+
   AddressEntity({
     required this.id,
     required this.name,
