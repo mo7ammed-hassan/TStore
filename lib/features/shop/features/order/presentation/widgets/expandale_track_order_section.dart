@@ -45,26 +45,25 @@ class _ExpandableTrackOrderSectionState
                     'Track Order',
                     style: textTheme.bodySmall?.copyWith(
                       color: isDark ? Colors.grey : const Color(0xFF5a5e64),
-                      fontSize: 14.2,
+                      fontSize: 15,
                     ),
                   ),
                 ),
                 ValueListenableBuilder<bool>(
-                    valueListenable: _isExpanded,
-                    builder: (context, isExpanded, _) {
-                      return AnimatedRotation(
-                        turns: isExpanded ? 1 : 0,
-                        duration: const Duration(milliseconds: 400),
-                        curve: Curves.easeInOut,
-                        child: Icon(
-                          size: context.horzSize(21),
-                          isExpanded
-                              ? Iconsax.arrow_up_2
-                              : Iconsax.arrow_down_1,
-                          key: ValueKey<bool>(isExpanded),
-                        ),
-                      );
-                    }),
+                  valueListenable: _isExpanded,
+                  builder: (context, isExpanded, _) {
+                    return AnimatedRotation(
+                      turns: isExpanded ? 1 : 0,
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.easeInOut,
+                      child: Icon(
+                        size: context.horzSize(21),
+                        isExpanded ? Iconsax.arrow_up_2 : Iconsax.arrow_down_1,
+                        key: ValueKey<bool>(isExpanded),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),
@@ -80,7 +79,7 @@ class _ExpandableTrackOrderSectionState
                 return isExpanded
                     ? Column(
                         children: [
-                          ResponsiveGap.vertical(TSizes.spaceBtwItems * 1.3),
+                          ResponsiveGap.vertical(TSizes.spaceBtwItems * 2),
                           const TrackOrderTimeline(),
                         ],
                       )
