@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/core/core.dart';
+import 'package:t_store/features/shop/features/order/presentation/widgets/track_order_time_line.dart';
 
 class ExpandableTrackOrderSection extends StatefulWidget {
   const ExpandableTrackOrderSection({
@@ -79,8 +80,8 @@ class _ExpandableTrackOrderSectionState
                 return isExpanded
                     ? Column(
                         children: [
-                          ResponsiveGap.vertical(TSizes.spaceBtwItems),
-                          for (int i = 0; i < 10; i++) const Text('Opened'),
+                          ResponsiveGap.vertical(TSizes.spaceBtwItems * 1.3),
+                          const TrackOrderTimeline(),
                         ],
                       )
                     : const SizedBox.shrink();
